@@ -1,17 +1,31 @@
 import request from '@/utils/request'
 
-export function getUserList(query) {
+export function login(data) {
   return request({
-    url: '/api/user/list',
-    method: 'get',
-    params: query
+    url: '/vue-admin-template/user/login',
+    method: 'post',
+    data
   })
 }
 
-export function postUser(data) {
+export function getInfo(token) {
   return request({
-    url: '/api/user/save',
-    method: 'post',
-    data
+    url: '/vue-admin-template/user/info',
+    method: 'get',
+    params: { token }
+  })
+}
+
+export function logout() {
+  return request({
+    url: '/vue-admin-template/user/logout',
+    method: 'post'
+  })
+}
+export function getfoodList(params) {
+  return request({
+    url: '/vue-admin-template/food/list',
+    method: 'get',
+    params
   })
 }

@@ -5,9 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-
-import adminRouter from './modules/admin'
-import userRouter from './modules/user'
+import food from '@/views/foodie/index'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -34,55 +32,162 @@ import userRouter from './modules/user'
  */
 export const constantRoutes = [
   {
-    path: '/redirect',
-    component: Layout,
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
+    path: '/bind',
+    name: 'bind',
+    component: () => import('@/views/login/bind'),
+    meta: { title: '登录', icon: 'dashboard' },
+    hidden: true
+  },
+  {
+    path: '/food',
+    name: 'food',
+    redirect: '/food/foodlist',
+    component: food,
+    meta: { title: '首页', icon: 'dashboard' },
     hidden: true,
     children: [
       {
-        path: '/redirect/:path*',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
+      path: '/food/foodlist',
+      name: 'foodlist',
+      component: () => import('@/views/foodie/foodlist/index'),
+      meta: { title: '吃什么', icon: 'dashboard' }
+      },
+      {
+      path: '/food/center',
+      name: 'center',
+      component: () => import('@/views/foodie/center/index'),
+      meta: { title: '我的', icon: 'dashboard' }
+     }
+  ]
   },
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', name: '404', component: () => import('@/views/errorPage/404'), hidden: true },
-  { path: '/401', name: '401', component: () => import('@/views/errorPage/401'), hidden: true },
+  {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
+  },
+
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        name: 'Dashboard',
-        meta: { title: '首页', icon: 'dashboard', noCache: true },
-        component: () => import('@/views/dashboard/index')
-      },
-      { path: 'profile', name: 'Profile', component: () => import('@/views/set/profile'), hidden: true },
-      { path: 'password', name: 'Password', component: () => import('@/views/set/password'), hidden: true }
-    ]
-  }
-]
+    redirect: '/food',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: 'Dashboard', icon: 'dashboard' }
+    }]
+  },
 
-export const asyncRoutes = [
-  userRouter,
-  adminRouter,
   {
-    path: '/set',
+    path: '/example',
     component: Layout,
-    redirect: 'noRedirect',
-    name: 'Set',
-    meta: { title: '系统设置', icon: 'example' },
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: 'Example', icon: 'example' },
     children: [
       {
-        path: 'parameter',
-        name: 'ParameterList',
-        component: () => import('@/views/set/parameter'),
-        meta: { title: '参数管理', icon: 'form', auth: true }
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree' }
       }
     ]
   },
-  { path: '*', redirect: '/401', auth: true }
+
+  {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Form', icon: 'form' }
+      }
+    ]
+  },
+  {
+    path: '/nested',
+    component: Layout,
+    redirect: '/nested/menu1',
+    name: 'Nested',
+    meta: {
+      title: 'Nested',
+      icon: 'nested'
+    },
+    children: [
+      {
+        path: 'menu1',
+        component: () => import('@/views/nested/menu1/index'), // Parent router-view
+        name: 'Menu1',
+        meta: { title: 'Menu1' },
+        children: [
+          {
+            path: 'menu1-1',
+            component: () => import('@/views/nested/menu1/menu1-1'),
+            name: 'Menu1-1',
+            meta: { title: 'Menu1-1' }
+          },
+          {
+            path: 'menu1-2',
+            component: () => import('@/views/nested/menu1/menu1-2'),
+            name: 'Menu1-2',
+            meta: { title: 'Menu1-2' },
+            children: [
+              {
+                path: 'menu1-2-1',
+                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                name: 'Menu1-2-1',
+                meta: { title: 'Menu1-2-1' }
+              },
+              {
+                path: 'menu1-2-2',
+                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                name: 'Menu1-2-2',
+                meta: { title: 'Menu1-2-2' }
+              }
+            ]
+          },
+          {
+            path: 'menu1-3',
+            component: () => import('@/views/nested/menu1/menu1-3'),
+            name: 'Menu1-3',
+            meta: { title: 'Menu1-3' }
+          }
+        ]
+      },
+      {
+        path: 'menu2',
+        component: () => import('@/views/nested/menu2/index'),
+        meta: { title: 'menu2' }
+      }
+    ]
+  },
+
+  {
+    path: 'external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+        meta: { title: 'External Link', icon: 'link' }
+      }
+    ]
+  },
+
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
