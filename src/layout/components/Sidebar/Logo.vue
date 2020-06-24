@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      title: '个人日志',
+      title: '京北方',
       logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }

@@ -44,26 +44,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/food',
-    name: 'food',
-    redirect: '/food/foodlist',
-    component: food,
-    meta: { title: '首页', icon: 'dashboard' },
-    hidden: true,
-    children: [
-      {
-      path: '/food/foodlist',
-      name: 'foodlist',
-      component: () => import('@/views/foodie/foodlist/index'),
-      meta: { title: '吃什么', icon: 'dashboard' }
-      },
-      {
-      path: '/food/center',
-      name: 'center',
-      component: () => import('@/views/foodie/center/index'),
-      meta: { title: '我的', icon: 'dashboard' }
-     }
-  ]
+    path: '/chart',
+    name: 'chart',
+    component: () => import('@/views/chart/index'),
+    meta: { title: '数据表', icon: 'dashboard' },
+    hidden: true
   },
   {
     path: '/404',
@@ -74,7 +59,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/food',
+    redirect: '/chart',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',

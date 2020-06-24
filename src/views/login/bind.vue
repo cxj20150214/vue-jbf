@@ -1,5 +1,5 @@
 <template>
-  <div :style="{'width':this.$store.state.width_s+'px'}">
+  <div>
     <div class="shopbind">
       <div class="bind">
         <img class="logo" src="../../assets/img/chihuo.png" alt />
@@ -57,6 +57,12 @@ export default {
   },
   components: {},
   methods: {
+    keyDown(e) {
+      //如果是回车则执行登录方法
+      if (e.keyCode == 13) {
+        this.submitForm("ruleForm");
+      }
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -66,7 +72,7 @@ export default {
             .then(() => {
               this.loginSuccess = true;
               setTimeout(() => {
-                this.$router.push({ path: "/food" });
+                this.$router.push({ path: "/chart" });
                 this.loginSuccess = false;
                 this.loading = false;
               }, 1500);
@@ -97,15 +103,21 @@ export default {
         });
     }
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener("keydown", this.keyDown);
+  },
   created() {
     // this.thisQuery = this.$route.query;
     // console.log(this.thisQuery);
+  },
+  destroyed() {
+    window.removeEventListener("keydown", this.keyDown, false);
   }
 };
 </script>
 <style lang="scss" scoped>
 .shopbind {
+  width: 100%;
   .now {
     width: 590px;
     margin: 0px auto;
@@ -149,11 +161,10 @@ export default {
     flex-direction: column;
     .logo {
       width: 250px;
-      height: 250px;
-      margin: 10vh auto 5vh;
+      margin: 8vh auto 3vh;
       border-radius: 100%;
     }
-    width: 590px;
+    width: 480px;
     margin: 0px auto;
     padding: 50px;
     .tit {
@@ -164,7 +175,7 @@ export default {
     .box {
       display: flex;
       flex-direction: row;
-      margin-top: 40px;
+      margin-top: 25px;
 
       .txt_box {
         width: 100%;
@@ -191,16 +202,18 @@ export default {
           float: right;
           margin-left: 20px;
           &.yz {
-            width: 150px;
+            width: 135px;
             color: #999;
+            font-size: 16px;
           }
           &.bd {
             width: 100%;
-            height: 80px;
-            line-height: 80px;
-            font-size: 32px;
-            background-color: #ffc32e;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            background-color: #3e327c;
             color: #fff;
+            margin-top: 20px;
           }
         }
       }
@@ -223,12 +236,16 @@ export default {
   background-color: #6e84f5;
 }
 .myInput {
-  width: 275px;
-  height: 60px;
-  font-size: 28px;
+  width: 180px;
+  height: 59px;
+  font-size: 16px;
   padding-left: 10px;
   float: left;
+  margin-bottom: 1px;
   border: 0px;
+  &:focus {
+    outline: none;
+  }
 }
 .el-form-item__error {
   font-size: 16px;
@@ -237,13 +254,13 @@ export default {
 <style lang="scss">
 .thisForm {
   .bind_img1 {
-    width: 25px;
-    margin-top: 15px;
+    width: 16px;
+    margin-top: 20px;
     float: left;
-    margin-right: 20px;
+    margin-right: 15px;
   }
   .el-form-item {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
   }
   .el-form-item__content {
     border-bottom: 1px solid #d5d5d5;
@@ -254,18 +271,19 @@ export default {
   }
 }
 .tis {
-  font-size: 28px;
+  font-size: 16px;
   color: #999;
 }
 .success {
-  width: 30vw;
-  height: 80px;
-  line-height: 80px;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  left: 50%;
+  margin-left: -75px;
   text-align: center;
-  font-size: 26px;
+  font-size: 16px;
   color: #fff;
   position: fixed;
-  left: 35vw;
   top: 35vh;
   background: rgba(0, 0, 0, 0.3);
   z-index: 999999;

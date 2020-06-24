@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '个人日志',
+  title: '京北方',
 
   /**
    * @type {boolean} true | false
