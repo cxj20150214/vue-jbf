@@ -3,6 +3,9 @@
     <div class="chart_box">
       <div class="bingtu" id="myChart"></div>
       <div class="ditu" id="main"></div>
+      <div class="togger">
+        <!-- <el-button @click="togger" type="danger">切换</el-button> -->
+      </div>
       <div class="zhexiantu" id="zhexiantu"></div>
     </div>
     <el-button class="loginOut" @click="logout" type="danger">退出登录</el-button>
@@ -21,6 +24,12 @@ export default {
     };
   },
   methods: {
+    //   切换地图
+    // togger() {
+    //   console.log("切换数据");
+    //   this.listArr[0].value = "300000";
+    //   this.DrawMap();
+    // },
     //   设置字体
     setFontsize(res) {
       let docEl = document.documentElement,
@@ -119,12 +128,42 @@ export default {
         this.listArr
       );
       myChart8.setOption({
-        visualMap: {
-          min: _this.min,
-          max: _this.max,
-          show: false,
-          inRange: {
-            // color: ["lightskyblue", "yellow", "orangered"]
+        title: {
+          top: 20,
+          bottom: 20,
+          text: "福建省数据",
+          subtext: "",
+          x: "center",
+          textStyle: {
+            color: "#ccc",
+            fontSize: this.setFontsize(0.24)
+          }
+        },
+
+        tooltip: {
+          trigger: "item",
+          formatter: "{b}<br/>{c} (人)"
+        },
+        geo: {
+          show: true,
+          map: "福建",
+          label: {
+            normal: {
+              show: false
+            },
+            emphasis: {
+              show: false
+            }
+          },
+          roam: false,
+          itemStyle: {
+            normal: {
+              areaColor: "#031525",
+              borderColor: "#3B5077"
+            },
+            emphasis: {
+              areaColor: "#2B91B7"
+            }
           }
         },
         series: [
@@ -147,6 +186,10 @@ export default {
             },
             itemStyle: {
               normal: {
+                label: {
+                  show: true,
+                  formatter: "{b}\n{c}"
+                },
                 borderColor: "#2ab8ff",
                 borderWidth: 1.5,
                 areaColor: "#12235c"
@@ -157,7 +200,7 @@ export default {
                 color: "green"
               }
             },
-            data: _this.listArr
+            data: this.listArr
           }
         ]
       });
