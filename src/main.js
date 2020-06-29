@@ -7,15 +7,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
-
 import App from './App'
 import store from './store'
 import router from './router'
-
 import '@/icons' // icon
 import '@/permission' // permission control
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
+import $ from 'jquery'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

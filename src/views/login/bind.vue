@@ -14,18 +14,18 @@
             >
               <el-form-item prop="mobile">
                 <img class="bind_img1" src="../../assets/img/bind1 (1).png" alt />
-                <input class="myInput" v-model="ruleForm.username" placeholder="输入手机号码" />
+                <input class="myInput" v-model="ruleForm.username" placeholder="输入账号" />
               </el-form-item>
               <el-form-item prop="smsvcode">
                 <img class="bind_img1" src="../../assets/img/bind1 (2).png" alt />
-                <input class="myInput" v-model="ruleForm.password" placeholder="输入验证码" />
-                <div class="button yz">获取验证码</div>
+                <input class="myInput" v-model="ruleForm.password" placeholder="输入密码" />
+                <!-- <div class="button yz">获取验证码</div> -->
               </el-form-item>
               <div v-loading="loading" class="button bd" @click="submitForm('ruleForm')">登录</div>
             </el-form>
           </div>
         </div>
-        <p class="tis">(手机号:15605995727 验证码任意)</p>
+        <p class="tis">(账号:root 密码任意)</p>
       </div>
     </div>
     <div class="success" v-show="loginSuccess">登录成功</div>
@@ -33,6 +33,7 @@
   </div>
 </template>
 <script>
+import $ from "jquery";
 export default {
   name: "shopbind",
   data() {
@@ -57,6 +58,7 @@ export default {
   },
   components: {},
   methods: {
+    // canva背景
     keyDown(e) {
       //如果是回车则执行登录方法
       if (e.keyCode == 13) {
@@ -72,7 +74,7 @@ export default {
             .then(() => {
               this.loginSuccess = true;
               setTimeout(() => {
-                this.$router.push({ path: "/chart" });
+                this.$router.push({ path: "/echart" });
                 this.loginSuccess = false;
                 this.loading = false;
               }, 1500);

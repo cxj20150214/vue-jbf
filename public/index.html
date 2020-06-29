@@ -3,9 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta id="meta-viewport" name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= webpackConfig.name %></title>
+    <script>
+      (function () { //手机版、小程序750设计稿转手机等比例显示
+        if( window.innerWidth <750){
+              var bl = (window.innerWidth / 750) * 1.0;
+              document.getElementById('meta-viewport').setAttribute('content', 'width=device-width, initial-scale=' + bl + ', maximum-scale=' + bl + ', minimum-scale=' + bl + ', user-scalable=no');
+            }else{
+              document.getElementById('meta-viewport').setAttribute('content', 'width=device-width, initial-scale=' + 1 + ', maximum-scale=' + 1 + ', minimum-scale=' + 1 + ', user-scalable=no');
+            }
+      })();
+    </script>
   </head>
   <body>
     <noscript>

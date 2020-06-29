@@ -1,6 +1,6 @@
 
 const tokens = {
-  '15605995727': {
+  'root': {
     token: 'admin-token'
   },
   '13666002467': {
