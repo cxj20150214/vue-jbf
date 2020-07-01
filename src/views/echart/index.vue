@@ -69,8 +69,8 @@
     <div class="loginOut" @click="drawer = true"><</div>
     <el-drawer size="20%" title="我是标题" :visible.sync="drawer" :with-header="false">
       <div class="buttonBox">
-        <el-button class="button1"  @click="demo1" type="primary" size="mini">案例1</el-button>
-        <el-button class="button1"  @click="demo2" type="primary" size="mini">案例2</el-button>
+        <el-button class="button1" @click="echart" type="primary" size="mini">案例1</el-button>
+        <el-button class="button1" @click="demo2" type="primary" size="mini">案例2</el-button>
         <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button>
       </div>
     </el-drawer>
@@ -90,11 +90,12 @@ export default {
     };
   },
   methods: {
-    demo1(){
-       this.$router.push("/demo1");
+    // 链接跳转
+    echart() {
+      this.$router.push("/echart");
     },
-    demo2(){
-       this.$router.push("/demo2");
+    demo2() {
+      this.$router.push("/demo2");
     },
     //   切换地图
     // togger() {
@@ -695,9 +696,8 @@ export default {
 .buttonBox {
   padding: 20px;
 }
-.button1{
-  width:80px;
-  margin:10px;
-
+.button1 {
+  width: 80px;
+  margin: 10px;
 }
 </style>

@@ -15,6 +15,8 @@ import '@/permission' // permission control
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 import $ from 'jquery'
+import scroll from 'vue-seamless-scroll'
+Vue.use(scroll)
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
