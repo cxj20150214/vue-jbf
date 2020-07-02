@@ -349,7 +349,7 @@ export default {
             color: "#fff",
             fontStyle: "normal",
             fontFamily: "微软雅黑",
-            fontSize: 12
+            fontSize: 18
           }
         },
         grid: {
@@ -380,7 +380,7 @@ export default {
             color: "#a8aab0",
             fontStyle: "normal",
             fontFamily: "微软雅黑",
-            fontSize: 12
+            fontSize: 16
           }
         },
         xAxis: [
@@ -456,7 +456,7 @@ export default {
             name: "本年",
             type: "bar",
             data: [10, 15, 30, 45, 55, 60],
-            barWidth: 10,
+            barWidth: 25,
             barGap: 0, //柱间距离
             // label: {//图形上的文本标签
             //     normal: {
@@ -473,7 +473,7 @@ export default {
             itemStyle: {
               normal: {
                 show: true,
-                barBorderRadius: 50,
+                barBorderRadius: 0,
                 borderWidth: 0,
                 color: "#77C8FF"
               }
@@ -483,7 +483,7 @@ export default {
             name: "本月",
             type: "bar",
             data: [8, 5, 25, 30, 35, 55, 62, 78, 65, 55, 60, 45, 42, 15, 12, 5],
-            barWidth: 10,
+            barWidth: 25,
             barGap: 0, //柱间距离
             // label: {//图形上的文本标签
             //     normal: {
@@ -500,7 +500,7 @@ export default {
             itemStyle: {
               normal: {
                 show: true,
-                barBorderRadius: 50,
+                barBorderRadius: 0,
                 borderWidth: 0
               }
             }
@@ -515,11 +515,13 @@ export default {
         legend: {
           data: ["本年", "本月"],
           textStyle: {
-            color: "#fff"
+            color: "#fff",
+            fontSize: 24
           }
         },
         toolbox: {
           show: false,
+
           feature: {
             mark: {
               show: true
@@ -550,7 +552,7 @@ export default {
               show: true,
               textStyle: {
                 color: "#ffffff", //X轴文字颜色
-                fontSize: 16
+                fontSize: 24
               }
             }
           }
@@ -562,7 +564,7 @@ export default {
               formatter: "{value} ",
               color: "#ffffff",
               textStyle: {
-                fontSize: 16
+                fontSize: 24
               }
             },
             axisLine: {
@@ -803,7 +805,7 @@ export default {
             label: {
               normal: {
                 textStyle: {
-                  fontSize: 12
+                  fontSize: 16
                 }
               },
               show: true,
