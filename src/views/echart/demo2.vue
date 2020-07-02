@@ -133,14 +133,14 @@
         <div class="box1">
           <div class="titleBox">
             <img src="../../assets/img/sj.png" alt />
-            <p class="title">风险排行</p>
+            <p class="title">服务点</p>
           </div>
           <!-- 跑马灯 -->
           <ul class="phList">
-            <li>1.厦门市思明区观音山支行</li>
-            <li>2.厦门市湖里区莲前街道支行</li>
-            <li>3.厦门市嘉庚体育馆支行</li>
-            <li>4.厦门市海沧区市支行</li>
+            <li>1.厦门市湖里区吕岭路与金泰路交叉口</li>
+            <li>2.湖北省武汉市武昌区友谊大道368号</li>
+            <li>3.武汉市武昌区中南路9号中商广场B1</li>
+            <li>4.民主路786号华银大厦10层1006</li>
           </ul>
         </div>
       </div>
@@ -387,7 +387,14 @@ export default {
           {
             type: "category",
             //	boundaryGap: true,//坐标轴两边留白
-            data: ["远程巡检", "现场巡检", "专项巡检","应巡检服务点数","巡检数量","巡检率"],
+            data: [
+              "远程巡检",
+              "现场巡检",
+              "专项巡检",
+              "应巡检服务点数",
+              "巡检数量",
+              "巡检率"
+            ],
             axisLabel: {
               //坐标轴刻度标签的相关设置。
               //		interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
@@ -768,14 +775,14 @@ export default {
           x: "center",
           y: "center",
           textStyle: {
-            fontSize: 20,
+            fontSize: 8,
             color: "#fff"
           }
         },
         tooltip: {
           trigger: "item",
           textStyle: {
-            fontSize: 30
+            fontSize: 10
           }
         },
         series: [
@@ -785,7 +792,7 @@ export default {
             radius: ["24%", "45%"],
             clockwise: true,
             avoidLabelOverlap: true,
-            hoverOffset: 15,
+            hoverOffset: 10,
             itemStyle: {
               normal: {
                 color: function(params) {
@@ -796,7 +803,7 @@ export default {
             label: {
               normal: {
                 textStyle: {
-                  fontSize: 30
+                  fontSize: 12
                 }
               },
               show: true,
@@ -901,6 +908,8 @@ ul {
       font-size: 1.2rem;
       margin-top: 4%;
       letter-spacing: 2px;
+      height: 30%;
+      line-height: 1.2rem;
       color: #80ccff;
     }
   }
@@ -939,6 +948,7 @@ ul {
       }
       .list {
         width: 80%;
+        height: 50%;
         margin: 15% auto 0px;
         display: flex;
         flex-direction: row;
@@ -947,20 +957,20 @@ ul {
         padding: 0px;
         li {
           width: 28%;
-          height: 0px;
-          padding-bottom: 50%;
+          height: 100%;
           color: #70c5ff;
           text-align: center;
           position: relative;
           .txt {
             position: absolute;
             left: 0px;
-            top: 20%;
+            top: 40%;
             height: 30%;
             width: 100%;
             p {
               font-size: 0.8rem;
               margin: 0px;
+              margin-bottom: 5%;
               line-height: 0.24rem;
             }
             span {
@@ -975,7 +985,7 @@ ul {
             width: 20%;
             position: absolute;
             right: -25%;
-            top: 17%;
+            top: 30%;
           }
         }
       }
@@ -1115,12 +1125,12 @@ ul {
         border: 1px solid #297aae;
         position: relative;
         .bingtu {
-          width: 500px;
-          height: 500px;
+          width: 100%;
+          height: 200%;
           position: absolute;
-          transform: scale(0.2);
-          left: -120px;
-          top: -220px;
+          transform: scale(0.55);
+          left: 10%;
+          top: -41%;
         }
       }
     }
@@ -1264,12 +1274,12 @@ ul {
         padding: 3%;
         position: relative;
         .bingtu {
-          width: 500px;
-          height: 500px;
+          width: 200%;
+          height: 200%;
           position: absolute;
-          transform: scale(0.35);
-          left: -120px;
-          top: -150px;
+          transform: scale(0.55);
+          left: -45%;
+          top: -50%;
         }
         .titleBox {
           display: flex;
