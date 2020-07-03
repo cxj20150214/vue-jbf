@@ -1,7 +1,7 @@
 <template>
   <div class="bg">
     <div class="title_time">
-      <p class="tit">裕农通风险管理系统</p>
+      <p class="tit">裕农通智能风控</p>
       <p class="time">{{date}}</p>
     </div>
     <div class="box1">
@@ -118,7 +118,8 @@
       <div class="modBox1">
         <!-- <img class="diqiuyi" src="../../assets/img/diqiuyi.png" alt /> -->
         <div class="bg">
-          <div class="ditu" id="main"></div>
+          <!-- <div class="ditu" id="main"></div> -->
+          <div class="ditu" id="ditu"></div>
           <p class="title">全国风险预警大数据统计图</p>
         </div>
       </div>
@@ -225,96 +226,334 @@ export default {
       }
     },
     DrawMap() {
-      let _this = this;
-      let myChart8 = this.$echarts.init(document.getElementById("main"));
-      console.log(
-        "最大value值",
-        this.max,
-        "\n",
-        "最小value值",
-        this.min,
-        "\n",
-        "城市数据",
-        this.listArr
-      );
-      myChart8.setOption({
-        title: {
-          top: 20,
-          bottom: 20,
-          subtext: "",
-          x: "center",
-          textStyle: {
-            color: "#ccc",
-            fontSize: this.setFontsize(0.24)
+      // 渐变地图
+      var data = [
+        {
+          name: "重庆",
+          value: 10
+        },
+        {
+          name: "云南",
+          value: 5
+        },
+        {
+          name: "辽宁",
+          value: 5
+        },
+        {
+          name: "黑龙江",
+          value: 10
+        },
+        {
+          name: "广西",
+          value: 5
+        },
+        {
+          name: "甘肃",
+          value: 5
+        },
+        {
+          name: "山西",
+          value: 5
+        },
+        {
+          name: "陕西",
+          value: 5
+        },
+        {
+          name: "吉林",
+          value: 5
+        },
+        {
+          name: "贵州",
+          value: 10
+        },
+        {
+          name: "新疆",
+          value: 0
+        },
+        {
+          name: "青海",
+          value: 0
+        },
+        {
+          name: "西藏",
+          value: 5
+        },
+        {
+          name: "四川",
+          value: 20
+        },
+        {
+          name: "宁夏",
+          value: 0
+        },
+        {
+          name: "海南",
+          value: 0
+        },
+        {
+          name: "台湾",
+          value: 0
+        },
+        {
+          name: "香港",
+          value: 30
+        },
+        {
+          name: "澳门",
+          value: 0
+        },
+        {
+          name: "上海",
+          value: 30
+        },
+        {
+          name: "安徽",
+          value: 20
+        },
+        {
+          name: "江苏",
+          value: 20
+        },
+        {
+          name: "浙江",
+          value: 30
+        },
+        {
+          name: "北京",
+          value: 30
+        },
+        {
+          name: "天津",
+          value: 20
+        },
+        {
+          name: "河北",
+          value: 10
+        },
+        {
+          name: "河南",
+          value: 10
+        },
+        {
+          name: "内蒙古",
+          value: 10
+        },
+        {
+          name: "湖南",
+          value: 20
+        },
+        {
+          name: "山东",
+          value: 10
+        },
+        {
+          name: "江西",
+          value: 20
+        },
+        {
+          name: "湖北",
+          value: 20
+        },
+        {
+          name: "福建",
+          value: 10
+        },
+        {
+          name: "广东",
+          value: 30
+        }
+      ];
+      let dituJB = this.$echarts.init(document.getElementById("ditu"));
+      dituJB.setOption({
+        color: ["", "#fc5353", "#f4fc6c", "#e68b55", "#9a68ff", "#ff60c5"],
+        /*地图上面的五大项颜色*/
+        tooltip: {
+          trigger: "item",
+          formatter: function(params) {
+            var MAP_VALUE_DIC = {
+              "0": "高级预警",
+              "10": "中级预警",
+              "20": "初级预警"
+            };
+            if (params.seriesType) {
+              return params.name + ": " + MAP_VALUE_DIC[params.data.value];
+            } else {
+              return params.name;
+            }
           }
         },
 
-        tooltip: {
-          trigger: "item",
-          formatter: "{b}<br/>{c} (个)"
+        visualMap: {
+          type: "piecewise",
+          splitNumber: 3,
+          pieces: [
+            {
+              min: 20,
+              label: "高级预警(20以上)",
+              color: "#7F1100"
+            },
+            {
+              max: 20,
+              min: 10,
+              label: "中级预警(10-20个)",
+              color: "#FF5428"
+            },
+            {
+              max: 10,
+              min: 1,
+              label: "初级预警(0-10个)",
+              color: "#FF8C71"
+            },
+            {
+              value: 0,
+              label: "无风险(0个)",
+              color: "#FFFFFF"
+            }
+          ],
+          textStyle: {
+            color: "#fff",
+            fontSize: this.setFontsize(0.16)
+          },
+          min: 0,
+          max: 20,
+          left: "left",
+          top: "bottom",
+          calculable: true,
+          show: true,
+          seriesIndex: 0
         },
         geo: {
-          show: true,
           map: "china",
-          zoom: 1.15,
-          label: {
-            normal: {
-              show: false
-            },
-            emphasis: {
-              show: false
-            }
-          },
-          roam: false,
-          itemStyle: {
-            normal: {
-              areaColor: "#031525",
-              borderColor: "#3B5077"
-            },
-            emphasis: {
-              areaColor: "#2B91B7"
-            }
-          }
+          zoom: 1.2,
+          layoutCenter: ["50%", "50%"],
+          layoutSize: "100%"
         },
         series: [
           {
             type: "map",
-            map: "china",
-            zoom: 1.15,
+            mapType: "china",
+            showLegendSymbol: false,
+            zoom: 1.2,
+            layoutCenter: ["50%", "50%"],
+            layoutSize: "100%",
             label: {
               normal: {
-                show: true,
-                textStyle: {
-                  color: "#fff",
-                  fontSize: this.setFontsize(0.12)
-                }
-              },
-              emphasis: {
+                show: false,
+                /*是否城市名字*/
                 textStyle: {
                   color: "#fff"
                 }
+              },
+              emphasis: {
+                show: false
               }
             },
             itemStyle: {
               normal: {
-                label: {
-                  show: true,
-                  formatter: "{b}\n{c}"
-                },
-                borderColor: "#2ab8ff",
-                borderWidth: 1.5,
-                areaColor: "#12235c"
-              },
-              emphasis: {
-                areaColor: "#2AB8FF",
-                borderWidth: 0,
-                color: "green"
+                // borderColor: '#2a507a',//区域边框颜色
+                // borderWidth :1.5
+                // shadowBlur: 6,
+                // shadowColor: 'rgba(39,64,110,0.6)',/*地图内的阴影*/
+                // shadowOffsetY: 10,
+                // shadowOffsetx: 10
               }
             },
-            data: this.listArr
+            data: data
           }
         ]
       });
+      // let _this = this;
+      // let myChart8 = this.$echarts.init(document.getElementById("main"));
+      // console.log(
+      //   "最大value值",
+      //   this.max,
+      //   "\n",
+      //   "最小value值",
+      //   this.min,
+      //   "\n",
+      //   "城市数据",
+      //   this.listArr
+      // );
+      // myChart8.setOption({
+      //   title: {
+      //     top: 20,
+      //     bottom: 20,
+      //     subtext: "",
+      //     x: "center",
+      //     textStyle: {
+      //       color: "#ccc",
+      //       fontSize: this.setFontsize(0.24)
+      //     }
+      //   },
+
+      //   tooltip: {
+      //     trigger: "item",
+      //     formatter: "{b}<br/>{c} (个)"
+      //   },
+      //   geo: {
+      //     show: true,
+      //     map: "china",
+      //     zoom: 1.15,
+      //     label: {
+      //       normal: {
+      //         show: false
+      //       },
+      //       emphasis: {
+      //         show: false
+      //       }
+      //     },
+      //     roam: false,
+      //     itemStyle: {
+      //       normal: {
+      //         areaColor: "#031525",
+      //         borderColor: "#3B5077"
+      //       },
+      //       emphasis: {
+      //         areaColor: "#2B91B7"
+      //       }
+      //     }
+      //   },
+      //   series: [
+      //     {
+      //       type: "map",
+      //       map: "china",
+      //       zoom: 1.15,
+      //       label: {
+      //         normal: {
+      //           show: true,
+      //           textStyle: {
+      //             color: "#fff",
+      //             fontSize: this.setFontsize(0.12)
+      //           }
+      //         },
+      //         emphasis: {
+      //           textStyle: {
+      //             color: "#fff"
+      //           }
+      //         }
+      //       },
+      //       itemStyle: {
+      //         normal: {
+      //           label: {
+      //             show: true,
+      //             formatter: "{b}\n{c}"
+      //           },
+      //           borderColor: "#2ab8ff",
+      //           borderWidth: 1.5,
+      //           areaColor: "#12235c"
+      //         },
+      //         emphasis: {
+      //           areaColor: "#2AB8FF",
+      //           borderWidth: 0,
+      //           color: "green"
+      //         }
+      //       },
+      //       data: this.listArr
+      //     }
+      //   ]
+      // });
     },
     //   设置字体
     setFontsize(res) {
@@ -898,6 +1137,7 @@ ul {
       color: #fff;
       font-size: 0.8rem;
       margin-top: 2.5%;
+      height: 30%;
     }
     width: 24%;
     height: 12%;
@@ -1007,6 +1247,7 @@ ul {
         display: flex;
         flex-direction: row;
         margin-bottom: 2%;
+        height: 18%;
         .title {
           color: #70c5ff;
           font-size: 0.8rem;
@@ -1112,6 +1353,7 @@ ul {
           display: flex;
           flex-direction: row;
           margin-bottom: 2%;
+          height: 18%;
           .title {
             color: #70c5ff;
             font-size: 0.6rem;
@@ -1176,6 +1418,7 @@ ul {
         display: flex;
         flex-direction: row;
         margin-bottom: 2%;
+        height: 18%;
         .title {
           color: #70c5ff;
           font-size: 0.8rem;
@@ -1288,6 +1531,7 @@ ul {
           flex-direction: row;
           margin-bottom: 2%;
           position: relative;
+          height: 18%;
           .title {
             color: #70c5ff;
             font-size: 0.8rem;
@@ -1350,6 +1594,7 @@ ul {
         display: flex;
         flex-direction: row;
         margin-bottom: 2%;
+        height: 18%;
         .title {
           color: #70c5ff;
           font-size: 0.8rem;
@@ -1382,6 +1627,7 @@ ul {
         display: flex;
         flex-direction: row;
         margin-bottom: 2%;
+        height: 18%;
         .title {
           color: #70c5ff;
           font-size: 0.8rem;
