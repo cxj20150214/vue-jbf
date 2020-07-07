@@ -6,7 +6,7 @@
     </div>
     <div class="box1">
       <div class="mod1">
-        <p class="title">风险评级准入</p>
+        <p class="title"></p>
         <ul class="list">
           <li>
             <img class="diqiu" src="../../assets/img/diqiu1.png" alt />

@@ -6,7 +6,7 @@
     </div>
     <div class="box1">
       <div class="mod1">
-        <p class="title">风险评级准入</p>
+        <p class="title">准入风险评级</p>
         <ul class="list">
           <li>
             <img class="diqiu" src="../../assets/img/diqiu1.png" alt />
@@ -37,36 +37,44 @@
         <img class="sjx" src="../../assets/img/diqiuyi.png" alt />
         <div class="piebox">
           <div class="t1">
-            <p class="title">双"10"服务点风险分布</p>
+            <p class="title">准入评级</p>
             <ul>
               <li>
-                <p>风险级占比：</p>
+                <p>拒件率：</p>
                 <span>50%</span>
               </li>
               <li>
-                <p>警示级占比：</p>
-                <span>10%</span>
+                <p>数量：</p>
+                <span>10个</span>
               </li>
               <li>
-                <p>预警级占比：</p>
+                <p>征信类占比：</p>
                 <span>12%</span>
               </li>
               <li>
-                <p>关注级占比：</p>
+                <p>黑名单类占比：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>外部数据名单类：</p>
                 <span>12%</span>
               </li>
             </ul>
           </div>
           <div class="t2">
-            <p class="title">双"50"服务点风险分布</p>
+            <p class="title">存量评级</p>
             <ul>
               <li>
+                <p>服务点总数：</p>
+                <span>50个</span>
+              </li>
+              <li>
                 <p>风险级占比：</p>
-                <span>50%</span>
+                <span>10%</span>
               </li>
               <li>
                 <p>警示级占比：</p>
-                <span>10%</span>
+                <span>12%</span>
               </li>
               <li>
                 <p>预警级占比：</p>
@@ -79,15 +87,19 @@
             </ul>
           </div>
           <div class="t3">
-            <p class="title">双"100"服务点风险分布</p>
+            <p class="title">风险预警</p>
             <ul>
               <li>
+                <p>预警总数：</p>
+                <span>50个</span>
+              </li>
+              <li>
                 <p>风险级占比：</p>
-                <span>50%</span>
+                <span>10%</span>
               </li>
               <li>
                 <p>警示级占比：</p>
-                <span>10%</span>
+                <span>12%</span>
               </li>
               <li>
                 <p>预警级占比：</p>
@@ -100,22 +112,26 @@
             </ul>
           </div>
           <div class="t4">
-            <p class="title">各风险等级涉及服务点数</p>
+            <p class="title">专项巡检</p>
             <ul>
               <li>
-                <p>风险级占比：</p>
-                <span>50%</span>
+                <p>应巡检服务点数：</p>
+                <span>50个</span>
               </li>
               <li>
-                <p>警示级占比：</p>
+                <p>一季度：</p>
                 <span>10%</span>
               </li>
               <li>
-                <p>预警级占比：</p>
+                <p>二季度：</p>
                 <span>12%</span>
               </li>
               <li>
-                <p>关注级占比：</p>
+                <p>三季度：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>四季度：</p>
                 <span>12%</span>
               </li>
             </ul>
@@ -126,42 +142,42 @@
       <div class="mod3">
         <div class="titleBox">
           <img src="../../assets/img/sj1.png" alt />
-          <p class="title">拒件数据统计</p>
+          <p class="title">风险预警与巡检评级</p>
         </div>
         <div class="tBox">
           <div class="boxchild">
             <img class="imgbox" src="../../assets/img/sq.png" alt />
-            <p class="t2">本年统计</p>
+            <p class="t2">上季度巡检</p>
           </div>
           <div class="boxchild">
-            <p class="t1">征信</p>
+            <p class="t1">总服务点数</p>
             <p class="t3">299个</p>
           </div>
           <div class="boxchild">
-            <p class="t1">黑名单</p>
+            <p class="t1">巡检数</p>
             <p class="t3">187个</p>
           </div>
           <div class="boxchild">
-            <p class="t1">外部数据名单</p>
-            <p class="t4">255个</p>
+            <p class="t1">巡检率</p>
+            <p class="t4">50%</p>
           </div>
         </div>
         <div class="tBox">
           <div class="boxchild">
             <img class="imgbox" src="../../assets/img/bld.png" alt />
-            <p class="t2">本月统计</p>
+            <p class="t2">风险预警</p>
           </div>
           <div class="boxchild">
-            <p class="t1">征信</p>
+            <p class="t1">总数</p>
             <p class="t3">299个</p>
           </div>
           <div class="boxchild">
-            <p class="t1">黑名单</p>
+            <p class="t1">处理数</p>
             <p class="t3">187个</p>
           </div>
           <div class="boxchild">
-            <p class="t1">外部数据名单</p>
-            <p class="t4">255个</p>
+            <p class="t1">处理率</p>
+            <p class="t4">50%</p>
           </div>
         </div>
       </div>
@@ -170,18 +186,39 @@
       <div class="modBox1">
         <!-- <img class="diqiuyi" src="../../assets/img/diqiuyi.png" alt /> -->
         <div class="bg">
-          <!-- <div class="ditu" id="ditu1"></div> -->
-          <div class="ditu" id="zxt"></div>
-          <p class="title">全国风险预警大数据走势图</p>
+          <div class="ditu" id="ditu1"></div>
+          <!-- <div class="ditu" id="zxt"></div> -->
+          <p class="title">全国风险预警大数据统计图</p>
         </div>
       </div>
       <div class="modBox2">
         <div class="box1">
           <div class="titleBox">
             <img src="../../assets/img/sj1.png" alt />
-            <p class="title">本月风险存量占比</p>
+            <p class="title">风险预警数</p>
           </div>
-          <div class="bingtu" id="Pie1"></div>
+          <!-- <div class="bingtu" id="Pie1"></div> -->
+          <vue-seamless-scroll :class-option="optionscroll" :data="listData" class="seamless-warp">
+            <ul class="itemhua">
+              <li v-for="item in listData">
+                <div class="tit">福建省分行</div>
+                <div class="txt">
+                  <div class="box">
+                    <p class="t1">预警总数</p>
+                    <p class="t2">{{item.data1}}</p>
+                  </div>
+                  <div class="box">
+                    <p class="t1">已处理数</p>
+                    <p class="t2">{{item.data2}}</p>
+                  </div>
+                  <div class="box">
+                    <p class="t1">处理率</p>
+                    <p class="t2">{{item.data3}}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </vue-seamless-scroll>
         </div>
         <div class="box1">
           <div class="titleBox">
@@ -203,7 +240,7 @@
         <p class="title">实时公告通知</p>
         <p
           class="txt"
-        >中国建设银行（China Construction Bank）成立于1954年10月1日。总行位于北京金融大街25号， [1-2] 是中央管理的大型国有银行， [3-4] 国家副部级单位。</p>
+        >裕农通智能风控检测出风险共：12650个,检测风险率为：80%，提供风险预警服务：8000个，处理数：7500个，统计率达：80%。其中风险预警高峰地区为...</p>
       </div>
       <div class="modr2">
         <div class="titleBox">
@@ -241,8 +278,68 @@ export default {
       listArr: [], //城市json
       nowDate: "", // 当前日期
       nowTime: "", // 当前时间
-      nowWeek: "" // 当前星期
+      nowWeek: "", // 当前星期
+      listData: [
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%"
+        }
+      ]
     };
+  },
+  computed: {
+    optionscroll() {
+      return {
+        // hoverStop: false,
+        step: 0.2
+      };
+    }
   },
   methods: {
     // 当前日期
@@ -314,152 +411,130 @@ export default {
     },
     DrawMap() {
       // 中间部分折线图
-      let zxt = this.$echarts.init(document.getElementById("zxt"));
-      zxt.setOption({
-        grid: {
-          left: "5%",
-          right: "10%",
-          top: "20%",
-          bottom: "15%",
-          containLabel: true
-        },
-        tooltip: {
-          show: true,
-          trigger: "item"
-        },
-        // 		legend: {
-        // 			show:true,
-        // 			x:'center',
-        // 			y:'35',
-        // 			icon: 'stack',
-        // 			itemWidth:10,
-        // 			itemHeight:10,
-        // 			textStyle:{
-        // 				color:'#1bb4f6'
-        // 			},
-        // 			data:['已采纳','已发布']
-        // 		},
-        xAxis: [
-          {
-            type: "category",
-            boundaryGap: false,
-            axisLabel: {
-              color: "#30eee9"
-            },
-            axisLine: {
-              show: true,
-              lineStyle: {
-                color: "#397cbc"
-              }
-            },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              show: false,
-              lineStyle: {
-                color: "#195384"
-              }
-            },
-            data: [
-              "1月",
-              "2月",
-              "3月",
-              "4月",
-              "5月",
-              "6月",
-              "7月",
-              "8月",
-              "9月",
-              "10月",
-              "11月",
-              "12月"
-            ]
-          }
-        ],
-        yAxis: [
-          {
-            type: "value",
-            name: "",
-            min: 0,
-            max: 1000,
-            axisLabel: {
-              formatter: "{value}",
-              textStyle: {
-                color: "#2ad1d2"
-              }
-            },
-            axisLine: {
-              lineStyle: {
-                color: "#27b4c2"
-              }
-            },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: "#11366e"
-              }
-            }
-          }
-        ],
-        series: [
-          {
-            name: "低预警",
-            type: "line",
-            stack: "总量",
-            symbol: "circle",
-            symbolSize: 8,
-            itemStyle: {
-              normal: {
-                color: "#0092f6",
-                lineStyle: {
-                  color: "#0092f6",
-                  width: 1
-                }
-                //           areaStyle: {
-                // 			//color: '#94C9EC'
-                // 			color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                // 				offset: 0,
-                // 				color: 'rgba(7,44,90,0.3)'
-                // 			}, {
-                // 				offset: 1,
-                // 				color: 'rgba(0,146,246,0.9)'
-                // 			}]),
-                //           }
-              }
-            },
-            markPoint: {
-              itemStyle: {
-                normal: {
-                  color: "red"
-                }
-              }
-            },
-            data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
-          },
-          {
-            name: "高预警",
-            type: "line",
-            stack: "总量",
-            symbol: "circle",
-            symbolSize: 8,
+      // let zxt = this.$echarts.init(document.getElementById("zxt"));
+      // zxt.setOption({
+      //   grid: {
+      //     left: "5%",
+      //     right: "10%",
+      //     top: "20%",
+      //     bottom: "15%",
+      //     containLabel: true
+      //   },
+      //   tooltip: {
+      //     show: true,
+      //     trigger: "item"
+      //   },
+      //   xAxis: [
+      //     {
+      //       type: "category",
+      //       boundaryGap: false,
+      //       axisLabel: {
+      //         color: "#30eee9"
+      //       },
+      //       axisLine: {
+      //         show: true,
+      //         lineStyle: {
+      //           color: "#397cbc"
+      //         }
+      //       },
+      //       axisTick: {
+      //         show: false
+      //       },
+      //       splitLine: {
+      //         show: false,
+      //         lineStyle: {
+      //           color: "#195384"
+      //         }
+      //       },
+      //       data: [
+      //         "1月",
+      //         "2月",
+      //         "3月",
+      //         "4月",
+      //         "5月",
+      //         "6月",
+      //         "7月",
+      //         "8月",
+      //         "9月",
+      //         "10月",
+      //         "11月",
+      //         "12月"
+      //       ]
+      //     }
+      //   ],
+      //   yAxis: [
+      //     {
+      //       type: "value",
+      //       name: "",
+      //       min: 0,
+      //       max: 1000,
+      //       axisLabel: {
+      //         formatter: "{value}",
+      //         textStyle: {
+      //           color: "#2ad1d2"
+      //         }
+      //       },
+      //       axisLine: {
+      //         lineStyle: {
+      //           color: "#27b4c2"
+      //         }
+      //       },
+      //       axisTick: {
+      //         show: false
+      //       },
+      //       splitLine: {
+      //         show: true,
+      //         lineStyle: {
+      //           color: "#11366e"
+      //         }
+      //       }
+      //     }
+      //   ],
+      //   series: [
+      //     {
+      //       name: "低预警",
+      //       type: "line",
+      //       stack: "总量",
+      //       symbol: "circle",
+      //       symbolSize: 8,
+      //       itemStyle: {
+      //         normal: {
+      //           color: "#0092f6",
+      //           lineStyle: {
+      //             color: "#0092f6",
+      //             width: 1
+      //           }
+      //         }
+      //       },
+      //       markPoint: {
+      //         itemStyle: {
+      //           normal: {
+      //             color: "red"
+      //           }
+      //         }
+      //       },
+      //       data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
+      //     },
+      //     {
+      //       name: "高预警",
+      //       type: "line",
+      //       stack: "总量",
+      //       symbol: "circle",
+      //       symbolSize: 8,
 
-            itemStyle: {
-              normal: {
-                color: "#00d4c7",
-                lineStyle: {
-                  color: "#00d4c7",
-                  width: 1
-                }
-              }
-            },
-            data: [220, 182, 191, 234, 290, 330, 310, 201, 154, 190, 330, 410]
-          }
-        ]
-      });
+      //       itemStyle: {
+      //         normal: {
+      //           color: "#00d4c7",
+      //           lineStyle: {
+      //             color: "#00d4c7",
+      //             width: 1
+      //           }
+      //         }
+      //       },
+      //       data: [220, 182, 191, 234, 290, 330, 310, 201, 154, 190, 330, 410]
+      //     }
+      //   ]
+      // });
       // 渐变2
       let dituJB1 = this.$echarts.init(document.getElementById("ditu1"));
       var dataJb = [
@@ -835,105 +910,105 @@ export default {
           value: 30
         }
       ];
-      let dituJB = this.$echarts.init(document.getElementById("ditu"));
-      dituJB.setOption({
-        color: ["", "#fc5353", "#f4fc6c", "#e68b55", "#9a68ff", "#ff60c5"],
-        /*地图上面的五大项颜色*/
-        tooltip: {
-          trigger: "item",
-          formatter: function(params) {
-            var MAP_VALUE_DIC = {
-              "0": "高级预警",
-              "10": "中级预警",
-              "20": "初级预警"
-            };
-            if (params.seriesType) {
-              return params.name + ": " + MAP_VALUE_DIC[params.data.value];
-            } else {
-              return params.name;
-            }
-          }
-        },
+      // let dituJB = this.$echarts.init(document.getElementById("ditu"));
+      // dituJB.setOption({
+      //   color: ["", "#fc5353", "#f4fc6c", "#e68b55", "#9a68ff", "#ff60c5"],
+      //   /*地图上面的五大项颜色*/
+      //   tooltip: {
+      //     trigger: "item",
+      //     formatter: function(params) {
+      //       var MAP_VALUE_DIC = {
+      //         "0": "高级预警",
+      //         "10": "中级预警",
+      //         "20": "初级预警"
+      //       };
+      //       if (params.seriesType) {
+      //         return params.name + ": " + MAP_VALUE_DIC[params.data.value];
+      //       } else {
+      //         return params.name;
+      //       }
+      //     }
+      //   },
 
-        visualMap: {
-          type: "piecewise",
-          splitNumber: 3,
-          pieces: [
-            {
-              min: 20,
-              label: "高级预警(20以上)",
-              color: "#7F1100"
-            },
-            {
-              max: 20,
-              min: 10,
-              label: "中级预警(10-20个)",
-              color: "#FF5428"
-            },
-            {
-              max: 10,
-              min: 1,
-              label: "初级预警(0-10个)",
-              color: "#FF8C71"
-            },
-            {
-              value: 0,
-              label: "无风险(0个)",
-              color: "#FFFFFF"
-            }
-          ],
-          textStyle: {
-            color: "#fff",
-            fontSize: this.setFontsize(0.16)
-          },
-          min: 0,
-          max: 20,
-          left: "left",
-          top: "bottom",
-          calculable: true,
-          show: true,
-          seriesIndex: 0
-        },
-        geo: {
-          map: "china",
-          zoom: 1.2,
-          layoutCenter: ["50%", "50%"],
-          layoutSize: "100%"
-        },
-        series: [
-          {
-            type: "map",
-            mapType: "china",
-            showLegendSymbol: false,
-            zoom: 1.2,
-            layoutCenter: ["50%", "50%"],
-            layoutSize: "100%",
-            label: {
-              normal: {
-                show: false,
-                /*是否城市名字*/
-                textStyle: {
-                  color: "#fff"
-                }
-              },
-              emphasis: {
-                show: false
-              }
-            },
-            itemStyle: {
-              normal: {
-                // borderColor: '#2a507a',//区域边框颜色
-                // borderWidth :1.5
-                // shadowBlur: 6,
-                // shadowColor: 'rgba(39,64,110,0.6)',/*地图内的阴影*/
-                // shadowOffsetY: 10,
-                // shadowOffsetx: 10
-              }
-            },
-            data: data
-          }
-        ]
-      });
+      //   visualMap: {
+      //     type: "piecewise",
+      //     splitNumber: 3,
+      //     pieces: [
+      //       {
+      //         min: 20,
+      //         label: "高级预警(20以上)",
+      //         color: "#7F1100"
+      //       },
+      //       {
+      //         max: 20,
+      //         min: 10,
+      //         label: "中级预警(10-20个)",
+      //         color: "#FF5428"
+      //       },
+      //       {
+      //         max: 10,
+      //         min: 1,
+      //         label: "初级预警(0-10个)",
+      //         color: "#FF8C71"
+      //       },
+      //       {
+      //         value: 0,
+      //         label: "无风险(0个)",
+      //         color: "#FFFFFF"
+      //       }
+      //     ],
+      //     textStyle: {
+      //       color: "#fff",
+      //       fontSize: this.setFontsize(0.16)
+      //     },
+      //     min: 0,
+      //     max: 20,
+      //     left: "left",
+      //     top: "bottom",
+      //     calculable: true,
+      //     show: true,
+      //     seriesIndex: 0
+      //   },
+      //   geo: {
+      //     map: "china",
+      //     zoom: 1.2,
+      //     layoutCenter: ["50%", "50%"],
+      //     layoutSize: "100%"
+      //   },
+      //   series: [
+      //     {
+      //       type: "map",
+      //       mapType: "china",
+      //       showLegendSymbol: false,
+      //       zoom: 1.2,
+      //       layoutCenter: ["50%", "50%"],
+      //       layoutSize: "100%",
+      //       label: {
+      //         normal: {
+      //           show: false,
+      //           /*是否城市名字*/
+      //           textStyle: {
+      //             color: "#fff"
+      //           }
+      //         },
+      //         emphasis: {
+      //           show: false
+      //         }
+      //       },
+      //       itemStyle: {
+      //         normal: {
+      //           // borderColor: '#2a507a',//区域边框颜色
+      //           // borderWidth :1.5
+      //           // shadowBlur: 6,
+      //           // shadowColor: 'rgba(39,64,110,0.6)',/*地图内的阴影*/
+      //           // shadowOffsetY: 10,
+      //           // shadowOffsetx: 10
+      //         }
+      //       },
+      //       data: data
+      //     }
+      //   ]
+      // });
       // let myChart8 = this.$echarts.init(document.getElementById("main"));
       // console.log(
       //   "最大value值",
@@ -1038,7 +1113,7 @@ export default {
     // 饼图
     piedemo() {
       let yuan = this.$echarts.init(document.getElementById("yuan"));
-      let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
+      // let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
       let Pie2 = this.$echarts.init(document.getElementById("Pie2"));
       let Pie3 = this.$echarts.init(document.getElementById("Pie3"));
       // 发光圆形
@@ -1158,7 +1233,7 @@ export default {
       yuan.setOption({
         color: color,
         title: {
-          text: "风险比例",
+          text: "风险评级",
           top: "46%",
           textAlign: "center",
           left: "49%",
@@ -1510,96 +1585,96 @@ export default {
         "#9E87FF",
         "#58D5FF"
       ];
-      Pie1.setOption({
-        backgroundColor: "",
-        title: {
-          text: "",
-          left: "center",
-          top: 20,
-          textStyle: {
-            color: "#ccc"
-          }
-        },
+      // Pie1.setOption({
+      //   backgroundColor: "",
+      //   title: {
+      //     text: "",
+      //     left: "center",
+      //     top: 20,
+      //     textStyle: {
+      //       color: "#ccc"
+      //     }
+      //   },
 
-        tooltip: {
-          trigger: "item",
-          formatter: "{b} : {c} ({d}%)"
-        },
+      //   tooltip: {
+      //     trigger: "item",
+      //     formatter: "{b} : {c} ({d}%)"
+      //   },
 
-        visualMap: {
-          show: false,
-          min: 500,
-          max: 600,
-          inRange: {
-            //colorLightness: [0, 1]
-          }
-        },
-        series: [
-          {
-            name: "访问来源",
-            type: "pie",
-            radius: "50%",
-            center: ["50%", "50%"],
-            color: ["rgb(131,249,103)", "#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
-            data: [
-              {
-                value: 285,
-                name: "风险级"
-              },
-              {
-                value: 410,
-                name: "警示级"
-              },
-              {
-                value: 274,
-                name: "预警级"
-              },
-              {
-                value: 235,
-                name: "关注级"
-              }
-            ].sort(function(a, b) {
-              return a.value - b.value;
-            }),
-            roseType: "radius",
+      //   visualMap: {
+      //     show: false,
+      //     min: 500,
+      //     max: 600,
+      //     inRange: {
+      //       //colorLightness: [0, 1]
+      //     }
+      //   },
+      //   series: [
+      //     {
+      //       name: "访问来源",
+      //       type: "pie",
+      //       radius: "50%",
+      //       center: ["50%", "50%"],
+      //       color: ["rgb(131,249,103)", "#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
+      //       data: [
+      //         {
+      //           value: 285,
+      //           name: "风险级"
+      //         },
+      //         {
+      //           value: 410,
+      //           name: "警示级"
+      //         },
+      //         {
+      //           value: 274,
+      //           name: "预警级"
+      //         },
+      //         {
+      //           value: 235,
+      //           name: "关注级"
+      //         }
+      //       ].sort(function(a, b) {
+      //         return a.value - b.value;
+      //       }),
+      //       roseType: "radius",
 
-            label: {
-              normal: {
-                formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
-                rich: {
-                  c: {
-                    color: "#77c8ff",
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    lineHeight: 5
-                  },
-                  b: {
-                    color: "rgb(98,137,169)",
-                    fontSize: 15,
-                    height: 40
-                  }
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                lineStyle: {
-                  color: "rgb(98,137,169)"
-                },
-                smooth: 0.2,
-                length: 10,
-                length2: 20
-              }
-            },
-            itemStyle: {
-              normal: {
-                shadowColor: "rgba(0, 0, 0, 0.8)",
-                shadowBlur: 50
-              }
-            }
-          }
-        ]
-      });
+      //       label: {
+      //         normal: {
+      //           formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
+      //           rich: {
+      //             c: {
+      //               color: "#77c8ff",
+      //               fontSize: 20,
+      //               fontWeight: "bold",
+      //               lineHeight: 5
+      //             },
+      //             b: {
+      //               color: "rgb(98,137,169)",
+      //               fontSize: 15,
+      //               height: 40
+      //             }
+      //           }
+      //         }
+      //       },
+      //       labelLine: {
+      //         normal: {
+      //           lineStyle: {
+      //             color: "rgb(98,137,169)"
+      //           },
+      //           smooth: 0.2,
+      //           length: 10,
+      //           length2: 20
+      //         }
+      //       },
+      //       itemStyle: {
+      //         normal: {
+      //           shadowColor: "rgba(0, 0, 0, 0.8)",
+      //           shadowBlur: 50
+      //         }
+      //       }
+      //     }
+      //   ]
+      // });
     },
     // 链接跳转
     echart() {
@@ -2353,6 +2428,50 @@ ul {
   margin-left: -12%;
   position: absolute;
   animation: rotate 5s linear infinite;
+}
+.seamless-warp {
+  height: 80%;
+  overflow: hidden;
+  .itemhua {
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    li {
+      width: 48%;
+      margin-bottom: 3%;
+      margin-top: 2%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5%;
+      padding: 2%;
+      .tit {
+        color: #fff;
+        font-size: 0.6rem;
+        margin-top: 2%;
+        margin-bottom: 5%;
+      }
+      .txt {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .box {
+          width: 33.33%;
+          font-size: 0.5rem;
+          text-align: center;
+          color: #fff;
+          .t1 {
+            color: #77c8ff;
+            margin-bottom: 5%;
+          }
+          .t2 {
+            color: #ffb956;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
 
