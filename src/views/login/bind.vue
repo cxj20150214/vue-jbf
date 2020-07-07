@@ -74,7 +74,7 @@ export default {
             .then(() => {
               this.loginSuccess = true;
               setTimeout(() => {
-                this.$router.push({ path: "/demo2" });
+                this.$router.push({ path: "/demo3" });
                 this.loginSuccess = false;
                 this.loading = false;
               }, 1500);

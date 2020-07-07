@@ -6,7 +6,7 @@
     </div>
     <div class="box1">
       <div class="mod1">
-        <p class="title"></p>
+        <p class="title">准入风险评级</p>
         <ul class="list">
           <li>
             <img class="diqiu" src="../../assets/img/diqiu1.png" alt />
@@ -171,8 +171,8 @@
     <div class="loginOut" @click="drawer = true"><</div>
     <el-drawer size="20%" title="我是标题" :visible.sync="drawer" :with-header="false">
       <div class="buttonBox">
-        <el-button class="button1" @click="echart" type="primary" size="mini">案例1</el-button>
-        <el-button class="button1" @click="demo2" type="primary" size="mini">案例2</el-button>
+        <el-button class="button1" @click="demo3" type="primary" size="mini">demo3</el-button>
+        <el-button class="button1" @click="demo2" type="primary" size="mini">demo2</el-button>
         <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button>
       </div>
     </el-drawer>
@@ -182,7 +182,7 @@
 import "echarts/map/js/china.js";
 import obj from "echarts/map/json/china.json";
 export default {
-  name: "demo1",
+  name: "demo2",
   data() {
     return {
       drawer: false,
@@ -1231,6 +1231,9 @@ export default {
     },
     demo2() {
       this.$router.push("/demo2");
+    },
+    demo3() {
+      this.$router.push("/demo3");
     },
     logout() {
       this.$store.dispatch("user/logout").then(() => {

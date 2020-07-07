@@ -223,15 +223,37 @@
         <div class="box1">
           <div class="titleBox">
             <img src="../../assets/img/sj.png" alt />
-            <p class="title">服务点</p>
+            <p class="title">风险预警排行TOP10</p>
           </div>
           <!-- 跑马灯 -->
-          <ul class="phList">
-            <li>1.厦门市湖里区吕岭路与金泰路交叉口</li>
-            <li>2.湖北省武汉市武昌区友谊大道368号</li>
-            <li>3.武汉市武昌区中南路9号中商广场B1</li>
-            <li>4.民主路786号华银大厦10层1006</li>
-          </ul>
+          <vue-seamless-scroll
+            :class-option="optionscroll1"
+            :data="listData1"
+            class="seamless-warp1"
+          >
+            <ul class="itemhua">
+              <li v-for="item in listData1">
+                <div class="tit">裕农通-福建省分行</div>
+                <div class="txt">
+                  <div class="paihan">NO {{item.no}}</div>
+                  <div class="boxP">
+                    <div class="box">
+                      <p class="t1">预警总数</p>
+                      <p class="t2">{{item.data1}}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">已处理数</p>
+                      <p class="t2">{{item.data2}}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">处理率</p>
+                      <p class="t2">{{item.data3}}</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </vue-seamless-scroll>
         </div>
       </div>
     </div>
@@ -260,8 +282,8 @@
     <div class="loginOut" @click="drawer = true"><</div>
     <el-drawer size="20%" title="我是标题" :visible.sync="drawer" :with-header="false">
       <div class="buttonBox">
-        <el-button class="button1" @click="echart" type="primary" size="mini">案例1</el-button>
-        <el-button class="button1" @click="demo2" type="primary" size="mini">案例2</el-button>
+        <el-button class="button1" @click="demo3" type="primary" size="mini">demo3</el-button>
+        <el-button class="button1" @click="demo2" type="primary" size="mini">demo2</el-button>
         <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button>
       </div>
     </el-drawer>
@@ -271,7 +293,7 @@
 import "echarts/map/js/china.js";
 import obj from "echarts/map/json/china.json";
 export default {
-  name: "demo1",
+  name: "demo3",
   data() {
     return {
       drawer: false,
@@ -330,6 +352,68 @@ export default {
           data2: "60个",
           data3: "80%"
         }
+      ],
+      listData1: [
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "1"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "2"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "3"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "4"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "5"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "6"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "7"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "8"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "9"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "10"
+        }
       ]
     };
   },
@@ -338,6 +422,14 @@ export default {
       return {
         // hoverStop: false,
         step: 0.2
+      };
+    },
+    optionscroll1() {
+      return {
+        // hoverStop: false,
+        step: 0.4,
+        direction: 2,
+        limitMoveNum: 2
       };
     }
   },
@@ -1680,6 +1772,9 @@ export default {
     echart() {
       this.$router.push("/echart");
     },
+    demo3() {
+      this.$router.push("/demo3");
+    },
     demo2() {
       this.$router.push("/demo2");
     },
@@ -2467,6 +2562,82 @@ ul {
           }
           .t2 {
             color: #ffb956;
+          }
+        }
+      }
+    }
+  }
+}
+
+.seamless-warp1 {
+  width: 90%;
+  margin: 0px auto;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+  .itemhua {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    height: 5rem;
+    margin-top: 1rem;
+    li {
+      width: 10rem;
+      height: 100%;
+      margin-right: 0.6rem;
+      .tit {
+        color: #fff;
+        font-size: 0.6rem;
+        margin-bottom: 2%;
+      }
+      .txt {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5%;
+        height: 4rem;
+        .paihan {
+          width: 3rem;
+          height: 3rem;
+          margin-top: 0.5rem;
+          margin-left: 0.5rem;
+          border: 0.01rem solid #2988c1;
+          font-size: 0.8rem;
+          border-radius: 5%;
+          color: #ffb956;
+          text-align: center;
+          line-height: 3rem;
+          background: rgba(255, 255, 255, 0.1);
+        }
+        .boxP {
+          display: flex;
+          flex-direction: column;
+          margin-top: 0.5rem;
+          margin-right: 0.5rem;
+          margin-left: 0.2rem;
+          .box {
+            width: 5.8rem;
+            font-size: 0.5rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            height: 0.9rem;
+            margin-bottom: 0.1rem;
+            line-height: 0.9rem;
+            padding-left: 0.2rem;
+            color: #fff;
+            border-left: 1px solid #2988c1;
+            .t1 {
+              color: #fff;
+              float: left;
+            }
+            .t2 {
+              color: #ffb956;
+              float: right;
+              margin-right: 0.1rem;
+            }
           }
         }
       }
