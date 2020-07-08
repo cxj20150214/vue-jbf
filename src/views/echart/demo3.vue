@@ -267,16 +267,17 @@
       <div class="modr2">
         <div class="titleBox">
           <img src="../../assets/img/sj.png" alt />
-          <p class="title">本月风险预警数据</p>
+          <p class="title">巡检数据统计</p>
         </div>
         <div class="zhexiantu" id="Pie2"></div>
       </div>
       <div class="modr3">
         <div class="titleBox">
           <img src="../../assets/img/sj.png" alt />
-          <p class="title">巡检数据统计</p>
+          <p class="title">本月风险预警</p>
         </div>
-        <div class="zhuzhuangtu" id="Pie3"></div>
+        <!-- <div class="zhuzhuangtu" id="Pie3"></div> -->
+        <div class="bingtu" id="Pie1"></div>
       </div>
     </div>
     <div class="loginOut" @click="drawer = true"><</div>
@@ -1205,9 +1206,11 @@ export default {
     // 饼图
     piedemo() {
       let yuan = this.$echarts.init(document.getElementById("yuan"));
-      // let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
+      let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
       let Pie2 = this.$echarts.init(document.getElementById("Pie2"));
-      let Pie3 = this.$echarts.init(document.getElementById("Pie3"));
+      // let Pie3 = this.$echarts.init(document.getElementById("Pie3"));
+      // 右侧最下角饼图
+
       // 发光圆形
       var trafficWay = [
         {
@@ -1374,210 +1377,185 @@ export default {
         series: seriesOption
       });
       // 折线图
-      Pie3.setOption({
-        tooltip: {
-          //提示框组件
-          trigger: "axis",
-          formatter: "{b}<br />{a0}: {c0}<br />{a1}: {c1}",
-          axisPointer: {
-            type: "shadow",
-            label: {
-              backgroundColor: "#6a7985"
-            }
-          },
-          textStyle: {
-            color: "#fff",
-            fontStyle: "normal",
-            fontFamily: "微软雅黑",
-            fontSize: 18
-          }
-        },
-        grid: {
-          left: "10%",
-          right: "10%",
-          bottom: "10%",
-          top: "40%",
-          //	padding:'0 0 10 0',
-          containLabel: true
-        },
-        legend: {
-          //图例组件，颜色和名字
-          right: "10%",
-          top: "30%",
-          itemGap: 16,
-          itemWidth: 18,
-          itemHeight: 10,
-          data: [
-            {
-              name: "本年"
-              //icon:'image://../wwwroot/js/url2.png', //路径
-            },
-            {
-              name: "本月"
-            }
-          ],
-          textStyle: {
-            color: "#a8aab0",
-            fontStyle: "normal",
-            fontFamily: "微软雅黑",
-            fontSize: 16
-          }
-        },
-        xAxis: [
-          {
-            type: "category",
-            //	boundaryGap: true,//坐标轴两边留白
-            data: [
-              "远程巡检",
-              "现场巡检",
-              "专项巡检",
-              "应巡检服务点数",
-              "巡检数量",
-              "巡检率"
-            ],
-            axisLabel: {
-              //坐标轴刻度标签的相关设置。
-              //		interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
-              //	margin:15,
-              textStyle: {
-                color: "#078ceb",
-                fontStyle: "normal",
-                fontFamily: "微软雅黑",
-                fontSize: 12
-              },
-              rotate: 50
-            },
-            axisTick: {
-              //坐标轴刻度相关设置。
-              show: false
-            },
-            axisLine: {
-              //坐标轴轴线相关设置
-              lineStyle: {
-                color: "#fff",
-                opacity: 0.2
-              }
-            },
-            splitLine: {
-              //坐标轴在 grid 区域中的分隔线。
-              show: false
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: "value",
-            splitNumber: 5,
-            axisLabel: {
-              textStyle: {
-                color: "#a8aab0",
-                fontStyle: "normal",
-                fontFamily: "微软雅黑",
-                fontSize: 12
-              }
-            },
-            axisLine: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: ["#fff"],
-                opacity: 0.06
-              }
-            }
-          }
-        ],
-        series: [
-          {
-            name: "本年",
-            type: "bar",
-            data: [10, 15, 30, 45, 55, 60],
-            barWidth: 25,
-            barGap: 0, //柱间距离
-            // label: {//图形上的文本标签
-            //     normal: {
-            //       show: true,
-            //       position: 'top',
-            //       textStyle: {
-            //           color: '#a8aab0',
-            //           fontStyle: 'normal',
-            //           fontFamily: '微软雅黑',
-            //           fontSize: 12,
-            //       },
-            //     },
-            // },
-            itemStyle: {
-              normal: {
-                show: true,
-                barBorderRadius: 0,
-                borderWidth: 0,
-                color: "#77C8FF"
-              }
-            }
-          },
-          {
-            name: "本月",
-            type: "bar",
-            data: [8, 5, 25, 30, 35, 55, 62, 78, 65, 55, 60, 45, 42, 15, 12, 5],
-            barWidth: 25,
-            barGap: 0, //柱间距离
-            // label: {//图形上的文本标签
-            //     normal: {
-            //       show: true,
-            //       position: 'top',
-            //       textStyle: {
-            //           color: '#a8aab0',
-            //           fontStyle: 'normal',
-            //           fontFamily: '微软雅黑',
-            //           fontSize: 12,
-            //       },
-            //     },
-            // },
-            itemStyle: {
-              normal: {
-                show: true,
-                barBorderRadius: 0,
-                borderWidth: 0
-              }
-            }
-          }
-        ]
-      });
+      // Pie3.setOption({
+      //   tooltip: {
+      //     //提示框组件
+      //     trigger: "axis",
+      //     formatter: "{b}<br />{a0}: {c0}<br />{a1}: {c1}",
+      //     axisPointer: {
+      //       type: "shadow",
+      //       label: {
+      //         backgroundColor: "#6a7985"
+      //       }
+      //     },
+      //     textStyle: {
+      //       color: "#fff",
+      //       fontStyle: "normal",
+      //       fontFamily: "微软雅黑",
+      //       fontSize: 18
+      //     }
+      //   },
+      //   grid: {
+      //     left: "10%",
+      //     right: "10%",
+      //     bottom: "10%",
+      //     top: "40%",
+      //     //	padding:'0 0 10 0',
+      //     containLabel: true
+      //   },
+      //   legend: {
+      //     //图例组件，颜色和名字
+      //     right: "10%",
+      //     top: "30%",
+      //     itemGap: 16,
+      //     itemWidth: 18,
+      //     itemHeight: 10,
+      //     data: [
+      //       {
+      //         name: "本年"
+      //         //icon:'image://../wwwroot/js/url2.png', //路径
+      //       },
+      //       {
+      //         name: "本月"
+      //       }
+      //     ],
+      //     textStyle: {
+      //       color: "#a8aab0",
+      //       fontStyle: "normal",
+      //       fontFamily: "微软雅黑",
+      //       fontSize: 16
+      //     }
+      //   },
+      //   xAxis: [
+      //     {
+      //       type: "category",
+      //       //	boundaryGap: true,//坐标轴两边留白
+      //       data: [
+      //         "远程巡检",
+      //         "现场巡检",
+      //         "专项巡检",
+      //         "应巡检服务点数",
+      //         "巡检数量",
+      //         "巡检率"
+      //       ],
+      //       axisLabel: {
+      //         //坐标轴刻度标签的相关设置。
+      //         //		interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
+      //         //	margin:15,
+      //         textStyle: {
+      //           color: "#078ceb",
+      //           fontStyle: "normal",
+      //           fontFamily: "微软雅黑",
+      //           fontSize: 12
+      //         },
+      //         rotate: 50
+      //       },
+      //       axisTick: {
+      //         //坐标轴刻度相关设置。
+      //         show: false
+      //       },
+      //       axisLine: {
+      //         //坐标轴轴线相关设置
+      //         lineStyle: {
+      //           color: "#fff",
+      //           opacity: 0.2
+      //         }
+      //       },
+      //       splitLine: {
+      //         //坐标轴在 grid 区域中的分隔线。
+      //         show: false
+      //       }
+      //     }
+      //   ],
+      //   yAxis: [
+      //     {
+      //       type: "value",
+      //       splitNumber: 5,
+      //       axisLabel: {
+      //         textStyle: {
+      //           color: "#a8aab0",
+      //           fontStyle: "normal",
+      //           fontFamily: "微软雅黑",
+      //           fontSize: 12
+      //         }
+      //       },
+      //       axisLine: {
+      //         show: false
+      //       },
+      //       axisTick: {
+      //         show: false
+      //       },
+      //       splitLine: {
+      //         show: true,
+      //         lineStyle: {
+      //           color: ["#fff"],
+      //           opacity: 0.06
+      //         }
+      //       }
+      //     }
+      //   ],
+      //   series: [
+      //     {
+      //       name: "本年",
+      //       type: "bar",
+      //       data: [10, 15, 30, 45, 55, 60],
+      //       barWidth: 25,
+      //       barGap: 0, //柱间距离
+      //       // label: {//图形上的文本标签
+      //       //     normal: {
+      //       //       show: true,
+      //       //       position: 'top',
+      //       //       textStyle: {
+      //       //           color: '#a8aab0',
+      //       //           fontStyle: 'normal',
+      //       //           fontFamily: '微软雅黑',
+      //       //           fontSize: 12,
+      //       //       },
+      //       //     },
+      //       // },
+      //       itemStyle: {
+      //         normal: {
+      //           show: true,
+      //           barBorderRadius: 0,
+      //           borderWidth: 0,
+      //           color: "#77C8FF"
+      //         }
+      //       }
+      //     },
+      //     {
+      //       name: "本月",
+      //       type: "bar",
+      //       data: [8, 5, 25, 30, 35, 55, 62, 78, 65, 55, 60, 45, 42, 15, 12, 5],
+      //       barWidth: 25,
+      //       barGap: 0, //柱间距离
+      //       // label: {//图形上的文本标签
+      //       //     normal: {
+      //       //       show: true,
+      //       //       position: 'top',
+      //       //       textStyle: {
+      //       //           color: '#a8aab0',
+      //       //           fontStyle: 'normal',
+      //       //           fontFamily: '微软雅黑',
+      //       //           fontSize: 12,
+      //       //       },
+      //       //     },
+      //       // },
+      //       itemStyle: {
+      //         normal: {
+      //           show: true,
+      //           barBorderRadius: 0,
+      //           borderWidth: 0
+      //         }
+      //       }
+      //     }
+      //   ]
+      // });
       //
       var data1 = [20, 30, 20, 30, 20, 30, 20, 30, 20, 30];
       var data2 = [9, 30, 9, 60, 70, 20, 59, 20, 49, 20];
       var data3 = [20, 30, 20, 30, 20, 30, 20, 30, 20, 30];
       var data4 = [9, 30, 9, 60, 70, 20, 59, 20, 49, 20];
-      var datacity = [
-        "济南市",
-        "青岛市",
-        "淄博市",
-        "枣庄",
-        "东营",
-        "烟台市",
-        "潍坊市",
-        "济宁市",
-        "威海市",
-        "泰安市"
-      ];
-
-      var datacity = [
-        "济南市",
-        "青岛市",
-        "淄博市",
-        "枣庄",
-        "东营",
-        "烟台市",
-        "潍坊市",
-        "济宁市",
-        "威海市",
-        "泰安市"
-      ];
-
+      var datacity = ["一季度", "二季度", "三季度", "四季度"];
       Pie2.setOption({
         color: ["#388BFF", "#05C3FA", "#F6931C", "#FFD52E"],
         tooltip: {
@@ -1585,7 +1563,7 @@ export default {
         },
         legend: {
           top: "8%",
-          data: ["存量", "新增", "拆除", "整改"],
+          data: ["未巡检", "远程巡检", "现场巡检", "专项巡检"],
           textStyle: {
             color: "#fff",
             fontSize: 16
@@ -1637,33 +1615,33 @@ export default {
         ],
         series: [
           {
-            name: "存量",
+            name: "未巡检",
             type: "bar",
             stack: "sum",
-            barWidth: "20px",
+            barWidth: "40px",
             data: data1
           },
           {
-            name: "新增",
+            name: "远程巡检",
             type: "bar",
-            barWidth: "20px",
+            barWidth: "40px",
             stack: "sum",
             data: data2
           },
           {
-            name: "拆除",
+            name: "现场巡检",
             type: "bar",
             color: "#F6931C",
             stack: "sum1",
-            barWidth: "20px",
+            barWidth: "40px",
             data: data3
           },
           {
-            name: "整改",
+            name: "专项巡检",
             type: "bar",
             color: "#FFD52E",
             stack: "sum1",
-            barWidth: "20px",
+            barWidth: "40px",
             data: data3
           }
         ]
@@ -1677,96 +1655,96 @@ export default {
         "#9E87FF",
         "#58D5FF"
       ];
-      // Pie1.setOption({
-      //   backgroundColor: "",
-      //   title: {
-      //     text: "",
-      //     left: "center",
-      //     top: 20,
-      //     textStyle: {
-      //       color: "#ccc"
-      //     }
-      //   },
+      Pie1.setOption({
+        backgroundColor: "",
+        title: {
+          text: "",
+          left: "center",
+          top: 20,
+          textStyle: {
+            color: "#ccc"
+          }
+        },
 
-      //   tooltip: {
-      //     trigger: "item",
-      //     formatter: "{b} : {c} ({d}%)"
-      //   },
+        tooltip: {
+          trigger: "item",
+          formatter: "{b} : {c} ({d}%)"
+        },
 
-      //   visualMap: {
-      //     show: false,
-      //     min: 500,
-      //     max: 600,
-      //     inRange: {
-      //       //colorLightness: [0, 1]
-      //     }
-      //   },
-      //   series: [
-      //     {
-      //       name: "访问来源",
-      //       type: "pie",
-      //       radius: "50%",
-      //       center: ["50%", "50%"],
-      //       color: ["rgb(131,249,103)", "#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
-      //       data: [
-      //         {
-      //           value: 285,
-      //           name: "风险级"
-      //         },
-      //         {
-      //           value: 410,
-      //           name: "警示级"
-      //         },
-      //         {
-      //           value: 274,
-      //           name: "预警级"
-      //         },
-      //         {
-      //           value: 235,
-      //           name: "关注级"
-      //         }
-      //       ].sort(function(a, b) {
-      //         return a.value - b.value;
-      //       }),
-      //       roseType: "radius",
+        visualMap: {
+          show: false,
+          min: 500,
+          max: 600,
+          inRange: {
+            //colorLightness: [0, 1]
+          }
+        },
+        series: [
+          {
+            name: "访问来源",
+            type: "pie",
+            radius: "50%",
+            center: ["50%", "50%"],
+            color: ["rgb(131,249,103)", "#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
+            data: [
+              {
+                value: 285,
+                name: "风险级"
+              },
+              {
+                value: 410,
+                name: "警示级"
+              },
+              {
+                value: 274,
+                name: "预警级"
+              },
+              {
+                value: 235,
+                name: "关注级"
+              }
+            ].sort(function(a, b) {
+              return a.value - b.value;
+            }),
+            roseType: "radius",
 
-      //       label: {
-      //         normal: {
-      //           formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
-      //           rich: {
-      //             c: {
-      //               color: "#77c8ff",
-      //               fontSize: 20,
-      //               fontWeight: "bold",
-      //               lineHeight: 5
-      //             },
-      //             b: {
-      //               color: "rgb(98,137,169)",
-      //               fontSize: 15,
-      //               height: 40
-      //             }
-      //           }
-      //         }
-      //       },
-      //       labelLine: {
-      //         normal: {
-      //           lineStyle: {
-      //             color: "rgb(98,137,169)"
-      //           },
-      //           smooth: 0.2,
-      //           length: 10,
-      //           length2: 20
-      //         }
-      //       },
-      //       itemStyle: {
-      //         normal: {
-      //           shadowColor: "rgba(0, 0, 0, 0.8)",
-      //           shadowBlur: 50
-      //         }
-      //       }
-      //     }
-      //   ]
-      // });
+            label: {
+              normal: {
+                formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
+                rich: {
+                  c: {
+                    color: "#77c8ff",
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    lineHeight: 5
+                  },
+                  b: {
+                    color: "rgb(98,137,169)",
+                    fontSize: 15,
+                    height: 40
+                  }
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                lineStyle: {
+                  color: "rgb(98,137,169)"
+                },
+                smooth: 0.2,
+                length: 10,
+                length2: 20
+              }
+            },
+            itemStyle: {
+              normal: {
+                shadowColor: "rgba(0, 0, 0, 0.8)",
+                shadowBlur: 50
+              }
+            }
+          }
+        ]
+      });
     },
     // 链接跳转
     echart() {
@@ -2294,6 +2272,14 @@ ul {
       padding: 5% 5% 11% 8%;
     }
     .modr3 {
+      .bingtu {
+        width: 200%;
+        height: 200%;
+        position: absolute;
+        transform: scale(0.55);
+        left: -45%;
+        top: -50%;
+      }
       .zhuzhuangtu {
         width: 200%;
         height: 200%;
