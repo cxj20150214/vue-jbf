@@ -782,9 +782,9 @@ export default {
           trigger: "item",
           formatter: function(params) {
             var MAP_VALUE_DIC = {
-              "0": "高级预警",
+              "0": "初级预警",
               "10": "中级预警",
-              "20": "初级预警"
+              "20": "高级预警"
             };
             if (params.seriesType) {
               return params.name + ": " + MAP_VALUE_DIC[params.data.value];
@@ -1551,10 +1551,10 @@ export default {
       //   ]
       // });
       //
-      var data1 = [20, 30, 20, 30, 20, 30, 20, 30, 20, 30];
-      var data2 = [9, 30, 9, 60, 70, 20, 59, 20, 49, 20];
-      var data3 = [20, 30, 20, 30, 20, 30, 20, 30, 20, 30];
-      var data4 = [9, 30, 9, 60, 70, 20, 59, 20, 49, 20];
+      var data1 = [20, 30, 20, 30]; 
+      var data2 = [9, 30, 9, 60];
+      var data3 = [20, 30, 20, 30];
+      var data4 = [9, 30, 9, 60];
       var datacity = ["一季度", "二季度", "三季度", "四季度"];
       Pie2.setOption({
         color: ["#388BFF", "#05C3FA", "#F6931C", "#FFD52E"],
@@ -1566,7 +1566,7 @@ export default {
           data: ["未巡检", "远程巡检", "现场巡检", "专项巡检"],
           textStyle: {
             color: "#fff",
-            fontSize: 16
+            fontSize: this.setFontsize(0.3)
           }
         },
         grid: {
@@ -1585,7 +1585,7 @@ export default {
               interval: "auto",
               formatter: "{value} ",
               textStyle: {
-                fontSize: 16,
+                fontSize: this.setFontsize(0.3),
                 color: "#fff"
               }
             },
@@ -1606,7 +1606,7 @@ export default {
               show: true,
               splitNumber: 15,
               textStyle: {
-                fontSize: 16,
+                fontSize: this.setFontsize(0.3),
                 color: "#fff"
               }
             },
@@ -1618,13 +1618,13 @@ export default {
             name: "未巡检",
             type: "bar",
             stack: "sum",
-            barWidth: "40px",
+            barWidth: this.setFontsize(0.5),
             data: data1
           },
           {
             name: "远程巡检",
             type: "bar",
-            barWidth: "40px",
+            barWidth: this.setFontsize(0.5),
             stack: "sum",
             data: data2
           },
@@ -1633,7 +1633,7 @@ export default {
             type: "bar",
             color: "#F6931C",
             stack: "sum1",
-            barWidth: "40px",
+            barWidth: this.setFontsize(0.5),
             data: data3
           },
           {
@@ -1641,7 +1641,7 @@ export default {
             type: "bar",
             color: "#FFD52E",
             stack: "sum1",
-            barWidth: "40px",
+            barWidth: this.setFontsize(0.5),
             data: data3
           }
         ]
