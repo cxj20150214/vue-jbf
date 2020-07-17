@@ -65,6 +65,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/demo4',
+    name: 'demo4',
+    component: () => import('@/views/echart/demo4'),
+    meta: { title: '数据表', icon: 'dashboard' },
+    hidden: true
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true

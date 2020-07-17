@@ -9,23 +9,23 @@
         <p class="title">准入风险评级</p>
         <ul class="list">
           <li>
-            <img class="diqiu" src="../../assets/img/diqiu1.png" alt />
+            <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
               <p>1090</p>
               <span>进件数</span>
             </div>
-            <img class="jt" src="../../assets/img/jt.png" alt />
+            <img class="jt" src="../../assets/img/jt1.png" alt />
           </li>
           <li>
-            <img class="diqiu" src="../../assets/img/diqiu1.png" alt />
+            <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
               <p>165</p>
               <span>通过数</span>
             </div>
-            <img class="jt" src="../../assets/img/jt.png" alt />
+            <img class="jt" src="../../assets/img/jt1.png" alt />
           </li>
           <li>
-            <img class="diqiu" src="../../assets/img/diqiu1.png" alt />
+            <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
               <p>40%</p>
               <span>通过率</span>
