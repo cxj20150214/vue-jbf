@@ -167,7 +167,7 @@ export default {
       border-radius: 100%;
     }
     width: 480px;
-    margin: 0px auto;
+    margin: 120px auto;
     padding: 50px;
     .tit {
       font-size: 32px;

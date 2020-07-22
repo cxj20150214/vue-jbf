@@ -1840,7 +1840,7 @@ ul {
       .title {
         position: absolute;
         color: #70c5ff;
-        font-size: 0.8rem;
+        font-size: 16px;
         left: 9%;
         top: 17%;
         font-weight: 700;
