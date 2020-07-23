@@ -1551,7 +1551,7 @@ export default {
       //   ]
       // });
       //
-      var data1 = [20, 30, 20, 30]; 
+      var data1 = [20, 30, 20, 30];
       var data2 = [9, 30, 9, 60];
       var data3 = [20, 30, 20, 30];
       var data4 = [9, 30, 9, 60];
@@ -1769,6 +1769,7 @@ export default {
   },
   created() {
     this.getData();
+
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -1792,8 +1793,8 @@ ul {
   .title_time {
     .time {
       color: #fff;
-      font-size: 0.8rem;
-      margin-top: 2.5%;
+      font-size: 16px;
+      margin-top: 15px;
       height: 30%;
     }
     width: 24%;
@@ -1804,11 +1805,11 @@ ul {
     position: absolute;
     text-align: center;
     .tit {
-      font-size: 1.2rem;
-      margin-top: 4%;
+      font-size: 38px;
+      margin-top: 20px;
       letter-spacing: 2px;
       height: 30%;
-      line-height: 1.2rem;
+      line-height: 30px;
       color: #80ccff;
     }
   }
@@ -1840,7 +1841,7 @@ ul {
       .title {
         position: absolute;
         color: #70c5ff;
-        font-size: 16px;
+        font-size: 18px;
         left: 9%;
         top: 17%;
         font-weight: 700;
@@ -1863,17 +1864,16 @@ ul {
           .txt {
             position: absolute;
             left: 0px;
-            top: 40%;
+            top: 30px;
             height: 30%;
             width: 100%;
             p {
-              font-size: 0.8rem;
+              font-size: 18px;
               margin: 0px;
-              margin-bottom: 5%;
-              line-height: 0.24rem;
+              line-height: 24px;
             }
             span {
-              font-size: 0.4rem;
+              font-size: 12px;
             }
           }
           .diqiu {
@@ -2053,21 +2053,21 @@ ul {
           }
           width: 25%;
           .t1 {
-            font-size: 0.6rem;
-            margin-top: 6%;
-            margin-bottom: 5%;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom:10px;
           }
           .t2 {
-            font-size: 0.7rem;
+            font-size: 18px;
             text-align: center;
           }
           .t3 {
             color: #77c8ff;
-            font-size: 1.2rem;
+            font-size: 26px;
           }
           .t4 {
             color: #ffb956;
-            font-size: 1.2rem;
+            font-size: 26px;
           }
         }
       }
@@ -2078,7 +2078,7 @@ ul {
         height: 18%;
         .title {
           color: #70c5ff;
-          font-size: 0.8rem;
+          font-size: 18px;
           font-weight: 700;
           margin-top: 2%;
           margin-left: 2%;
@@ -2135,7 +2135,7 @@ ul {
         .title {
           position: absolute;
           color: #70c5ff;
-          font-size: 0.8rem;
+          font-size: 18px;
           left: 5%;
           top: 10%;
           font-weight: 700;
@@ -2166,7 +2166,7 @@ ul {
             padding-bottom: 3%;
             padding-top: 3%;
             color: #aaddff;
-            font-size: 0.6rem;
+            font-size: 14px;
           }
         }
         width: 49%;
@@ -2191,7 +2191,7 @@ ul {
           height: 18%;
           .title {
             color: #70c5ff;
-            font-size: 0.8rem;
+            font-size: 18px;
             margin-top: 2%;
             margin-left: 2%;
             font-weight: 700;
@@ -2220,19 +2220,19 @@ ul {
       .title {
         position: absolute;
         color: #70c5ff;
-        font-size: 0.8rem;
+        font-size: 18px;
         right: 9%;
         top: 17%;
         font-weight: 700;
       }
       .txt {
         color: #70c5ff;
-        font-size: 0.7rem;
+        font-size: 16px;
         width: 80%;
         height: 55%;
         overflow: hidden;
         margin: 15% auto 0px;
-        line-height: 1.2rem;
+        line-height: 24px;
       }
     }
     // 裕农通风险管理
@@ -2254,7 +2254,7 @@ ul {
         height: 18%;
         .title {
           color: #70c5ff;
-          font-size: 0.8rem;
+          font-size: 18px;
           font-weight: 700;
           margin-top: 2%;
           margin-left: 2%;
@@ -2295,7 +2295,7 @@ ul {
         height: 18%;
         .title {
           color: #70c5ff;
-          font-size: 0.8rem;
+          font-size: 18px;
           font-weight: 700;
           margin-top: 2%;
           margin-left: 2%;
@@ -2335,7 +2335,7 @@ ul {
   height: 35px;
   line-height: 35px;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 18px;
   text-align: center;
   position: fixed;
   right: 0px;
@@ -2349,6 +2349,8 @@ ul {
 .button1 {
   width: 80px;
   margin: 10px;
+  font-size: 16px;
+  text-align: center;
 }
 .piebox {
   height: 100%;
@@ -2361,7 +2363,7 @@ ul {
     left: 0px;
     .title {
       color: #70c5ff;
-      font-size: 0.24rem;
+      font-size: 12px;
       font-weight: 700;
       margin-bottom: 3%;
     }
@@ -2375,13 +2377,13 @@ ul {
       li {
         p {
           color: #fff;
-          font-size: 0.24rem;
+          font-size: 10px;
           padding: 0px;
           float: left;
         }
         span {
           color: #ffb956;
-          font-size: 0.24rem;
+          font-size: 10px;
           float: right;
         }
         margin-bottom: 5%;
@@ -2396,7 +2398,7 @@ ul {
     top: 0px;
     .title {
       color: #70c5ff;
-      font-size: 0.24rem;
+      font-size: 12px;
       font-weight: 700;
       margin-bottom: 3%;
     }
@@ -2410,13 +2412,13 @@ ul {
       li {
         p {
           color: #fff;
-          font-size: 0.24rem;
+          font-size: 10px;
           padding: 0px;
           float: left;
         }
         span {
           color: #ffb956;
-          font-size: 0.24rem;
+          font-size: 10px;
           float: right;
         }
         margin-bottom: 5%;
@@ -2426,7 +2428,7 @@ ul {
   .t3 {
     .title {
       color: #70c5ff;
-      font-size: 0.24rem;
+      font-size: 12px;
       font-weight: 700;
       margin-bottom: 3%;
     }
@@ -2440,13 +2442,13 @@ ul {
       li {
         p {
           color: #fff;
-          font-size: 0.24rem;
+          font-size: 10px;
           padding: 0px;
           float: left;
         }
         span {
           color: #ffb956;
-          font-size: 0.24rem;
+          font-size: 10px;
           float: right;
         }
         margin-bottom: 5%;
@@ -2461,7 +2463,7 @@ ul {
   .t4 {
     .title {
       color: #70c5ff;
-      font-size: 0.24rem;
+      font-size: 12px;
       font-weight: 700;
       margin-bottom: 3%;
     }
@@ -2475,13 +2477,13 @@ ul {
       li {
         p {
           color: #fff;
-          font-size: 0.24rem;
+          font-size: 10px;
           padding: 0px;
           float: left;
         }
         span {
           color: #ffb956;
-          font-size: 0.24rem;
+          font-size: 10px;
           float: right;
         }
         margin-bottom: 5%;
@@ -2528,7 +2530,7 @@ ul {
       padding: 2%;
       .tit {
         color: #fff;
-        font-size: 0.6rem;
+        font-size: 14px;
         margin-top: 2%;
         margin-bottom: 5%;
       }
@@ -2539,7 +2541,7 @@ ul {
         justify-content: space-between;
         .box {
           width: 33.33%;
-          font-size: 0.5rem;
+          font-size: 12px;
           text-align: center;
           color: #fff;
           .t1 {
@@ -2566,16 +2568,16 @@ ul {
     margin: 0px;
     display: flex;
     flex-direction: row;
-    height: 5rem;
-    margin-top: 1rem;
+    height: 200px;
+    margin-top:20px;
     li {
-      width: 10rem;
-      height: 100%;
-      margin-right: 0.6rem;
+      width: 300px;
+      height: 150px;
+      margin-right: 20px;
       .tit {
         color: #fff;
-        font-size: 0.6rem;
-        margin-bottom: 2%;
+        font-size: 16px;
+        margin-bottom: 10px;
       }
       .txt {
         display: flex;
@@ -2583,36 +2585,36 @@ ul {
         flex-wrap: wrap;
         justify-content: space-between;
         background: rgba(255, 255, 255, 0.1);
-        border-radius: 5%;
-        height: 4rem;
+        border-radius: 5px;
+        height: 100px;
         .paihan {
-          width: 3rem;
-          height: 3rem;
-          margin-top: 0.5rem;
-          margin-left: 0.5rem;
-          border: 0.01rem solid #2988c1;
-          font-size: 0.8rem;
-          border-radius: 5%;
+          width: 80px;
+          height: 80px;
+          margin-top: 10px;
+          margin-left: 10px;
+          border: 1px solid #2988c1;
+          font-size: 22px;
+          border-radius: 5px;
           color: #ffb956;
           text-align: center;
-          line-height: 3rem;
+          line-height: 80px;
           background: rgba(255, 255, 255, 0.1);
         }
         .boxP {
           display: flex;
           flex-direction: column;
-          margin-top: 0.5rem;
-          margin-right: 0.5rem;
-          margin-left: 0.2rem;
+          margin-top: 10px;
+          margin-right: 15px;
+          margin-left: 5px;
           .box {
-            width: 5.8rem;
-            font-size: 0.5rem;
+            width: 170px;
+            font-size: 14px;
             text-align: center;
             background: rgba(255, 255, 255, 0.1);
-            height: 0.9rem;
-            margin-bottom: 0.1rem;
-            line-height: 0.9rem;
-            padding-left: 0.2rem;
+            height: 22px;
+            margin-bottom: 5px;
+            line-height: 22px;
+            padding-left: 5px;
             color: #fff;
             border-left: 1px solid #2988c1;
             .t1 {
@@ -2622,7 +2624,7 @@ ul {
             .t2 {
               color: #ffb956;
               float: right;
-              margin-right: 0.1rem;
+              margin-right: 15px;
             }
           }
         }
