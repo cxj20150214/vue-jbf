@@ -1849,7 +1849,7 @@ ul {
       .list {
         width: 80%;
         height: 50%;
-        margin: 15% auto 0px;
+        margin: 70px auto 0px;
         display: flex;
         flex-direction: row;
         align-items: center;
