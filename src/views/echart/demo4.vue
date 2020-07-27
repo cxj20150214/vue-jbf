@@ -474,7 +474,7 @@ li {
               width: 11.1111%;
               list-style: none;
               color: #fff;
-              font-size: 0.6rem;
+              font-size: 14px;
               float: left;
               color: #70c5ff;
               font-weight: 700;
@@ -492,7 +492,7 @@ li {
             width: 100%;
             padding: 0px;
             margin: 0px;
-            font-size: 0.6rem;
+            font-size: 14px;
             li {
               float: left;
               width: 100%;
@@ -542,7 +542,7 @@ li {
             flex-direction: row;
             .box {
               width: 50%;
-              font-size: 0.8rem;
+              font-size: 18px;
               color: #aaddff;
               text-align: center;
               position: relative;
@@ -557,11 +557,11 @@ li {
               }
               .t1 {
                 color: #77c8ff;
-                font-size: 1.2rem;
+                font-size: 32px;
               }
               .t2 {
                 color: #ffb956;
-                font-size: 1.2rem;
+                font-size: 32px;
               }
             }
           }
