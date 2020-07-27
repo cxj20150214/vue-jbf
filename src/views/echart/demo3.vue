@@ -1815,6 +1815,7 @@ ul {
   }
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   background-image: url("../../assets/img/demo2bg.jpg");
@@ -2049,6 +2050,7 @@ ul {
           flex-direction: column;
           .imgbox {
             width: 40%;
+            height:40px;
             margin: 0px auto;
           }
           width: 25%;
