@@ -81,6 +81,14 @@
         </div>
       </div>
     </div>
+    <div class="loginOut" @click="drawer = true"><</div>
+    <el-drawer size="20%" title="我是标题" :visible.sync="drawer" :with-header="false">
+      <div class="buttonBox">
+        <el-button class="button1" @click="demo3" type="primary" size="mini">demo3</el-button>
+        <el-button class="button1" @click="demo4" type="primary" size="mini">demo4</el-button>
+        <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button>
+      </div>
+    </el-drawer>
   </div>
 </template>
 <script>
@@ -88,6 +96,7 @@ export default {
   name: "demo4",
   data() {
     return {
+      drawer: false,
       tabList: [
         {
           sd: "00:00~13:00",
@@ -122,7 +131,7 @@ export default {
           rgcll: "80%",
           zdcll: "40.25%"
         },
-         {
+        {
           sd: "00:00~13:00",
           gjl: "5000",
           rjgjl: "4209",
@@ -133,7 +142,7 @@ export default {
           rgcll: "80%",
           zdcll: "40.25%"
         },
-         {
+        {
           sd: "00:00~13:00",
           gjl: "5000",
           rjgjl: "4209",
@@ -228,6 +237,13 @@ export default {
     this.echart();
   },
   methods: {
+    // 页面跳转
+    demo3() {
+      this.$router.push("/demo3");
+    },
+    demo4() {
+      this.$router.push("/demo4");
+    },
     // 字体大小
     setFontsize(res) {
       let docEl = document.documentElement,
@@ -582,5 +598,21 @@ li {
 .seamless-warp {
   height: 100%;
   overflow: hidden;
+}
+.loginOut {
+  width: 15px;
+  height: 35px;
+  line-height: 35px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  position: fixed;
+  right: 0px;
+  top: 10px;
+  background-color: #034c6a;
+  cursor: pointer;
+}
+.buttonBox {
+  padding: 20px;
 }
 </style>

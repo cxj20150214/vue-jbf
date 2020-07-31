@@ -284,7 +284,7 @@
     <el-drawer size="20%" title="我是标题" :visible.sync="drawer" :with-header="false">
       <div class="buttonBox">
         <el-button class="button1" @click="demo3" type="primary" size="mini">demo3</el-button>
-        <el-button class="button1" @click="demo2" type="primary" size="mini">demo2</el-button>
+        <el-button class="button1" @click="demo4" type="primary" size="mini">demo4</el-button>
         <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button>
       </div>
     </el-drawer>
@@ -1566,7 +1566,7 @@ export default {
           data: ["未巡检", "远程巡检", "现场巡检", "专项巡检"],
           textStyle: {
             color: "#fff",
-            fontSize: this.setFontsize(0.3)
+            fontSize: this.setFontsize(0.4)
           }
         },
         grid: {
@@ -1585,7 +1585,7 @@ export default {
               interval: "auto",
               formatter: "{value} ",
               textStyle: {
-                fontSize: this.setFontsize(0.3),
+                fontSize: this.setFontsize(0.4),
                 color: "#fff"
               }
             },
@@ -1606,7 +1606,7 @@ export default {
               show: true,
               splitNumber: 15,
               textStyle: {
-                fontSize: this.setFontsize(0.3),
+                fontSize: this.setFontsize(0.4),
                 color: "#fff"
               }
             },
@@ -1753,8 +1753,8 @@ export default {
     demo3() {
       this.$router.push("/demo3");
     },
-    demo2() {
-      this.$router.push("/demo2");
+    demo4() {
+      this.$router.push("/demo4");
     },
     logout() {
       this.$store.dispatch("user/logout").then(() => {
@@ -1766,10 +1766,15 @@ export default {
     this.currentTime();
     this.piedemo();
     this.DrawMap();
+    window.onresize = () => {
+      return (() => {
+        this.$router.go(0);
+      })();
+    };
   },
   created() {
     this.getData();
-
+    console.log(this.setFontsize(0.3), "1111");
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -2050,14 +2055,14 @@ ul {
           flex-direction: column;
           .imgbox {
             width: 40%;
-            height:40px;
+            height: 40px;
             margin: 0px auto;
           }
           width: 25%;
           .t1 {
             font-size: 14px;
             margin-top: 5px;
-            margin-bottom:10px;
+            margin-bottom: 10px;
           }
           .t2 {
             font-size: 18px;
@@ -2349,10 +2354,8 @@ ul {
   padding: 20px;
 }
 .button1 {
-  width: 80px;
+ 
   margin: 10px;
-  font-size: 16px;
-  text-align: center;
 }
 .piebox {
   height: 100%;
@@ -2571,7 +2574,7 @@ ul {
     display: flex;
     flex-direction: row;
     height: 200px;
-    margin-top:20px;
+    margin-top: 20px;
     li {
       width: 300px;
       height: 150px;
@@ -2632,6 +2635,60 @@ ul {
         }
       }
     }
+  }
+}
+@media screen and (max-width: 1280px) {
+  .seamless-warp .itemhua li{
+    padding:10px;
+  }
+  .seamless-warp1 .itemhua{
+    margin-top:10px;
+  }
+  .seamless-warp1 .itemhua li .tit{
+    margin-bottom:5px;
+  }
+  .yuanhuan{
+    display:none;
+  }
+  .bg .box1 .mod3 .tBox{
+    margin-top: 1%;
+    padding-bottom: 0px;
+    transform: scale(0.85);
+  }
+  .seamless-warp .itemhua li .txt .box{
+    font-size: 10px;
+  }
+  .piebox .t1 ul li{
+    margin-bottom: 2%;
+  }
+  .piebox .t2 ul li{
+    margin-bottom: 2%;
+  }
+  .piebox .t3 ul li{
+    margin-bottom: 2%;
+  }
+  .piebox .t4 ul li{
+    margin-bottom: 2%;
+  }
+  .piebox {
+    width: 110%;
+    height: 110%;
+    left: -5%;
+    transform: scale(0.7);
+    top: -10%;
+    position: absolute;
+  }
+  .piebox .t1 {
+    width: 48%;
+  }
+  .piebox .t2 {
+    width: 48%;
+  }
+  .piebox .t3 {
+    width: 48%;
+  }
+  .piebox .t4 {
+    width: 48%;
   }
 }
 </style>
