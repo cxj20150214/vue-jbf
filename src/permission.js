@@ -62,6 +62,8 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else if (to.path === '/demo4') {
       next()
+    } else if (to.path === '/merchant') {
+      next()
     } else {
       // other pages that do not have permission to access are redirected to the login page.
       next(`/bind?redirect=${to.path}`)

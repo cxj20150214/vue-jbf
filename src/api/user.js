@@ -22,10 +22,18 @@ export function logout() {
     method: 'post'
   })
 }
-export function getfoodList(params) {
+export function getfoodList(data) {
   return request({
     url: '/vue-admin-template/food/list',
     method: 'get',
-    params
+    data
+  })
+}
+
+export function getModelInfo(data) {
+  return request({
+    url: 'http://172.20.10.5:10001/engine/getModelInfo?modelId=1',
+    method: 'get',
+    data
   })
 }

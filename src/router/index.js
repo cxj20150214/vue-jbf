@@ -72,6 +72,13 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/merchant',
+    name: 'merchant',
+    component: () => import('@/views/merchant/merchant'),
+    meta: { title: '商户交易联机侦测模型', icon: 'dashboard' },
+    hidden: true
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
