@@ -198,27 +198,56 @@
             <p class="title">风险预警数</p>
           </div>
           <!-- <div class="bingtu" id="Pie1"></div> -->
-          <vue-seamless-scroll :class-option="optionscroll" :data="listData" class="seamless-warp">
+          <el-carousel
+            :interval="4000"
+            direction="vertical"
+            trigger="click"
+            height="100%"
+            class="seamless-warp"
+          >
+            <el-carousel-item v-for="item in listData">
+              <ul class="itemhua">
+                <li>
+                  <div class="tit">福建分行</div>
+                  <div class="txt">
+                    <div class="box">
+                      <p class="t1">预警总数</p>
+                      <p class="t2">{{item.data1}}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">已处理数</p>
+                      <p class="t2">{{item.data2}}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">处理率</p>
+                      <p class="t2">{{item.data3}}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </el-carousel-item>
+          </el-carousel>
+          <!-- <vue-seamless-scroll :class-option="optionscroll" :data="listData" class="seamless-warp">
             <ul class="itemhua">
               <li v-for="item in listData">
-                <div class="tit">福建省分行</div>
+                <div class="tit">分行</div>
                 <div class="txt">
                   <div class="box">
                     <p class="t1">预警总数</p>
-                    <p class="t2">{{item.data1}}</p>
+                    <p class="t2">{{item.value}}</p>
                   </div>
                   <div class="box">
                     <p class="t1">已处理数</p>
-                    <p class="t2">{{item.data2}}</p>
+                    <p class="t2">{{item.value1}}</p>
                   </div>
                   <div class="box">
                     <p class="t1">处理率</p>
-                    <p class="t2">{{item.data3}}</p>
+                    <p class="t2">{{item.value1}}</p>
                   </div>
                 </div>
               </li>
             </ul>
-          </vue-seamless-scroll>
+          </vue-seamless-scroll>-->
         </div>
         <div class="box1">
           <div class="titleBox">
@@ -327,31 +356,6 @@ export default {
           data1: "120个",
           data2: "60个",
           data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
         }
       ],
       listData1: [
@@ -419,12 +423,12 @@ export default {
     };
   },
   computed: {
-    optionscroll() {
-      return {
-        // hoverStop: false,
-        step: 0.2
-      };
-    },
+    // optionscroll() {
+    //   return {
+    //     // hoverStop: false,
+    //     step: 0.2
+    //   };
+    // },
     optionscroll1() {
       return {
         // hoverStop: false,
@@ -631,18 +635,18 @@ export default {
       // 渐变2
       let dituJB1 = this.$echarts.init(document.getElementById("ditu1"));
       var dataJb = [
-        {
-          name: "重庆",
-          value: 0
-        },
-        {
-          name: "云南",
-          value: 0
-        },
-        {
-          name: "辽宁",
-          value: 0
-        },
+        // {
+        //   name: "重庆",
+        //   value: 0
+        // },
+        // {
+        //   name: "云南",
+        //   value: 0
+        // },
+        // {
+        //   name: "辽宁",
+        //   value: 0
+        // },
         {
           name: "黑龙江",
           value: 0
@@ -709,15 +713,15 @@ export default {
         },
         {
           name: "上海",
-          value: 20
+          value: 140
         },
         {
           name: "安徽",
-          value: 20
+          value: 120
         },
         {
           name: "江苏",
-          value: 20
+          value: 200
         },
         {
           name: "浙江",
@@ -787,7 +791,15 @@ export default {
               "20": "高级预警"
             };
             if (params.seriesType) {
-              return params.name + ": " + MAP_VALUE_DIC[params.data.value];
+              console.log(params);
+              return (
+                params.name +
+                ": " +
+                MAP_VALUE_DIC[params.data.value] +
+                "<br>" +
+                "预警值: " +
+                params.value
+              );
             } else {
               return params.name;
             }
@@ -798,12 +810,12 @@ export default {
           splitNumber: 3,
           pieces: [
             {
-              min: 10,
+              min: 100,
               label: "高级预警",
               color: "#0090c6"
             },
             {
-              max: 10,
+              max: 100,
               min: 1,
               label: "中级预警",
               color: "#2ab1ea"
@@ -818,7 +830,7 @@ export default {
             color: "#fff"
           },
           min: 0,
-          max: 20,
+          max: 300,
           left: "left",
           top: "bottom",
           calculable: true,
@@ -866,18 +878,18 @@ export default {
       });
       // 渐变地图
       var data = [
-        {
-          name: "重庆",
-          value: 10
-        },
-        {
-          name: "云南",
-          value: 5
-        },
-        {
-          name: "辽宁",
-          value: 5
-        },
+        // {
+        //   name: "重庆",
+        //   value: 10
+        // },
+        // {
+        //   name: "云南",
+        //   value: 5
+        // },
+        // {
+        //   name: "辽宁",
+        //   value: 5
+        // },
         {
           name: "黑龙江",
           value: 10
@@ -1774,7 +1786,7 @@ export default {
   },
   created() {
     this.getData();
-    console.log(this.setFontsize(0.3), "1111");
+    // console.log(this.setFontsize(0.3), "1111");
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -1785,6 +1797,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 999999;
+  left: 0px;
+  top: 0px;
+}
 p {
   padding: 0px;
   margin: 0px;
@@ -2354,7 +2374,6 @@ ul {
   padding: 20px;
 }
 .button1 {
- 
   margin: 10px;
 }
 .piebox {
@@ -2527,7 +2546,7 @@ ul {
     flex-wrap: wrap;
     justify-content: space-between;
     li {
-      width: 48%;
+      width: 90%;
       margin-bottom: 3%;
       margin-top: 2%;
       background: rgba(255, 255, 255, 0.1);
@@ -2535,8 +2554,9 @@ ul {
       padding: 2%;
       .tit {
         color: #fff;
-        font-size: 14px;
+        font-size: 18px;
         margin-top: 2%;
+        margin-left: 5%;
         margin-bottom: 5%;
       }
       .txt {
@@ -2544,9 +2564,10 @@ ul {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-bottom: 5%;
         .box {
           width: 33.33%;
-          font-size: 12px;
+          font-size: 18px;
           text-align: center;
           color: #fff;
           .t1 {
@@ -2638,36 +2659,36 @@ ul {
   }
 }
 @media screen and (max-width: 1280px) {
-  .seamless-warp .itemhua li{
-    padding:10px;
+  .seamless-warp .itemhua li {
+    padding: 10px;
   }
-  .seamless-warp1 .itemhua{
-    margin-top:10px;
+  .seamless-warp1 .itemhua {
+    margin-top: 10px;
   }
-  .seamless-warp1 .itemhua li .tit{
-    margin-bottom:5px;
+  .seamless-warp1 .itemhua li .tit {
+    margin-bottom: 5px;
   }
-  .yuanhuan{
-    display:none;
+  .yuanhuan {
+    display: none;
   }
-  .bg .box1 .mod3 .tBox{
+  .bg .box1 .mod3 .tBox {
     margin-top: 1%;
     padding-bottom: 0px;
     transform: scale(0.85);
   }
-  .seamless-warp .itemhua li .txt .box{
+  .seamless-warp .itemhua li .txt .box {
     font-size: 10px;
   }
-  .piebox .t1 ul li{
+  .piebox .t1 ul li {
     margin-bottom: 2%;
   }
-  .piebox .t2 ul li{
+  .piebox .t2 ul li {
     margin-bottom: 2%;
   }
-  .piebox .t3 ul li{
+  .piebox .t3 ul li {
     margin-bottom: 2%;
   }
-  .piebox .t4 ul li{
+  .piebox .t4 ul li {
     margin-bottom: 2%;
   }
   .piebox {
