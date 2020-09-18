@@ -235,6 +235,11 @@ export default {
   },
   mounted() {
     this.echart();
+     window.onresize = () => {
+      return (() => {
+        this.$router.go(0);
+      })();
+    };
   },
   methods: {
     // 页面跳转
