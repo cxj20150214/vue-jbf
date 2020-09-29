@@ -86,7 +86,7 @@
       <div class="buttonBox">
         <el-button class="button1" @click="demo3" type="primary" size="mini">demo3</el-button>
         <el-button class="button1" @click="demo4" type="primary" size="mini">demo4</el-button>
-        <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button>
+        <!-- <el-button class="button1" @click="logout" type="danger" size="mini">退出登录</el-button> -->
       </div>
     </el-drawer>
   </div>
@@ -141,18 +141,28 @@ export default {
           zxrs: "19",
           rgcll: "80%",
           zdcll: "40.25%"
-        },
-        {
-          sd: "00:00~13:00",
-          gjl: "5000",
-          rjgjl: "4209",
-          cll: "3100",
-          ljl: "70",
-          gjlfd: "-40%",
-          zxrs: "19",
-          rgcll: "80%",
-          zdcll: "40.25%"
-        },
+        }
+      ]
+    };
+  },
+  mounted() {
+    this.echart();
+    window.onresize = () => {
+      return (() => {
+        this.$router.go(0);
+      })();
+    };
+  },
+  created() {
+    var that = this;
+    window.setInterval(() => {
+      setTimeout(that.getData, 0);
+    }, 5000);
+  },
+  methods: {
+    getData() {
+      console.log('5秒1次')
+      this.tabList = [
         {
           sd: "00:00~13:00",
           gjl: "5000",
@@ -230,18 +240,8 @@ export default {
           rgcll: "80%",
           zdcll: "40.25%"
         }
-      ]
-    };
-  },
-  mounted() {
-    this.echart();
-     window.onresize = () => {
-      return (() => {
-        this.$router.go(0);
-      })();
-    };
-  },
-  methods: {
+      ];
+    },
     // 页面跳转
     demo3() {
       this.$router.push("/demo3");
