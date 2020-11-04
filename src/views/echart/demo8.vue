@@ -16,14 +16,14 @@
               class="title_all"
               @click="clickDR()"
             >
-              当日
+              今日
             </p>
             <p
               :class="{ active: showDate == 2 }"
               class="title_all"
               @click="clickDY()"
             >
-              当月
+              今月
             </p>
             <p
               :class="{ active: showDate == 3 }"
@@ -33,6 +33,19 @@
               今年
             </p>
           </div>
+          <el-select
+            class="ccbSelect"
+            v-model="valueSelect"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </div>
         <p class="title">准入风险评级</p>
         <ul class="list">
@@ -252,6 +265,13 @@ export default {
   name: "demo8",
   data() {
     return {
+      options: [
+        {
+          value: "选项1",
+          label: "全国"
+        }
+      ],
+      valueSelect: "全国",
       province: "",
       shows: 3,
       showXJ: 1,
@@ -510,13 +530,13 @@ export default {
   },
   methods: {
     // 当月 当日 当年
-    clickDR(){
+    clickDR() {
       this.showDate = 1;
     },
-     clickDY(){
+    clickDY() {
       this.showDate = 2;
     },
-     clickDN(){
+    clickDN() {
       this.showDate = 3;
     },
     // 预警 存量 准入 巡检  切换
@@ -4130,37 +4150,43 @@ export default {
     }
   }
 };
-</script>在
+</script>
 <style lang="scss" scoped>
 // 新增css
+.ccbSelect {
+  width: 60%;
+  height: 50%;
+  margin-top: 3%;
+}
 .selectBox {
   position: absolute;
-  width: 220px;
+  z-index: 999;
+  width: 320px;
   height: 50px;
-  right: 0px;
+  right: -22%;
   display: flex;
   flex-direction: row;
   .box4_tab {
-    width: 60%;
-    height: 45%;
-    margin-top: 6%;
+    width: 40%;
+    height: 50%;
+    margin-top: 3%;
     display: flex;
     flex-direction: row;
-    
   }
   .title_all {
     color: #d2d2d3;
-    padding: 1px 4px 2px 4px;
+    padding: 3% 3% 3% 3%;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     &.active {
       color: #fff;
       font-size: 16px;
       font-weight: 700;
-      border-bottom: 2px solid #409eff;
-      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid #6088b1;
+      padding: 2% 3% 2% 3%;
+      border-radius: 5px;
     }
   }
 }
@@ -4357,7 +4383,7 @@ ul {
       }
       .list {
         width: 80%;
-        height: 50%;
+        height: 60%;
         margin: 50px auto 0px;
         display: flex;
         flex-direction: row;
@@ -4461,14 +4487,14 @@ ul {
         margin-left: -30%;
         top: 10%;
         position: absolute;
-        z-index: 998;
+        z-index: 997;
         animation: rotate 9s linear infinite;
       }
       .bg {
         width: 100%;
         height: 102%;
         position: absolute;
-        z-index: 999;
+        z-index: 998;
         left: -0.5%;
         top: -1%;
         background-image: url("../../assets/img/box2mod2.png");
@@ -5216,6 +5242,32 @@ ul {
   }
   .el-dialog__body {
     padding: 20px 20px;
+  }
+}
+.ccbSelect {
+  .el-select-dropdown__item.selected {
+    color: #fff;
+  }
+  .el-select-dropdown__item {
+    color: #fff;
+  }
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover {
+    background-color: #637ea7;
+  }
+  .el-select-dropdown {
+    border: 1px solid #6088b1;
+    background-color: #061743;
+  }
+  .el-input__inner {
+    background-color: #021742;
+    border: 1px solid #6088b1;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+  }
+  .el-input__icon {
+    line-height: normal;
   }
 }
 </style>
