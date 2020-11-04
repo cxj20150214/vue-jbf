@@ -66,6 +66,10 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else if (to.path === '/demo6') {
       next()
+    } else if (to.path === '/demo7') {
+      next()
+    } else if (to.path === '/demo8') {
+      next()
     } else if (to.path === '/merchant') {
       next()
     } else {

@@ -52,11 +52,11 @@
                 <span>12%</span>
               </li>
               <li>
-                <p>黑名单类占比：</p>
+                <p>内部数据名单：</p>
                 <span>12%</span>
               </li>
               <li>
-                <p>外部数据名单类：</p>
+                <p>外部数据名单：</p>
                 <span>12%</span>
               </li>
             </ul>
@@ -112,26 +112,26 @@
             </ul>
           </div>
           <div class="t4">
-            <p class="title">专项巡检</p>
+            <p class="title">巡检概况</p>
             <ul>
               <li>
-                <p>应巡检服务点数：</p>
+                <p>已巡检数量：</p>
                 <span>50个</span>
               </li>
               <li>
-                <p>一季度：</p>
+                <p>一季度完成率：</p>
                 <span>10%</span>
               </li>
               <li>
-                <p>二季度：</p>
+                <p>二季度完成率：</p>
                 <span>12%</span>
               </li>
               <li>
-                <p>三季度：</p>
+                <p>三季度完成率：</p>
                 <span>12%</span>
               </li>
               <li>
-                <p>四季度：</p>
+                <p>四季度完成率：</p>
                 <span>12%</span>
               </li>
             </ul>
@@ -794,8 +794,7 @@ export default {
               console.log(params);
               return (
                 params.name +
-                ": " +
-                MAP_VALUE_DIC[params.data.value] +
+                // MAP_VALUE_DIC[params.data.value] +
                 "<br>" +
                 "预警值: " +
                 params.value

@@ -18,6 +18,7 @@
     "axios": "0.18.1",
     "babel-polyfill": "^6.26.0",
     "echarts": "^4.8.0",
+    "echarts-liquidfill": "^2.0.6",
     "element-ui": "2.13.0",
     "es6-promise": "^4.2.8",
     "jquery": "^3.5.1",

@@ -86,6 +86,20 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/demo7',
+    name: 'demo7',
+    component: () => import('@/views/echart/demo7'),
+    meta: { title: '数据表', icon: 'dashboard' },
+    hidden: true
+  },
+  {
+    path: '/demo8',
+    name: 'demo8',
+    component: () => import('@/views/echart/demo8'),
+    meta: { title: '数据表', icon: 'dashboard' },
+    hidden: true
+  },
+  {
     path: '/merchant',
     name: 'merchant',
     component: () => import('@/views/merchant/merchant'),

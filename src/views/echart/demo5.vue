@@ -1,6 +1,15 @@
 <template>
   <div>
-    <el-carousel height="100vh" class="lb" :autoplay="false" trigger="click">
+    <div class="qie" @click="next">下一页</div>
+    <div class="qie1" @click="sx">自动切换：{{ toggle }}</div>
+    <el-carousel
+      height="100vh"
+      class="lb"
+      ref="carousel"
+      :interval="8000"
+      :autoplay="autoplay"
+      trigger="click"
+    >
       <el-carousel-item>
         <div class="bg">
           <div class="echartBox">
@@ -8,48 +17,139 @@
               <div class="title">
                 <p>实时反欺诈</p>
               </div>
-              <div class="sjBox">
-                <div class="tit">
-                  <p>欺诈国家</p>
-                  <p>欺诈案件数(件)</p>
-                  <p>欺诈案件金额(万元)</p>
-                </div>
-                <ul class="gjBox">
-                  <li>
-                    <p class="p1">中国</p>
-                    <p class="p2">1,200</p>
-                    <p class="p3">2,225,000</p>
-                  </li>
-                  <li>
-                    <p class="p1">中国</p>
-                    <p class="p2">1,200</p>
-                    <p class="p3">2,225,000</p>
-                  </li>
-                  <li>
-                    <p class="p1">中国</p>
-                    <p class="p2">1,200</p>
-                    <p class="p3">2,225,000</p>
-                  </li>
-                  <li>
-                    <p class="p1">中国</p>
-                    <p class="p2">1,200</p>
-                    <p class="p3">2,225,000</p>
-                  </li>
-                  <li>
-                    <p class="p1">中国</p>
-                    <p class="p2">1,200</p>
-                    <p class="p3">2,225,000</p>
-                  </li>
-                  <li>
-                    <p class="p1">中国</p>
-                    <p class="p2">1,200</p>
-                    <p class="p3">2,225,000</p>
-                  </li>
-                </ul>
-              </div>
+              <el-tabs
+                class="e_tabs"
+                v-model="activeName"
+                @tab-click="handleClick"
+              >
+                <el-tab-pane label="世界地区" name="first">
+                  <div class="sjBox">
+                    <div class="tit">
+                      <p>欺诈国家</p>
+                      <p>欺诈事件数(件)</p>
+                      <p>欺诈事件金额(万元)</p>
+                    </div>
+                    <ul class="gjBox">
+                      <li>
+                        <p class="p1">中国</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">韩国</p>
+                        <p class="p2">800</p>
+                        <p class="p3">1,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">日本</p>
+                        <p class="p2">1,400</p>
+                        <p class="p3">2,655,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">俄罗斯</p>
+                        <p class="p2">1,080</p>
+                        <p class="p3">1,245,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">新加坡</p>
+                        <p class="p2">900</p>
+                        <p class="p3">225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">印度</p>
+                        <p class="p2">1,000</p>
+                        <p class="p3">125,000</p>
+                      </li>
+                    </ul>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane label="中国地区" name="second">
+                  <div class="sjBox">
+                    <div class="tit">
+                      <p>欺诈地区</p>
+                      <p>欺诈事件数(件)</p>
+                      <p>欺诈事件金额(万元)</p>
+                    </div>
+                    <ul class="gjBox">
+                      <li>
+                        <p class="p1">福建</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">32,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">浙江</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">42,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">黑龙江</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">12,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">河北</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">14,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">云南</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">11,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">四川</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">322,000</p>
+                      </li>
+                    </ul>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane label="商户维度" name="third">
+                  <div class="sjBox">
+                    <div class="tit">
+                      <p>商户类型</p>
+                      <p>欺诈事件数(件)</p>
+                      <p>欺诈事件金额(万元)</p>
+                    </div>
+                    <ul class="gjBox">
+                      <li>
+                        <p class="p1">类型</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">类型</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">类型</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">类型</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">类型</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                      <li>
+                        <p class="p1">类型</p>
+                        <p class="p2">1,200</p>
+                        <p class="p3">2,225,000</p>
+                      </li>
+                    </ul>
+                  </div>
+                </el-tab-pane>
+              </el-tabs>
             </div>
             <div class="boxRight">
-              <div class="ditu" id="ditu1"></div>
+              <div class="ditu" id="ditu1" v-show="sjMap"></div>
+              <div class="ditu" id="ditu2"></div>
             </div>
           </div>
         </div>
@@ -59,25 +159,29 @@
           <div class="echartBox">
             <div class="box1">
               <div class="title">
-                <span>当日卡片交易量</span>
+                <span>当日监测交易量</span>
                 <p>135,532笔</p>
               </div>
               <ul class="list">
                 <li>
-                  <p class="p1">持卡客户数</p>
+                  <p class="p1">当日监测客户数</p>
                   <p class="p2">23,365 户</p>
                 </li>
                 <li>
                   <p class="p1">告警量</p>
-                  <p class="p2">13,365 次</p>
-                </li>
-                <li>
-                  <p class="p1">拦截量</p>
-                  <p class="p2">3,365 次</p>
+                  <p class="p2">13,365 起</p>
                 </li>
                 <li>
                   <p class="p1">处理量</p>
-                  <p class="p2">3,365 次</p>
+                  <p class="p2">3,365 起</p>
+                </li>
+                <li>
+                  <p class="p1">待处理量</p>
+                  <p class="p2">3,365 起</p>
+                </li>
+                <li>
+                  <p class="p1">在线人数</p>
+                  <p class="p2">3,36 人</p>
                 </li>
               </ul>
             </div>
@@ -85,60 +189,88 @@
               <div class="bingtu" id="Pie1"></div>
             </div>
             <div class="box3">
-              <div class="title">自主交互情况</div>
-              <div class="sjBox">
-                <div class="tit">
-                  <p>卡号</p>
-                  <p>交易日期</p>
-                  <p>交易时间</p>
-                  <p>交易金额(万元)</p>
-                  <p>交互内容</p>
-                </div>
-                <ul class="gjBox">
-                  <li>
-                    <p class="p1">KH3568</p>
-                    <p class="p2">2019/05/06</p>
-                    <p class="p3">09:25</p>
-                    <p class="p4">12,356</p>
-                    <p class="p5">内容内容内容</p>
-                  </li>
-                  <li>
-                    <p class="p1">KH3568</p>
-                    <p class="p2">2019/05/06</p>
-                    <p class="p3">09:25</p>
-                    <p class="p4">12,356</p>
-                    <p class="p5">内容内容内容</p>
-                  </li>
-                  <li>
-                    <p class="p1">KH3568</p>
-                    <p class="p2">2019/05/06</p>
-                    <p class="p3">09:25</p>
-                    <p class="p4">12,356</p>
-                    <p class="p5">内容内容内容</p>
-                  </li>
-                  <li>
-                    <p class="p1">KH3568</p>
-                    <p class="p2">2019/05/06</p>
-                    <p class="p3">09:25</p>
-                    <p class="p4">12,356</p>
-                    <p class="p5">内容内容内容</p>
-                  </li>
-                  <li>
-                    <p class="p1">KH3568</p>
-                    <p class="p2">2019/05/06</p>
-                    <p class="p3">09:25</p>
-                    <p class="p4">12,356</p>
-                    <p class="p5">内容内容内容</p>
-                  </li>
-                  <li>
-                    <p class="p1">KH3568</p>
-                    <p class="p2">2019/05/06</p>
-                    <p class="p3">09:25</p>
-                    <p class="p4">12,356</p>
-                    <p class="p5">内容内容内容</p>
-                  </li>
-                </ul>
-              </div>
+              <el-tabs
+                class="e_tabs e_tabs1"
+                v-model="activeName1"
+                @tab-click="handleClick1"
+              >
+                <el-tab-pane label="告警量" name="first">
+                  <!-- <div class="sjBox">
+                    <div class="tit">
+                      <p>卡号</p>
+                      <p>交易日期</p>
+                      <p>交易时间</p>
+                      <p>交易金额(万元)</p>
+                      <p>交互内容</p>
+                    </div>
+                    <ul class="gjBox">
+                      <li>
+                        <p class="p1">KH3568</p>
+                        <p class="p2">2019/05/06</p>
+                        <p class="p3">09:25</p>
+                        <p class="p4">12,356</p>
+                        <p class="p5">内容内容内容</p>
+                      </li>
+                      <li>
+                        <p class="p1">KH3568</p>
+                        <p class="p2">2019/05/06</p>
+                        <p class="p3">09:25</p>
+                        <p class="p4">12,356</p>
+                        <p class="p5">内容内容内容</p>
+                      </li>
+                      <li>
+                        <p class="p1">KH3568</p>
+                        <p class="p2">2019/05/06</p>
+                        <p class="p3">09:25</p>
+                        <p class="p4">12,356</p>
+                        <p class="p5">内容内容内容</p>
+                      </li>
+                      <li>
+                        <p class="p1">KH3568</p>
+                        <p class="p2">2019/05/06</p>
+                        <p class="p3">09:25</p>
+                        <p class="p4">12,356</p>
+                        <p class="p5">内容内容内容</p>
+                      </li>
+                      <li>
+                        <p class="p1">KH3568</p>
+                        <p class="p2">2019/05/06</p>
+                        <p class="p3">09:25</p>
+                        <p class="p4">12,356</p>
+                        <p class="p5">内容内容内容</p>
+                      </li>
+                      <li>
+                        <p class="p1">KH3568</p>
+                        <p class="p2">2019/05/06</p>
+                        <p class="p3">09:25</p>
+                        <p class="p4">12,356</p>
+                        <p class="p5">内容内容内容</p>
+                      </li>
+                    </ul>
+                  </div> -->
+                  <div class="zxtTxt">
+                    <p>今天告警量比平时少<span>37.5%</span></p>
+                    <div class="zxtTxt1">
+                      <p>今天：2570起</p>
+                      <p>平均：2570起</p>
+                    </div>
+                  </div>
+                  <div class="zxt" id="zxt"></div>
+                </el-tab-pane>
+                <el-tab-pane label="欺诈事件数" name="second">
+                  <div class="zxtTxt">
+                    <p>今天欺诈事件数比平时少<span>37.5%</span></p>
+                    <div class="zxtTxt1">
+                      <p>今天：2570起</p>
+                      <p>平均：2570起</p>
+                    </div>
+                  </div>
+                  <div class="zxt" id="zxt1"></div>
+                </el-tab-pane>
+                <el-tab-pane label="自动处理概况" name="third">
+                  123
+                </el-tab-pane>
+              </el-tabs>
             </div>
           </div>
         </div>
@@ -199,12 +331,22 @@
 </template>
 <script>
 import "echarts/map/js/world.js";
+import "echarts/map/js/china.js";
 export default {
   name: "demo5",
   data() {
-    return {};
+    return {
+      activeName: "first",
+      activeName1: "first",
+      sjMap: true,
+      zgMap: false,
+      autoplay: true,
+      toggle: "开",
+      handle: "40%"
+    };
   },
   mounted() {
+    console.log(this.$el);
     this.piedemo();
     this.DrawMap();
     window.onresize = () => {
@@ -213,8 +355,48 @@ export default {
       })();
     };
   },
-  created() {},
+  created() {
+    console.log(this.$data);
+    this.$nextTick(() => {
+      // 禁用右键
+      document.oncontextmenu = new Function("event.returnValue=false");
+      // 禁用选择
+      document.onselectstart = new Function("event.returnValue=false");
+    });
+  },
   methods: {
+    // 切换下一页
+    next() {
+      this.$refs.carousel.next();
+    },
+    sx() {
+      if (this.autoplay === true) {
+        this.autoplay = false;
+        this.toggle = "关";
+        console.log("关闭自动");
+        return false;
+      }
+      if (this.autoplay === false) {
+        this.autoplay = true;
+        this.toggle = "开";
+        console.log("启动自动");
+        return false;
+      }
+    },
+    // 切换列表
+    handleClick(tab, event) {
+      if (tab.name === "first") {
+        this.sjMap = true;
+        this.zgMap = false;
+      }
+      if (tab.name === "second") {
+        this.sjMap = false;
+        this.zgMap = true;
+      }
+    },
+    handleClick1(tab, event) {
+      this.piedemo();
+    },
     // 设置字体
     setFontsize(res) {
       let docEl = document.documentElement,
@@ -228,12 +410,548 @@ export default {
     },
     piedemo() {
       let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
+      let zxt = this.$echarts.init(document.getElementById("zxt"));
+      let zxt1 = this.$echarts.init(document.getElementById("zxt1"));
       this.$nextTick(() => {
         Pie1.resize();
       });
+      this.$nextTick(() => {
+        zxt.resize();
+      });
+      this.$nextTick(() => {
+        zxt1.resize();
+      });
+      // 折线图
+      let t = this;
+      zxt.setOption({
+        backgroundColor: "#010f1c",
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "cross",
+            label: {
+              backgroundColor: "#6a7985"
+            }
+          }
+        },
+        grid: {
+          left: "0",
+          top: "50px",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: "category",
+            boundaryGap: false,
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#273f55"
+              }
+            },
+            axisLabel: {
+              // interval: 0, //设置x轴的标签显示可自适应
+              show: true,
+              textStyle: {
+                color: "#8fd5f3"
+              }
+            },
+            data: [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24"
+            ]
+          }
+        ],
+        yAxis: [
+          {
+            type: "value",
+            name: "告警量(起)",
+            nameTextStyle: {
+              //y轴上方单位的颜色
+              color: "#8fd5f3"
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: true, //y轴线
+              lineStyle: {
+                show: false
+              }
+            },
+            axisLabel: {
+              // margin: 10,
+              textStyle: {
+                fontSize: 12,
+                color: "#8fd5f3"
+              }
+            },
+            splitLine: {
+              show: false,
+              lineStyle: {
+                color: ["#56859d"],
+                width: 1,
+                type: "solid"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: "平均",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 2,
+            showSymbol: false,
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#777779"
+              }
+            },
+            areaStyle: {
+              normal: {
+                color: new t.$echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(119,119,121,0.8)"
+                    },
+                    {
+                      offset: 0.5,
+                      color: "rgba(119,119,121,0.4)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(119,119,121,0.2)"
+                    },
+                    {
+                      offset: 1,
+                      color: "transparent"
+                    }
+                  ],
+                  false
+                ),
+                // shadowColor: 'rgba(232,246,254,0.2)',
+                shadowBlur: 30
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#777779",
+                borderColor: "#777779",
+                borderWidth: 0
+              }
+            },
+
+            data: [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              5,
+              8,
+              20,
+              50,
+              55,
+              100,
+              20,
+              30,
+              25,
+              33,
+              21,
+              125,
+              60,
+              50,
+              24,
+              30,
+              20,
+              12
+            ]
+          },
+          {
+            name: "今天",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 2,
+            showSymbol: false,
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#32e8f5"
+              }
+            },
+            areaStyle: {
+              normal: {
+                color: new t.$echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(50,232,245,0.7)"
+                    },
+                    {
+                      offset: 0.5,
+                      color: "rgba(50,232,245,0.4)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(50,232,245,0.2)"
+                    },
+                    {
+                      offset: 1,
+                      color: "transparent"
+                    }
+                  ],
+                  false
+                ),
+                // shadowColor: 'rgba(232,246,254,0.2)',
+                shadowBlur: 30
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#32e8f5",
+                borderColor: "#32e8f5",
+                borderWidth: 0
+              }
+            },
+
+            data: [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              5,
+              20,
+              50,
+              120,
+              50,
+              40,
+              50,
+              155,
+              60,
+              40,
+              55,
+              30,
+              66,
+              60,
+              50,
+              22,
+              10,
+              0,
+              0
+            ]
+          }
+        ]
+      });
+      zxt1.setOption({
+        backgroundColor: "#010f1c",
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "cross",
+            label: {
+              backgroundColor: "#6a7985"
+            }
+          }
+        },
+        grid: {
+          left: "0",
+          top: "50px",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: "category",
+            boundaryGap: false,
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              lineStyle: {
+                color: "#273f55"
+              }
+            },
+            axisLabel: {
+              // interval: 0, //设置x轴的标签显示可自适应
+              show: true,
+              textStyle: {
+                color: "#8fd5f3"
+              }
+            },
+            data: [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24"
+            ]
+          }
+        ],
+        yAxis: [
+          {
+            type: "value",
+            name: "欺诈数(起)",
+            nameTextStyle: {
+              //y轴上方单位的颜色
+              color: "#8fd5f3"
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: true, //y轴线
+              lineStyle: {
+                show: false
+              }
+            },
+            axisLabel: {
+              // margin: 10,
+              textStyle: {
+                fontSize: 12,
+                color: "#8fd5f3"
+              }
+            },
+            splitLine: {
+              show: false,
+              lineStyle: {
+                color: ["#56859d"],
+                width: 1,
+                type: "solid"
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: "平均",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 2,
+            showSymbol: false,
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#777779"
+              }
+            },
+            areaStyle: {
+              normal: {
+                color: new t.$echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(119,119,121,0.8)"
+                    },
+                    {
+                      offset: 0.5,
+                      color: "rgba(119,119,121,0.4)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(119,119,121,0.2)"
+                    },
+                    {
+                      offset: 1,
+                      color: "transparent"
+                    }
+                  ],
+                  false
+                ),
+                // shadowColor: 'rgba(232,246,254,0.2)',
+                shadowBlur: 30
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#777779",
+                borderColor: "#777779",
+                borderWidth: 0
+              }
+            },
+
+            data: [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              5,
+              8,
+              20,
+              50,
+              55,
+              100,
+              20,
+              30,
+              25,
+              33,
+              21,
+              125,
+              60,
+              50,
+              24,
+              30,
+              20,
+              12
+            ]
+          },
+          {
+            name: "今天",
+            type: "line",
+            smooth: true,
+            symbol: "circle",
+            symbolSize: 2,
+            showSymbol: false,
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#32e8f5"
+              }
+            },
+            areaStyle: {
+              normal: {
+                color: new t.$echarts.graphic.LinearGradient(
+                  0,
+                  0,
+                  0,
+                  1,
+                  [
+                    {
+                      offset: 0,
+                      color: "rgba(50,232,245,0.7)"
+                    },
+                    {
+                      offset: 0.5,
+                      color: "rgba(50,232,245,0.4)"
+                    },
+                    {
+                      offset: 0.8,
+                      color: "rgba(50,232,245,0.2)"
+                    },
+                    {
+                      offset: 1,
+                      color: "transparent"
+                    }
+                  ],
+                  false
+                ),
+                // shadowColor: 'rgba(232,246,254,0.2)',
+                shadowBlur: 30
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#32e8f5",
+                borderColor: "#32e8f5",
+                borderWidth: 0
+              }
+            },
+
+            data: [
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              5,
+              20,
+              50,
+              120,
+              50,
+              40,
+              50,
+              155,
+              60,
+              40,
+              55,
+              30,
+              66,
+              60,
+              50,
+              22,
+              10,
+              0,
+              0
+            ]
+          }
+        ]
+      });
       // 饼图
       let color = ["#f69846", "#45dbf7"];
-      let names = ["告警率", "处理率"];
+      let names = ["自动处理", "人工处理"];
       let data = [300, 444];
       let list = [];
       let total = 0;
@@ -269,8 +987,8 @@ export default {
             name: names[i],
             itemStyle: {
               normal: {
-                borderWidth: 5,
-                shadowBlur: 20,
+                borderWidth: 8,
+                shadowBlur: 10,
                 borderColor: color[i],
                 shadowColor: color[i],
                 color: color[i]
@@ -304,8 +1022,8 @@ export default {
             type: "pie",
             clockWise: false,
             startAngle: "90",
-            center: ["50%", "50%"],
-            radius: ["50%", "51%"],
+            center: ["50%", "55%"],
+            radius: ["50%", "52%"],
             hoverAnimation: false,
             itemStyle: {
               normal: {
@@ -333,7 +1051,7 @@ export default {
           {
             name: "",
             type: "pie",
-            center: ["50%", "50%"],
+            center: ["50%", "55%"],
             radius: ["49%", "49%"],
             itemStyle: {
               color: "transparant"
@@ -346,7 +1064,7 @@ export default {
                 label: {
                   normal: {
                     show: true,
-                    formatter: "处理记录",
+                    formatter: this.handle + "已处理",
                     rich: {
                       c: {
                         color: "rgb(98,137,169)",
@@ -376,12 +1094,22 @@ export default {
       window.addEventListener("resize", function() {
         Pie1.resize();
       });
+      window.addEventListener("resize", function() {
+        zxt.resize();
+      });
+      window.addEventListener("resize", function() {
+        zxt1.resize();
+      });
     },
     DrawMap() {
       // 世界地图
       let dituJB1 = this.$echarts.init(document.getElementById("ditu1"));
+      let dituJB2 = this.$echarts.init(document.getElementById("ditu2"));
       this.$nextTick(() => {
         dituJB1.resize();
+      });
+      this.$nextTick(() => {
+        dituJB2.resize();
       });
       var data = [
         // { name: "卢旺达", value: 56.99 },
@@ -551,6 +1279,133 @@ export default {
         //{name:'黑山',value:0},
         //{name:'科索沃',value:0},
         //{name:'塞尔维亚',value:0},
+      ];
+
+      var data1 = [
+        {
+          name: "黑龙江",
+          value: 0
+        },
+        {
+          name: "广西",
+          value: 0
+        },
+        {
+          name: "甘肃",
+          value: 0
+        },
+        {
+          name: "山西",
+          value: 0
+        },
+        {
+          name: "陕西",
+          value: 0
+        },
+        {
+          name: "吉林",
+          value: 0
+        },
+        {
+          name: "贵州",
+          value: 0
+        },
+        {
+          name: "新疆",
+          value: 0
+        },
+        {
+          name: "青海",
+          value: 0
+        },
+        {
+          name: "西藏",
+          value: 0
+        },
+        {
+          name: "四川",
+          value: 0
+        },
+        {
+          name: "宁夏",
+          value: 0
+        },
+        {
+          name: "海南",
+          value: 0
+        },
+        {
+          name: "台湾",
+          value: 0
+        },
+        {
+          name: "香港",
+          value: 0
+        },
+        {
+          name: "澳门",
+          value: 0
+        },
+        {
+          name: "上海",
+          value: 140
+        },
+        {
+          name: "安徽",
+          value: 120
+        },
+        {
+          name: "江苏",
+          value: 200
+        },
+        {
+          name: "浙江",
+          value: 20
+        },
+        {
+          name: "北京",
+          value: 20
+        },
+        {
+          name: "天津",
+          value: 10
+        },
+        {
+          name: "河北",
+          value: 10
+        },
+        {
+          name: "河南",
+          value: 10
+        },
+        {
+          name: "内蒙古",
+          value: 10
+        },
+        {
+          name: "湖南",
+          value: 10
+        },
+        {
+          name: "山东",
+          value: 10
+        },
+        {
+          name: "江西",
+          value: 10
+        },
+        {
+          name: "湖北",
+          value: 10
+        },
+        {
+          name: "福建",
+          value: 10
+        },
+        {
+          name: "广东",
+          value: 10
+        }
       ];
 
       var nameMap = {
@@ -837,6 +1692,7 @@ export default {
               type: "map",
               map: "world",
               zoom: 1.2,
+              layoutCenter: ["50%", "50%"],
               roam: false,
               itemStyle: {
                 normal: {
@@ -876,8 +1732,121 @@ export default {
           }
         ]
       });
+
+      dituJB2.setOption({
+        timeline: {
+          axisType: "category",
+          orient: "vertical",
+          autoPlay: true,
+          inverse: true,
+          playInterval: 5000,
+          left: null,
+          right: -105,
+          top: 20,
+          bottom: 20,
+          width: 46
+        },
+        baseOption: {
+          visualMap: {
+            show: false,
+            type: "piecewise", //分段型。
+            splitNumber: 6,
+            inverse: true,
+            pieces: [
+              {
+                min: 0,
+                max: 10,
+                color: "#60D8FF"
+              },
+              {
+                min: 10,
+                max: 20,
+                color: "#973412"
+              },
+              {
+                min: 20,
+                max: 40,
+                color: "#8E164E"
+              },
+              {
+                min: 40,
+                max: 70,
+                color: "#e69d87"
+              },
+              {
+                min: 70,
+                max: 140,
+                color: "#B26410"
+              },
+              {
+                min: 140,
+                //max: 1000,
+                color: "#882503"
+              }
+            ],
+            left: "left",
+            top: "bottom",
+            textStyle: {
+              color: "#000"
+            }
+            //min: 0,
+            //max: 60000,
+            //text:['High','Low'],
+            //realtime: true,
+            //calculable: true,
+            //color: ['red','orange','lightgreen']
+          },
+          series: [
+            {
+              type: "map",
+              map: "china",
+              zoom: 1.2,
+              layoutCenter: ["50%", "50%"],
+              roam: false,
+              itemStyle: {
+                normal: {
+                  borderColor: "#666666",
+                  borderWidth: 0.8,
+                  areaColor: "#12235c"
+                },
+                emphasis: {
+                  areaColor: "#2AB8FF",
+                  borderWidth: 0,
+                  color: "green"
+                }
+              },
+              nameMap: nameMap
+            }
+          ]
+        },
+
+        options: [
+          {
+            tooltip: {
+              trigger: "item",
+              formatter: function(params) {
+                var value = params.value;
+                //value = value.toFixed(5);toFixed(3)控制小数位数
+                value = value;
+                if (!value) {
+                  return;
+                }
+                //var abc=(params.abc);
+                return params.name + " : " + value + " 万元";
+              }
+            },
+            series: {
+              data: data1
+            }
+          }
+        ]
+      });
+
       window.addEventListener("resize", function() {
         dituJB1.resize();
+      });
+      window.addEventListener("resize", function() {
+        dituJB2.resize();
       });
     }
   },
@@ -946,10 +1915,9 @@ li {
       .sjBox {
         width: 80%;
         height: 50%;
-        margin-left: 20%;
-        margin-top: 70px;
+        margin-left: 5%;
         .tit {
-          width: 650px;
+          width: 600px;
           height: 50px;
           line-height: 50px;
           background: rgba(1, 80, 216, 0.4);
@@ -1041,7 +2009,7 @@ li {
       }
     }
     .boxRight {
-      width: 66%;
+      width: 70%;
       height: 100%;
       overflow: hidden;
       position: relative;
@@ -1074,7 +2042,7 @@ li {
       width: 33%;
       height: 100;
       .title {
-        width: 500px;
+        width: 460px;
         height: 50px;
         background: rgba(0, 80, 216, 0.8);
         margin-top: 30px;
@@ -1106,7 +2074,7 @@ li {
         }
       }
       .list {
-        width: 400px;
+        width: 450px;
         margin: 0px;
         padding: 0px;
         padding-left: 20px;
@@ -1116,7 +2084,7 @@ li {
           flex-direction: row;
           height: 45px;
           line-height: 45px;
-          margin-bottom: 45px;
+          margin-bottom: 35px;
           justify-content: space-between;
           p {
             color: #d2d2d3;
@@ -1148,6 +2116,39 @@ li {
       .title {
         font-size: 32px;
         color: #fff;
+      }
+      .zxtTxt {
+        .zxtTxt1 {
+          display: flex;
+          flex-direction: row;
+          p {
+            margin-left: 30px;
+            &:nth-child(1) {
+              color: #32e8f5;
+            }
+            &:nth-child(2) {
+              color: #f69846;
+            }
+          }
+        }
+        color: #fff;
+        margin-top: 20px;
+        font-size: 18px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .zxtTxt1 {
+        }
+        span {
+          color: #20a56c;
+          padding-left: 5px;
+          font-size: 20px;
+          font-weight: 700;
+        }
+      }
+      .zxt {
+        width: 100%;
+        height: 300px;
       }
       width: 50%;
       height: 100%;
@@ -1224,6 +2225,54 @@ li {
           }
         }
       }
+    }
+  }
+}
+.qie {
+  position: absolute;
+  color: #fff;
+  right: 12%;
+  bottom: 5%;
+  z-index: 999999;
+  cursor: pointer;
+}
+.qie1 {
+  position: absolute;
+  color: #fff;
+  right: 5%;
+  bottom: 5%;
+  z-index: 999999;
+  cursor: pointer;
+}
+</style>
+<style lang="scss">
+.e_tabs {
+  &.e_tabs1 {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    .el-tabs__header {
+      margin-left: 0px;
+      margin: 0px;
+    }
+  }
+  width: 700px;
+  height: 50%;
+  margin-top: 60px;
+  .el-tabs__header {
+    margin-left: 60px;
+  }
+  .el-tabs__item {
+    font-size: 22px;
+    color: #d2d2d3;
+  }
+  .el-tabs__item.is-active {
+    color: #fff;
+    font-size: 28px;
+  }
+  .el-tabs__nav-wrap {
+    &::after {
+      background-color: transparent;
     }
   }
 }

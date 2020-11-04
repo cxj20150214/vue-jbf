@@ -11,7 +11,7 @@
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
-              <p class="p1">1090</p>
+              <p>1090</p>
               <span>进件数</span>
             </div>
             <img class="jt" src="../../assets/img/jt1.png" alt />
@@ -19,7 +19,7 @@
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
-              <p class="p2">165</p>
+              <p>165</p>
               <span>通过数</span>
             </div>
             <img class="jt" src="../../assets/img/jt1.png" alt />
@@ -27,73 +27,141 @@
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
-              <p class="p3">40%</p>
+              <p>40%</p>
               <span>通过率</span>
             </div>
           </li>
         </ul>
       </div>
-      <div class="mod2 mod2_1">
+      <div class="mod3">
         <div class="titleBox">
           <img src="../../assets/img/sj1.png" alt />
-          <p class="title">准入评级拒件分布</p>
+          <p class="title">风险预警</p>
         </div>
-        <div class="zrBox">
-          <div class="zrPie" id="zrPie"></div>
+        <div class="tBox">
+          <div class="boxchild">
+            <img class="imgbox" src="../../assets/img/bld.png" alt />
+            <p class="t2">风险预警</p>
+          </div>
+          <div class="boxchild">
+            <p class="t1">总数</p>
+            <p class="t3">299个</p>
+          </div>
+          <div class="boxchild">
+            <p class="t1">处理数</p>
+            <p class="t3">187个</p>
+          </div>
+          <div class="boxchild">
+            <p class="t1">处理率</p>
+            <p class="t4">50%</p>
+          </div>
         </div>
       </div>
       <div class="mod2">
-        <div class="titleBox">
-          <img src="../../assets/img/sj1.png" alt />
-          <p class="title">存量评级概况</p>
-        </div>
-        <p class="sq_txt">总完成率</p>
-        <div class="clBox">
-          <div class="sqPie" id="sqPie"></div>
-          <div class="jdt">
-            <ul class="jdt_list">
+        <img class="sjx" src="../../assets/img/diqiuyi.png" alt />
+        <div class="piebox">
+          <div class="t1">
+            <p class="title">准入评级</p>
+            <ul>
               <li>
-                <p>风险级</p>
-                <el-progress
-                  class="jdt_box"
-                  :text-inside="true"
-                  :stroke-width="12"
-                  :percentage="75"
-                ></el-progress>
+                <p>拒件率：</p>
+                <span>50%</span>
               </li>
               <li>
-                <p>警示级</p>
-                <el-progress
-                  class="jdt_box"
-                  :text-inside="true"
-                  :stroke-width="12"
-                  :percentage="50"
-                  status="success"
-                ></el-progress>
+                <p>数量：</p>
+                <span>10个</span>
               </li>
               <li>
-                <p>预警级</p>
-                <el-progress
-                  class="jdt_box"
-                  :text-inside="true"
-                  :stroke-width="12"
-                  :percentage="60"
-                  status="warning"
-                ></el-progress>
+                <p>征信类占比：</p>
+                <span>12%</span>
               </li>
               <li>
-                <p>关注级</p>
-                <el-progress
-                  class="jdt_box"
-                  :text-inside="true"
-                  :stroke-width="12"
-                  :percentage="70"
-                  status="exception"
-                ></el-progress>
+                <p>内部数据名单：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>外部数据名单：</p>
+                <span>12%</span>
+              </li>
+            </ul>
+          </div>
+          <div class="t2">
+            <p class="title">存量评级</p>
+            <ul>
+              <li>
+                <p>服务点总数：</p>
+                <span>50个</span>
+              </li>
+              <li>
+                <p>风险级占比：</p>
+                <span>10%</span>
+              </li>
+              <li>
+                <p>警示级占比：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>预警级占比：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>关注级占比：</p>
+                <span>12%</span>
+              </li>
+            </ul>
+          </div>
+          <div class="t3">
+            <p class="title">风险预警</p>
+            <ul>
+              <li>
+                <p>预警总数：</p>
+                <span>50个</span>
+              </li>
+              <li>
+                <p>风险级占比：</p>
+                <span>10%</span>
+              </li>
+              <li>
+                <p>警示级占比：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>预警级占比：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>关注级占比：</p>
+                <span>12%</span>
+              </li>
+            </ul>
+          </div>
+          <div class="t4">
+            <p class="title">巡检概况</p>
+            <ul>
+              <li>
+                <p>已巡检数量：</p>
+                <span>50个</span>
+              </li>
+              <li>
+                <p>一季度完成率：</p>
+                <span>10%</span>
+              </li>
+              <li>
+                <p>二季度完成率：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>三季度完成率：</p>
+                <span>12%</span>
+              </li>
+              <li>
+                <p>四季度完成率：</p>
+                <span>12%</span>
               </li>
             </ul>
           </div>
         </div>
+        <div class="yuanhuan" id="yuan"></div>
       </div>
     </div>
     <div class="box2">
@@ -181,7 +249,7 @@
     </div>
     <div class="box3">
       <div class="modr1">
-        <p class="title">风险预警通知</p>
+        <p class="title">实时公告通知</p>
         <p class="txt">
           裕农通智能风控检测出风险共：12650个,检测风险率为：80%，提供风险预警服务：8000个，处理数：7500个，统计率达：80%。其中风险预警高峰地区为...
         </p>
@@ -278,9 +346,8 @@
 <script>
 import "echarts/map/js/china.js";
 import obj from "echarts/map/json/china.json";
-import "echarts-liquidfill/src/liquidFill.js";
 export default {
-  name: "demo8",
+  name: "demo7",
   data() {
     return {
       shows: 1,
@@ -798,7 +865,7 @@ export default {
               console.log(params);
               return (
                 params.name +
-                // MAP_VALUE_DIC[params.data.value] +
+                MAP_VALUE_DIC[params.data.value] +
                 "<br>" +
                 "预警值: " +
                 params.value
@@ -1221,174 +1288,10 @@ export default {
     },
     // 饼图
     piedemo() {
+      let yuan = this.$echarts.init(document.getElementById("yuan"));
       let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
       let Pie2 = this.$echarts.init(document.getElementById("Pie2"));
       let Pie4 = this.$echarts.init(document.getElementById("Pie4"));
-      let zrPie = this.$echarts.init(document.getElementById("zrPie")); //准入饼图
-      let sqPie = this.$echarts.init(document.getElementById("sqPie")); //水球图
-      // 水球图
-      sqPie.setOption({
-        title: {
-          text: "",
-          textStyle: {
-            fontWeight: "normal",
-            fontSize: 25,
-            color: "rgb(97, 142, 205)"
-          }
-        },
-        series: [
-          {
-            type: "liquidFill",
-            radius: "65%",
-            center: ["50%", "40%"],
-            data: [0.5, 0.5, 0.5], // data个数代表波浪数
-            backgroundStyle: {
-              borderWidth: 1,
-              color: "rgb(255,0,255,0.1)"
-            },
-            label: {
-              normal: {
-                formatter: (0.5 * 100).toFixed(2) + "%",
-                textStyle: {
-                  fontSize: this.setFontsize(0.25)
-                }
-              }
-            },
-            outline: {
-              show: false
-            }
-          },
-          {
-            type: "pie",
-            center: ["50%", "40%"],
-            radius: ["70%", "72%"],
-            hoverAnimation: false,
-            data: [
-              {
-                name: "",
-                value: 500,
-                labelLine: {
-                  show: false
-                },
-                itemStyle: {
-                  color: "#5886f0"
-                },
-                emphasis: {
-                  labelLine: {
-                    show: false
-                  },
-                  itemStyle: {
-                    color: "#5886f0"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      });
-      // 准入拒件饼图
-      var seriesData = [
-        {
-          name: "征信类占比",
-          value: "40000"
-        },
-        {
-          name: "黑名单类占比",
-          value: "13000"
-        },
-        {
-          name: "内部数据名单类",
-          value: "60000"
-        },
-        {
-          name: "外部数据名单类",
-          value: "50000"
-        }
-      ];
-      var legendData = [
-        "征信类占比",
-        "黑名单类占比",
-        "内部数据名单类",
-        "外部数据名单类"
-      ];
-      var colorList1 = ["#73ACFF", "#9E87FF", "#FD866A", "#FDD56A"];
-      zrPie.setOption({
-        tooltip: {
-          trigger: "item",
-          borderColor: "rgba(255,255,255,.3)",
-          backgroundColor: "rgba(13,5,30,.6)",
-          borderWidth: 1,
-          padding: 5,
-          formatter: function(parms) {
-            var str =
-              parms.marker +
-              "" +
-              parms.data.name +
-              "</br>" +
-              "数量：" +
-              parms.data.value +
-              "个</br>" +
-              "占比：" +
-              parms.percent +
-              "%";
-            return str;
-          }
-        },
-        legend: {
-          type: "scroll",
-          orient: "vertical",
-          left: "left",
-          align: "auto",
-          top: "middle",
-          itemWidth: 12,
-          itemHeight: 10,
-          textStyle: {
-            color: "#fff",
-            fontSize: this.setFontsize(0.12)
-          },
-          data: legendData
-        },
-        series: [
-          {
-            type: "pie",
-            z: 3,
-            center: ["65%", "55%"],
-            radius: ["50%", "80%"],
-            clockwise: true,
-            avoidLabelOverlap: true,
-            hoverOffset: this.setFontsize(0.07),
-            itemStyle: {
-              normal: {
-                color: function(params) {
-                  return colorList1[params.dataIndex];
-                }
-              }
-            },
-            label: {
-              fontSize: this.setFontsize(0.15),
-              show: true,
-              position: "outside",
-              formatter: "{d}%\n{hr|}",
-              rich: {
-                a: {
-                  padding: [-30, 15, -20, 15]
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                length: 5,
-                length2: 10,
-                lineStyle: {
-                  width: 1
-                }
-              }
-            },
-            data: seriesData
-          }
-        ]
-      });
-      //
       this.$nextTick(() => {
         Pie1.resize();
       });
@@ -1397,8 +1300,172 @@ export default {
       });
       // let Pie3 = this.$echarts.init(document.getElementById("Pie3"));
       // 右侧最下角饼图
-      var data = [];
 
+      // 发光圆形
+      var trafficWay = [
+        {
+          name: "正高级教师",
+          value: 20
+        },
+        {
+          name: "高级教师",
+          value: 10
+        },
+        {
+          name: "一级教师",
+          value: 30
+        },
+        {
+          name: "二级教师",
+          value: 40
+        },
+        {
+          name: "三级教师",
+          value: 50
+        }
+      ];
+
+      var data = [];
+      var color = [
+        "#00ffff",
+        "#00cfff",
+        "#006ced",
+        "#ffe000",
+        "#ffa800",
+        "#ff5b00",
+        "#ff3000"
+      ];
+      for (var i = 0; i < trafficWay.length; i++) {
+        data.push(
+          {
+            value: trafficWay[i].value,
+            name: trafficWay[i].name,
+            itemStyle: {
+              normal: {
+                borderWidth: 5,
+                shadowBlur: 20,
+                borderColor: color[i],
+                shadowColor: color[i]
+              }
+            }
+          },
+          {
+            value: 2,
+            name: "",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: false
+                },
+                labelLine: {
+                  show: false
+                },
+                color: "rgba(0, 0, 0, 0)",
+                borderColor: "rgba(0, 0, 0, 0)",
+                borderWidth: 0
+              }
+            }
+          }
+        );
+      }
+      var seriesOption = [
+        {
+          name: "",
+          type: "pie",
+          clockWise: false,
+          radius: [105, 109],
+          hoverAnimation: false,
+          itemStyle: {
+            normal: {
+              label: {
+                show: false,
+                position: "outside",
+                fontSize: 24,
+                color: "#ddd",
+                formatter: function(params) {
+                  var percent = 0;
+                  var total = 0;
+                  for (var i = 0; i < trafficWay.length; i++) {
+                    total += trafficWay[i].value;
+                  }
+                  percent = ((params.value / total) * 100).toFixed(0);
+                  if (params.name !== "") {
+                    return (
+                      "教师职称：" +
+                      params.name +
+                      "\n" +
+                      "\n" +
+                      "占百分比：" +
+                      percent +
+                      "%"
+                    );
+                  } else {
+                    return "";
+                  }
+                }
+              },
+              labelLine: {
+                length: 20,
+                length2: 50,
+                show: true,
+                color: "#00ffff"
+              }
+            }
+          },
+          data: data
+        }
+      ];
+      yuan.setOption({
+        color: color,
+        title: {
+          text: "风险评级",
+          top: "46%",
+          textAlign: "center",
+          left: "49%",
+          textStyle: {
+            color: "#70c5ff",
+            fontSize: 46,
+            fontWeight: "400"
+          }
+        },
+        graphic: {
+          elements: [
+            {
+              type: "image",
+              z: 3,
+              style: {
+                width: 178,
+                height: 178
+              },
+              left: "center",
+              top: "center",
+              position: [100, 100]
+            }
+          ]
+        },
+        tooltip: {
+          show: false
+        },
+        legend: {
+          show: false,
+          icon: "circle",
+          orient: "horizontal",
+          // x: 'left',
+          data: ["正高级教师", "高级教师", "一级教师", "二级教师", "三级教师"],
+          right: 340,
+          bottom: 150,
+          align: "right",
+          textStyle: {
+            color: "#fff"
+            // fontSize:24,
+          },
+          itemGap: 20
+        },
+        toolbox: {
+          show: false
+        },
+        series: seriesOption
+      });
       // 折线图
       // Pie3.setOption({
       //   tooltip: {
@@ -1944,7 +2011,6 @@ export default {
       window.addEventListener("resize", function() {
         Pie4.resize();
       });
-      // 巡检数据柱状图
       var data1 = [20, 30, 20, 30];
       var data2 = [9, 30, 9, 60];
       var data3 = [20, 30, 20, 30];
@@ -2177,65 +2243,8 @@ export default {
     }
   }
 };
-</script>在
+</script>
 <style lang="scss" scoped>
-// 新增css
-.zrBox {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  .zrPie {
-    width: 100%;
-    height: 100%;
-  }
-}
-.sq_txt {
-  position: absolute;
-  color: #fff;
-  font-size: 16px;
-  bottom: 12%;
-  left: 20%;
-  font-weight: 700;
-}
-.clBox {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  .sqPie {
-    width: 40%;
-    height: 100%;
-  }
-  .jdt {
-    width: 60%;
-    height: 100%;
-    .jdt_list {
-      margin: 0px;
-      margin-top: 25px;
-      padding: 0px;
-      display: flex;
-      flex-direction: column;
-      li {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 15px;
-        p {
-          color: #fff;
-          float: left;
-          font-size: 10px;
-        }
-        .jdt_box {
-          width: 70%;
-          margin-left: 10px;
-        }
-      }
-    }
-  }
-}
-//
 .loading {
   width: 100vw;
   height: 100vh;
@@ -2295,11 +2304,11 @@ ul {
     flex-direction: column;
     .mod1 {
       width: 100%;
-      height: 30%;
-      margin-bottom: 2%;
+      height: 25%;
+      margin-bottom: 5%;
       // background-color: rgba(13, 49, 130, 0.8);
       background-image: url("../../assets/img/mod1.png");
-      background-size: 100% 100%;
+      background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
       position: relative;
@@ -2314,7 +2323,7 @@ ul {
       .list {
         width: 80%;
         height: 50%;
-        margin: 75px auto 0px;
+        margin: 70px auto 0px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -2333,23 +2342,12 @@ ul {
             height: 30%;
             width: 100%;
             p {
-              font-size: 20px;
+              font-size: 18px;
               margin: 0px;
               line-height: 24px;
-              font-weight: 700;
-              &.p1 {
-                color: #05c3fa;
-              }
-              &.p2 {
-                color: #56a444;
-              }
-              &.p3 {
-                color: #ffb956;
-              }
             }
             span {
               font-size: 12px;
-              color: #fff;
             }
           }
           .diqiu {
@@ -2367,40 +2365,222 @@ ul {
     }
     .mod2 {
       width: 100%;
-      height: 40%;
+      height: 52%;
       background-image: url("../../assets/img/mod2.png");
       background-size: 95% 100%;
       background-repeat: no-repeat;
       background-position-x: 100%;
       position: relative;
-      padding: 5% 6% 2% 10%;
+      padding: 8% 8% 8% 11%;
       display: flex;
       flex-direction: column;
-      &.mod2_1 {
-        margin-bottom: 2%;
-      }
       .titleBox {
         display: flex;
         flex-direction: row;
         margin-bottom: 2%;
-        width: 100%;
         height: 18%;
+        .more {
+          float: right;
+          color: #fff;
+        }
         .title {
           color: #70c5ff;
-          font-size: 18px;
+          font-size: 0.8rem;
+          font-weight: 700;
           margin-top: 2%;
           margin-left: 2%;
-          font-weight: 700;
         }
         img {
           width: 8%;
         }
       }
+      .modBox1 {
+        width: 100%;
+        height: 20%;
+        border: 1px solid #297aae;
+        margin-bottom: 2%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2% 5% 2% 5%;
+        .txt1 {
+          color: #70c5ff;
+          font-size: 0.8rem;
+        }
+        .txt2 {
+          font-size: 1.4rem;
+          .s1 {
+            color: #ffb956;
+          }
+          .s2 {
+            color: #495f73;
+          }
+          .s3 {
+            color: #77c8ff;
+          }
+        }
+      }
+      .modBox2 {
+        width: 100%;
+        height: 20%;
+        margin-bottom: 2%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .box_l {
+          width: calc(50% - 2%);
+          padding: 3% 5%;
+          height: 100%;
+          margin-right: 2%;
+          border: 1px solid #297aae;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .txt1 {
+            color: #70c5ff;
+            font-size: 0.6rem;
+            line-height: 0.8rem;
+          }
+          .txt2 {
+            font-size: 0.8rem;
+            .s1 {
+              color: #ffb956;
+            }
+            .s2 {
+              color: #495f73;
+            }
+            .s3 {
+              color: #77c8ff;
+            }
+          }
+        }
+        .box_r {
+          width: calc(50% - 2%);
+          padding: 3% 5%;
+          height: 100%;
+          border: 1px solid #297aae;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .txt1 {
+            color: #70c5ff;
+            font-size: 0.6rem;
+            line-height: 0.8rem;
+          }
+          .txt2 {
+            font-size: 0.8rem;
+            .s1 {
+              color: #ffb956;
+            }
+            .s2 {
+              color: #495f73;
+            }
+            .s3 {
+              color: #77c8ff;
+            }
+          }
+        }
+      }
+      .modBox3 {
+        .titleBox {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 2%;
+          height: 18%;
+          .title {
+            color: #70c5ff;
+            font-size: 0.6rem;
+            margin-top: 2%;
+            margin-left: 2%;
+          }
+          img {
+            width: 8%;
+          }
+        }
+        width: 100%;
+        height: 40%;
+        border: 1px solid #297aae;
+        position: relative;
+        .bingtu {
+          width: 100%;
+          height: 200%;
+          position: absolute;
+          transform: scale(0.55);
+          left: 10%;
+          top: -41%;
+        }
+      }
+    }
+    .mod3 {
+      .tBox {
+        padding-top: 2%;
+        display: flex;
+        flex-direction: row;
+        color: #aaddff;
+        padding-bottom: 2%;
+        border-bottom: 1px solid #1a4786;
+        .boxchild {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          .imgbox {
+            width: 40%;
+            height: 40px;
+            margin: 0px auto;
+          }
+          width: 25%;
+          .t1 {
+            font-size: 18px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+          }
+          .t2 {
+            font-size: 18px;
+            text-align: center;
+          }
+          .t3 {
+            color: #77c8ff;
+            font-size: 26px;
+          }
+          .t4 {
+            color: #ffb956;
+            font-size: 26px;
+          }
+        }
+      }
+      .titleBox {
+        display: flex;
+        flex-direction: row;
+        height: 25%;
+        .title {
+          color: #70c5ff;
+          font-size: 18px;
+          font-weight: 700;
+          margin-top: 2%;
+          margin-left: 2%;
+        }
+        img {
+          width: 8%;
+        }
+      }
+      width: 100%;
+      height: 20%;
+      margin-bottom: 2%;
+      background-image: url("../../assets/img/mod3.png");
+      background-size: 95% 100%;
+      background-repeat: no-repeat;
+      background-position-x: 100%;
+      position: relative;
+      padding: 5% 5% 5% 11%;
+      display: flex;
+      flex-direction: column;
     }
   }
   .box2 {
-    width: calc(48% - 20px);
-    margin: 0px 10px;
+    width: calc(48% - 40px);
+    margin: 0px 20px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -2446,7 +2626,7 @@ ul {
     }
     .modBox2 {
       margin-top: 3%;
-      height: 40%;
+      height: 30%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -2468,7 +2648,6 @@ ul {
           }
         }
         width: 100%;
-        height: 100%;
         background-image: url("../../assets/img/box2mod1.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -2505,14 +2684,12 @@ ul {
   .box3 {
     width: 26%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
     .modr1 {
       width: 100%;
-      height: 30%;
-      margin-bottom: 2%;
+      height: 25%;
+      margin-bottom: 5%;
       background-image: url("../../assets/img/modR1.png");
-      background-size: 100% 100%;
+      background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
       position: relative;
@@ -2535,18 +2712,54 @@ ul {
         margin: 15% auto 0px;
         line-height: 24px;
       }
+      .tBox {
+        padding-top: 2%;
+        display: flex;
+        flex-direction: row;
+        color: #aaddff;
+        padding-bottom: 2%;
+        border-bottom: 1px solid #1a4786;
+        .boxchild {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          .imgbox {
+            width: 40%;
+            height: 40px;
+            margin: 0px auto;
+          }
+          width: 25%;
+          .t1 {
+            font-size: 18px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+          }
+          .t2 {
+            font-size: 18px;
+            text-align: center;
+          }
+          .t3 {
+            color: #77c8ff;
+            font-size: 26px;
+          }
+          .t4 {
+            color: #ffb956;
+            font-size: 26px;
+          }
+        }
+      }
     }
     // 裕农通风险管理
     .modr2 {
       display: flex;
       flex-direction: column;
       .zhexiantu {
-        width: 215%;
-        height: 220%;
+        width: 220%;
+        height: 190%;
         position: absolute;
-        transform: scale(0.35);
+        transform: scale(0.4);
         left: -60%;
-        top: -50%;
+        top: -43%;
       }
       .titleBox {
         display: flex;
@@ -2557,17 +2770,17 @@ ul {
           color: #70c5ff;
           font-size: 18px;
           font-weight: 700;
-          margin-top: 1%;
+          margin-top: 2%;
           margin-left: 2%;
         }
         img {
-          width: 7%;
+          width: 8%;
         }
       }
       width: 100%;
       height: 40%;
       background-image: url("../../assets/img/mod2.png");
-      background-size: 95% 100%;
+      background-size: 95% 95%;
       background-repeat: no-repeat;
       position: relative;
       padding: 5% 5% 11% 8%;
@@ -2616,7 +2829,7 @@ ul {
             font-size: 15px;
             font-weight: 700;
             margin-top: 3%;
-            border-bottom: 1px solid #409eff;
+            border-bottom: 1px solid #409EFF
           }
         }
         .title_cll {
@@ -2631,7 +2844,7 @@ ul {
             font-size: 15px;
             font-weight: 700;
             margin-top: 3%;
-            border-bottom: 1px solid #409eff;
+            border-bottom: 1px solid #409EFF
           }
         }
         img {
@@ -2639,7 +2852,7 @@ ul {
         }
       }
       width: 100%;
-      height: 40%;
+      height: 30%;
       margin-top: 2%;
       background-image: url("../../assets/img/mod3.png");
       background-size: 95% 100%;
@@ -3040,12 +3253,6 @@ ul {
 }
 </style>
 <style lang="scss">
-.jdt {
-  .el-progress-bar__outer {
-    background-color: #0d0a23;
-  }
-}
-
 .ssYijihan {
   .el-input__inner {
     background-color: transparent;
