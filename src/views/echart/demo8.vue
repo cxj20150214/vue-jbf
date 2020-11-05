@@ -16,14 +16,14 @@
               class="title_all"
               @click="clickDR()"
             >
-              今日
+              当日
             </p>
             <p
               :class="{ active: showDate == 2 }"
               class="title_all"
               @click="clickDY()"
             >
-              今月
+              当月
             </p>
             <p
               :class="{ active: showDate == 3 }"
@@ -269,6 +269,14 @@ export default {
         {
           value: "选项1",
           label: "全国"
+        },
+        {
+          value: "选项2",
+          label: "福建"
+        },
+        {
+          value: "选项3",
+          label: "泉州"
         }
       ],
       valueSelect: "全国",
@@ -757,15 +765,6 @@ export default {
       }
     },
     PieClick(value) {
-      const loading = this.$loading({
-        lock: true,
-        text: "Loading",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)"
-      });
-      setTimeout(() => {
-        loading.close();
-      }, 1000);
       this.province = "（" + value + "）";
       if (value === "福建") {
         this.zrData = [
@@ -1156,10 +1155,6 @@ export default {
         {
           name: "海南",
           value: 14
-        },
-        {
-          name: "台湾",
-          value: 0
         }
       ];
       var dataJB1 = [
@@ -4121,7 +4116,16 @@ export default {
   watch: {
     zrData(val) {
       //监听数据发生改变 刷新图表数据
-      this.piedemo();
+      const loading = this.$loading({
+        lock: true,
+        text: "Loading",
+        spinner: "el-icon-loading",
+        background: "rgba(0, 0, 0, 0.7)"
+      });
+      setTimeout(() => {
+        loading.close();
+        this.piedemo();
+      }, 1000);
     },
     zsData() {
       console.log("监听总数变化");
@@ -4437,7 +4441,7 @@ ul {
     }
     .mod2 {
       width: 100%;
-      height: 40%;
+      height: 38%;
       background-image: url("../../assets/img/mod2.png");
       background-size: 95% 100%;
       background-repeat: no-repeat;
@@ -5050,49 +5054,6 @@ ul {
     }
   }
 }
-@media screen and (max-width: 1280px) {
-  // .seamless-warp .itemhua li {
-  //   padding: 10px;
-  // }
-  // .seamless-warp1 .itemhua {
-  //   margin-top: 10px;
-  // }
-  // .seamless-warp1 .itemhua li .tit {
-  //   margin-bottom: 5px;
-  // }
-  .yuanhuan {
-    display: none;
-  }
-  // .bg .box1 .mod3 .tBox {
-  //   margin-top: 1%;
-  //   padding-bottom: 0px;
-  //   transform: scale(0.85);
-  // }
-  // .seamless-warp .itemhua li .txt .box {
-  //   font-size: 10px;
-  // }
-  // .piebox .t1 ul li {
-  //   margin-bottom: 2%;
-  // }
-  // .piebox .t2 ul li {
-  //   margin-bottom: 2%;
-  // }
-  // .piebox .t3 ul li {
-  //   margin-bottom: 2%;
-  // }
-  // .piebox .t4 ul li {
-  //   margin-bottom: 2%;
-  // }
-  // .piebox {
-  //   width: 110%;
-  //   height: 110%;
-  //   left: -5%;
-  //   transform: scale(0.8);
-  //   top: -10%;
-  //   position: absolute;
-  // }
-}
-
 .el-carousel__item:nth-child(2n) {
   // background-color: #072769;
   background: rgba(53, 87, 154, 0.5);
@@ -5114,6 +5075,35 @@ ul {
   color: #fff;
   cursor: pointer;
   font-size: 16px;
+}
+@media screen and (max-width: 1280px) {
+  .selectBox {
+    width: 420px;
+    right: -45%;
+  }
+  .selectBox .box4_tab {
+    width: 50%;
+    height: 55%;
+  }
+  .selectBox .title_all{
+    padding: 2% 5% 2% 5%;
+  }
+  .selectBox .title_all.active {
+    padding: 2% 5% 2% 5%;
+  }
+  .zrBox{
+    width:150%;
+    height:150%;
+    position: absolute;
+    bottom:0%;
+    transform: scale(0.35);
+  }
+  .sq_txt{
+        bottom: 2%;
+  }
+  .clBox .jdt .jdt_list{
+    margin-top:0px;
+  }
 }
 </style>
 <style lang="scss">
