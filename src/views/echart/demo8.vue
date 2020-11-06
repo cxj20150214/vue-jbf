@@ -2404,7 +2404,7 @@ export default {
           x: 50,
           x2: 50,
           top: "15%",
-          bottom: "18%" //也可设置left和right设置距离来控制图表的大小
+          bottom: "20%" //也可设置left和right设置距离来控制图表的大小
         },
         tooltip: {
           trigger: "axis",
@@ -2626,23 +2626,27 @@ export default {
       let dataYJ = [
         {
           name: "风险级",
-          value: 80
+          value: 80,
+          color: "#F56C6C"
         },
         {
           name: "警示级",
-          value: 60
+          value: 60,
+          color: "#E6A23C"
         },
         {
           name: "预警级",
-          value: 40
+          value: 40,
+          color: "#FFD52E"
         },
         {
           name: "关注级",
-          value: 30
+          value: 30,
+          color: "#409EFF"
         }
       ];
       let label = dataYJ.map(item => {
-        return item.name;
+        return [item.name, item.color];
       });
       let lineColor = "rgba(255,255,255,0.2)";
       let colors = [
@@ -2793,14 +2797,15 @@ export default {
               show: true,
               textStyle: {
                 color: "#ffffff",
-                fontSize: 18,
+                fontSize: 18
               }
             },
             data: label.map(value => {
               return {
-                value: value,
+                value: value[0],
                 textStyle: {
-                  align: "center"
+                  align: "center",
+                  color: value[1]
                 }
               };
             })
@@ -3923,7 +3928,7 @@ export default {
           data: ["预警总数", "处理数"],
           textStyle: {
             color: "#fff",
-            fontSize: 30,
+            fontSize: 30
           }
         },
         grid: {
