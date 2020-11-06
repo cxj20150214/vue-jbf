@@ -2675,13 +2675,13 @@ export default {
         legend: {
           show: true,
           icon: "rect",
-          itemWidth: this.setFontsize(0.2),
-          itemHeight: this.setFontsize(0.12),
+          itemWidth: 20,
+          itemHeight: 15,
           itemGap: 9,
           top: "5",
           left: "center",
           textStyle: {
-            fontSize: this.setFontsize(0.12),
+            fontSize: 22,
             color: "#F1F1F3"
           },
           data: ["已处理", "未处理"]
@@ -2690,22 +2690,23 @@ export default {
           {
             show: false,
             left: "10%",
-            top: this.setFontsize(1.1),
-            bottom: 60,
+            top: 30,
+            bottom: 10,
             containLabel: true,
             width: "32%"
           },
           {
             show: false,
             left: "51.5%", //调整中间文字位置
-            top: this.setFontsize(1.15), //使中间文字对齐
+            top: 24,
+            bottom: 10,
             width: "0%"
           },
           {
             show: false,
             right: "10%",
-            top: this.setFontsize(1.1),
-            bottom: 60,
+            top: 30,
+            bottom: 10,
             containLabel: true,
             width: "32%"
           }
@@ -2792,7 +2793,7 @@ export default {
               show: true,
               textStyle: {
                 color: "#ffffff",
-                fontSize: this.setFontsize(0.14)
+                fontSize: 18,
               }
             },
             data: label.map(value => {
@@ -2828,12 +2829,12 @@ export default {
           {
             name: "已处理",
             type: "bar",
-            barWidth: this.setFontsize(0.12),
+            barWidth: 15,
             stack: "left",
             label: {
               show: true,
-              fontSize: this.setFontsize(0.14),
-              distance: this.setFontsize(0.08),
+              fontSize: 20,
+              distance: 5,
               color: "#fff",
               position: "left", //inside|right
               formatter: params => {
@@ -2851,14 +2852,14 @@ export default {
           {
             name: "未处理",
             type: "bar",
-            barWidth: this.setFontsize(0.12),
+            barWidth: 15,
             stack: "right",
             xAxisIndex: 2,
             yAxisIndex: 2,
             label: {
               show: true,
-              fontSize: this.setFontsize(0.14),
-              distance: this.setFontsize(0.08),
+              fontSize: 20,
+              distance: 5,
               color: "#fff",
               position: "right", //inside|right
               formatter: params => {
@@ -2878,46 +2879,46 @@ export default {
       ybpPie.setOption({
         title: [
           {
-            x: "8%",
+            x: "9%",
             y: "80%",
             //bottom: 100,
             text: "准入通过率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: this.setFontsize(0.2),
+              fontSize: 28,
               color: "#fff"
             }
           },
           {
-            x: "31%",
+            x: "32%",
             y: "80%",
             //bottom: 100,
             text: "评级处理率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: this.setFontsize(0.2),
+              fontSize: 28,
               color: "#fff"
             }
           },
           {
-            x: "55%",
+            x: "56%",
             y: "80%",
             //bottom: 100,
             text: "预警处理率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: this.setFontsize(0.2),
+              fontSize: 28,
               color: "#fff"
             }
           },
           {
-            x: "78%",
+            x: "79%",
             y: "80%",
             //bottom: 100,
             text: "巡检完成率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: this.setFontsize(0.2),
+              fontSize: 28,
               color: "#fff"
             }
           }
@@ -2940,9 +2941,9 @@ export default {
                   [0.8, "#4EE3FF"],
                   [1, "lime"]
                 ],
-                width: 2,
+                width: 3,
                 //shadowColor : '#fff', //默认透明
-                shadowBlur: 5
+                shadowBlur: 6
               }
             },
             axisLabel: {
@@ -2953,12 +2954,12 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: this.setFontsize(0.12)
+                fontSize: 20
               }
             },
             axisTick: {
               // 坐标轴小标记
-              length: this.setFontsize(0.1), // 属性length控制线长
+              length: 15, // 属性length控制线长
               lineStyle: {
                 // 属性lineStyle控制线条样式
                 color: "auto",
@@ -2969,9 +2970,9 @@ export default {
             },
             splitLine: {
               //橙色分割线
-              length: this.setFontsize(0.15),
+              length: 18,
               lineStyle: {
-                width: 3,
+                width: 4,
                 color: "#FCD209"
               }
             },
@@ -2981,13 +2982,13 @@ export default {
             },
             pointer: {
               //指针长短
-              length: this.setFontsize(0.45),
-              width: this.setFontsize(0.05)
+              length: 65,
+              width: 7
             },
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: this.setFontsize(0.24)
+                fontSize: 40
               }
             },
             data: [{ value: 40 }]
@@ -3009,9 +3010,9 @@ export default {
                   [0.8, "#4EE3FF"],
                   [1, "lime"]
                 ],
-                width: 2,
+                width: 3,
                 //shadowColor : '#fff', //默认透明
-                shadowBlur: 5
+                shadowBlur: 6
               }
             },
             axisLabel: {
@@ -3022,12 +3023,12 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: this.setFontsize(0.12)
+                fontSize: 20
               }
             },
             axisTick: {
               // 坐标轴小标记
-              length: this.setFontsize(0.1), // 属性length控制线长
+              length: 15, // 属性length控制线长
               lineStyle: {
                 // 属性lineStyle控制线条样式
                 color: "auto",
@@ -3038,9 +3039,9 @@ export default {
             },
             splitLine: {
               //橙色分割线
-              length: this.setFontsize(0.15),
+              length: 18,
               lineStyle: {
-                width: 3,
+                width: 4,
                 color: "#FCD209"
               }
             },
@@ -3050,16 +3051,16 @@ export default {
             },
             pointer: {
               //指针长短
-              length: this.setFontsize(0.45),
-              width: this.setFontsize(0.05)
+              length: 65,
+              width: 7
             },
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: this.setFontsize(0.24)
+                fontSize: 40
               }
             },
-            data: [{ value: 100 }]
+            data: [{ value: 30 }]
           },
           {
             name: "速度",
@@ -3078,9 +3079,9 @@ export default {
                   [0.8, "#4EE3FF"],
                   [1, "lime"]
                 ],
-                width: 2,
+                width: 3,
                 //shadowColor : '#fff', //默认透明
-                shadowBlur: 5
+                shadowBlur: 6
               }
             },
             axisLabel: {
@@ -3091,12 +3092,12 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: this.setFontsize(0.12)
+                fontSize: 20
               }
             },
             axisTick: {
               // 坐标轴小标记
-              length: this.setFontsize(0.1), // 属性length控制线长
+              length: 15, // 属性length控制线长
               lineStyle: {
                 // 属性lineStyle控制线条样式
                 color: "auto",
@@ -3107,9 +3108,9 @@ export default {
             },
             splitLine: {
               //橙色分割线
-              length: this.setFontsize(0.15),
+              length: 18,
               lineStyle: {
-                width: 3,
+                width: 4,
                 color: "#FCD209"
               }
             },
@@ -3119,16 +3120,16 @@ export default {
             },
             pointer: {
               //指针长短
-              length: this.setFontsize(0.45),
-              width: this.setFontsize(0.05)
+              length: 65,
+              width: 7
             },
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: this.setFontsize(0.24)
+                fontSize: 40
               }
             },
-            data: [{ value: 10 }]
+            data: [{ value: 90 }]
           },
           {
             name: "速度",
@@ -3147,9 +3148,9 @@ export default {
                   [0.8, "#4EE3FF"],
                   [1, "lime"]
                 ],
-                width: 2,
+                width: 3,
                 //shadowColor : '#fff', //默认透明
-                shadowBlur: 5
+                shadowBlur: 6
               }
             },
             axisLabel: {
@@ -3160,12 +3161,12 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: this.setFontsize(0.12)
+                fontSize: 20
               }
             },
             axisTick: {
               // 坐标轴小标记
-              length: this.setFontsize(0.1), // 属性length控制线长
+              length: 15, // 属性length控制线长
               lineStyle: {
                 // 属性lineStyle控制线条样式
                 color: "auto",
@@ -3176,9 +3177,9 @@ export default {
             },
             splitLine: {
               //橙色分割线
-              length: this.setFontsize(0.15),
+              length: 18,
               lineStyle: {
-                width: 3,
+                width: 4,
                 color: "#FCD209"
               }
             },
@@ -3188,16 +3189,16 @@ export default {
             },
             pointer: {
               //指针长短
-              length: this.setFontsize(0.45),
-              width: this.setFontsize(0.05)
+              length: 65,
+              width: 7
             },
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: this.setFontsize(0.24)
+                fontSize: 40
               }
             },
-            data: [{ value: 60 }]
+            data: [{ value: 20 }]
           }
         ]
       });
@@ -3277,6 +3278,9 @@ export default {
           backgroundColor: "rgba(13,5,30,.6)",
           borderWidth: 1,
           padding: 5,
+          textStyle: {
+            fontSize: 30
+          },
           formatter: function(parms) {
             var str =
               parms.marker +
@@ -3298,11 +3302,11 @@ export default {
           left: "left",
           align: "auto",
           top: "middle",
-          itemWidth: 12,
-          itemHeight: 10,
+          itemWidth: 17,
+          itemHeight: 15,
           textStyle: {
             color: "#fff",
-            fontSize: this.setFontsize(0.12)
+            fontSize: 26
           },
           data: legendData
         },
@@ -3323,7 +3327,7 @@ export default {
               }
             },
             label: {
-              fontSize: this.setFontsize(0.15),
+              fontSize: 32,
               show: true,
               position: "outside",
               formatter: "{d}%\n{hr|}",
@@ -3335,8 +3339,8 @@ export default {
             },
             labelLine: {
               normal: {
-                length: 5,
-                length2: 10,
+                length: 10,
+                length2: 15,
                 lineStyle: {
                   width: 1
                 }
@@ -3919,7 +3923,7 @@ export default {
           data: ["预警总数", "处理数"],
           textStyle: {
             color: "#fff",
-            fontSize: this.setFontsize(0.4)
+            fontSize: 30,
           }
         },
         grid: {
@@ -3938,7 +3942,7 @@ export default {
               interval: "auto",
               formatter: "{value} ",
               textStyle: {
-                fontSize: this.setFontsize(0.4),
+                fontSize: 30,
                 color: "#fff"
               }
             },
@@ -3959,7 +3963,7 @@ export default {
               show: true,
               splitNumber: 15,
               textStyle: {
-                fontSize: this.setFontsize(0.4),
+                fontSize: 30,
                 color: "#fff"
               }
             },
@@ -4249,11 +4253,12 @@ export default {
   }
 }
 .zrBox {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  position: relative;
+  width: 230%;
+  height: 200%;
+  position: absolute;
+  bottom: -67%;
+  left: -60%;
+  transform: scale(0.4);
   .zrPie {
     width: 100%;
     height: 100%;
@@ -4306,8 +4311,12 @@ export default {
   }
 }
 .ybpPie {
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 170%;
+  position: absolute;
+  left: -50%;
+  top: -33%;
+  transform: scale(0.5);
 }
 //
 .loading {
@@ -4524,6 +4533,7 @@ ul {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      position: relative;
       .box1 {
         .phList {
           width: 90%;
@@ -4610,10 +4620,13 @@ ul {
         line-height: 24px;
       }
       .yjBox {
-        width: 95%;
-        height: 95%;
+        width: 200%;
+        left: -50%;
+        height: 150%;
         padding: 2% 7% 2% 5%;
-        margin-top: 8%;
+        top: -14%;
+        transform: scale(0.5);
+        position: absolute;
         display: flex;
         color: #aaddff;
         .yjPie {
@@ -5085,24 +5098,17 @@ ul {
     width: 50%;
     height: 55%;
   }
-  .selectBox .title_all{
+  .selectBox .title_all {
     padding: 2% 5% 2% 5%;
   }
   .selectBox .title_all.active {
     padding: 2% 5% 2% 5%;
   }
-  .zrBox{
-    width:150%;
-    height:150%;
-    position: absolute;
-    bottom:0%;
-    transform: scale(0.35);
+  .sq_txt {
+    bottom: 2%;
   }
-  .sq_txt{
-        bottom: 2%;
-  }
-  .clBox .jdt .jdt_list{
-    margin-top:0px;
+  .clBox .jdt .jdt_list {
+    margin-top: 0px;
   }
 }
 </style>
