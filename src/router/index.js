@@ -5,7 +5,6 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-import food from '@/views/foodie/index'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -32,67 +31,6 @@ import food from '@/views/foodie/index'
  */
 export const constantRoutes = [
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-  {
-    path: '/bind',
-    name: 'bind',
-    component: () => import('@/views/login/bind'),
-    meta: { title: '登录', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/echart',
-    name: 'echart',
-    component: () => import('@/views/echart/index'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/demo2',
-    name: 'demo2',
-    component: () => import('@/views/echart/demo2'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/demo3',
-    name: 'demo3',
-    component: () => import('@/views/echart/demo3'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/demo4',
-    name: 'demo4',
-    component: () => import('@/views/echart/demo4'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/demo5',
-    name: 'demo5',
-    component: () => import('@/views/echart/demo5'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/demo6',
-    name: 'demo6',
-    component: () => import('@/views/echart/demo6'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
-    path: '/demo7',
-    name: 'demo7',
-    component: () => import('@/views/echart/demo7'),
-    meta: { title: '数据表', icon: 'dashboard' },
-    hidden: true
-  },
-  {
     path: '/demo8',
     name: 'demo8',
     component: () => import('@/views/echart/demo8'),
@@ -100,133 +38,21 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/merchant',
-    name: 'merchant',
-    component: () => import('@/views/merchant/merchant'),
-    meta: { title: '商户交易联机侦测模型', icon: 'dashboard' },
-    hidden: true
-  },
-  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
     component: Layout,
-    redirect: '/demo3',
+    redirect: '/demo8',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/echart/demo3'),
+      component: () => import('@/views/echart/demo8'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
