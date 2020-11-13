@@ -30,7 +30,7 @@
               class="title_all"
               @click="clickDN()"
             >
-              今年
+              当年
             </p>
           </div>
           <el-select
@@ -48,7 +48,7 @@
             </el-option>
           </el-select>
         </div>
-        <p class="title">准入风险评级</p>
+        <p class="title">准入评级</p>
         <ul class="list">
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
@@ -78,7 +78,7 @@
       <div class="mod2 mod2_1">
         <div class="titleBox">
           <img src="../../assets/img/sj1.png" alt />
-          <p class="title">准入评级拒件分布</p>
+          <p class="title">拒件分布</p>
         </div>
         <div class="zrBox">
           <div class="zrPie" id="zrPie"></div>
@@ -87,7 +87,7 @@
       <div class="mod2">
         <div class="titleBox">
           <img src="../../assets/img/sj1.png" alt />
-          <p class="title">存量评级概况</p>
+          <p class="title">存量评级</p>
         </div>
         <p class="sq_txt">总异常率</p>
         <div class="clBox">
@@ -190,7 +190,7 @@
     <div class="box3">
       <div class="modr1">
         <p class="jiedian_tit">当前位置：{{ province + selectTime }}</p>
-        <p class="title">风险预警处理率</p>
+        <p class="title">风险预警</p>
         <div class="yjBox">
           <div class="yjPie" id="yjPie"></div>
         </div>
@@ -198,14 +198,14 @@
       <div class="modr2">
         <div class="titleBox">
           <img src="../../assets/img/sj.png" alt />
-          <p class="title">风险预警数统计</p>
+          <p class="title">风险处置</p>
         </div>
         <div class="zhexiantu" id="Pie2"></div>
       </div>
       <div class="modr3">
         <div class="titleBox">
           <img src="../../assets/img/sj.png" alt />
-          <p class="title">巡检数据统计</p>
+          <p class="title">定期巡检</p>
           <p :class="{ active: showXJ == 1 }" class="title_all" @click="clAll">
             巡检总数
           </p>
@@ -227,10 +227,10 @@
           存量评级
         </p>
         <p :class="{ active: shows == 1 }" class="title_all" @click="clickYJ()">
-          预警
+          预警处置
         </p>
         <p :class="{ active: shows == 4 }" class="title_all" @click="clickXJ()">
-          巡检
+          定期巡检
         </p>
       </div>
       <div class="box4Pie" id="box4Pie"></div>
@@ -265,8 +265,8 @@ export default {
   data() {
     return {
       shuiqiuData: 0.8,
-      zhihanglist: ["福建支行", "广东支行", "浙江支行"],
-      box4PieData: ["总数", "完成数", "完成率(%)"],
+      zhihanglist: ["福建支行", "广东支行", "浙江支行","福建支行", "广东支行", "浙江支行","福建支行", "广东支行", "浙江支行"],
+      box4PieData: ["进件数", "通过数", "准入通过率(%)"],
       dataType: "准入评级",
       selectTime: "当日",
       options: [
@@ -388,11 +388,11 @@ export default {
       ],
       zrData: [
         {
-          name: "征信类占比",
+          name: "征信类",
           value: "40000"
         },
         {
-          name: "黑名单类占比",
+          name: "黑名单类",
           value: "13000"
         },
         {
@@ -563,7 +563,7 @@ export default {
     },
     clickDN() {
       this.showDate = 3;
-      this.selectTime = "今年";
+      this.selectTime = "当年";
     },
     // 预警 存量 准入 巡检  切换
     clickYJ() {
@@ -2913,7 +2913,7 @@ export default {
             x: "32%",
             y: "80%",
             //bottom: 100,
-            text: "评级处理率",
+            text: "存量低险率",
             textStyle: {
               fontWeight: "normal",
               fontSize: 28,
@@ -2921,10 +2921,10 @@ export default {
             }
           },
           {
-            x: "56%",
+            x: "52%",
             y: "80%",
             //bottom: 100,
-            text: "预警处理率",
+            text: "中高风险预警处置率",
             textStyle: {
               fontWeight: "normal",
               fontSize: 28,
@@ -2935,7 +2935,7 @@ export default {
             x: "79%",
             y: "80%",
             //bottom: 100,
-            text: "巡检完成率",
+            text: "巡检通过率",
             textStyle: {
               fontWeight: "normal",
               fontSize: 28,
@@ -3285,8 +3285,8 @@ export default {
       // 准入拒件饼图
       var seriesData = this.zrData;
       var legendData = [
-        "征信类占比",
-        "黑名单类占比",
+        "征信类",
+        "黑名单类",
         "内部数据名单类",
         "外部数据名单类"
       ];
