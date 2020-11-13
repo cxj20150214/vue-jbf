@@ -1706,6 +1706,13 @@ export default {
                   color: "green"
                 }
               },
+              label: {
+                emphasis: {
+                  //对应的鼠标悬浮效果
+                  show: false,
+                  textStyle: { color: "#FFFFFF" }
+                }
+              },
               nameMap: nameMap
             }
           ]
@@ -1813,6 +1820,13 @@ export default {
                   areaColor: "#2AB8FF",
                   borderWidth: 0,
                   color: "green"
+                }
+              },
+              label: {
+                emphasis: {
+                  //对应的鼠标悬浮效果
+                  show: false,
+                  textStyle: { color: "#FFFFFF" }
                 }
               },
               nameMap: nameMap
