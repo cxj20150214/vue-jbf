@@ -37,6 +37,7 @@
             class="ccbSelect"
             v-model="valueSelect"
             placeholder="请选择"
+            @change="getJGH"
           >
             <el-option
               v-for="item in options"
@@ -77,10 +78,7 @@
       <div class="mod2 mod2_1">
         <div class="titleBox">
           <img src="../../assets/img/sj1.png" alt />
-          <p class="title">
-            准入评级拒件分布
-            {{ province }}
-          </p>
+          <p class="title">准入评级拒件分布</p>
         </div>
         <div class="zrBox">
           <div class="zrPie" id="zrPie"></div>
@@ -146,7 +144,7 @@
         <div class="bg">
           <div class="ditu" id="ditu1"></div>
           <!-- <div class="ditu" id="zxt"></div> -->
-          <p class="title">全国风险预警大数据统计图</p>
+          <p class="title">{{ province }}{{ dataType }}大数据统计</p>
         </div>
       </div>
       <div class="modBox2">
@@ -191,6 +189,7 @@
     </div>
     <div class="box3">
       <div class="modr1">
+        <p class="jiedian_tit">当前位置：{{ province + selectTime }}</p>
         <p class="title">风险预警处理率</p>
         <div class="yjBox">
           <div class="yjPie" id="yjPie"></div>
@@ -238,7 +237,7 @@
     </div>
     <div class="loginOut" @click="drawer = true"><</div>
     <el-drawer
-      size="20%"
+      size="80%"
       title="我是标题"
       :visible.sync="drawer"
       :with-header="false"
@@ -265,6 +264,11 @@ export default {
   name: "demo8",
   data() {
     return {
+      shuiqiuData: 0.8,
+      zhihanglist: ["福建支行", "广东支行", "浙江支行"],
+      box4PieData: ["总数", "完成数", "完成率(%)"],
+      dataType: "准入评级",
+      selectTime: "当日",
       options: [
         {
           value: "选项1",
@@ -276,11 +280,11 @@ export default {
         },
         {
           value: "选项3",
-          label: "泉州"
+          label: "浙江"
         }
       ],
       valueSelect: "全国",
-      province: "",
+      province: "全国",
       shows: 3,
       showXJ: 1,
       showDate: 1,
@@ -537,236 +541,78 @@ export default {
     }
   },
   methods: {
+    // 获取下拉框机构号和名称
+    getJGH(val) {
+      console.log(val);
+      let obj = {};
+      obj = this.options.find(item => {
+        return item.value === val;
+      });
+      let getLabel = "";
+      getLabel = obj.label;
+      this.province = getLabel;
+    },
     // 当月 当日 当年
     clickDR() {
       this.showDate = 1;
+      this.selectTime = "当日";
     },
     clickDY() {
       this.showDate = 2;
+      this.selectTime = "当月";
     },
     clickDN() {
       this.showDate = 3;
+      this.selectTime = "今年";
     },
     // 预警 存量 准入 巡检  切换
     clickYJ() {
       this.shows = 1;
+      this.dataType = "风险预警";
+      this.box4PieData = ["总数", "处理数", "处理率(%)"];
     },
     clickCL() {
       this.shows = 2;
-      this.zsData = [
-        1100,
-        900,
-        680,
-        560,
-        455,
-        543,
-        432,
-        410,
-        295,
-        360,
-        380,
-        320,
-        211,
-        201,
-        150,
-        242,
-        132,
-        120,
-        105,
-        101,
-        92,
-        72,
-        63,
-        47,
-        25,
-        16,
-        12,
-        8
-      ];
-      this.wclData = [
-        1100,
-        1000,
-        780,
-        560,
-        355,
-        443,
-        232,
-        410,
-        295,
-        360,
-        380,
-        320,
-        181,
-        101,
-        150,
-        342,
-        132,
-        120,
-        75,
-        101,
-        52,
-        72,
-        63,
-        47,
-        25,
-        16,
-        12,
-        8
-      ];
-      this.wclvData = [
-        6.1,
-        3.3,
-        5.97,
-        6.22,
-        4.28,
-        4.9,
-        3.59,
-        3.17,
-        3.92,
-        3.28,
-        3,
-        4.99,
-        3.67,
-        2.92,
-        1.58,
-        1.8,
-        2.99,
-        1.67,
-        1.3,
-        1.28,
-        1,
-        1.99,
-        1.27,
-        1.92,
-        1.28,
-        1,
-        0.99,
-        0.67
-      ];
+      this.dataType = "存量评级";
+      this.box4PieData = ["总数", "完成数", "完成率(%)"];
     },
     clickZR() {
       this.shows = 3;
-      this.zsData = [
-        1100,
-        950,
-        780,
-        560,
-        555,
-        543,
-        432,
-        410,
-        395,
-        360,
-        340,
-        220,
-        211,
-        201,
-        150,
-        142,
-        132,
-        120,
-        105,
-        101,
-        92,
-        82,
-        63,
-        40,
-        35,
-        26,
-        12,
-        8
-      ];
-      this.wclData = [
-        1100,
-        950,
-        780,
-        560,
-        555,
-        543,
-        432,
-        410,
-        395,
-        360,
-        340,
-        220,
-        211,
-        201,
-        150,
-        142,
-        132,
-        120,
-        105,
-        101,
-        92,
-        82,
-        63,
-        40,
-        35,
-        26,
-        12,
-        8
-      ];
-      this.wclvData = [
-        6.1,
-        5.3,
-        4.67,
-        4.92,
-        3.58,
-        3.6,
-        3.99,
-        3.67,
-        3.92,
-        3.58,
-        3,
-        3.99,
-        3.67,
-        4.92,
-        3.58,
-        2.8,
-        2.99,
-        2.67,
-        1.92,
-        1.58,
-        1,
-        1.99,
-        1.67,
-        1.92,
-        1.58,
-        1,
-        1.99,
-        1.67
-      ];
+      this.dataType = "准入评级";
+      this.box4PieData = ["总数", "通过数", "通过率(%)"];
     },
     clickXJ() {
       this.shows = 4;
+      this.dataType = "巡检";
+      this.box4PieData = ["总数", "通过数", "通过率(%)"];
     },
     // 测试点击监听改变图表
-    PieClick1(value) {
-      if (value === undefined) {
-        this.province = "";
-        this.zrData = [
-          {
-            name: "征信类占比",
-            value: "40000"
-          },
-          {
-            name: "黑名单类占比",
-            value: "23000"
-          },
-          {
-            name: "内部数据名单类",
-            value: "25000"
-          },
-          {
-            name: "外部数据名单类",
-            value: "10000"
-          }
-        ];
-      }
-    },
+    // PieClick1(value) {
+    //   if (value === undefined) {
+    //     this.province = "";
+    //     this.zrData = [
+    //       {
+    //         name: "征信类占比",
+    //         value: "40000"
+    //       },
+    //       {
+    //         name: "黑名单类占比",
+    //         value: "23000"
+    //       },
+    //       {
+    //         name: "内部数据名单类",
+    //         value: "25000"
+    //       },
+    //       {
+    //         name: "外部数据名单类",
+    //         value: "10000"
+    //       }
+    //     ];
+    //   }
+    // },
     PieClick(value) {
-      this.province = "（" + value + "）";
-      if (value === "福建") {
+      this.province = value.name;
+      if (value.name === "福建") {
         this.zrData = [
           {
             name: "征信类占比",
@@ -786,7 +632,7 @@ export default {
           }
         ];
       }
-      if (value === "新疆") {
+      if (value === "浙江") {
         this.zrData = [
           {
             name: "征信类占比",
@@ -1018,13 +864,13 @@ export default {
       // 省份点击联动
       let _that = this;
       dituJB1.on("click", function(param) {
-        _that.PieClick(param.name);
+        _that.PieClick(param);
         console.log(param);
       });
-      dituJB1.getZr().on("click", res => {
-        // 点击空白处
-        _that.PieClick1(res.target);
-      });
+      // dituJB1.getZr().on("click", res => {
+      //   // 点击空白处
+      //   _that.PieClick1(res.target);
+      // });
       var mapName = "china";
       var dataJB = [
         {
@@ -1082,7 +928,7 @@ export default {
         },
         {
           name: "厦门",
-          value: 116
+          value: 300
         },
         {
           name: "江西",
@@ -1910,32 +1756,18 @@ export default {
           formatter: function(params) {
             if (typeof params.value[2] == "undefined") {
               var toolTiphtml = "";
-              for (var i = 0; i < toolTipData.length; i++) {
-                if (params.name == toolTipData[i].name) {
-                  toolTiphtml += toolTipData[i].name + ":<br>";
-                  for (var j = 0; j < toolTipData[i].value.length; j++) {
-                    toolTiphtml +=
-                      toolTipData[i].value[j].name +
-                      ":" +
-                      toolTipData[i].value[j].value +
-                      "<br>";
-                  }
+              for (var i = 0; i < dataJB.length; i++) {
+                if (params.name == dataJB[i].name) {
+                  toolTiphtml += dataJB[i].name + ":" + dataJB[i].value;
                 }
               }
               // console.log(convertData(data))
               return toolTiphtml;
             } else {
               var toolTiphtml = "";
-              for (var i = 0; i < toolTipData.length; i++) {
-                if (params.name == toolTipData[i].name) {
-                  toolTiphtml += toolTipData[i].name + ":<br>";
-                  for (var j = 0; j < toolTipData[i].value.length; j++) {
-                    toolTiphtml +=
-                      toolTipData[i].value[j].name +
-                      ":" +
-                      toolTipData[i].value[j].value +
-                      "<br>";
-                  }
+              for (var i = 0; i < dataJB.length; i++) {
+                if (params.name == dataJB[i].name) {
+                  toolTiphtml += dataJB[i].name + ":" + dataJB[i].value;
                 }
               }
               // console.log(toolTiphtml);
@@ -2387,24 +2219,16 @@ export default {
       let fontSize = 100 * (clientWidth / 1920);
       return res * fontSize;
     },
-    // 饼图
-    piedemo() {
-      let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
-      let Pie2 = this.$echarts.init(document.getElementById("Pie2"));
-      let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
-      let zrPie = this.$echarts.init(document.getElementById("zrPie")); //准入饼图
-      let sqPie = this.$echarts.init(document.getElementById("sqPie")); //水球图
-      let ybpPie = this.$echarts.init(document.getElementById("ybpPie")); //仪表盘
-      let yjPie = this.$echarts.init(document.getElementById("yjPie")); //预警柱状图
+    // box4Pie单独请求
+    box4PieDemo() {
       let box4Pie = this.$echarts.init(document.getElementById("box4Pie")); //预警柱状图
-      // 支行柱状图+折线图
-
+      var that = this;
       box4Pie.setOption({
         grid: {
           x: 50,
           x2: 50,
           top: "15%",
-          bottom: "20%" //也可设置left和right设置距离来控制图表的大小
+          bottom: "22%" //也可设置left和right设置距离来控制图表的大小
         },
         tooltip: {
           trigger: "axis",
@@ -2427,39 +2251,14 @@ export default {
           }
         },
         legend: {
-          data: ["总数", "完成数", "完成率(%)"],
+          data: that.box4PieData,
           top: "0%",
           textStyle: {
             color: "#fff"
           }
         },
         xAxis: {
-          data: [
-            "福建支行",
-            "江西支行",
-            "浙江支行",
-            "江苏支行",
-            "湖北支行",
-            "广东支行",
-            "福建支行",
-            "江西支行",
-            "浙江支行",
-            "江苏支行",
-            "湖北支行",
-            "广东支行",
-            "福建支行",
-            "江西支行",
-            "浙江支行",
-            "江苏支行",
-            "湖北支行",
-            "广东支行",
-            "福建支行",
-            "江西支行",
-            "浙江支行",
-            "江苏支行",
-            "湖北支行",
-            "广东支行"
-          ],
+          data: this.zhihanglist,
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
@@ -2498,7 +2297,8 @@ export default {
             axisLabel: {
               show: true,
               textStyle: {
-                color: "#fff"
+                color: "#fff",
+                fontSize: this.setFontsize(0.12)
               }
             }
           },
@@ -2522,7 +2322,8 @@ export default {
               show: true,
               formatter: "{value} %", //右侧Y轴文字显示
               textStyle: {
-                color: "#fff"
+                color: "#fff",
+                fontSize: this.setFontsize(0.12)
               }
             }
           },
@@ -2604,6 +2405,219 @@ export default {
           },
           {
             name: "完成率(%)",
+            type: "line",
+            yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
+            smooth: true, //平滑曲线显示
+            showAllSymbol: true, //显示所有图形。
+            symbol: "circle", //标记的图形为实心圆
+            symbolSize: this.setFontsize(0.1), //标记的大小
+            itemStyle: {
+              //折线拐点标志的样式
+              color: "#FFCC67"
+            },
+            lineStyle: {
+              color: "#FFCC67"
+            },
+            data: this.wclvData,
+            valueType: "percent"
+          }
+        ]
+      });
+    },
+    // 饼图
+    piedemo() {
+      let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
+      let Pie2 = this.$echarts.init(document.getElementById("Pie2"));
+      let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
+      let zrPie = this.$echarts.init(document.getElementById("zrPie")); //准入饼图
+      let sqPie = this.$echarts.init(document.getElementById("sqPie")); //水球图
+      let ybpPie = this.$echarts.init(document.getElementById("ybpPie")); //仪表盘
+      let yjPie = this.$echarts.init(document.getElementById("yjPie")); //预警柱状图
+      let box4Pie = this.$echarts.init(document.getElementById("box4Pie")); //预警柱状图
+      // 支行柱状图+折线图
+      var that = this;
+      box4Pie.setOption({
+        grid: {
+          x: 50,
+          x2: 50,
+          top: "15%",
+          bottom: "22%" //也可设置left和right设置距离来控制图表的大小
+        },
+        tooltip: {
+          trigger: "axis",
+          formatter: function(params) {
+            var html = params[0].name + "<br>";
+            for (var i = 0; i < params.length; i++) {
+              html +=
+                '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:' +
+                params[i].color +
+                ';"></span>';
+              html += params[i].seriesName + ":" + params[i].value + "<br>";
+            }
+            return html;
+          }
+        },
+        axisPointer: {
+          type: "shadow",
+          label: {
+            show: true
+          }
+        },
+        legend: {
+          data: that.box4PieData,
+          top: "0%",
+          textStyle: {
+            color: "#fff"
+          }
+        },
+        xAxis: {
+          data: this.zhihanglist,
+          axisLine: {
+            show: true, //隐藏X轴轴线
+            lineStyle: {
+              color: "#fff"
+            }
+          },
+          axisTick: {
+            show: true //隐藏X轴刻度
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#fff" //X轴文字颜色
+            }
+          }
+        },
+        yAxis: [
+          {
+            type: "value",
+            name: "数量",
+            nameTextStyle: {
+              color: "#fff"
+            },
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: true
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: "#fff"
+              }
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: "#fff",
+                fontSize: this.setFontsize(0.12)
+              }
+            }
+          },
+          {
+            type: "value",
+            name: "比率",
+            nameTextStyle: {
+              color: "#fff"
+            },
+            position: "right",
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: true
+            },
+            axisLine: {
+              show: true
+            },
+            axisLabel: {
+              show: true,
+              formatter: "{value} %", //右侧Y轴文字显示
+              textStyle: {
+                color: "#fff",
+                fontSize: this.setFontsize(0.12)
+              }
+            }
+          },
+          {
+            type: "value",
+            gridIndex: 0,
+            min: 50,
+            max: 100,
+            splitNumber: 8,
+            splitLine: {
+              show: false
+            },
+            axisLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            axisLabel: {
+              show: false
+            },
+            splitArea: {
+              show: true,
+              areaStyle: {
+                color: ["rgba(250,250,250,0.0)", "rgba(250,250,250,0.05)"]
+              }
+            }
+          }
+        ],
+        dataZoom: [
+          {
+            show: true,
+            height: this.setFontsize(0.18),
+            xAxisIndex: [0],
+            bottom: "0%",
+            start: 0,
+            end: 100,
+            handleIcon:
+              "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
+            handleSize: "110%",
+            handleStyle: {
+              color: "#d3dee5"
+            },
+            textStyle: {
+              color: "#fff"
+            },
+            borderColor: "#90979c"
+          },
+          {
+            type: "inside",
+            show: true,
+            height: 15,
+            start: 1,
+            end: 35
+          }
+        ],
+        series: [
+          {
+            name: this.box4PieData[0],
+            type: "bar",
+            barWidth: this.setFontsize(0.15),
+            itemStyle: {
+              normal: {
+                color: "#388BFF"
+              }
+            },
+            data: this.zsData
+          },
+          {
+            name: this.box4PieData[1],
+            type: "bar",
+            barWidth: this.setFontsize(0.15),
+            itemStyle: {
+              normal: {
+                color: "#F6931C"
+              }
+            },
+            data: this.wclData
+          },
+          {
+            name: this.box4PieData[2],
             type: "line",
             yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
             smooth: true, //平滑曲线显示
@@ -3223,14 +3237,14 @@ export default {
             type: "liquidFill",
             radius: "65%",
             center: ["50%", "40%"],
-            data: [0.5, 0.5, 0.5], // data个数代表波浪数
+            data: [this.shuiqiuData, this.shuiqiuData, this.shuiqiuData], // data个数代表波浪数
             backgroundStyle: {
               borderWidth: 1,
               color: "rgb(255,0,255,0.1)"
             },
             label: {
               normal: {
-                formatter: (0.5 * 100).toFixed(2) + "%",
+                formatter: (this.shuiqiuData * 100).toFixed(2) + "%",
                 textStyle: {
                   fontSize: this.setFontsize(0.25)
                 }
@@ -3925,7 +3939,7 @@ export default {
           }
         },
         legend: {
-          top: "8%",
+          top: "6%",
           data: ["预警总数", "处理数"],
           textStyle: {
             color: "#fff",
@@ -3934,7 +3948,7 @@ export default {
         },
         grid: {
           //图表的位置
-          top: "20%",
+          top: "22%",
           left: "3%",
           right: "4%",
           bottom: "5%",
@@ -4124,9 +4138,12 @@ export default {
     };
   },
   watch: {
+    box4PieData() {
+      this.box4PieDemo();
+    },
     zrData(val) {
       //监听数据发生改变 刷新图表数据
-      const loading = this.$loading({
+      var loading = this.$loading({
         lock: true,
         text: "Loading",
         spinner: "el-icon-loading",
@@ -4156,6 +4173,38 @@ export default {
   created() {
     this.getData();
     // console.log(this.setFontsize(0.3), "1111");
+
+    // 数据解析备用
+    // box4Pie数据
+    var rows = [
+      {
+        IND: "北京,560,340"
+      },
+      {
+        IND: "天津,539,260"
+      }
+    ];
+    var newRow = [];
+    rows.map(item => {
+      var newData = item.IND;
+      var result = newData.split(",");
+      newRow.push({
+        name: result[0],
+        value1: result[1],
+        value2: result[2]
+      });
+    });
+    var itemName = [];
+    var itemValue1 = [];
+    var itemValue2 = [];
+    newRow.map(item => {
+      itemName.push(item.name);
+      itemValue1.push(parseInt(item.value1));
+      itemValue2.push(parseInt(item.value2));
+    });
+    console.log(itemName);
+    console.log(itemValue1);
+    console.log(itemValue2);
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -4167,6 +4216,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 // 新增css
+.xxxl {
+  height: 80%;
+  overflow: auto;
+}
+.jiedian_tit {
+  position: absolute;
+  left: -9%;
+  font-weight: 700;
+  top: 5%;
+  color: #fff;
+  font-size: 16px;
+}
 .ccbSelect {
   width: 60%;
   height: 50%;
@@ -4369,6 +4430,7 @@ ul {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  user-select: none;
   display: flex;
   flex-direction: row;
   background-image: url("../../assets/img/demo2bg.jpg");
@@ -5115,6 +5177,32 @@ ul {
   }
   .clBox .jdt .jdt_list {
     margin-top: 0px;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .bg .box3 .modr3 .titleBox .title_all {
+    margin-left: 3%;
+  }
+  .bg .box3 .modr1 .yjBox {
+    height: 170%;
+  }
+  .sq_txt {
+    left: 18%;
+  }
+  .clBox .sqPie {
+    width: 36%;
+  }
+  .clBox .jdt {
+    width: 64%;
+  }
+  .box4 .box4Pie {
+    width: 94%;
+  }
+  .box4 .box4_tab {
+    width: 6%;
+  }
+  .box4 .title_all {
+    font-size: 12px;
   }
 }
 </style>
