@@ -53,7 +53,7 @@
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
-              <p class="p1">1090</p>
+              <p class="p1">{{ this.zrpjData1 }}</p>
               <span>进件数</span>
             </div>
             <img class="jt" src="../../assets/img/jt1.png" alt />
@@ -61,7 +61,7 @@
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
-              <p class="p2">165</p>
+              <p class="p2">{{ this.zrpjData2 }}</p>
               <span>通过数</span>
             </div>
             <img class="jt" src="../../assets/img/jt1.png" alt />
@@ -69,7 +69,7 @@
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
             <div class="txt">
-              <p class="p3">40%</p>
+              <p class="p3">{{ this.zrpjData3 }}%</p>
               <span>通过率</span>
             </div>
           </li>
@@ -100,7 +100,7 @@
                   class="jdt_box"
                   :text-inside="true"
                   :stroke-width="12"
-                  :percentage="75"
+                  :percentage="this.fxjData"
                   status="exception"
                 ></el-progress>
               </li>
@@ -110,7 +110,7 @@
                   class="jdt_box "
                   :text-inside="true"
                   :stroke-width="12"
-                  :percentage="50"
+                  :percentage="this.jsjData"
                   status="warning"
                 ></el-progress>
               </li>
@@ -120,7 +120,7 @@
                   class="jdt_box jdt_box_1"
                   :text-inside="true"
                   :stroke-width="12"
-                  :percentage="60"
+                  :percentage="this.yjjData"
                   status="success"
                 ></el-progress>
               </li>
@@ -130,7 +130,7 @@
                   class="jdt_box"
                   :text-inside="true"
                   :stroke-width="12"
-                  :percentage="70"
+                  :percentage="this.gzjData"
                 ></el-progress>
               </li>
             </ul>
@@ -140,10 +140,8 @@
     </div>
     <div class="box2">
       <div class="modBox1">
-        <!-- <img class="diqiuyi" src="../../assets/img/diqiuyi.png" alt /> -->
         <div class="bg">
           <div class="ditu" id="ditu1"></div>
-          <!-- <div class="ditu" id="zxt"></div> -->
           <p class="title">{{ province }}{{ dataType }}大数据统计</p>
         </div>
       </div>
@@ -151,40 +149,6 @@
         <div class="box1">
           <div class="ybpPie" id="ybpPie"></div>
         </div>
-        <!-- <div class="box1">
-          <div class="titleBox">
-            <img src="../../assets/img/sj.png" alt />
-            <p class="title">风险预警排行TOP10</p>
-          </div>
-          <vue-seamless-scroll
-            :class-option="optionscroll1"
-            :data="listData1"
-            class="seamless-warp1"
-          >
-            <ul class="itemhua">
-              <li v-for="item in listData1">
-                <div class="tit">裕农通-福建省分行</div>
-                <div class="txt">
-                  <div class="paihan">NO {{item.no}}</div>
-                  <div class="boxP">
-                    <div class="box">
-                      <p class="t1">预警总数</p>
-                      <p class="t2">{{item.data1}}</p>
-                    </div>
-                    <div class="box">
-                      <p class="t1">已处理数</p>
-                      <p class="t2">{{item.data2}}</p>
-                    </div>
-                    <div class="box">
-                      <p class="t1">处理率</p>
-                      <p class="t2">{{item.data3}}</p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </vue-seamless-scroll>
-        </div> -->
       </div>
     </div>
     <div class="box3">
@@ -210,10 +174,9 @@
             巡检总数
           </p>
           <p :class="{ active: showXJ == 2 }" class="title_cll" @click="cll">
-            处理率
+            巡检完成率
           </p>
         </div>
-        <!-- <div class="zhuzhuangtu" id="Pie3"></div> -->
         <div class="bingtu" id="Pie1" v-show="chuliliang"></div>
         <div class="bingtu" id="Pie4" v-show="chulilv"></div>
       </div>
@@ -264,38 +227,93 @@ export default {
   name: "demo8",
   data() {
     return {
-      shuiqiuData: 0.8,
-      zhihanglist: ["福建支行", "广东支行", "浙江支行","福建支行", "广东支行", "浙江支行","福建支行", "广东支行", "浙江支行"],
-      box4PieData: ["进件数", "通过数", "准入通过率(%)"],
-      dataType: "准入评级",
-      selectTime: "当日",
-      options: [
+      // 页面渲染
+      zrpjData1: 0, //准入评级
+      zrpjData2: 0,
+      zrpjData3: 0,
+      zrData: [
+        //拒件分布
         {
-          value: "选项1",
-          label: "全国"
+          name: "征信类",
+          value: "0"
         },
         {
-          value: "选项2",
-          label: "福建"
+          name: "黑名单类",
+          value: "0"
         },
         {
-          value: "选项3",
-          label: "浙江"
+          name: "内部数据名单类",
+          value: "0"
+        },
+        {
+          name: "外部数据名单类",
+          value: "0"
         }
       ],
-      valueSelect: "全国",
-      province: "全国",
-      shows: 3,
-      showXJ: 1,
-      showDate: 1,
-      search: "",
-      drawer: false,
-      listArr: [], //城市json
-      nowDate: "", // 当前日期
-      nowTime: "", // 当前时间
-      nowWeek: "", // 当前星期
-      chuliliang: true,
-      chulilv: false,
+      shuiqiuData: 0.0, //存量评级
+      fxjData: 0,
+      jsjData: 0,
+      yjjData: 0,
+      gzjData: 0,
+      zrtglData: 0, //仪表盘
+      cldxlData: 0,
+      yjczlData: 0,
+      xjtglData: 0,
+      fxyjData: [
+        //风险预警
+        {
+          name: "风险级",
+          value: 0,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 0,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 0,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 0,
+          color: "#409EFF"
+        }
+      ],
+      fxczData1: [0, 0, 0, 0], //风险处置
+      fxczData2: [0, 0, 0, 0],
+      dqxjData1: [
+        //定期巡检
+        {
+          value: 0,
+          name: "远程巡检"
+        },
+        {
+          value: 0,
+          name: "现场巡检"
+        },
+        {
+          value: 0,
+          name: "专项巡检"
+        }
+      ],
+      ycxjData: 0,
+      xcxjData: 0,
+      zxxjData: 0,
+      zhihanglist: [
+        //box4pie数据
+        "福建分行",
+        "广东分行",
+        "浙江分行",
+        "福建分行",
+        "广东分行",
+        "浙江分行",
+        "福建分行",
+        "广东分行",
+        "浙江分行"
+      ],
       zsData: [
         1100,
         950,
@@ -386,160 +404,39 @@ export default {
         1.99,
         1.67
       ],
-      zrData: [
+      //默认参数
+      box4PieData: ["进件数", "通过数", "准入通过率(%)"],
+      dataType: "准入评级",
+      selectTime: "当日",
+      options: [
         {
-          name: "征信类",
-          value: "40000"
+          value: "选项1",
+          label: "全国"
         },
         {
-          name: "黑名单类",
-          value: "13000"
+          value: "选项2",
+          label: "福建"
         },
         {
-          name: "内部数据名单类",
-          value: "60000"
-        },
-        {
-          name: "外部数据名单类",
-          value: "50000"
+          value: "选项3",
+          label: "浙江"
         }
       ],
-      listData: [
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%"
-        }
-      ],
-      listData1: [
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "1",
-          name: "福建省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "2",
-          name: "浙江省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "3",
-          name: "江西省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "4",
-          name: "黑龙江省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "5",
-          name: "辽宁省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "6",
-          name: "云南省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "7",
-          name: "江苏省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "8",
-          name: "重庆省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "9",
-          name: "天津省分行"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "10",
-          name: "四川省分行"
-        }
-      ]
+      valueSelect: "全国",
+      province: "全国",
+      shows: 3,
+      showXJ: 1,
+      showDate: 1,
+      drawer: false,
+      listArr: [], //城市json
+      nowDate: "", // 当前日期
+      nowTime: "", // 当前时间
+      nowWeek: "", // 当前星期
+      chuliliang: true,
+      chulilv: false
     };
   },
-  computed: {
-    //过滤方法
-    itemss: function() {
-      var _search = this.search;
-      if (_search) {
-        //不区分大小写处理
-        var reg = new RegExp(_search, "ig");
-        //es6 filter过滤匹配，有则返回当前，无则返回所有
-        return this.listData1.filter(function(e) {
-          //匹配所有字段
-          return Object.keys(e).some(function(key) {
-            return e[key].match(reg);
-          });
-          //匹配某个字段
-          //  return e.name.match(reg);
-        });
-      }
-      return this.listData1;
-      console.log(this.listData1);
-    },
-    // optionscroll() {
-    //   return {
-    //     // hoverStop: false,
-    //     step: 0.2
-    //   };
-    // },
-    optionscroll1() {
-      return {
-        // hoverStop: false,
-        step: 0.4,
-        direction: 2,
-        limitMoveNum: 2
-      };
-    }
-  },
+  computed: {},
   methods: {
     // 获取下拉框机构号和名称
     getJGH(val) {
@@ -569,22 +466,23 @@ export default {
     clickYJ() {
       this.shows = 1;
       this.dataType = "风险预警";
-      this.box4PieData = ["总数", "处理数", "处理率(%)"];
+      this.box4PieData = ["预警数", "处置数", "预警处置率(%)"];
+      this.box4PieDemo();
     },
     clickCL() {
       this.shows = 2;
       this.dataType = "存量评级";
-      this.box4PieData = ["总数", "完成数", "完成率(%)"];
+      this.box4PieData = ["服务点数", "中高风险服务点数", "占比(%)"];
     },
     clickZR() {
       this.shows = 3;
       this.dataType = "准入评级";
-      this.box4PieData = ["总数", "通过数", "通过率(%)"];
+      this.box4PieData = ["进件数", "通过数", "准入通过率(%)"];
     },
     clickXJ() {
       this.shows = 4;
       this.dataType = "巡检";
-      this.box4PieData = ["总数", "通过数", "通过率(%)"];
+      this.box4PieData = ["服务点数", "巡检通过服务点数", "巡检通过率(%)"];
     },
     // 测试点击监听改变图表
     // PieClick1(value) {
@@ -612,59 +510,20 @@ export default {
     // },
     PieClick(value) {
       this.province = value.name;
-      if (value.name === "福建") {
-        this.zrData = [
-          {
-            name: "征信类占比",
-            value: "10000"
-          },
-          {
-            name: "黑名单类占比",
-            value: "13000"
-          },
-          {
-            name: "内部数据名单类",
-            value: "30000"
-          },
-          {
-            name: "外部数据名单类",
-            value: "20000"
-          }
-        ];
-      }
-      if (value === "浙江") {
-        this.zrData = [
-          {
-            name: "征信类占比",
-            value: "70000"
-          },
-          {
-            name: "黑名单类占比",
-            value: "18000"
-          },
-          {
-            name: "内部数据名单类",
-            value: "25000"
-          },
-          {
-            name: "外部数据名单类",
-            value: "10000"
-          }
-        ];
-      }
+      alert(value.id);
     },
     // 处理量 处理率
     clAll() {
       this.chuliliang = true;
       this.chulilv = false;
-      this.piedemo();
+      this.xunJianPie();
       this.showXJ = 1;
     },
     cll() {
       this.showXJ = 2;
       this.chuliliang = false;
       this.chulilv = true;
-      this.piedemo();
+      this.xunJianPie();
     },
     // 当前日期
     currentTime() {
@@ -734,138 +593,13 @@ export default {
       }
     },
     DrawMap() {
-      // 中间部分折线图
-      // let zxt = this.$echarts.init(document.getElementById("zxt"));
-      // zxt.setOption({
-      //   grid: {
-      //     left: "5%",
-      //     right: "10%",
-      //     top: "20%",
-      //     bottom: "15%",
-      //     containLabel: true
-      //   },
-      //   tooltip: {
-      //     show: true,
-      //     trigger: "item"
-      //   },
-      //   xAxis: [
-      //     {
-      //       type: "category",
-      //       boundaryGap: false,
-      //       axisLabel: {
-      //         color: "#30eee9"
-      //       },
-      //       axisLine: {
-      //         show: true,
-      //         lineStyle: {
-      //           color: "#397cbc"
-      //         }
-      //       },
-      //       axisTick: {
-      //         show: false
-      //       },
-      //       splitLine: {
-      //         show: false,
-      //         lineStyle: {
-      //           color: "#195384"
-      //         }
-      //       },
-      //       data: [
-      //         "1月",
-      //         "2月",
-      //         "3月",
-      //         "4月",
-      //         "5月",
-      //         "6月",
-      //         "7月",
-      //         "8月",
-      //         "9月",
-      //         "10月",
-      //         "11月",
-      //         "12月"
-      //       ]
-      //     }
-      //   ],
-      //   yAxis: [
-      //     {
-      //       type: "value",
-      //       name: "",
-      //       min: 0,
-      //       max: 1000,
-      //       axisLabel: {
-      //         formatter: "{value}",
-      //         textStyle: {
-      //           color: "#2ad1d2"
-      //         }
-      //       },
-      //       axisLine: {
-      //         lineStyle: {
-      //           color: "#27b4c2"
-      //         }
-      //       },
-      //       axisTick: {
-      //         show: false
-      //       },
-      //       splitLine: {
-      //         show: true,
-      //         lineStyle: {
-      //           color: "#11366e"
-      //         }
-      //       }
-      //     }
-      //   ],
-      //   series: [
-      //     {
-      //       name: "低预警",
-      //       type: "line",
-      //       stack: "总量",
-      //       symbol: "circle",
-      //       symbolSize: 8,
-      //       itemStyle: {
-      //         normal: {
-      //           color: "#0092f6",
-      //           lineStyle: {
-      //             color: "#0092f6",
-      //             width: 1
-      //           }
-      //         }
-      //       },
-      //       markPoint: {
-      //         itemStyle: {
-      //           normal: {
-      //             color: "red"
-      //           }
-      //         }
-      //       },
-      //       data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
-      //     },
-      //     {
-      //       name: "高预警",
-      //       type: "line",
-      //       stack: "总量",
-      //       symbol: "circle",
-      //       symbolSize: 8,
-
-      //       itemStyle: {
-      //         normal: {
-      //           color: "#00d4c7",
-      //           lineStyle: {
-      //             color: "#00d4c7",
-      //             width: 1
-      //           }
-      //         }
-      //       },
-      //       data: [220, 182, 191, 234, 290, 330, 310, 201, 154, 190, 330, 410]
-      //     }
-      //   ]
-      // });
       // 全国地图渐变
       let dituJB1 = this.$echarts.init(document.getElementById("ditu1"));
       // 省份点击联动
       let _that = this;
       dituJB1.on("click", function(param) {
-        _that.PieClick(param);
         console.log(param);
+        _that.PieClick(param.data);
       });
       // dituJB1.getZr().on("click", res => {
       //   // 点击空白处
@@ -924,7 +658,7 @@ export default {
         {
           name: "福建",
           value: 116,
-          id: 123456
+          id: 1111111
         },
         {
           name: "厦门",
@@ -1006,711 +740,43 @@ export default {
       var dataJB1 = [
         {
           name: "厦门",
-          value: 116
+          value: 116,
+          id: 2222222
         },
         {
           name: "深圳",
-          value: 116
+          value: 116,
+          id: 2222222
         },
         {
           name: "苏州",
-          value: 116
+          value: 116,
+          id: 2222222
         },
         {
           name: "大连",
-          value: 116
+          value: 116,
+          id: 2222222
         },
         {
           name: "青岛",
-          value: 116
+          value: 116,
+          id: 2222222
         },
         {
           name: "三峡",
-          value: 116
+          value: 116,
+          id: 2222222
         }
       ];
       var geoCoordMap = {
         厦门: [118.159101, 24.491196],
+        宁波: [121.622188, 29.871286],
         深圳: [114.062198, 22.549668],
         苏州: [120.678332, 31.321619],
         大连: [121.651314, 38.925283],
-        青岛: [120.473524, 36.105373],
-        三峡: [111.284501, 30.708209]
+        青岛: [120.473524, 36.105373]
       };
-      var toolTipData = [
-        {
-          name: "北京",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "天津",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "河北",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "山西",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "内蒙古",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "辽宁",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "吉林",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "黑龙江",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "上海",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "江苏",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "浙江",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "安徽",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "福建",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "江西",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "山东",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "河南",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "湖北",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "湖南",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "重庆",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "四川",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "贵州",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "云南",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "西藏",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "陕西",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "甘肃",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "青海",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "宁夏",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "新疆",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "广东",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "广西",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "海南",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        },
-        {
-          name: "台湾",
-          value: [
-            {
-              name: "准入",
-              value: 95
-            },
-            {
-              name: "存量",
-              value: 82
-            },
-            {
-              name: "预警",
-              value: 82
-            },
-            {
-              name: "巡检",
-              value: 82
-            }
-          ]
-        }
-      ];
       /*获取地图数据*/
       var mapFeatures = this.$echarts.getMap(mapName).geoJson.features;
       mapFeatures.forEach(function(v) {
@@ -1744,7 +810,8 @@ export default {
           if (geoCoord) {
             res.push({
               name: dataJB1[i].name,
-              value: geoCoord.concat(dataJB1[i].value)
+              value: geoCoord.concat(dataJB1[i].value),
+              id: dataJB1[i].id
             });
           }
         }
@@ -1761,7 +828,6 @@ export default {
                   toolTiphtml += dataJB[i].name + ":" + dataJB[i].value;
                 }
               }
-              // console.log(convertData(data))
               return toolTiphtml;
             } else {
               var toolTiphtml = "";
@@ -1781,11 +847,12 @@ export default {
           itemWidth: this.setFontsize(0.2), //图形的宽度，即长条的宽度。
           itemHeight: this.setFontsize(0.9),
           textStyle: {
-            color: "#fff"
+            color: "#fff",
+            show: false
           },
           show: true,
           min: 0,
-          max: 200,
+          max: 0,
           left: "left",
           top: "bottom",
           text: ["高", "低"], // 文本，默认为数值文本
@@ -1880,333 +947,6 @@ export default {
           }
         ]
       });
-      // 渐变地图
-      var data = [
-        // {
-        //   name: "重庆",
-        //   value: 10
-        // },
-        // {
-        //   name: "云南",
-        //   value: 5
-        // },
-        // {
-        //   name: "辽宁",
-        //   value: 5
-        // },
-        {
-          name: "黑龙江",
-          value: 10
-        },
-        {
-          name: "广西",
-          value: 5
-        },
-        {
-          name: "甘肃",
-          value: 5
-        },
-        {
-          name: "山西",
-          value: 5
-        },
-        {
-          name: "陕西",
-          value: 5
-        },
-        {
-          name: "吉林",
-          value: 5
-        },
-        {
-          name: "贵州",
-          value: 10
-        },
-        {
-          name: "新疆",
-          value: 0
-        },
-        {
-          name: "青海",
-          value: 0
-        },
-        {
-          name: "西藏",
-          value: 5
-        },
-        {
-          name: "四川",
-          value: 20
-        },
-        {
-          name: "宁夏",
-          value: 0
-        },
-        {
-          name: "海南",
-          value: 0
-        },
-        {
-          name: "台湾",
-          value: 0
-        },
-        {
-          name: "香港",
-          value: 30
-        },
-        {
-          name: "澳门",
-          value: 0
-        },
-        {
-          name: "上海",
-          value: 30
-        },
-        {
-          name: "安徽",
-          value: 20
-        },
-        {
-          name: "江苏",
-          value: 20
-        },
-        {
-          name: "浙江",
-          value: 30
-        },
-        {
-          name: "北京",
-          value: 30
-        },
-        {
-          name: "天津",
-          value: 20
-        },
-        {
-          name: "河北",
-          value: 10
-        },
-        {
-          name: "河南",
-          value: 10
-        },
-        {
-          name: "内蒙古",
-          value: 10
-        },
-        {
-          name: "湖南",
-          value: 20
-        },
-        {
-          name: "山东",
-          value: 10
-        },
-        {
-          name: "江西",
-          value: 20
-        },
-        {
-          name: "湖北",
-          value: 20
-        },
-        {
-          name: "福建",
-          value: 10
-        },
-        {
-          name: "广东",
-          value: 30
-        }
-      ];
-      // let dituJB = this.$echarts.init(document.getElementById("ditu"));
-      // dituJB.setOption({
-      //   color: ["", "#fc5353", "#f4fc6c", "#e68b55", "#9a68ff", "#ff60c5"],
-      //   /*地图上面的五大项颜色*/
-      //   tooltip: {
-      //     trigger: "item",
-      //     formatter: function(params) {
-      //       var MAP_VALUE_DIC = {
-      //         "0": "高级预警",
-      //         "10": "中级预警",
-      //         "20": "初级预警"
-      //       };
-      //       if (params.seriesType) {
-      //         return params.name + ": " + MAP_VALUE_DIC[params.data.value];
-      //       } else {
-      //         return params.name;
-      //       }
-      //     }
-      //   },
-
-      //   visualMap: {
-      //     type: "piecewise",
-      //     splitNumber: 3,
-      //     pieces: [
-      //       {
-      //         min: 20,
-      //         label: "高级预警(20以上)",
-      //         color: "#7F1100"
-      //       },
-      //       {
-      //         max: 20,
-      //         min: 10,
-      //         label: "中级预警(10-20个)",
-      //         color: "#FF5428"
-      //       },
-      //       {
-      //         max: 10,
-      //         min: 1,
-      //         label: "初级预警(0-10个)",
-      //         color: "#FF8C71"
-      //       },
-      //       {
-      //         value: 0,
-      //         label: "无风险(0个)",
-      //         color: "#FFFFFF"
-      //       }
-      //     ],
-      //     textStyle: {
-      //       color: "#fff",
-      //       fontSize: this.setFontsize(0.16)
-      //     },
-      //     min: 0,
-      //     max: 20,
-      //     left: "left",
-      //     top: "bottom",
-      //     calculable: true,
-      //     show: true,
-      //     seriesIndex: 0
-      //   },
-      //   geo: {
-      //     map: "china",
-      //     zoom: 1.2,
-      //     layoutCenter: ["50%", "50%"],
-      //     layoutSize: "100%"
-      //   },
-      //   series: [
-      //     {
-      //       type: "map",
-      //       mapType: "china",
-      //       showLegendSymbol: false,
-      //       zoom: 1.2,
-      //       layoutCenter: ["50%", "50%"],
-      //       layoutSize: "100%",
-      //       label: {
-      //         normal: {
-      //           show: false,
-      //           /*是否城市名字*/
-      //           textStyle: {
-      //             color: "#fff"
-      //           }
-      //         },
-      //         emphasis: {
-      //           show: false
-      //         }
-      //       },
-      //       itemStyle: {
-      //         normal: {
-      //           // borderColor: '#2a507a',//区域边框颜色
-      //           // borderWidth :1.5
-      //           // shadowBlur: 6,
-      //           // shadowColor: 'rgba(39,64,110,0.6)',/*地图内的阴影*/
-      //           // shadowOffsetY: 10,
-      //           // shadowOffsetx: 10
-      //         }
-      //       },
-      //       data: data
-      //     }
-      //   ]
-      // });
-      // let myChart8 = this.$echarts.init(document.getElementById("main"));
-      // console.log(
-      //   "最大value值",
-      //   this.max,
-      //   "\n",
-      //   "最小value值",
-      //   this.min,
-      //   "\n",
-      //   "城市数据",
-      //   this.listArr
-      // );
-      // myChart8.setOption({
-      //   title: {
-      //     top: 20,
-      //     bottom: 20,
-      //     subtext: "",
-      //     x: "center",
-      //     textStyle: {
-      //       color: "#ccc",
-      //       fontSize: this.setFontsize(0.24)
-      //     }
-      //   },
-
-      //   tooltip: {
-      //     trigger: "item",
-      //     formatter: "{b}<br/>{c} (个)"
-      //   },
-      //   geo: {
-      //     show: true,
-      //     map: "china",
-      //     zoom: 1.15,
-      //     label: {
-      //       normal: {
-      //         show: false
-      //       },
-      //       emphasis: {
-      //         show: false
-      //       }
-      //     },
-      //     roam: false,
-      //     itemStyle: {
-      //       normal: {
-      //         areaColor: "#031525",
-      //         borderColor: "#3B5077"
-      //       },
-      //       emphasis: {
-      //         areaColor: "#2B91B7"
-      //       }
-      //     }
-      //   },
-      //   series: [
-      //     {
-      //       type: "map",
-      //       map: "china",
-      //       zoom: 1.15,
-      //       label: {
-      //         normal: {
-      //           show: true,
-      //           textStyle: {
-      //             color: "#fff",
-      //             fontSize: this.setFontsize(0.12)
-      //           }
-      //         },
-      //         emphasis: {
-      //           textStyle: {
-      //             color: "#fff"
-      //           }
-      //         }
-      //       },
-      //       itemStyle: {
-      //         normal: {
-      //           label: {
-      //             show: true,
-      //             formatter: "{b}\n{c}"
-      //           },
-      //           borderColor: "#2ab8ff",
-      //           borderWidth: 1.5,
-      //           areaColor: "#12235c"
-      //         },
-      //         emphasis: {
-      //           areaColor: "#2AB8FF",
-      //           borderWidth: 0,
-      //           color: "green"
-      //         }
-      //       },
-      //       data: this.listArr
-      //     }
-      //   ]
-      // });
     },
     //   设置字体
     setFontsize(res) {
@@ -2278,7 +1018,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "数量",
+            name: " ",
             nameTextStyle: {
               color: "#fff"
             },
@@ -2304,7 +1044,7 @@ export default {
           },
           {
             type: "value",
-            name: "比率",
+            name: " ",
             nameTextStyle: {
               color: "#fff"
             },
@@ -2360,7 +1100,7 @@ export default {
             xAxisIndex: [0],
             bottom: "0%",
             start: 0,
-            end: 100,
+            end: 50,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -2382,7 +1122,7 @@ export default {
         ],
         series: [
           {
-            name: "总数",
+            name: this.box4PieData[0],
             type: "bar",
             barWidth: this.setFontsize(0.15),
             itemStyle: {
@@ -2393,7 +1133,7 @@ export default {
             data: this.zsData
           },
           {
-            name: "完成数",
+            name: this.box4PieData[1],
             type: "bar",
             barWidth: this.setFontsize(0.15),
             itemStyle: {
@@ -2404,7 +1144,7 @@ export default {
             data: this.wclData
           },
           {
-            name: "完成率(%)",
+            name: this.box4PieData[2],
             type: "line",
             yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
             smooth: true, //平滑曲线显示
@@ -2424,10 +1164,376 @@ export default {
         ]
       });
     },
+    // 巡检切换的两个图单独请求
+    xunJianPie() {
+      let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
+      var colorList = [
+        "#73DDFF",
+        "#73ACFF",
+        "#FDD56A",
+        "#FDB36A",
+        "#FD866A",
+        "#9E87FF",
+        "#58D5FF"
+      ];
+      Pie1.setOption({
+        backgroundColor: "",
+        title: {
+          text: "",
+          left: "center",
+          top: 20,
+          textStyle: {
+            color: "#ccc"
+          }
+        },
+
+        tooltip: {
+          trigger: "item",
+          formatter: "{b} : {c} ({d}%)",
+          textStyle: {
+            fontSize: 24
+          }
+        },
+
+        visualMap: {
+          show: false,
+          min: 500,
+          max: 600,
+          inRange: {
+            //colorLightness: [0, 1]
+          }
+        },
+        series: [
+          {
+            name: "访问来源",
+            type: "pie",
+            radius: "50%",
+            center: ["45%", "62%"],
+            color: ["#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
+            data: this.dqxjData1.sort(function(a, b) {
+              return a.value - b.value;
+            }),
+            roseType: "radius",
+
+            label: {
+              normal: {
+                formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
+                rich: {
+                  c: {
+                    color: "#77c8ff",
+                    fontSize: 28,
+                    fontWeight: "bold",
+                    lineHeight: 5
+                  },
+                  b: {
+                    color: "rgb(98,137,169)",
+                    fontSize: 24,
+                    height: 40
+                  }
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                lineStyle: {
+                  color: "rgb(98,137,169)"
+                },
+                smooth: 0.2,
+                length: 10,
+                length2: 20
+              }
+            },
+            itemStyle: {
+              normal: {
+                shadowColor: "rgba(0, 0, 0, 0.8)",
+                shadowBlur: 50
+              }
+            }
+          }
+        ]
+      });
+      let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
+      var dataArry = {
+        two: 300,
+        three: 200,
+        four: 200
+      };
+      Pie4.setOption({
+        tooltip: {
+          formatter: "{a} <br/>{c} {b}"
+        },
+        series: [
+          {
+            name: "远程巡检",
+            type: "gauge",
+            color: ["#f00"],
+            min: 0,
+            max: 8,
+            splitNumber: 8,
+            radius: "30%",
+            center: ["20%", "55%"],
+            axisLine: {
+              // 坐标轴线
+              lineStyle: {
+                // 属性lineStyle控制线条样式
+                width: 10,
+                color: [
+                  [0.4, "#203add"],
+                  [1, "#0d1758"]
+                ]
+              },
+              backgroundColor: "none"
+            },
+            axisTick: {
+              // 坐标轴小标记
+              length: 12, // 属性length控制线长
+              lineStyle: {
+                // 属性lineStyle控制线条样式
+                color: "auto"
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                if (dataArry.two) {
+                  return "远程巡检:" + dataArry.two;
+                }
+              }
+            },
+            splitLine: {
+              // 分隔线
+              length: 5, // 属性length控制线长
+              lineStyle: {
+                // 属性lineStyle（详见lineStyle）控制线条样式
+                color: "rgba(255,255,255,0.7)"
+              }
+            },
+            axisLabel: {
+              borderRadius: 1,
+              color: "rgba(255,255,255,0.7)",
+              padding: 1
+            },
+            title: {
+              fontSize: 22,
+              fontColor: "#FFF",
+              color: "#FFF",
+              paddingTop: 15,
+              offsetCenter: [0, "110%"]
+            },
+            itemStyle: {
+              color: "#1092ff"
+            },
+            detail: {
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              textBorderColor: "#000",
+              textBorderWidth: 1,
+              textShadowBlur: 1,
+              textShadowColor: "#fff",
+              textShadowOffsetX: 0,
+              textShadowOffsetY: 0,
+              paddingTop: 10,
+              fontFamily: "digital",
+              fontSize: 20,
+              width: 30,
+              color: "#fff",
+              rich: {},
+              offsetCenter: [0, "65%"],
+              formatter: function(value) {
+                return value * 10 + "%";
+              }
+            },
+            data: [
+              {
+                value: 3,
+                name: "远程巡检"
+              }
+            ]
+          },
+          {
+            name: "现场巡检",
+            type: "gauge",
+            color: ["#f00"],
+            min: 0,
+            max: 8,
+            splitNumber: 8,
+            radius: "30%",
+            center: ["40%", "55%"],
+            axisLine: {
+              // 坐标轴线
+              lineStyle: {
+                // 属性lineStyle控制线条样式
+                width: 10,
+                color: [
+                  [0.4, "#203add"],
+                  [1, "#0d1758"]
+                ]
+              },
+              backgroundColor: "none"
+            },
+            axisTick: {
+              // 坐标轴小标记
+              length: 12, // 属性length控制线长
+              lineStyle: {
+                // 属性lineStyle控制线条样式
+                color: "auto"
+              }
+            },
+            splitLine: {
+              // 分隔线
+              length: 5, // 属性length控制线长
+              lineStyle: {
+                // 属性lineStyle（详见lineStyle）控制线条样式
+                color: "rgba(255,255,255,0.7)"
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                if (dataArry.three) {
+                  return "现场巡检:" + dataArry.three;
+                }
+              }
+            },
+            axisLabel: {
+              borderRadius: 1,
+              color: "rgba(255,255,255,0.7)",
+              padding: 1
+            },
+            title: {
+              fontSize: 22,
+              fontColor: "#FFF",
+              color: "#FFF",
+              paddingTop: 15,
+              offsetCenter: [0, "110%"]
+            },
+            itemStyle: {
+              color: "#1092ff"
+            },
+            detail: {
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              textBorderColor: "#000",
+              textBorderWidth: 1,
+              textShadowBlur: 1,
+              textShadowColor: "#fff",
+              textShadowOffsetX: 0,
+              textShadowOffsetY: 0,
+              paddingTop: 10,
+              fontFamily: "digital",
+              fontSize: 20,
+              width: 30,
+              color: "#fff",
+              rich: {},
+              offsetCenter: [0, "65%"],
+              formatter: function(value) {
+                return value * 10 + "%";
+              }
+            },
+            data: [
+              {
+                value: 2,
+                name: "现场巡检"
+              }
+            ]
+          },
+          {
+            name: "专项巡检",
+            type: "gauge",
+            color: ["#f00"],
+            min: 0,
+            max: 8,
+            splitNumber: 8,
+            radius: "30%",
+            center: ["62%", "55%"],
+            axisLine: {
+              // 坐标轴线
+              lineStyle: {
+                // 属性lineStyle控制线条样式
+                width: 10,
+                color: [
+                  [0.4, "#203add"],
+                  [1, "#0d1758"]
+                ]
+              },
+              backgroundColor: "none"
+            },
+            axisTick: {
+              // 坐标轴小标记
+              length: 12, // 属性length控制线长
+              lineStyle: {
+                // 属性lineStyle控制线条样式
+                color: "auto"
+              }
+            },
+            splitLine: {
+              // 分隔线
+              length: 5, // 属性length控制线长
+              lineStyle: {
+                // 属性lineStyle（详见lineStyle）控制线条样式
+                color: "rgba(255,255,255,0.7)"
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                if (dataArry.four) {
+                  return "专项巡检:" + dataArry.four;
+                }
+              }
+            },
+            axisLabel: {
+              borderRadius: 1,
+              color: "rgba(255,255,255,0.7)",
+              padding: 1
+            },
+            title: {
+              fontSize: 22,
+              fontColor: "#FFF",
+              color: "#FFF",
+              paddingTop: 15,
+              offsetCenter: [0, "110%"]
+            },
+            itemStyle: {
+              color: "#1092ff"
+            },
+            detail: {
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              textBorderColor: "#000",
+              textBorderWidth: 1,
+              textShadowBlur: 1,
+              textShadowColor: "#fff",
+              textShadowOffsetX: 0,
+              textShadowOffsetY: 0,
+              paddingTop: 10,
+              fontFamily: "digital",
+              fontSize: 20,
+              width: 30,
+              color: "#fff",
+              rich: {},
+              offsetCenter: [0, "65%"],
+              formatter: function(value) {
+                return value * 10 + "%";
+              }
+            },
+            data: [
+              {
+                value: 2,
+                name: "专项巡检"
+              }
+            ]
+          }
+        ]
+      });
+      this.$nextTick(() => {
+        Pie1.resize();
+      });
+      this.$nextTick(() => {
+        Pie4.resize();
+      });
+    },
     // 饼图
     piedemo() {
       let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
-      let Pie2 = this.$echarts.init(document.getElementById("Pie2"));
+      let Pie2 = this.$echarts.init(document.getElementById("Pie2")); //风险处置柱状图
       let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
       let zrPie = this.$echarts.init(document.getElementById("zrPie")); //准入饼图
       let sqPie = this.$echarts.init(document.getElementById("sqPie")); //水球图
@@ -2491,7 +1597,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "数量",
+            name: "",
             nameTextStyle: {
               color: "#fff"
             },
@@ -2517,7 +1623,7 @@ export default {
           },
           {
             type: "value",
-            name: "比率",
+            name: "",
             nameTextStyle: {
               color: "#fff"
             },
@@ -2573,7 +1679,7 @@ export default {
             xAxisIndex: [0],
             bottom: "0%",
             start: 0,
-            end: 100,
+            end: 50,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -2587,7 +1693,7 @@ export default {
           },
           {
             type: "inside",
-            show: true,
+            show: false,
             height: 15,
             start: 1,
             end: 35
@@ -2637,28 +1743,7 @@ export default {
         ]
       });
       // 预警柱状图
-      let dataYJ = [
-        {
-          name: "风险级",
-          value: 80,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 60,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 40,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 30,
-          color: "#409EFF"
-        }
-      ];
+      let dataYJ = this.fxyjData;
       let label = dataYJ.map(item => {
         return [item.name, item.color];
       });
@@ -2717,9 +1802,9 @@ export default {
           {
             show: false,
             left: "51.5%", //调整中间文字位置
-            top: 24,
+            top: 26,
             bottom: 10,
-            width: "0%"
+            width: "20%"
           },
           {
             show: false,
@@ -2820,7 +1905,8 @@ export default {
                 value: value[0],
                 textStyle: {
                   align: "center",
-                  color: value[1]
+                  color: value[1],
+                  fontSize: 24
                 }
               };
             })
@@ -2921,10 +2007,10 @@ export default {
             }
           },
           {
-            x: "52%",
+            x: "56%",
             y: "80%",
             //bottom: 100,
-            text: "中高风险预警处置率",
+            text: "预警处置率",
             textStyle: {
               fontWeight: "normal",
               fontSize: 28,
@@ -3011,7 +2097,7 @@ export default {
                 fontSize: 40
               }
             },
-            data: [{ value: 40 }]
+            data: [{ value: this.zrtglData }]
           },
           {
             name: "速度",
@@ -3080,7 +2166,7 @@ export default {
                 fontSize: 40
               }
             },
-            data: [{ value: 30 }]
+            data: [{ value: this.cldxlData }]
           },
           {
             name: "速度",
@@ -3149,7 +2235,7 @@ export default {
                 fontSize: 40
               }
             },
-            data: [{ value: 90 }]
+            data: [{ value: this.yjczlData }]
           },
           {
             name: "速度",
@@ -3218,7 +2304,7 @@ export default {
                 fontSize: 40
               }
             },
-            data: [{ value: 20 }]
+            data: [{ value: this.xjtglData }]
           }
         ]
       });
@@ -3326,7 +2412,7 @@ export default {
           itemHeight: 15,
           textStyle: {
             color: "#fff",
-            fontSize: 26
+            fontSize: 28
           },
           data: legendData
         },
@@ -3377,189 +2463,8 @@ export default {
       this.$nextTick(() => {
         Pie4.resize();
       });
-      // let Pie3 = this.$echarts.init(document.getElementById("Pie3"));
-      // 右侧最下角饼图
-      var data = [];
-
-      // 折线图
-      // Pie3.setOption({
-      //   tooltip: {
-      //     //提示框组件
-      //     trigger: "axis",
-      //     formatter: "{b}<br />{a0}: {c0}<br />{a1}: {c1}",
-      //     axisPointer: {
-      //       type: "shadow",
-      //       label: {
-      //         backgroundColor: "#6a7985"
-      //       }
-      //     },
-      //     textStyle: {
-      //       color: "#fff",
-      //       fontStyle: "normal",
-      //       fontFamily: "微软雅黑",
-      //       fontSize: 18
-      //     }
-      //   },
-      //   grid: {
-      //     left: "10%",
-      //     right: "10%",
-      //     bottom: "10%",
-      //     top: "40%",
-      //     //	padding:'0 0 10 0',
-      //     containLabel: true
-      //   },
-      //   legend: {
-      //     //图例组件，颜色和名字
-      //     right: "10%",
-      //     top: "30%",
-      //     itemGap: 16,
-      //     itemWidth: 18,
-      //     itemHeight: 10,
-      //     data: [
-      //       {
-      //         name: "本年"
-      //         //icon:'image://../wwwroot/js/url2.png', //路径
-      //       },
-      //       {
-      //         name: "本月"
-      //       }
-      //     ],
-      //     textStyle: {
-      //       color: "#a8aab0",
-      //       fontStyle: "normal",
-      //       fontFamily: "微软雅黑",
-      //       fontSize: 16
-      //     }
-      //   },
-      //   xAxis: [
-      //     {
-      //       type: "category",
-      //       //	boundaryGap: true,//坐标轴两边留白
-      //       data: [
-      //         "远程巡检",
-      //         "现场巡检",
-      //         "专项巡检",
-      //         "应巡检服务点数",
-      //         "巡检数量",
-      //         "巡检率"
-      //       ],
-      //       axisLabel: {
-      //         //坐标轴刻度标签的相关设置。
-      //         //		interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
-      //         //	margin:15,
-      //         textStyle: {
-      //           color: "#078ceb",
-      //           fontStyle: "normal",
-      //           fontFamily: "微软雅黑",
-      //           fontSize: 12
-      //         },
-      //         rotate: 50
-      //       },
-      //       axisTick: {
-      //         //坐标轴刻度相关设置。
-      //         show: false
-      //       },
-      //       axisLine: {
-      //         //坐标轴轴线相关设置
-      //         lineStyle: {
-      //           color: "#fff",
-      //           opacity: 0.2
-      //         }
-      //       },
-      //       splitLine: {
-      //         //坐标轴在 grid 区域中的分隔线。
-      //         show: false
-      //       }
-      //     }
-      //   ],
-      //   yAxis: [
-      //     {
-      //       type: "value",
-      //       splitNumber: 5,
-      //       axisLabel: {
-      //         textStyle: {
-      //           color: "#a8aab0",
-      //           fontStyle: "normal",
-      //           fontFamily: "微软雅黑",
-      //           fontSize: 12
-      //         }
-      //       },
-      //       axisLine: {
-      //         show: false
-      //       },
-      //       axisTick: {
-      //         show: false
-      //       },
-      //       splitLine: {
-      //         show: true,
-      //         lineStyle: {
-      //           color: ["#fff"],
-      //           opacity: 0.06
-      //         }
-      //       }
-      //     }
-      //   ],
-      //   series: [
-      //     {
-      //       name: "本年",
-      //       type: "bar",
-      //       data: [10, 15, 30, 45, 55, 60],
-      //       barWidth: 25,
-      //       barGap: 0, //柱间距离
-      //       // label: {//图形上的文本标签
-      //       //     normal: {
-      //       //       show: true,
-      //       //       position: 'top',
-      //       //       textStyle: {
-      //       //           color: '#a8aab0',
-      //       //           fontStyle: 'normal',
-      //       //           fontFamily: '微软雅黑',
-      //       //           fontSize: 12,
-      //       //       },
-      //       //     },
-      //       // },
-      //       itemStyle: {
-      //         normal: {
-      //           show: true,
-      //           barBorderRadius: 0,
-      //           borderWidth: 0,
-      //           color: "#77C8FF"
-      //         }
-      //       }
-      //     },
-      //     {
-      //       name: "本月",
-      //       type: "bar",
-      //       data: [8, 5, 25, 30, 35, 55, 62, 78, 65, 55, 60, 45, 42, 15, 12, 5],
-      //       barWidth: 25,
-      //       barGap: 0, //柱间距离
-      //       // label: {//图形上的文本标签
-      //       //     normal: {
-      //       //       show: true,
-      //       //       position: 'top',
-      //       //       textStyle: {
-      //       //           color: '#a8aab0',
-      //       //           fontStyle: 'normal',
-      //       //           fontFamily: '微软雅黑',
-      //       //           fontSize: 12,
-      //       //       },
-      //       //     },
-      //       // },
-      //       itemStyle: {
-      //         normal: {
-      //           show: true,
-      //           barBorderRadius: 0,
-      //           borderWidth: 0
-      //         }
-      //       }
-      //     }
-      //   ]
-      // });
-      //
-
       //  仪表盘
       var dataArry = {
-        one: 500,
         two: 300,
         three: 200,
         four: 200
@@ -3570,97 +2475,6 @@ export default {
         },
         series: [
           {
-            name: "未巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 8,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["15%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.one) {
-                  return "未巡检:" + dataArry.one;
-                }
-              }
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-              // fontWeight: 'bolder',
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-              // fontStyle: 'italic'
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              // borderWidth: 1,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                console.info(value);
-                return value * 10 + "%";
-              }
-            },
-            data: [
-              {
-                value: 5,
-                name: "未巡检"
-              }
-            ]
-          },
-          {
             name: "远程巡检",
             type: "gauge",
             color: ["#f00"],
@@ -3668,7 +2482,7 @@ export default {
             max: 8,
             splitNumber: 8,
             radius: "30%",
-            center: ["34%", "55%"],
+            center: ["20%", "55%"],
             axisLine: {
               // 坐标轴线
               lineStyle: {
@@ -3741,7 +2555,7 @@ export default {
             },
             data: [
               {
-                value: 3,
+                value: this.ycxjData,
                 name: "远程巡检"
               }
             ]
@@ -3754,7 +2568,7 @@ export default {
             max: 8,
             splitNumber: 8,
             radius: "30%",
-            center: ["53%", "55%"],
+            center: ["40%", "55%"],
             axisLine: {
               // 坐标轴线
               lineStyle: {
@@ -3827,7 +2641,7 @@ export default {
             },
             data: [
               {
-                value: 2,
+                value: this.xcxjData,
                 name: "现场巡检"
               }
             ]
@@ -3840,7 +2654,7 @@ export default {
             max: 8,
             splitNumber: 8,
             radius: "30%",
-            center: ["72%", "55%"],
+            center: ["62%", "55%"],
             axisLine: {
               // 坐标轴线
               lineStyle: {
@@ -3913,7 +2727,7 @@ export default {
             },
             data: [
               {
-                value: 2,
+                value: this.zxxjData,
                 name: "专项巡检"
               }
             ]
@@ -3926,9 +2740,9 @@ export default {
       window.addEventListener("resize", function() {
         Pie4.resize();
       });
-      // 巡检数据柱状图
-      var data1 = [20, 30, 20, 30];
-      var data3 = [20, 24, 15, 20];
+      // 风险处置
+      var data1 = this.fxczData1;
+      var data3 = this.fxczData2;
       var datacity = ["风险级", "警示级", "预警级", "关注级"];
       Pie2.setOption({
         color: ["#388BFF", "#E6A23C"],
@@ -3943,7 +2757,7 @@ export default {
           data: ["预警总数", "处理数"],
           textStyle: {
             color: "#fff",
-            fontSize: 30
+            fontSize: 36
           }
         },
         grid: {
@@ -3983,7 +2797,7 @@ export default {
               show: true,
               splitNumber: 15,
               textStyle: {
-                fontSize: 30,
+                fontSize: 34,
                 color: "#fff"
               }
             },
@@ -4008,6 +2822,7 @@ export default {
           }
         ]
       });
+
       var colorList = [
         "#73DDFF",
         "#73ACFF",
@@ -4050,25 +2865,8 @@ export default {
             type: "pie",
             radius: "50%",
             center: ["45%", "62%"],
-            color: ["rgb(131,249,103)", "#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
-            data: [
-              {
-                value: 285,
-                name: "未巡检"
-              },
-              {
-                value: 410,
-                name: "远程巡检"
-              },
-              {
-                value: 274,
-                name: "现场巡检"
-              },
-              {
-                value: 235,
-                name: "专项巡检"
-              }
-            ].sort(function(a, b) {
+            color: ["#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
+            data: this.dqxjData1.sort(function(a, b) {
               return a.value - b.value;
             }),
             roseType: "radius",
@@ -4079,13 +2877,13 @@ export default {
                 rich: {
                   c: {
                     color: "#77c8ff",
-                    fontSize: 24,
+                    fontSize: 30,
                     fontWeight: "bold",
                     lineHeight: 5
                   },
                   b: {
                     color: "rgb(98,137,169)",
-                    fontSize: 20,
+                    fontSize: 24,
                     height: 40
                   }
                 }
@@ -4137,39 +2935,7 @@ export default {
       })();
     };
   },
-  watch: {
-    box4PieData() {
-      this.box4PieDemo();
-    },
-    zrData(val) {
-      //监听数据发生改变 刷新图表数据
-      var loading = this.$loading({
-        lock: true,
-        text: "Loading",
-        spinner: "el-icon-loading",
-        background: "rgba(0, 0, 0, 0.7)"
-      });
-      setTimeout(() => {
-        loading.close();
-        this.piedemo();
-      }, 1000);
-    },
-    zsData() {
-      console.log("监听总数变化");
-      //监听数据发生改变 刷新图表数据
-      this.piedemo();
-    },
-    wclData() {
-      console.log("监听完成量变化");
-      //监听数据发生改变 刷新图表数据
-      this.piedemo();
-    },
-    wclvData() {
-      console.log("监听完成率变化");
-      //监听数据发生改变 刷新图表数据
-      this.piedemo();
-    }
-  },
+  watch: {},
   created() {
     this.getData();
     // console.log(this.setFontsize(0.3), "1111");
@@ -4205,6 +2971,50 @@ export default {
     console.log(itemName);
     console.log(itemValue1);
     console.log(itemValue2);
+    // 全部饼图数据
+    var thisData = [
+      {
+        value1: "0",
+        value2: "0",
+        value3: "0",
+        value4: "0"
+      }
+    ];
+    this.zrData[0].value = thisData[0].value1;
+    this.zrData[1].value = thisData[0].value2;
+    this.zrData[2].value = thisData[0].value3;
+    this.zrData[3].value = thisData[0].value4;
+    // 数据排序
+    var yhData = [
+      {
+        name: "aaa",
+        value: "2"
+      },
+      {
+        name: "bbb",
+        value: "8"
+      },
+      {
+        name: "ccc",
+        value: "5"
+      }
+    ];
+    yhData.sort(function(a, b) {
+      if (a.value > b.value) {
+        return -1;
+      } else if (a.value < b.value) {
+        return 1;
+      }
+      return 0;
+    });
+    var newyhData = [];
+    for (var i = 0; i < yhData.length; i++) {
+      newyhData.push({
+        name: yhData[i].name,
+        value: yhData[i].value
+      });
+    }
+    console.log(newyhData);
   },
   beforeDestroy: function() {
     if (this.getDate) {
