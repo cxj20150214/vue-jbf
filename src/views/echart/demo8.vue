@@ -1344,7 +1344,7 @@ export default {
             },
             data: [
               {
-                value: 3,
+                value: this.ycxjData,
                 name: "远程巡检"
               }
             ]
@@ -1430,7 +1430,7 @@ export default {
             },
             data: [
               {
-                value: 2,
+                value: this.xcxjData,
                 name: "现场巡检"
               }
             ]
@@ -1516,7 +1516,7 @@ export default {
             },
             data: [
               {
-                value: 2,
+                value: this.zxxjData,
                 name: "专项巡检"
               }
             ]
@@ -1546,7 +1546,7 @@ export default {
         grid: {
           x: 50,
           x2: 50,
-          top: "15%",
+          top: "30%",
           bottom: "22%" //也可设置left和right设置距离来控制图表的大小
         },
         tooltip: {
@@ -1793,11 +1793,11 @@ export default {
         grid: [
           {
             show: false,
-            left: "10%",
+            left: "14%",
             top: 30,
             bottom: 10,
             containLabel: true,
-            width: "32%"
+            width: "28%"
           },
           {
             show: false,
@@ -1808,11 +1808,11 @@ export default {
           },
           {
             show: false,
-            right: "10%",
+            right: "14%",
             top: 30,
             bottom: 10,
             containLabel: true,
-            width: "32%"
+            width: "28%"
           }
         ],
         xAxis: [
@@ -2960,6 +2960,7 @@ export default {
         value2: result[2]
       });
     });
+    console.log(newRow, "123456");
     var itemName = [];
     var itemValue1 = [];
     var itemValue2 = [];
@@ -2975,8 +2976,8 @@ export default {
     var thisData = [
       {
         value1: "0",
-        value2: "0",
-        value3: "0",
+        value2: "1",
+        value3: "2",
         value4: "0"
       }
     ];
@@ -3968,6 +3969,11 @@ ul {
   font-size: 16px;
 }
 @media screen and (max-width: 1280px) {
+  .zrBox {
+    // width: 200%;
+    // left: -49%;
+    // transform: scale(0.35);
+  }
   .selectBox {
     width: 420px;
     right: -45%;
