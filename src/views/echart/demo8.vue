@@ -172,7 +172,7 @@
           <p class="title">定期巡检</p>
           <p :class="{ active: showXJ == 1 }" class="title_all" @click="clAll">
             巡检总数
-          </p>
+          </p>x
           <p :class="{ active: showXJ == 2 }" class="title_cll" @click="cll">
             巡检完成率
           </p>
@@ -1238,12 +1238,12 @@ export default {
                     color: "#77c8ff",
                     fontSize: 28,
                     fontWeight: "bold",
-                    lineHeight: 5
+                    lineHeight: 40
                   },
                   b: {
                     color: "rgb(98,137,169)",
                     fontSize: 24,
-                    height: 40
+                    height: 60
                   }
                 }
               }
