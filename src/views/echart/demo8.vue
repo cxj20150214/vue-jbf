@@ -231,11 +231,11 @@ export default {
           value: "70"
         }
       ],
-      shuiqiuData: 0.4, //存量评级
-      fxjData: 60,
-      jsjData: 75,
-      yjjData: 80,
-      gzjData: 50,
+      shuiqiuData: 0.8, //存量评级
+      fxjData: 20,
+      jsjData: 45,
+      yjjData: 60,
+      gzjData: 30,
       zrtglData: 80, //仪表盘
       cldxlData: 90,
       yjczlData: 40,
@@ -263,8 +263,31 @@ export default {
           color: "#409EFF"
         }
       ],
-      fxczData1: [40, 80, 65, 20], //风险处置
-      fxczData2: [90, 70, 40, 30],
+      fxyjData1: [
+        //风险预警
+        {
+          name: "风险级",
+          value: 20,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 30,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 40,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 50,
+          color: "#409EFF"
+        }
+      ],
+      fxczData1: [90, 80, 65, 40], //风险处置
+      fxczData2: [40, 70, 40, 30],
       dqxjData1: [
         //定期巡检
         {
@@ -1736,6 +1759,7 @@ export default {
       });
       // 预警柱状图
       let dataYJ = this.fxyjData;
+      let dataYJ1 = this.fxyjData1;
       let label = dataYJ.map(item => {
         return [item.name, item.color];
       });
@@ -1969,7 +1993,7 @@ export default {
                 color: "#FFD52E"
               }
             },
-            data: dataYJ
+            data: dataYJ1
           }
         ]
       });
