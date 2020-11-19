@@ -233,8 +233,8 @@ export default {
       ],
       shuiqiuData: 0.6, //存量评级
       fxjData: 20,
-      jsjData: 45,
-      yjjData: 50,
+      jsjData: 35,
+      yjjData: 15,
       gzjData: 30,
       zrtglData: 80, //仪表盘
       cldxlData: 90,
