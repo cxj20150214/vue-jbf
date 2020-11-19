@@ -231,10 +231,10 @@ export default {
           value: "70"
         }
       ],
-      shuiqiuData: 0.8, //存量评级
+      shuiqiuData: 0.6, //存量评级
       fxjData: 20,
       jsjData: 45,
-      yjjData: 60,
+      yjjData: 50,
       gzjData: 30,
       zrtglData: 80, //仪表盘
       cldxlData: 90,
@@ -299,7 +299,7 @@ export default {
           name: "现场巡检"
         },
         {
-          value: 200,
+          value: 300,
           name: "专项巡检"
         }
       ],
@@ -2001,46 +2001,46 @@ export default {
       ybpPie.setOption({
         title: [
           {
-            x: "9%",
+            x: "9.5%",
             y: "80%",
             //bottom: 100,
             text: "准入通过率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: 28,
+              fontSize: 32,
               color: "#fff"
             }
           },
           {
-            x: "32%",
+            x: "32.5%",
             y: "80%",
             //bottom: 100,
             text: "存量低险率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: 28,
+              fontSize: 32,
               color: "#fff"
             }
           },
           {
-            x: "56%",
+            x: "56.5%",
             y: "80%",
             //bottom: 100,
             text: "预警处置率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: 28,
+              fontSize: 32,
               color: "#fff"
             }
           },
           {
-            x: "79%",
+            x: "79.5%",
             y: "80%",
             //bottom: 100,
             text: "巡检通过率",
             textStyle: {
               fontWeight: "normal",
-              fontSize: 28,
+              fontSize: 32,
               color: "#fff"
             }
           }
@@ -2076,7 +2076,7 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: 20
+                fontSize: 24
               }
             },
             axisTick: {
@@ -2110,7 +2110,7 @@ export default {
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: 40
+                fontSize: 45
               }
             },
             data: [{ value: this.zrtglData }]
@@ -2145,7 +2145,7 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: 20
+                fontSize: 24
               }
             },
             axisTick: {
@@ -2179,7 +2179,7 @@ export default {
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: 40
+                fontSize: 45
               }
             },
             data: [{ value: this.cldxlData }]
@@ -2214,7 +2214,7 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: 20
+                fontSize: 24
               }
             },
             axisTick: {
@@ -2248,7 +2248,7 @@ export default {
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: 40
+                fontSize: 45
               }
             },
             data: [{ value: this.yjczlData }]
@@ -2283,7 +2283,7 @@ export default {
                 color: "#fff",
                 //shadowColor : '#fff', //默认透明
                 shadowBlur: 5,
-                fontSize: 20
+                fontSize: 24
               }
             },
             axisTick: {
@@ -2317,7 +2317,7 @@ export default {
             detail: {
               formatter: "{value}%",
               textStyle: {
-                fontSize: 40
+                fontSize: 45
               }
             },
             data: [{ value: this.xjtglData }]
@@ -3191,7 +3191,7 @@ export default {
   width: 230%;
   height: 200%;
   position: absolute;
-  bottom: -67%;
+  bottom: -56%;
   left: -60%;
   transform: scale(0.4);
   .zrPie {
@@ -3246,12 +3246,12 @@ export default {
   }
 }
 .ybpPie {
-  width: 200%;
+  width: 250%;
   height: 170%;
   position: absolute;
-  left: -50%;
+  left: -75%;
   top: -33%;
-  transform: scale(0.5);
+  transform: scale(0.40);
 }
 //
 .loading {
@@ -3276,7 +3276,7 @@ ul {
     .time {
       color: #fff;
       font-size: 16px;
-      margin-top: 15px;
+      margin-top: 17px;
       height: 30%;
     }
     width: 24%;
@@ -3288,7 +3288,7 @@ ul {
     text-align: center;
     .tit {
       font-size: 26px;
-      margin-top: 20px;
+      margin-top: 22px;
       letter-spacing: 2px;
       height: 30%;
       line-height: 30px;
@@ -3333,7 +3333,7 @@ ul {
       .list {
         width: 80%;
         height: 60%;
-        margin: 50px auto 0px;
+        margin: 80px auto 0px;
         display: flex;
         flex-direction: row;
         align-items: center;
