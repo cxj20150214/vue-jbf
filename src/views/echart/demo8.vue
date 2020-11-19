@@ -1,7 +1,7 @@
 <template>
   <div class="bg">
     <div class="title_time">
-      <p class="tit">裕农通智能风控</p>
+      <p class="tit">裕农通普惠金融服务点智能风控</p>
       <p class="time">{{ nowDate + " " + nowTime + " " + nowWeek }}</p>
     </div>
     <div class="box1">
@@ -198,25 +198,6 @@
       </div>
       <div class="box4Pie" id="box4Pie"></div>
     </div>
-    <div class="loginOut" @click="drawer = true"><</div>
-    <el-drawer
-      size="80%"
-      title="我是标题"
-      :visible.sync="drawer"
-      :with-header="false"
-    >
-      <div class="buttonBox">
-        <el-button class="button1" @click="demo3" type="primary" size="mini"
-          >demo3</el-button
-        >
-        <el-button class="button1" @click="demo4" type="primary" size="mini"
-          >demo4</el-button
-        >
-        <el-button class="button1" @click="logout" type="danger" size="mini"
-          >退出登录</el-button
-        >
-      </div>
-    </el-drawer>
   </div>
 </template>
 <script>
@@ -228,91 +209,95 @@ export default {
   data() {
     return {
       // 页面渲染
-      zrpjData1: 0, //准入评级
-      zrpjData2: 0,
-      zrpjData3: 0,
+      zrpjData1: 1500, //准入评级
+      zrpjData2: 900,
+      zrpjData3: 60,
       zrData: [
         //拒件分布
         {
           name: "征信类",
-          value: "0"
+          value: "40"
         },
         {
           name: "黑名单类",
-          value: "0"
+          value: "50"
         },
         {
           name: "内部数据名单类",
-          value: "0"
+          value: "60"
         },
         {
           name: "外部数据名单类",
-          value: "0"
+          value: "70"
         }
       ],
-      shuiqiuData: 0.0, //存量评级
-      fxjData: 0,
-      jsjData: 0,
-      yjjData: 0,
-      gzjData: 0,
-      zrtglData: 0, //仪表盘
-      cldxlData: 0,
-      yjczlData: 0,
-      xjtglData: 0,
+      shuiqiuData: 0.4, //存量评级
+      fxjData: 60,
+      jsjData: 75,
+      yjjData: 80,
+      gzjData: 50,
+      zrtglData: 80, //仪表盘
+      cldxlData: 90,
+      yjczlData: 40,
+      xjtglData: 60,
       fxyjData: [
         //风险预警
         {
           name: "风险级",
-          value: 0,
+          value: 80,
           color: "#F56C6C"
         },
         {
           name: "警示级",
-          value: 0,
+          value: 70,
           color: "#E6A23C"
         },
         {
           name: "预警级",
-          value: 0,
+          value: 60,
           color: "#FFD52E"
         },
         {
           name: "关注级",
-          value: 0,
+          value: 50,
           color: "#409EFF"
         }
       ],
-      fxczData1: [0, 0, 0, 0], //风险处置
-      fxczData2: [0, 0, 0, 0],
+      fxczData1: [40, 80, 65, 20], //风险处置
+      fxczData2: [90, 70, 40, 30],
       dqxjData1: [
         //定期巡检
         {
-          value: 0,
+          value: 400,
           name: "远程巡检"
         },
         {
-          value: 0,
+          value: 350,
           name: "现场巡检"
         },
         {
-          value: 0,
+          value: 200,
           name: "专项巡检"
         }
       ],
-      ycxjData: 0,
-      xcxjData: 0,
-      zxxjData: 0,
+      ycxjData: 2,
+      xcxjData: 1,
+      zxxjData: 4,
       zhihanglist: [
         //box4pie数据
-        "福建分行",
-        "广东分行",
-        "浙江分行",
-        "福建分行",
-        "广东分行",
-        "浙江分行",
-        "福建分行",
-        "广东分行",
-        "浙江分行"
+        "重庆",
+        "云南",
+        "辽宁",
+        "黑龙江",
+        "广西",
+        "甘肃",
+        "山西",
+        "陕西",
+        "吉林",
+        "贵州",
+        "新疆",
+        "青海",
+        "西藏",
       ],
       zsData: [
         1100,
@@ -422,12 +407,149 @@ export default {
           label: "浙江"
         }
       ],
+      dituData:  [
+        {
+          name: "重庆",
+          value: 0
+        },
+        {
+          name: "云南",
+          value: 0
+        },
+        {
+          name: "辽宁",
+          value: 0
+        },
+        {
+          name: "黑龙江",
+          value: 0
+        },
+        {
+          name: "广西",
+          value: 20
+        },
+        {
+          name: "甘肃",
+          value: 20
+        },
+        {
+          name: "山西",
+          value: 10
+        },
+        {
+          name: "陕西",
+          value: 0
+        },
+        {
+          name: "吉林",
+          value: 40
+        },
+        {
+          name: "贵州",
+          value: 20
+        },
+        {
+          name: "新疆",
+          value: 0
+        },
+        {
+          name: "青海",
+          value: 10
+        },
+        {
+          name: "西藏",
+          value: 0
+        },
+        {
+          name: "四川",
+          value: 20
+        },
+        {
+          name: "宁夏",
+          value: 0
+        },
+        {
+          name: "海南",
+          value: 0
+        },
+        {
+          name: "台湾",
+          value: 0
+        },
+        {
+          name: "香港",
+          value: 0
+        },
+        {
+          name: "澳门",
+          value: 0
+        },
+        {
+          name: "上海",
+          value: 100
+        },
+        {
+          name: "安徽",
+          value: 150
+        },
+        {
+          name: "江苏",
+          value: 140
+        },
+        {
+          name: "浙江",
+          value: 120
+        },
+        {
+          name: "北京",
+          value: 80
+        },
+        {
+          name: "天津",
+          value:60
+        },
+        {
+          name: "河北",
+          value: 0
+        },
+        {
+          name: "河南",
+          value: 0
+        },
+        {
+          name: "内蒙古",
+          value: 0
+        },
+        {
+          name: "湖南",
+          value: 0
+        },
+        {
+          name: "山东",
+          value: 180
+        },
+        {
+          name: "江西",
+          value: 160
+        },
+        {
+          name: "湖北",
+          value: 0
+        },
+        {
+          name: "福建",
+          value: 80
+        },
+        {
+          name: "广东",
+          value: 40
+        }
+      ],
       valueSelect: "全国",
       province: "全国",
       shows: 3,
       showXJ: 1,
       showDate: 1,
-      drawer: false,
       listArr: [], //城市json
       nowDate: "", // 当前日期
       nowTime: "", // 当前时间
@@ -599,144 +721,14 @@ export default {
       let _that = this;
       dituJB1.on("click", function(param) {
         console.log(param);
-        _that.PieClick(param.data);
+        // _that.PieClick(param.data);
       });
       // dituJB1.getZr().on("click", res => {
       //   // 点击空白处
       //   _that.PieClick1(res.target);
       // });
       var mapName = "china";
-      var dataJB = [
-        {
-          name: "北京",
-          value: 177
-        },
-        {
-          name: "天津",
-          value: 42
-        },
-        {
-          name: "河北",
-          value: 102
-        },
-        {
-          name: "山西",
-          value: 81
-        },
-        {
-          name: "内蒙古",
-          value: 47
-        },
-        {
-          name: "辽宁",
-          value: 67
-        },
-        {
-          name: "吉林",
-          value: 82
-        },
-        {
-          name: "黑龙江",
-          value: 66
-        },
-        {
-          name: "上海",
-          value: 24
-        },
-        {
-          name: "江苏",
-          value: 92
-        },
-        {
-          name: "浙江",
-          value: 114
-        },
-        {
-          name: "安徽",
-          value: 109
-        },
-        {
-          name: "福建",
-          value: 116,
-          id: 1111111
-        },
-        {
-          name: "厦门",
-          value: 300
-        },
-        {
-          name: "江西",
-          value: 91
-        },
-        {
-          name: "山东",
-          value: 119
-        },
-        {
-          name: "河南",
-          value: 137
-        },
-        {
-          name: "湖北",
-          value: 116
-        },
-        {
-          name: "湖南",
-          value: 114
-        },
-        {
-          name: "重庆",
-          value: 91
-        },
-        {
-          name: "四川",
-          value: 125
-        },
-        {
-          name: "贵州",
-          value: 62
-        },
-        {
-          name: "云南",
-          value: 83
-        },
-        {
-          name: "西藏",
-          value: 9
-        },
-        {
-          name: "陕西",
-          value: 80
-        },
-        {
-          name: "甘肃",
-          value: 56
-        },
-        {
-          name: "青海",
-          value: 10
-        },
-        {
-          name: "宁夏",
-          value: 18
-        },
-        {
-          name: "新疆",
-          value: 67
-        },
-        {
-          name: "广东",
-          value: 123
-        },
-        {
-          name: "广西",
-          value: 59
-        },
-        {
-          name: "海南",
-          value: 14
-        }
-      ];
+      var dataJB = this.dituData;
       var dataJB1 = [
         {
           name: "厦门",
@@ -852,7 +844,7 @@ export default {
           },
           show: true,
           min: 0,
-          max: 0,
+          max: 200,
           left: "left",
           top: "bottom",
           text: ["高", "低"], // 文本，默认为数值文本
@@ -1100,7 +1092,7 @@ export default {
             xAxisIndex: [0],
             bottom: "0%",
             start: 0,
-            end: 50,
+            end: 100,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -1679,7 +1671,7 @@ export default {
             xAxisIndex: [0],
             bottom: "0%",
             start: 0,
-            end: 50,
+            end: 100,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -2972,19 +2964,6 @@ export default {
     console.log(itemName);
     console.log(itemValue1);
     console.log(itemValue2);
-    // 全部饼图数据
-    var thisData = [
-      {
-        value1: "0",
-        value2: "1",
-        value3: "2",
-        value4: "0"
-      }
-    ];
-    this.zrData[0].value = thisData[0].value1;
-    this.zrData[1].value = thisData[0].value2;
-    this.zrData[2].value = thisData[0].value3;
-    this.zrData[3].value = thisData[0].value4;
     // 数据排序
     var yhData = [
       {
@@ -3016,6 +2995,60 @@ export default {
       });
     }
     console.log(newyhData);
+
+    var newdituData =[
+        {
+          name: "重庆",
+          value: 20
+        },
+        {
+          name: "云南",
+          value: 10
+        },
+        {
+          name: "辽宁",
+          value: 10
+        },
+    ]
+    newdituData = newdituData.concat(this.dituData);
+    console.log(newdituData)
+    let arr = [
+      {
+        name: "张三",
+        age: "30"
+      },
+      {
+        name: "李四",
+        age: "15"
+      },
+      {
+        name: "王五",
+        age: "20"
+      },
+      {
+        name: "张三",
+        age: "18"
+      },
+      {
+        name: "王五",
+        age: "16"
+      }
+    ];
+
+    let obj = {};
+
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 1; j < arr.length; j++) {
+        arr[i].age = arr[i].name == arr[j].name ? arr[j].age : arr[i].age;
+      }
+    }
+
+    arr = arr.reduce((item, next) => {
+      obj[next.name] ? "" : (obj[next.name] = true && item.push(next));
+      return item;
+    }, []);
+
+    console.log(arr,'去重');
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -3230,7 +3263,7 @@ ul {
     position: absolute;
     text-align: center;
     .tit {
-      font-size: 38px;
+      font-size: 26px;
       margin-top: 20px;
       letter-spacing: 2px;
       height: 30%;
