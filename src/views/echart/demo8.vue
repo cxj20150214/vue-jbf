@@ -209,9 +209,9 @@ export default {
   data() {
     return {
       // 页面渲染
-      zrpjData1: 1500, //准入评级
-      zrpjData2: 900,
-      zrpjData3: 60,
+      zrpjData1: 80050, //准入评级
+      zrpjData2: 72045,
+      zrpjData3: 90,
       zrData: [
         //拒件分布
         {
@@ -219,47 +219,51 @@ export default {
           value: "40"
         },
         {
-          name: "黑名单类",
+          name: "洗钱风险类",
           value: "50"
         },
         {
-          name: "内部数据名单类",
+          name: "司法涉诉类",
           value: "60"
         },
         {
-          name: "外部数据名单类",
+          name: "内部黑名单类",
+          value: "100"
+        },
+        {
+          name: "外部黑名单类",
           value: "70"
         }
       ],
-      shuiqiuData: 0.6, //存量评级
-      fxjData: 20,
-      jsjData: 35,
-      yjjData: 15,
-      gzjData: 30,
-      zrtglData: 80, //仪表盘
-      cldxlData: 90,
-      yjczlData: 40,
-      xjtglData: 60,
+      shuiqiuData: 0.05, //存量评级
+      fxjData: 2,
+      jsjData: 3,
+      yjjData: 40,
+      gzjData: 55,
+      zrtglData: 90, //仪表盘
+      cldxlData: 95,
+      yjczlData: 95,
+      xjtglData: 94,
       fxyjData: [
         //风险预警
         {
           name: "风险级",
-          value: 80,
+          value: 98,
           color: "#F56C6C"
         },
         {
           name: "警示级",
-          value: 70,
+          value: 95,
           color: "#E6A23C"
         },
         {
           name: "预警级",
-          value: 60,
+          value: 90,
           color: "#FFD52E"
         },
         {
           name: "关注级",
-          value: 50,
+          value: 92,
           color: "#409EFF"
         }
       ],
@@ -267,45 +271,45 @@ export default {
         //风险预警
         {
           name: "风险级",
-          value: 20,
+          value: 2,
           color: "#F56C6C"
         },
         {
           name: "警示级",
-          value: 30,
+          value: 5,
           color: "#E6A23C"
         },
         {
           name: "预警级",
-          value: 40,
+          value: 10,
           color: "#FFD52E"
         },
         {
           name: "关注级",
-          value: 50,
+          value: 8,
           color: "#409EFF"
         }
       ],
-      fxczData1: [90, 80, 65, 40], //风险处置
-      fxczData2: [40, 70, 40, 30],
+      fxczData1: [900, 850, 4540, 6400], //风险处置
+      fxczData2: [750, 630, 4340, 6150],
       dqxjData1: [
         //定期巡检
         {
-          value: 400,
+          value: 334345,
           name: "远程巡检"
         },
         {
-          value: 350,
+          value: 223431,
           name: "现场巡检"
         },
         {
-          value: 300,
+          value: 163254,
           name: "专项巡检"
         }
       ],
-      ycxjData: 2,
-      xcxjData: 1,
-      zxxjData: 4,
+      ycxjData: 9.2,
+      xcxjData: 9.5,
+      zxxjData: 9.5,
       zhihanglist: [
         //box4pie数据
         "重庆",
@@ -320,7 +324,7 @@ export default {
         "贵州",
         "新疆",
         "青海",
-        "西藏",
+        "西藏"
       ],
       zsData: [
         1100,
@@ -430,7 +434,7 @@ export default {
           label: "浙江"
         }
       ],
-      dituData:  [
+      dituData: [
         {
           name: "重庆",
           value: 0
@@ -529,7 +533,7 @@ export default {
         },
         {
           name: "天津",
-          value:60
+          value: 60
         },
         {
           name: "河北",
@@ -867,7 +871,7 @@ export default {
           },
           show: true,
           min: 0,
-          max: 200,
+          max: 3300,
           left: "left",
           top: "bottom",
           text: ["高", "低"], // 文本，默认为数值文本
@@ -1693,8 +1697,8 @@ export default {
             height: this.setFontsize(0.18),
             xAxisIndex: [0],
             bottom: "0%",
-            start: 0,
-            end: 100,
+            start: 30,
+            end: 70,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -2388,11 +2392,12 @@ export default {
       var seriesData = this.zrData;
       var legendData = [
         "征信类",
-        "黑名单类",
-        "内部数据名单类",
-        "外部数据名单类"
+        "洗钱风险类",
+        "司法涉诉类",
+        "内部黑名单类",
+        "外部黑名单类"
       ];
-      var colorList1 = ["#73ACFF", "#9E87FF", "#FD866A", "#FDD56A"];
+      var colorList1 = ["#73ACFF", "#9E87FF", "#FD866A", "#FDD56A","#02C81A"];
       zrPie.setOption({
         tooltip: {
           trigger: "item",
@@ -2428,7 +2433,7 @@ export default {
           itemHeight: 15,
           textStyle: {
             color: "#fff",
-            fontSize: 28
+            fontSize: 29
           },
           data: legendData
         },
@@ -2436,7 +2441,7 @@ export default {
           {
             type: "pie",
             z: 3,
-            center: ["65%", "55%"],
+            center: ["61%", "55%"],
             radius: ["50%", "80%"],
             clockwise: true,
             avoidLabelOverlap: true,
@@ -2958,36 +2963,106 @@ export default {
 
     // 数据解析备用
     // box4Pie数据
-    var rows = [
-      {
-        IND: "北京,560,340"
-      },
-      {
-        IND: "天津,539,260"
-      }
+    var dituNewData = [
+      { name: "福建", value: 2663, value1: 2431, value2: 0.912880210289148 },
+      { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
+      { name: "北京", value: 1610, value1: 1555, value2: 0.96583850931677 },
+      { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
+      { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
+      { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
+      { name: "江苏", value: 1224, value1: 1002, value2: 0.818627450980392 },
+      { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
+      { name: "大连", value: 1789, value1: 1733, value2: 0.968697596422582 },
+      { name: "厦门", value: 1066, value1: 730, value2: 0.684803001876173 },
+      { name: "重庆", value: 2023, value1: 1897, value2: 0.937716262975779 },
+      { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
+      { name: "天津", value: 1002, value1: 874, value2: 0.872255489021956 },
+      { name: "宁波", value: 2133, value1: 1795, value2: 0.841537740271918 },
+      { name: "湖南", value: 3304, value1: 2097, value2: 0.634685230024213 },
+      { name: "青岛", value: 2548, value1: 2456, value2: 0.963893249607535 },
+      { name: "河南", value: 3001, value1: 2764, value2: 0.921026324558481 },
+      { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
+      { name: "苏州", value: 1996, value1: 1947, value2: 0.975450901803607 },
+      { name: "四川", value: 2035, value1: 1975, value2: 0.97051597051597 },
+      { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
+      { name: "陕西", value: 2827, value1: 2477, value2: 0.87619384506544 },
+      { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
+      { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
+      { name: "青海", value: 2444, value1: 1986, value2: 0.812602291325696 },
+      { name: "江西", value: 2031, value1: 1799, value2: 0.885770556376169 },
+      { name: "黑龙江", value: 2613, value1: 2548, value2: 0.975124378109453 },
+      { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
+      { name: "山西", value: 2814, value1: 2455, value2: 0.872423596304193 },
+      { name: "甘肃", value: 2777, value1: 2547, value2: 0.917176809506662 },
+      { name: "辽宁", value: 2491, value1: 2104, value2: 0.844640706543557 },
+      { name: "海南", value: 1045, value1: 787, value2: 0.75311004784689 },
+      { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
+      { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
+      { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
+      { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
+      { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
     ];
-    var newRow = [];
-    rows.map(item => {
-      var newData = item.IND;
-      var result = newData.split(",");
-      newRow.push({
-        name: result[0],
-        value1: result[1],
-        value2: result[2]
-      });
+    this.dituData = dituNewData;
+    dituNewData.sort(function(a, b) {
+      if (a.value > b.value) {
+        return -1;
+      } else if (a.value < b.value) {
+        return 1;
+      }
+      return 0;
     });
-    console.log(newRow, "123456");
+    console.log(dituNewData);
     var itemName = [];
     var itemValue1 = [];
     var itemValue2 = [];
-    newRow.map(item => {
+    var itemValue3 = [];
+    dituNewData.map(item => {
       itemName.push(item.name);
-      itemValue1.push(parseInt(item.value1));
-      itemValue2.push(parseInt(item.value2));
+      itemValue1.push(parseFloat(item.value));
+      itemValue2.push(parseFloat(item.value1));
+      itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
     });
-    console.log(itemName);
-    console.log(itemValue1);
-    console.log(itemValue2);
+    this.zhihanglist = itemName;
+    this.zsData = itemValue1;
+    this.wclData = itemValue2;
+    this.wclvData = itemValue3;
+    // var newyhData = [];
+    // for (var i = 0; i < yhData.length; i++) {
+    //   newdata1.push({
+    //     name: yhData[i].name,
+    //     value: yhData[i].value,
+    //   });
+    // }
+    // var rows = [
+    //   {
+    //     IND: "北京,560,340"
+    //   },
+    //   {
+    //     IND: "天津,539,260"
+    //   }
+    // ];
+    // var newRow = [];
+    // rows.map(item => {
+    //   var newData = item.IND;
+    //   var result = newData.split(",");
+    //   newRow.push({
+    //     name: result[0],
+    //     value1: result[1],
+    //     value2: result[2]
+    //   });
+    // });
+    // console.log(newRow, "123456");
+    // var itemName = [];
+    // var itemValue1 = [];
+    // // var itemValue2 = [];
+    // dituNewData.map(item => {
+    //   itemName.push(item.name);
+    //   itemValue1.push(parseInt(item.value));
+    //   // itemValue2.push(parseInt(item.value2));
+    // });
+    // console.log(itemName, "1");
+    // console.log(itemValue1, "2");
+    // console.log(itemValue2);
     // 数据排序
     var yhData = [
       {
@@ -2997,10 +3072,6 @@ export default {
       {
         name: "bbb",
         value: "8"
-      },
-      {
-        name: "ccc",
-        value: "5"
       }
     ];
     yhData.sort(function(a, b) {
@@ -3020,22 +3091,22 @@ export default {
     }
     console.log(newyhData);
 
-    var newdituData =[
-        {
-          name: "重庆",
-          value: 20
-        },
-        {
-          name: "云南",
-          value: 10
-        },
-        {
-          name: "辽宁",
-          value: 10
-        },
-    ]
-    newdituData = newdituData.concat(this.dituData);
-    console.log(newdituData)
+    var newdituData = [
+      {
+        name: "重庆",
+        value: 20
+      },
+      {
+        name: "云南",
+        value: 10
+      },
+      {
+        name: "辽宁",
+        value: 10
+      }
+    ];
+    // newdituData = newdituData.concat(this.dituData);
+    // console.log(newdituData)
     let arr = [
       {
         name: "张三",
@@ -3072,7 +3143,7 @@ export default {
       return item;
     }, []);
 
-    console.log(arr,'去重');
+    console.log(arr, "去重");
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -3193,7 +3264,7 @@ export default {
   position: absolute;
   bottom: -56%;
   left: -60%;
-  transform: scale(0.4);
+  transform: scale(0.38);
   .zrPie {
     width: 100%;
     height: 100%;
@@ -3251,7 +3322,7 @@ export default {
   position: absolute;
   left: -75%;
   top: -33%;
-  transform: scale(0.40);
+  transform: scale(0.4);
 }
 //
 .loading {
