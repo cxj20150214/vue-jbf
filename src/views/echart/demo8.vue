@@ -172,7 +172,8 @@
           <p class="title">定期巡检</p>
           <p :class="{ active: showXJ == 1 }" class="title_all" @click="clAll">
             巡检总数
-          </p>x
+          </p>
+          x
           <p :class="{ active: showXJ == 2 }" class="title_cll" @click="cll">
             巡检完成率
           </p>
@@ -303,9 +304,9 @@ export default {
           name: "专项巡检"
         }
       ],
-      ycxjData: 2,
-      xcxjData: 1,
-      zxxjData: 4,
+      ycxjData: 8.1,
+      xcxjData: 55.2844444444,
+      zxxjData: 80,
       zhihanglist: [
         //box4pie数据
         "重庆",
@@ -320,7 +321,7 @@ export default {
         "贵州",
         "新疆",
         "青海",
-        "西藏",
+        "西藏"
       ],
       zsData: [
         1100,
@@ -430,7 +431,7 @@ export default {
           label: "浙江"
         }
       ],
-      dituData:  [
+      dituData: [
         {
           name: "重庆",
           value: 0
@@ -529,7 +530,7 @@ export default {
         },
         {
           name: "天津",
-          value:60
+          value: 60
         },
         {
           name: "河北",
@@ -1283,7 +1284,7 @@ export default {
             type: "gauge",
             color: ["#f00"],
             min: 0,
-            max: 8,
+            max: 100,
             splitNumber: 8,
             radius: "30%",
             center: ["20%", "55%"],
@@ -1354,7 +1355,7 @@ export default {
               rich: {},
               offsetCenter: [0, "65%"],
               formatter: function(value) {
-                return value * 10 + "%";
+                return value *10 .toFixed(2) + "%";
               }
             },
             data: [
@@ -1369,7 +1370,7 @@ export default {
             type: "gauge",
             color: ["#f00"],
             min: 0,
-            max: 8,
+            max: 100,
             splitNumber: 8,
             radius: "30%",
             center: ["40%", "55%"],
@@ -1440,7 +1441,7 @@ export default {
               rich: {},
               offsetCenter: [0, "65%"],
               formatter: function(value) {
-                return value * 10 + "%";
+                return value .toFixed(2)  + "%";
               }
             },
             data: [
@@ -1455,7 +1456,7 @@ export default {
             type: "gauge",
             color: ["#f00"],
             min: 0,
-            max: 8,
+            max: 100,
             splitNumber: 8,
             radius: "30%",
             center: ["62%", "55%"],
@@ -1526,7 +1527,7 @@ export default {
               rich: {},
               offsetCenter: [0, "65%"],
               formatter: function(value) {
-                return value * 10 + "%";
+                return value + "%";
               }
             },
             data: [
@@ -2495,7 +2496,7 @@ export default {
             type: "gauge",
             color: ["#f00"],
             min: 0,
-            max: 8,
+            max: 100,
             splitNumber: 8,
             radius: "30%",
             center: ["20%", "55%"],
@@ -2566,7 +2567,7 @@ export default {
               rich: {},
               offsetCenter: [0, "65%"],
               formatter: function(value) {
-                return value * 10 + "%";
+                return value + "%";
               }
             },
             data: [
@@ -2581,7 +2582,7 @@ export default {
             type: "gauge",
             color: ["#f00"],
             min: 0,
-            max: 8,
+            max: 100,
             splitNumber: 8,
             radius: "30%",
             center: ["40%", "55%"],
@@ -2652,7 +2653,7 @@ export default {
               rich: {},
               offsetCenter: [0, "65%"],
               formatter: function(value) {
-                return value * 10 + "%";
+                return value + "%";
               }
             },
             data: [
@@ -2667,7 +2668,7 @@ export default {
             type: "gauge",
             color: ["#f00"],
             min: 0,
-            max: 8,
+            max: 100,
             splitNumber: 8,
             radius: "30%",
             center: ["62%", "55%"],
@@ -2738,7 +2739,7 @@ export default {
               rich: {},
               offsetCenter: [0, "65%"],
               formatter: function(value) {
-                return value * 10 + "%";
+                return value + "%";
               }
             },
             data: [
@@ -2955,7 +2956,6 @@ export default {
   created() {
     this.getData();
     // console.log(this.setFontsize(0.3), "1111");
-
     // 数据解析备用
     // box4Pie数据
     var rows = [
@@ -3020,59 +3020,71 @@ export default {
     }
     console.log(newyhData);
 
-    var newdituData =[
-        {
-          name: "重庆",
-          value: 20
-        },
-        {
-          name: "云南",
-          value: 10
-        },
-        {
-          name: "辽宁",
-          value: 10
-        },
-    ]
-    newdituData = newdituData.concat(this.dituData);
-    console.log(newdituData)
-    let arr = [
+    var newdituData = [
       {
-        name: "张三",
-        age: "30"
+        name: "重庆",
+        value: 20
       },
       {
-        name: "李四",
-        age: "15"
+        name: "云南",
+        value: 10
       },
       {
-        name: "王五",
-        age: "20"
-      },
-      {
-        name: "张三",
-        age: "18"
-      },
-      {
-        name: "王五",
-        age: "16"
+        name: "辽宁",
+        value: 10
       }
     ];
-
+    newdituData = this.dituData.concat(newdituData);
     let obj = {};
 
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 1; j < arr.length; j++) {
-        arr[i].age = arr[i].name == arr[j].name ? arr[j].age : arr[i].age;
+    for (let i = 0; i < newdituData.length; i++) {
+      for (let j = 1; j < newdituData.length; j++) {
+        newdituData[i].value = newdituData[i].name == newdituData[j].name ? newdituData[j].value : newdituData[i].value;
       }
     }
-
-    arr = arr.reduce((item, next) => {
+    newdituData = newdituData.reduce((item, next) => {
       obj[next.name] ? "" : (obj[next.name] = true && item.push(next));
       return item;
     }, []);
 
-    console.log(arr,'去重');
+    console.log(newdituData, "去重");
+
+    // let arr = [
+    //   {
+    //     name: "张三",
+    //     age: "30"
+    //   },
+    //   {
+    //     name: "李四",
+    //     age: "15"
+    //   },
+    //   {
+    //     name: "王五",
+    //     age: "20"
+    //   },
+    //   {
+    //     name: "张三",
+    //     age: "18"
+    //   },
+    //   {
+    //     name: "王五",
+    //     age: "16"
+    //   }
+    // ];
+
+    // let obj = {};
+
+    // for (let i = 0; i < arr.length; i++) {
+    //   for (let j = 1; j < arr.length; j++) {
+    //     arr[i].age = arr[i].name == arr[j].name ? arr[j].age : arr[i].age;
+    //   }
+    // }
+    // arr = arr.reduce((item, next) => {
+    //   obj[next.name] ? "" : (obj[next.name] = true && item.push(next));
+    //   return item;
+    // }, []);
+
+    // console.log(arr, "去重");
   },
   beforeDestroy: function() {
     if (this.getDate) {
