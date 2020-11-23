@@ -31,9 +31,9 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
-    path: '/demo8',
-    name: 'demo8',
-    component: () => import('@/views/echart/demo8'),
+    path: '/demo5',
+    name: 'demo5',
+    component: () => import('@/views/echart/demo5'),
     meta: { title: '数据表', icon: 'dashboard' },
     hidden: true
   },
@@ -45,11 +45,11 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/demo8',
+    redirect: '/demo5',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/echart/demo8'),
+      component: () => import('@/views/echart/demo5'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
