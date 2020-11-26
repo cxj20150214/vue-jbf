@@ -19,6 +19,7 @@ import scroll from 'vue-seamless-scroll'
 import 'lib-flexible'
 import 'babel-polyfill'
 import Es6Promise from 'es6-promise'
+import i18n from './i18n/i18n'
 Es6Promise.polyfill()
 Vue.use(scroll)
 /**
@@ -48,6 +49,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  i18n,
   store,
   render: h => h(App)
 })

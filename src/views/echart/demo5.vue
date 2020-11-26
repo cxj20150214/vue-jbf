@@ -28,7 +28,44 @@
         <div class="bg">
           <div class="echartBox">
             <div class="flexBox">
-              123
+              <el-select class="select_1" v-model="value1" placeholder="请选择">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <el-select
+                class="select_1"
+                v-model="value"
+                placeholder="请选择"
+                @change="getJGH"
+              >
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <el-date-picker
+                v-show="dateMode"
+                v-model="selectTime"
+                class="select_2"
+                type="daterange"
+                align="right"
+                unlink-panels
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="yyyy-MM-dd"
+                @change="getDatePick"
+                :picker-options="pickerOptions"
+              >
+              </el-date-picker>
             </div>
             <div class="boxLeft">
               <div class="title">
@@ -174,6 +211,33 @@
       <el-carousel-item>
         <div class="bg1">
           <div class="echartBox">
+            <div class="flexBox">
+              <el-select
+                class="select_1"
+                v-model="value2"
+                placeholder="请选择"
+                @change="getJGH"
+              >
+                <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+              <el-date-picker
+                v-show="dateMode1"
+                v-model="selectTime1"
+                class="select_2 select_2_1"
+                type="date"
+                placeholder="选择日期"
+                value-format="yyyy-MM-dd"
+                @change="getDatePick1"
+                :picker-options="pickerOptions1"
+              >
+              </el-date-picker>
+            </div>
             <div class="box1">
               <div class="title">
                 <span>当日监测交易量</span>
@@ -192,11 +256,11 @@
                   <p class="p1">处理量</p>
                   <p class="p2">3,365 起</p>
                 </li>
-                <li>
+                <li v-show="sskb">
                   <p class="p1">待处理量</p>
                   <p class="p2">3,365 起</p>
                 </li>
-                <li>
+                <li v-show="sskb">
                   <p class="p1">在线人数</p>
                   <p class="p2">3,36 人</p>
                 </li>
@@ -212,63 +276,10 @@
                 @tab-click="handleClick1"
               >
                 <el-tab-pane label="告警量" name="first">
-                  <!-- <div class="sjBox">
-                    <div class="tit">
-                      <p>卡号</p>
-                      <p>交易日期</p>
-                      <p>交易时间</p>
-                      <p>交易金额(万元)</p>
-                      <p>交互内容</p>
-                    </div>
-                    <ul class="gjBox">
-                      <li>
-                        <p class="p1">KH3568</p>
-                        <p class="p2">2019/05/06</p>
-                        <p class="p3">09:25</p>
-                        <p class="p4">12,356</p>
-                        <p class="p5">内容内容内容</p>
-                      </li>
-                      <li>
-                        <p class="p1">KH3568</p>
-                        <p class="p2">2019/05/06</p>
-                        <p class="p3">09:25</p>
-                        <p class="p4">12,356</p>
-                        <p class="p5">内容内容内容</p>
-                      </li>
-                      <li>
-                        <p class="p1">KH3568</p>
-                        <p class="p2">2019/05/06</p>
-                        <p class="p3">09:25</p>
-                        <p class="p4">12,356</p>
-                        <p class="p5">内容内容内容</p>
-                      </li>
-                      <li>
-                        <p class="p1">KH3568</p>
-                        <p class="p2">2019/05/06</p>
-                        <p class="p3">09:25</p>
-                        <p class="p4">12,356</p>
-                        <p class="p5">内容内容内容</p>
-                      </li>
-                      <li>
-                        <p class="p1">KH3568</p>
-                        <p class="p2">2019/05/06</p>
-                        <p class="p3">09:25</p>
-                        <p class="p4">12,356</p>
-                        <p class="p5">内容内容内容</p>
-                      </li>
-                      <li>
-                        <p class="p1">KH3568</p>
-                        <p class="p2">2019/05/06</p>
-                        <p class="p3">09:25</p>
-                        <p class="p4">12,356</p>
-                        <p class="p5">内容内容内容</p>
-                      </li>
-                    </ul>
-                  </div> -->
                   <div class="zxtTxt">
-                    <p>今天告警量比平时少<span>37.5%</span></p>
+                    <p>当天告警量比平时少<span>37.5%</span></p>
                     <div class="zxtTxt1">
-                      <p>今天：2570起</p>
+                      <p>当天：2570起</p>
                       <p>平均：2570起</p>
                     </div>
                   </div>
@@ -276,16 +287,16 @@
                 </el-tab-pane>
                 <el-tab-pane label="欺诈事件数" name="second">
                   <div class="zxtTxt">
-                    <p>今天欺诈事件数比平时少<span>37.5%</span></p>
+                    <p>当天欺诈事件数比平时少<span>37.5%</span></p>
                     <div class="zxtTxt1">
-                      <p>今天：2570起</p>
+                      <p>当天：2570起</p>
                       <p>平均：2570起</p>
                     </div>
                   </div>
                   <div class="zxt" id="zxt1"></div>
                 </el-tab-pane>
                 <el-tab-pane label="自动处理概况" name="third">
-                  123
+                  <div class="zxt" id="zxt2"></div>
                 </el-tab-pane>
               </el-tabs>
             </div>
@@ -353,6 +364,72 @@ export default {
   name: "demo5",
   data() {
     return {
+      lang: "cn",
+      sskb: true,
+      // 下拉选择全部/线上/线下
+      options1: [
+        {
+          value: "a1",
+          label: "全部"
+        },
+        {
+          value: "a2",
+          label: "线上"
+        },
+        {
+          value: "a3",
+          label: "线下"
+        }
+      ],
+      value1: "全部",
+      // 下拉选择实时历史
+      options: [
+        {
+          value: "b1",
+          label: "实时看板"
+        },
+        {
+          value: "b2",
+          label: "历史看板"
+        }
+      ],
+      options2: [
+        {
+          value: "b3",
+          label: "实时看板"
+        },
+        {
+          value: "b4",
+          label: "历史看板"
+        }
+      ],
+      value: "实时看板",
+      value2: "实时看板",
+      // 下拉日期选择
+      dateMode: false,
+      dateMode1: false,
+      pickerOptions: {
+        // disabledDate是一个函数,参数是当前选中的日期值,这个函数需要返回一个Boolean值,
+        disabledDate: time => {
+          // 如果函数处理比较简单,可以直接在这里写逻辑方法
+          // return time.getTime() < Date.now() - 8.64e7
+
+          // 如果函数里处理的数据比较麻烦,也可以单独放在一个函数里,避免data数据太臃肿
+          return this.dealDisabledDate(time);
+        }
+      },
+      pickerOptions1: {
+        // disabledDate是一个函数,参数是当前选中的日期值,这个函数需要返回一个Boolean值,
+        disabledDate: time => {
+          // 如果函数处理比较简单,可以直接在这里写逻辑方法
+          // return time.getTime() < Date.now() - 8.64e7
+
+          // 如果函数里处理的数据比较麻烦,也可以单独放在一个函数里,避免data数据太臃肿
+          return this.dealDisabledDate(time);
+        }
+      },
+      selectTime: "",
+      selectTime1: "",
       ssImg1: true,
       ssImg2: false,
       activeName: "first",
@@ -384,6 +461,50 @@ export default {
     });
   },
   methods: {
+    // 监听下拉日期
+    getDatePick() {
+      console.log(this.selectTime);
+    },
+    getDatePick1() {
+      console.log(this.selectTime1);
+    },
+    // 监听 下拉实时/历史
+    getJGH(val) {
+      console.log(val);
+      if (val == "b2") {
+        this.dateMode = true;
+      }
+      if (val == "b1") {
+        this.dateMode = false;
+      }
+      if (val == "b4") {
+        this.dateMode1 = true;
+        this.sskb = false;
+      }
+      if (val == "b3") {
+        this.dateMode1 = false;
+        this.sskb = true;
+      }
+    },
+    // 下拉日期选择
+    dealDisabledDate(time) {
+      // time.getTime是把选中的时间转化成自1970年1月1日 00:00:00 UTC到当前时间的毫秒数
+      // Date.now()是把今天的时间转化成自1970年1月1日 00:00:00 UTC到当前时间的毫秒数,这样比较好比较
+      // return的值,true是不可以操作选择,false可以操作选择,比如下面这个判断就只能选择今天之后的时间
+      // return time.getTime() < Date.now();
+      // 设置可选择的日期为今天之前的一个月内
+      let curDate = new Date().getTime();
+      // 这里算出一个月的毫秒数,这里使用30的平均值,实际中应根据具体的每个月有多少天计算
+      let day = 31 * 24 * 3600 * 1000;
+      let dateRegion = curDate - day;
+      return (
+        time.getTime() > Date.now() - 8.64e7 || time.getTime() < dateRegion
+      );
+
+      // 这里减8.64e7的作用是,让今天的日期可以选择,如果不减的话,今天的日期就不可以选择,判断中写<= 也是没用的,一天的毫秒数就是8.64e7
+      // return time.getTime() <= Date.now()
+      // return time.getTime() < Date.now() - 8.64e7
+    },
     // 测试轮询
     ceshiData() {
       this.ceshi111 = this.ceshi111 + 1;
@@ -442,6 +563,7 @@ export default {
       let Pie1 = this.$echarts.init(document.getElementById("Pie1"));
       let zxt = this.$echarts.init(document.getElementById("zxt"));
       let zxt1 = this.$echarts.init(document.getElementById("zxt1"));
+      let zxt2 = this.$echarts.init(document.getElementById("zxt2"));
       this.$nextTick(() => {
         Pie1.resize();
       });
@@ -451,531 +573,290 @@ export default {
       this.$nextTick(() => {
         zxt1.resize();
       });
+      this.$nextTick(() => {
+        zxt2.resize();
+      });
       // 折线图
       let t = this;
       zxt.setOption({
-        backgroundColor: "#010f1c",
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: "cross",
+            type: "shadow",
             label: {
-              backgroundColor: "#6a7985"
+              show: true
             }
           }
         },
         grid: {
-          left: "0",
-          top: "50px",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
+          left: "4%",
+          top: "18%",
+          right: "5%",
+          bottom: "22%"
         },
-        xAxis: [
-          {
-            type: "category",
-            boundaryGap: false,
-            axisTick: {
-              show: false
+
+        xAxis: {
+          data: ["16:30"],
+          axisLine: {
+            show: true, //隐藏X轴轴线
+            lineStyle: {
+              color: "#3d5269",
+              width: 1
+            }
+          },
+          axisTick: {
+            show: true, //隐藏X轴刻度
+            alignWithLabel: true
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#d2d2d3", //X轴文字颜色
+              fontSize: 14
             },
-            axisLine: {
-              lineStyle: {
-                color: "#273f55"
-              }
-            },
-            axisLabel: {
-              // interval: 0, //设置x轴的标签显示可自适应
-              show: true,
-              textStyle: {
-                color: "#8fd5f3"
-              }
-            },
-            data: [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "22",
-              "23",
-              "24"
-            ]
+            interval: 0
           }
-        ],
+        },
         yAxis: [
           {
             type: "value",
-            name: "告警量(起)",
+            name: "数量",
             nameTextStyle: {
-              //y轴上方单位的颜色
-              color: "#8fd5f3"
+              color: "#d2d2d3",
+              fontSize: 14
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                width: 1,
+                color: "#3d5269"
+              }
             },
             axisTick: {
               show: false
             },
             axisLine: {
-              show: true, //y轴线
-              lineStyle: {
-                show: false
-              }
+              show: false
             },
             axisLabel: {
-              // margin: 10,
+              show: true,
               textStyle: {
-                fontSize: 12,
-                color: "#8fd5f3"
-              }
-            },
-            splitLine: {
-              show: false,
-              lineStyle: {
-                color: ["#56859d"],
-                width: 1,
-                type: "solid"
+                color: "#d2d2d3",
+                fontSize: 14
               }
             }
           }
         ],
         series: [
           {
-            name: "平均",
-            type: "line",
-            smooth: true,
-            symbol: "circle",
-            symbolSize: 2,
-            showSymbol: false,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#777779"
-              }
-            },
-            areaStyle: {
-              normal: {
-                color: new t.$echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "rgba(119,119,121,0.8)"
-                    },
-                    {
-                      offset: 0.5,
-                      color: "rgba(119,119,121,0.4)"
-                    },
-                    {
-                      offset: 0.8,
-                      color: "rgba(119,119,121,0.2)"
-                    },
-                    {
-                      offset: 1,
-                      color: "transparent"
-                    }
-                  ],
-                  false
-                ),
-                // shadowColor: 'rgba(232,246,254,0.2)',
-                shadowBlur: 30
-              }
-            },
+            name: "当日",
+            type: "bar",
+            barWidth: 18,
             itemStyle: {
               normal: {
-                color: "#777779",
-                borderColor: "#777779",
-                borderWidth: 0
-              }
-            },
-
-            data: [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              2,
-              5,
-              8,
-              20,
-              50,
-              55,
-              100,
-              20,
-              30,
-              25,
-              33,
-              21,
-              125,
-              60,
-              50,
-              24,
-              30,
-              20,
-              12
-            ]
-          },
-          {
-            name: "今天",
-            type: "line",
-            smooth: true,
-            symbol: "circle",
-            symbolSize: 2,
-            showSymbol: false,
-            lineStyle: {
-              normal: {
-                width: 2,
                 color: "#32e8f5"
               }
             },
-            areaStyle: {
-              normal: {
-                color: new t.$echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "rgba(50,232,245,0.7)"
-                    },
-                    {
-                      offset: 0.5,
-                      color: "rgba(50,232,245,0.4)"
-                    },
-                    {
-                      offset: 0.8,
-                      color: "rgba(50,232,245,0.2)"
-                    },
-                    {
-                      offset: 1,
-                      color: "transparent"
-                    }
-                  ],
-                  false
-                ),
-                // shadowColor: 'rgba(232,246,254,0.2)',
-                shadowBlur: 30
-              }
-            },
+            data: [133]
+          },
+          {
+            name: "平均",
+            type: "bar",
+            barWidth: 18,
             itemStyle: {
               normal: {
-                color: "#32e8f5",
-                borderColor: "#32e8f5",
-                borderWidth: 0
+                color: "#f69846"
               }
             },
-
-            data: [
-              0,
-              0,
-              0,
-              0,
-              0,
-              2,
-              5,
-              20,
-              50,
-              120,
-              50,
-              40,
-              50,
-              155,
-              60,
-              40,
-              55,
-              30,
-              66,
-              60,
-              50,
-              22,
-              10,
-              0,
-              0
-            ]
+            data: [123]
           }
         ]
       });
       zxt1.setOption({
-        backgroundColor: "#010f1c",
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            type: "cross",
+            type: "shadow",
             label: {
-              backgroundColor: "#6a7985"
+              show: true
             }
           }
         },
         grid: {
-          left: "0",
-          top: "50px",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
+          left: "4%",
+          top: "18%",
+          right: "5%",
+          bottom: "22%"
         },
-        xAxis: [
-          {
-            type: "category",
-            boundaryGap: false,
-            axisTick: {
-              show: false
+
+        xAxis: {
+          data: ["16:30"],
+          axisLine: {
+            show: true, //隐藏X轴轴线
+            lineStyle: {
+              color: "#3d5269",
+              width: 1
+            }
+          },
+          axisTick: {
+            show: true, //隐藏X轴刻度
+            alignWithLabel: true
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#d2d2d3", //X轴文字颜色
+              fontSize: 14
             },
-            axisLine: {
-              lineStyle: {
-                color: "#273f55"
-              }
-            },
-            axisLabel: {
-              // interval: 0, //设置x轴的标签显示可自适应
-              show: true,
-              textStyle: {
-                color: "#8fd5f3"
-              }
-            },
-            data: [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21",
-              "22",
-              "23",
-              "24"
-            ]
+            interval: 0
           }
-        ],
+        },
         yAxis: [
           {
             type: "value",
-            name: "欺诈数(起)",
+            name: "数量",
             nameTextStyle: {
-              //y轴上方单位的颜色
-              color: "#8fd5f3"
+              color: "#d2d2d3",
+              fontSize: 14
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                width: 1,
+                color: "#3d5269"
+              }
             },
             axisTick: {
               show: false
             },
             axisLine: {
-              show: true, //y轴线
-              lineStyle: {
-                show: false
-              }
+              show: false
             },
             axisLabel: {
-              // margin: 10,
+              show: true,
               textStyle: {
-                fontSize: 12,
-                color: "#8fd5f3"
-              }
-            },
-            splitLine: {
-              show: false,
-              lineStyle: {
-                color: ["#56859d"],
-                width: 1,
-                type: "solid"
+                color: "#d2d2d3",
+                fontSize: 14
               }
             }
           }
         ],
         series: [
           {
-            name: "平均",
-            type: "line",
-            smooth: true,
-            symbol: "circle",
-            symbolSize: 2,
-            showSymbol: false,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#777779"
-              }
-            },
-            areaStyle: {
-              normal: {
-                color: new t.$echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "rgba(119,119,121,0.8)"
-                    },
-                    {
-                      offset: 0.5,
-                      color: "rgba(119,119,121,0.4)"
-                    },
-                    {
-                      offset: 0.8,
-                      color: "rgba(119,119,121,0.2)"
-                    },
-                    {
-                      offset: 1,
-                      color: "transparent"
-                    }
-                  ],
-                  false
-                ),
-                // shadowColor: 'rgba(232,246,254,0.2)',
-                shadowBlur: 30
-              }
-            },
+            name: "当日",
+            type: "bar",
+            barWidth: 18,
             itemStyle: {
               normal: {
-                color: "#777779",
-                borderColor: "#777779",
-                borderWidth: 0
-              }
-            },
-
-            data: [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              2,
-              5,
-              8,
-              20,
-              50,
-              55,
-              100,
-              20,
-              30,
-              25,
-              33,
-              21,
-              125,
-              60,
-              50,
-              24,
-              30,
-              20,
-              12
-            ]
-          },
-          {
-            name: "今天",
-            type: "line",
-            smooth: true,
-            symbol: "circle",
-            symbolSize: 2,
-            showSymbol: false,
-            lineStyle: {
-              normal: {
-                width: 2,
                 color: "#32e8f5"
               }
             },
-            areaStyle: {
-              normal: {
-                color: new t.$echarts.graphic.LinearGradient(
-                  0,
-                  0,
-                  0,
-                  1,
-                  [
-                    {
-                      offset: 0,
-                      color: "rgba(50,232,245,0.7)"
-                    },
-                    {
-                      offset: 0.5,
-                      color: "rgba(50,232,245,0.4)"
-                    },
-                    {
-                      offset: 0.8,
-                      color: "rgba(50,232,245,0.2)"
-                    },
-                    {
-                      offset: 1,
-                      color: "transparent"
-                    }
-                  ],
-                  false
-                ),
-                // shadowColor: 'rgba(232,246,254,0.2)',
-                shadowBlur: 30
-              }
-            },
+            data: [133]
+          },
+          {
+            name: "平均",
+            type: "bar",
+            barWidth: 18,
             itemStyle: {
               normal: {
-                color: "#32e8f5",
-                borderColor: "#32e8f5",
-                borderWidth: 0
+                color: "#f69846"
               }
             },
+            data: [123]
+          }
+        ]
+      });
+      zxt2.setOption({
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+            label: {
+              show: true
+            }
+          }
+        },
+        grid: {
+          left: "4%",
+          top: "18%",
+          right: "5%",
+          bottom: "22%"
+        },
 
-            data: [
-              0,
-              0,
-              0,
-              0,
-              0,
-              2,
-              5,
-              20,
-              50,
-              120,
-              50,
-              40,
-              50,
-              155,
-              60,
-              40,
-              55,
-              30,
-              66,
-              60,
-              50,
-              22,
-              10,
-              0,
-              0
-            ]
+        xAxis: {
+          data: ["微信", "短信", "智能外呼", "自动查验"],
+          axisLine: {
+            show: true, //隐藏X轴轴线
+            lineStyle: {
+              color: "#3d5269",
+              width: 1
+            }
+          },
+          axisTick: {
+            show: true, //隐藏X轴刻度
+            alignWithLabel: true
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#d2d2d3", //X轴文字颜色
+              fontSize: 14
+            },
+            interval: 0
+          }
+        },
+        yAxis: [
+          {
+            type: "value",
+            name: "数量",
+            nameTextStyle: {
+              color: "#d2d2d3",
+              fontSize: 14
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                width: 1,
+                color: "#3d5269"
+              }
+            },
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: false
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: "#d2d2d3",
+                fontSize: 14
+              }
+            }
+          }
+        ],
+        series: [
+          {
+            name: "当日",
+            type: "bar",
+            barWidth: 18,
+            itemStyle: {
+              normal: {
+                color: "#32e8f5"
+              }
+            },
+            data: [133, 127, 110, 90]
+          },
+          {
+            name: "平均",
+            type: "bar",
+            barWidth: 18,
+            itemStyle: {
+              normal: {
+                color: "#f69846"
+              }
+            },
+            data: [123, 80, 70, 93]
           }
         ]
       });
@@ -1129,6 +1010,9 @@ export default {
       });
       window.addEventListener("resize", function() {
         zxt1.resize();
+      });
+      window.addEventListener("resize", function() {
+        zxt2.resize();
       });
     },
     DrawMap() {
@@ -1898,10 +1782,24 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.select_1 {
+  width: 150px;
+  margin-right: 15px;
+}
+
+.select_2 {
+  width: 280px;
+  &.select_2_1 {
+    width: 220px;
+  }
+}
 .flexBox {
   position: absolute;
+  display: flex;
+  flex-direction: row;
   top: 2%;
-  left: 2%;
+  left: 2.5%;
+  z-index: 999999;
 }
 .lb {
   width: 100vw;
@@ -2281,7 +2179,7 @@ li {
 .qie {
   position: absolute;
   color: #fff;
-  left: 8%;
+  left: 6%;
   top: 42px;
   z-index: 999999;
   cursor: pointer;
@@ -2294,7 +2192,7 @@ li {
   display: flex;
   flex-direction: row;
   color: #fff;
-  left: 5%;
+  left: 3%;
   top: 5%;
   z-index: 999999;
   cursor: pointer;
@@ -2307,6 +2205,56 @@ li {
 }
 </style>
 <style lang="scss">
+.select_2_1 {
+  .el-input__inner {
+    background-color: transparent;
+    font-size: 12px;
+    height: 28px;
+    line-height: 28px;
+    color: #fff;
+  }
+  .el-input__icon {
+    line-height: 22px;
+  }
+}
+.select_1 {
+  .el-input__inner {
+    background-color: transparent;
+    font-size: 12px;
+    height: 28px;
+    line-height: 28px;
+    color: #fff;
+  }
+  .el-input__icon {
+    line-height: 17px;
+  }
+}
+.flexBox {
+  .select_2 {
+    font-size: 12px;
+    height: 28px;
+    line-height: 28px;
+    color: #fff;
+    background-color: transparent;
+    .el-range__icon {
+      line-height: 14px;
+    }
+    .el-range-input {
+      width: 46%;
+      font-size: 12px;
+      color: #fff;
+      background-color: transparent;
+    }
+    .el-range__close-icon {
+      line-height: 14px;
+    }
+    .el-range-separator {
+      line-height: 14px;
+      font-size: 12px;
+      color: #fff;
+    }
+  }
+}
 .e_tabs {
   &.e_tabs1 {
     width: 100%;
