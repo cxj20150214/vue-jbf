@@ -16,294 +16,341 @@
         alt=""
       />
     </div>
-    <el-carousel
-      height="100vh"
-      class="lb"
-      ref="carousel"
-      :interval="8000"
-      :autoplay="autoplay"
-      trigger="click"
-    >
-      <el-carousel-item>
-        <div class="bg">
-          <div class="echartBox">
-            <div class="flexBox">
-              <el-select class="select_1" v-model="value1" placeholder="请选择">
-                <el-option
-                  v-for="item in options1"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+    <div class="bgAll">
+      <el-carousel
+        height="100%"
+        class="lb"
+        ref="carousel"
+        :interval="8000"
+        :autoplay="autoplay"
+        trigger="click"
+      >
+        <el-carousel-item>
+          <div class="bg">
+            <div class="echartBox">
+              <div class="flexBox">
+                <el-select
+                  class="select_1"
+                  v-model="value1"
+                  placeholder="请选择"
                 >
-                </el-option>
-              </el-select>
-              <el-select
-                class="select_1"
-                v-model="value"
-                placeholder="请选择"
-                @change="getJGH"
-              >
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+                  <el-option
+                    v-for="item in options1"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+                <el-select
+                  class="select_1"
+                  v-model="value"
+                  placeholder="请选择"
+                  @change="getJGH"
                 >
-                </el-option>
-              </el-select>
-              <el-date-picker
-                v-show="dateMode"
-                v-model="selectTime"
-                class="select_2"
-                type="daterange"
-                align="right"
-                unlink-panels
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                value-format="yyyy-MM-dd"
-                @change="getDatePick"
-                :picker-options="pickerOptions"
-              >
-              </el-date-picker>
-            </div>
-            <div class="boxLeft">
-              <div class="title">
-                <p>实时反欺诈</p>
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+                <el-date-picker
+                  v-show="dateMode"
+                  v-model="selectTime"
+                  class="select_2"
+                  type="daterange"
+                  align="right"
+                  unlink-panels
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  value-format="yyyy-MM-dd"
+                  @change="getDatePick"
+                  :picker-options="pickerOptions"
+                >
+                </el-date-picker>
               </div>
-              <el-tabs
-                class="e_tabs"
-                v-model="activeName"
-                @tab-click="handleClick"
-              >
-                <el-tab-pane label="世界地区" name="first">
-                  <div class="sjBox">
-                    <div class="tit">
-                      <p>欺诈国家</p>
-                      <p>欺诈事件数(件)</p>
-                      <p>欺诈事件金额(万元)</p>
+              <div class="boxLeft">
+                <div class="title">
+                  <p>实时反欺诈</p>
+                </div>
+                <el-tabs
+                  class="e_tabs"
+                  v-model="activeName"
+                  @tab-click="handleClick"
+                >
+                  <el-tab-pane label="世界地区" name="first">
+                    <div class="sjBox">
+                      <div class="tit">
+                        <p>欺诈国家</p>
+                        <p>欺诈事件数(件)</p>
+                        <p>欺诈事件金额(万元)</p>
+                      </div>
+                      <ul class="gjBox">
+                        <li>
+                          <p class="p1">中国</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">韩国</p>
+                          <p class="p2">800</p>
+                          <p class="p3">1,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">日本</p>
+                          <p class="p2">1,400</p>
+                          <p class="p3">2,655,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">俄罗斯</p>
+                          <p class="p2">1,080</p>
+                          <p class="p3">1,245,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">新加坡</p>
+                          <p class="p2">900</p>
+                          <p class="p3">225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">印度</p>
+                          <p class="p2">1,000</p>
+                          <p class="p3">125,000</p>
+                        </li>
+                      </ul>
                     </div>
-                    <ul class="gjBox">
-                      <li>
-                        <p class="p1">中国</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">韩国</p>
-                        <p class="p2">800</p>
-                        <p class="p3">1,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">日本</p>
-                        <p class="p2">1,400</p>
-                        <p class="p3">2,655,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">俄罗斯</p>
-                        <p class="p2">1,080</p>
-                        <p class="p3">1,245,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">新加坡</p>
-                        <p class="p2">900</p>
-                        <p class="p3">225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">印度</p>
-                        <p class="p2">1,000</p>
-                        <p class="p3">125,000</p>
-                      </li>
-                    </ul>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="中国地区" name="second">
-                  <div class="sjBox">
-                    <div class="tit">
-                      <p>欺诈地区</p>
-                      <p>欺诈事件数(件)</p>
-                      <p>欺诈事件金额(万元)</p>
+                  </el-tab-pane>
+                  <el-tab-pane label="中国地区" name="second">
+                    <div class="sjBox">
+                      <div class="tit">
+                        <p>欺诈地区</p>
+                        <p>欺诈事件数(件)</p>
+                        <p>欺诈事件金额(万元)</p>
+                      </div>
+                      <ul class="gjBox">
+                        <li>
+                          <p class="p1">福建</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">32,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">浙江</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">42,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">黑龙江</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">12,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">河北</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">14,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">云南</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">11,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">四川</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">322,000</p>
+                        </li>
+                      </ul>
                     </div>
-                    <ul class="gjBox">
-                      <li>
-                        <p class="p1">福建</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">32,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">浙江</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">42,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">黑龙江</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">12,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">河北</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">14,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">云南</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">11,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">四川</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">322,000</p>
-                      </li>
-                    </ul>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="商户维度" name="third">
-                  <div class="sjBox">
-                    <div class="tit">
-                      <p>商户类型</p>
-                      <p>欺诈事件数(件)</p>
-                      <p>欺诈事件金额(万元)</p>
+                  </el-tab-pane>
+                  <el-tab-pane label="商户维度(境外)" name="third">
+                    <div class="sjBox">
+                      <div class="tit">
+                        <p>商户类型</p>
+                        <p>欺诈事件数(件)</p>
+                        <p>欺诈事件金额(万元)</p>
+                      </div>
+                      <ul class="gjBox">
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                      </ul>
                     </div>
-                    <ul class="gjBox">
-                      <li>
-                        <p class="p1">类型</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">类型</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">类型</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">类型</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">类型</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                      <li>
-                        <p class="p1">类型</p>
-                        <p class="p2">1,200</p>
-                        <p class="p3">2,225,000</p>
-                      </li>
-                    </ul>
-                  </div>
-                </el-tab-pane>
-              </el-tabs>
-            </div>
-            <div class="boxRight">
-              <div class="ditu" id="ditu1" v-show="sjMap"></div>
-              <div class="ditu" id="ditu2"></div>
+                  </el-tab-pane>
+                  <el-tab-pane label="商户维度(境内)" name="third1">
+                    <div class="sjBox">
+                      <div class="tit">
+                        <p>商户类型</p>
+                        <p>欺诈事件数(件)</p>
+                        <p>欺诈事件金额(万元)</p>
+                      </div>
+                      <ul class="gjBox">
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                        <li>
+                          <p class="p1">类型</p>
+                          <p class="p2">1,200</p>
+                          <p class="p3">2,225,000</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </el-tab-pane>
+                </el-tabs>
+              </div>
+              <div class="boxRight">
+                <div class="ditu" id="ditu1" v-show="sjMap"></div>
+                <div class="ditu" id="ditu2"></div>
+              </div>
             </div>
           </div>
-        </div>
-      </el-carousel-item>
-      <el-carousel-item>
-        <div class="bg1">
-          <div class="echartBox">
-            <div class="flexBox">
-              <el-select
-                class="select_1"
-                v-model="value2"
-                placeholder="请选择"
-                @change="getJGH"
-              >
-                <el-option
-                  v-for="item in options2"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+        </el-carousel-item>
+        <el-carousel-item>
+          <div class="bg1">
+            <div class="echartBox">
+              <div class="flexBox">
+                <el-select
+                  class="select_1"
+                  v-model="value2"
+                  placeholder="请选择"
+                  @change="getJGH"
                 >
-                </el-option>
-              </el-select>
-              <el-date-picker
-                v-show="dateMode1"
-                v-model="selectTime1"
-                class="select_2 select_2_1"
-                type="date"
-                placeholder="选择日期"
-                value-format="yyyy-MM-dd"
-                @change="getDatePick1"
-                :picker-options="pickerOptions1"
-              >
-              </el-date-picker>
-            </div>
-            <div class="box1">
-              <div class="title">
-                <span>当日监测交易量</span>
-                <p>135,532笔</p>
+                  <el-option
+                    v-for="item in options2"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+                <el-date-picker
+                  v-show="dateMode1"
+                  v-model="selectTime1"
+                  class="select_2 select_2_1"
+                  type="date"
+                  placeholder="选择日期"
+                  value-format="yyyy-MM-dd"
+                  @change="getDatePick1"
+                  :picker-options="pickerOptions1"
+                >
+                </el-date-picker>
               </div>
-              <ul class="list">
-                <li>
-                  <p class="p1">当日监测客户数</p>
-                  <p class="p2">23,365 户</p>
-                </li>
-                <li>
-                  <p class="p1">告警量</p>
-                  <p class="p2">13,365 起</p>
-                </li>
-                <li>
-                  <p class="p1">处理量</p>
-                  <p class="p2">3,365 起</p>
-                </li>
-                <li v-show="sskb">
-                  <p class="p1">待处理量</p>
-                  <p class="p2">3,365 起</p>
-                </li>
-                <li v-show="sskb">
-                  <p class="p1">在线人数</p>
-                  <p class="p2">3,36 人</p>
-                </li>
-              </ul>
-            </div>
-            <div class="box2">
-              <div class="bingtu" id="Pie1"></div>
-            </div>
-            <div class="box3">
-              <el-tabs
-                class="e_tabs e_tabs1"
-                v-model="activeName1"
-                @tab-click="handleClick1"
-              >
-                <el-tab-pane label="告警量" name="first">
-                  <div class="zxtTxt">
-                    <p>当天告警量比平时少<span>37.5%</span></p>
-                    <div class="zxtTxt1">
-                      <p>当天：2570起</p>
-                      <p>平均：2570起</p>
+              <div class="box1">
+                <div class="title">
+                  <span>当日监测交易量</span>
+                  <p>135,532笔</p>
+                </div>
+                <ul class="list">
+                  <li>
+                    <p class="p1">当日监测客户数</p>
+                    <p class="p2">23,365 户</p>
+                  </li>
+                  <li>
+                    <p class="p1">告警量</p>
+                    <p class="p2">13,365 起</p>
+                  </li>
+                  <li>
+                    <p class="p1">处理量</p>
+                    <p class="p2">3,365 起</p>
+                  </li>
+                  <li v-show="sskb">
+                    <p class="p1">待处理量</p>
+                    <p class="p2">3,365 起</p>
+                  </li>
+                  <li v-show="sskb">
+                    <p class="p1">在线人数</p>
+                    <p class="p2">3,36 人</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="box2">
+                <div class="bingtu" id="Pie1"></div>
+              </div>
+              <div class="box3">
+                <el-tabs
+                  class="e_tabs e_tabs1"
+                  v-model="activeName1"
+                  @tab-click="handleClick1"
+                >
+                  <el-tab-pane label="告警量" name="first">
+                    <div class="zxtTxt">
+                      <p>当天告警量比平时少<span>37.5%</span></p>
+                      <div class="zxtTxt1">
+                        <p>当天：2570起</p>
+                        <p>平均：2570起</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="zxt" id="zxt"></div>
-                </el-tab-pane>
-                <el-tab-pane label="欺诈事件数" name="second">
-                  <div class="zxtTxt">
-                    <p>当天欺诈事件数比平时少<span>37.5%</span></p>
-                    <div class="zxtTxt1">
-                      <p>当天：2570起</p>
-                      <p>平均：2570起</p>
+                    <div class="zxt" id="zxt"></div>
+                  </el-tab-pane>
+                  <el-tab-pane label="欺诈事件数" name="second">
+                    <div class="zxtTxt">
+                      <p>当天欺诈事件数比平时少<span>37.5%</span></p>
+                      <div class="zxtTxt1">
+                        <p>当天：2570起</p>
+                        <p>平均：2570起</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="zxt" id="zxt1"></div>
-                </el-tab-pane>
-                <el-tab-pane label="自动处理概况" name="third">
-                  <div class="zxt" id="zxt2"></div>
-                </el-tab-pane>
-              </el-tabs>
+                    <div class="zxt" id="zxt1"></div>
+                  </el-tab-pane>
+                  <el-tab-pane label="自动处理概况" name="third">
+                    <div class="zxt" id="zxt2"></div>
+                  </el-tab-pane>
+                </el-tabs>
+              </div>
             </div>
           </div>
-        </div>
-      </el-carousel-item>
-    </el-carousel>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
     <!-- <div class="bg">
       <div class="echartBox">
         <div class="boxLeft">
@@ -589,7 +636,7 @@ export default {
           }
         },
         grid: {
-          left: "4%",
+          left: "8%",
           top: "18%",
           right: "5%",
           bottom: "22%"
@@ -683,7 +730,7 @@ export default {
           }
         },
         grid: {
-          left: "4%",
+          left: "8%",
           top: "18%",
           right: "5%",
           bottom: "22%"
@@ -777,7 +824,7 @@ export default {
           }
         },
         grid: {
-          left: "4%",
+          left: "8%",
           top: "18%",
           right: "5%",
           bottom: "22%"
@@ -1180,7 +1227,6 @@ export default {
         // { name: "爱沙尼亚", value: 19.49 },
         // { name: "白俄罗斯", value: 7.67 },
         { name: "美国", value: 63.52 },
-        { name: "美国", value: 63.52 }
         // { name: "文莱", value: 45.69 },
         // { name: "摩尔多瓦", value: 2.08 },
         // { name: "巴哈马", value: 26.37 },
@@ -1788,7 +1834,7 @@ export default {
 }
 
 .select_2 {
-  width: 280px;
+  width: 320px;
   &.select_2_1 {
     width: 220px;
   }
@@ -1810,12 +1856,18 @@ p {
 li {
   list-style: none;
 }
-.bg {
+.bgAll {
   width: 100vw;
   height: 100vh;
   background: #000;
   display: flex;
   padding: 100px 0px;
+  position: relative;
+}
+.bg {
+  width: 100vw;
+  height: 100%;
+  display: flex;
   .echartBox {
     width: 100%;
     height: 100%;
@@ -1970,10 +2022,8 @@ li {
 }
 .bg1 {
   width: 100vw;
-  height: 100vh;
-  background: #000;
+  height: 100%;
   display: flex;
-  padding: 100px 0px;
   .echartBox {
     width: 100%;
     height: 100%;
@@ -2272,12 +2322,12 @@ li {
     margin-left: 60px;
   }
   .el-tabs__item {
-    font-size: 22px;
+    font-size: 18px;
     color: #d2d2d3;
   }
   .el-tabs__item.is-active {
     color: #fff;
-    font-size: 28px;
+    font-size: 24px;
   }
   .el-tabs__nav-wrap {
     &::after {
