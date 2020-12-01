@@ -81,12 +81,12 @@
                   v-model="activeName"
                   @tab-click="handleClick"
                 >
-                  <el-tab-pane label="世界地区" name="first">
+                  <el-tab-pane label="世界" name="first">
                     <div class="sjBox">
                       <div class="tit">
-                        <p>欺诈国家</p>
-                        <p>欺诈事件数(件)</p>
-                        <p>欺诈事件金额(万元)</p>
+                        <p>欺诈国家地区</p>
+                        <p>欺诈事件数(起)</p>
+                        <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
                         <li>
@@ -122,12 +122,12 @@
                       </ul>
                     </div>
                   </el-tab-pane>
-                  <el-tab-pane label="中国地区" name="second">
+                  <el-tab-pane label="中国" name="second">
                     <div class="sjBox">
                       <div class="tit">
                         <p>欺诈地区</p>
-                        <p>欺诈事件数(件)</p>
-                        <p>欺诈事件金额(万元)</p>
+                        <p>欺诈事件数(起)</p>
+                        <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
                         <li>
@@ -163,12 +163,12 @@
                       </ul>
                     </div>
                   </el-tab-pane>
-                  <el-tab-pane label="商户维度(境外)" name="third">
+                  <el-tab-pane label="欺诈商户类型(境外)" name="third">
                     <div class="sjBox">
                       <div class="tit">
                         <p>商户类型</p>
-                        <p>欺诈事件数(件)</p>
-                        <p>欺诈事件金额(万元)</p>
+                        <p>欺诈事件数(起)</p>
+                        <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
                         <li>
@@ -204,12 +204,12 @@
                       </ul>
                     </div>
                   </el-tab-pane>
-                  <el-tab-pane label="商户维度(境内)" name="third1">
+                  <el-tab-pane label="欺诈商户类型(境内)" name="third1">
                     <div class="sjBox">
                       <div class="tit">
                         <p>商户类型</p>
-                        <p>欺诈事件数(件)</p>
-                        <p>欺诈事件金额(万元)</p>
+                        <p>欺诈事件数(起)</p>
+                        <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
                         <li>
@@ -292,23 +292,23 @@
                 <ul class="list">
                   <li>
                     <p class="p1">当日监测客户数</p>
-                    <p class="p2">23,365 户</p>
+                    <p class="p2">23,365 <span>户</span></p>
                   </li>
                   <li>
                     <p class="p1">告警量</p>
-                    <p class="p2">13,365 起</p>
+                    <p class="p2">13,365 <span>起</span></p>
                   </li>
                   <li>
                     <p class="p1">处理量</p>
-                    <p class="p2">3,365 起</p>
+                    <p class="p2">3,365 <span>起</span></p>
                   </li>
                   <li v-show="sskb">
                     <p class="p1">待处理量</p>
-                    <p class="p2">3,365 起</p>
+                    <p class="p2">3,365 <span>起</span></p>
                   </li>
                   <li v-show="sskb">
                     <p class="p1">在线人数</p>
-                    <p class="p2">3,36 人</p>
+                    <p class="p2">3,36 <span>人</span></p>
                   </li>
                 </ul>
               </div>
@@ -407,6 +407,7 @@
 <script>
 import "echarts/map/js/world.js";
 import "echarts/map/js/china.js";
+import "echarts-liquidfill/src/liquidFill.js";
 export default {
   name: "demo5",
   data() {
@@ -421,11 +422,11 @@ export default {
         },
         {
           value: "a2",
-          label: "线上"
+          label: "网络交易"
         },
         {
           value: "a3",
-          label: "线下"
+          label: "刷卡"
         }
       ],
       value1: "全部",
@@ -643,7 +644,7 @@ export default {
         },
 
         xAxis: {
-          data: ["16:30"],
+          data: ["更新时间：16:30"],
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
@@ -667,7 +668,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "数量",
+            name: "告警量(起)",
             nameTextStyle: {
               color: "#d2d2d3",
               fontSize: 14
@@ -737,7 +738,7 @@ export default {
         },
 
         xAxis: {
-          data: ["16:30"],
+          data: ["更新时间：16:30"],
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
@@ -761,7 +762,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "数量",
+            name: "欺诈事件数(起)",
             nameTextStyle: {
               color: "#d2d2d3",
               fontSize: 14
@@ -831,7 +832,7 @@ export default {
         },
 
         xAxis: {
-          data: ["微信", "短信", "智能外呼", "自动查验"],
+          data: ["微信核实", "短信核实", "智能语音外呼", "符合客户行为","无效卡处理"],
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
@@ -855,7 +856,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: "数量",
+            name: "自动处理数(起)",
             nameTextStyle: {
               color: "#d2d2d3",
               fontSize: 14
@@ -892,7 +893,7 @@ export default {
                 color: "#32e8f5"
               }
             },
-            data: [133, 127, 110, 90]
+            data: [133, 127, 110, 90,70]
           },
           {
             name: "平均",
@@ -903,7 +904,7 @@ export default {
                 color: "#f69846"
               }
             },
-            data: [123, 80, 70, 93]
+            data: [123, 80, 70, 93,42]
           }
         ]
       });
@@ -932,9 +933,11 @@ export default {
       };
 
       let rich = {
+        fontSize: 16,
         white: {
           align: "center",
-          padding: [3, 0]
+          padding: [3, 0],
+          fontSize: 16
         }
       };
 
@@ -979,17 +982,21 @@ export default {
             name: "",
             type: "pie",
             clockWise: false,
-            startAngle: "90",
+            startAngle: "0",
             center: ["50%", "55%"],
-            radius: ["50%", "52%"],
+            radius: ["50%", "54%"],
             hoverAnimation: false,
             itemStyle: {
               normal: {
                 label: {
                   show: true,
+                  fontSize: 16,
                   position: "outside",
                   formatter: func,
-                  rich: rich
+                  rich: rich,
+                  textStyle: {
+                    fontSize: 16
+                  }
                 },
                 labelLine: {
                   length: 5,
@@ -1007,45 +1014,25 @@ export default {
             }
           },
           {
-            name: "",
-            type: "pie",
+            type: "liquidFill",
+            radius: "45%",
             center: ["50%", "55%"],
-            radius: ["49%", "49%"],
-            itemStyle: {
-              color: "transparant"
+            data: [0.5, 0.5, 0.5], // data个数代表波浪数
+            backgroundStyle: {
+              borderWidth: 1,
+              color: "rgb(255,0,255,0.1)"
             },
-            startAngle: "90",
-            data: [
-              {
-                value: total,
-                name: "",
-                label: {
-                  normal: {
-                    show: true,
-                    formatter: this.handle + "已处理",
-                    rich: {
-                      c: {
-                        color: "rgb(98,137,169)",
-                        fontSize: this.setFontsize(0.4),
-                        fontWeight: "bold",
-                        lineHeight: 5
-                      },
-                      b: {
-                        color: "rgb(98,137,169)",
-                        fontSize: this.setFontsize(0.4),
-                        lineHeight: 5
-                      }
-                    },
-                    textStyle: {
-                      fontSize: this.setFontsize(0.35),
-                      // fontWeight: "bold",
-                      color: "#d2d2d3"
-                    },
-                    position: "center"
-                  }
+            label: {
+              normal: {
+                formatter: ["处理率", (0.5 * 100).toFixed(2) + "%"].join("\n"),
+                textStyle: {
+                  fontSize: this.setFontsize(0.25)
                 }
               }
-            ]
+            },
+            outline: {
+              show: false
+            }
           }
         ]
       });
@@ -1226,7 +1213,7 @@ export default {
         // { name: "立陶宛", value: 16.14 },
         // { name: "爱沙尼亚", value: 19.49 },
         // { name: "白俄罗斯", value: 7.67 },
-        { name: "美国", value: 20.52 },
+        { name: "美国", value: 20.52 }
         // { name: "文莱", value: 45.69 },
         // { name: "摩尔多瓦", value: 2.08 },
         // { name: "巴哈马", value: 26.37 },
@@ -1599,7 +1586,7 @@ export default {
         },
         baseOption: {
           visualMap: {
-            show: false,
+            show: true,
             type: "piecewise", //分段型。
             splitNumber: 6,
             inverse: true,
@@ -1638,7 +1625,7 @@ export default {
             left: "left",
             top: "bottom",
             textStyle: {
-              color: "#000"
+              color: "#fff"
             }
             //min: 0,
             //max: 60000,
@@ -1715,7 +1702,7 @@ export default {
         },
         baseOption: {
           visualMap: {
-            show: false,
+            show: true,
             type: "piecewise", //分段型。
             splitNumber: 6,
             inverse: true,
@@ -1754,7 +1741,7 @@ export default {
             left: "left",
             top: "bottom",
             textStyle: {
-              color: "#000"
+              color: "#fff"
             }
             //min: 0,
             //max: 60000,
@@ -2040,7 +2027,7 @@ li {
       width: 33%;
       height: 100;
       .title {
-        width: 460px;
+        width: 540px;
         height: 50px;
         background: rgba(0, 80, 216, 0.8);
         margin-top: 30px;
@@ -2089,9 +2076,12 @@ li {
             &.p2 {
               font-size: 48px;
               letter-spacing: 3px;
+              span {
+                font-size: 32px;
+              }
             }
             &.p1 {
-              font-size: 20px;
+              font-size: 24px;
               line-height: 60px;
             }
           }
@@ -2131,22 +2121,24 @@ li {
         }
         color: #fff;
         margin-top: 20px;
-        font-size: 18px;
+        font-size: 22px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         .zxtTxt1 {
+          font-size: 22px;
         }
         span {
           color: #20a56c;
           padding-left: 5px;
-          font-size: 20px;
+          font-size: 22px;
           font-weight: 700;
         }
       }
       .zxt {
         width: 100%;
         height: 300px;
+        margin-top:20px;
       }
       width: 50%;
       height: 100%;
