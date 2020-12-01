@@ -170,16 +170,22 @@
         <div class="titleBox">
           <img src="../../assets/img/sj.png" alt />
           <p class="title">定期巡检</p>
-          <p :class="{ active: showXJ == 1 }" class="title_all" @click="clAll">
+          <!-- <p :class="{ active: showXJ == 1 }" class="title_all" @click="clAll">
             巡检总数
           </p>
           x
           <p :class="{ active: showXJ == 2 }" class="title_cll" @click="cll">
             巡检完成率
-          </p>
+          </p> -->
         </div>
-        <div class="bingtu" id="Pie1" v-show="chuliliang"></div>
-        <div class="bingtu" id="Pie4" v-show="chulilv"></div>
+        <ul class="xjTitle">
+          <li>专项</li>
+          <li>远程</li>
+          <li>现场</li>
+        </ul>
+        <div class="bingtu" id="PieXJ"></div>
+        <!-- <div class="bingtu" id="Pie1" v-show="chuliliang"></div>
+        <div class="bingtu" id="Pie4" v-show="chulilv"></div> -->
       </div>
     </div>
     <div class="box4">
@@ -984,7 +990,7 @@ export default {
           x: 50,
           x2: 50,
           top: "15%",
-          bottom: "22%" //也可设置left和right设置距离来控制图表的大小
+          bottom: "15%" //也可设置left和right设置距离来控制图表的大小
         },
         tooltip: {
           trigger: "axis",
@@ -1026,6 +1032,8 @@ export default {
           },
           axisLabel: {
             show: true,
+            interval: 0,
+            rotate: 40,
             textStyle: {
               color: "#fff" //X轴文字颜色
             }
@@ -1051,7 +1059,6 @@ export default {
               }
             },
             axisLabel: {
-              show: true,
               textStyle: {
                 color: "#fff",
                 fontSize: this.setFontsize(0.12)
@@ -1075,7 +1082,6 @@ export default {
               show: true
             },
             axisLabel: {
-              show: true,
               formatter: "{value} %", //右侧Y轴文字显示
               textStyle: {
                 color: "#fff",
@@ -1116,7 +1122,7 @@ export default {
             xAxisIndex: [0],
             bottom: "0%",
             start: 0,
-            end: 100,
+            end: 50,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -1124,6 +1130,7 @@ export default {
               color: "#d3dee5"
             },
             textStyle: {
+              show: false,
               color: "#fff"
             },
             borderColor: "#90979c"
@@ -1181,389 +1188,594 @@ export default {
       });
     },
     // 巡检切换的两个图单独请求
-    xunJianPie() {
-      let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
-      var colorList = [
-        "#73DDFF",
-        "#73ACFF",
-        "#FDD56A",
-        "#FDB36A",
-        "#FD866A",
-        "#9E87FF",
-        "#58D5FF"
-      ];
-      Pie1.setOption({
-        backgroundColor: "",
-        title: {
-          text: "",
-          left: "center",
-          top: 20,
-          textStyle: {
-            color: "#ccc"
-          }
-        },
+    // xunJianPie() {
+    //   let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
+    //   var colorList = [
+    //     "#73DDFF",
+    //     "#73ACFF",
+    //     "#FDD56A",
+    //     "#FDB36A",
+    //     "#FD866A",
+    //     "#9E87FF",
+    //     "#58D5FF"
+    //   ];
+    //   Pie1.setOption({
+    //     backgroundColor: "",
+    //     title: {
+    //       text: "",
+    //       left: "center",
+    //       top: 20,
+    //       textStyle: {
+    //         color: "#ccc"
+    //       }
+    //     },
 
-        tooltip: {
-          trigger: "item",
-          formatter: "{b} : {c} ({d}%)",
-          textStyle: {
-            fontSize: 24
-          }
-        },
+    //     tooltip: {
+    //       trigger: "item",
+    //       formatter: "{b} : {c} ({d}%)",
+    //       textStyle: {
+    //         fontSize: 24
+    //       }
+    //     },
 
-        visualMap: {
-          show: false,
-          min: 500,
-          max: 600,
-          inRange: {
-            //colorLightness: [0, 1]
-          }
-        },
-        series: [
-          {
-            name: "访问来源",
-            type: "pie",
-            radius: "50%",
-            center: ["45%", "62%"],
-            color: ["#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
-            data: this.dqxjData1.sort(function(a, b) {
-              return a.value - b.value;
-            }),
-            roseType: "radius",
+    //     visualMap: {
+    //       show: false,
+    //       min: 500,
+    //       max: 600,
+    //       inRange: {
+    //         //colorLightness: [0, 1]
+    //       }
+    //     },
+    //     series: [
+    //       {
+    //         name: "访问来源",
+    //         type: "pie",
+    //         radius: "50%",
+    //         center: ["45%", "62%"],
+    //         color: ["#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
+    //         data: this.dqxjData1.sort(function(a, b) {
+    //           return a.value - b.value;
+    //         }),
+    //         roseType: "radius",
 
-            label: {
-              normal: {
-                formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
-                rich: {
-                  c: {
-                    color: "#77c8ff",
-                    fontSize: 28,
-                    fontWeight: "bold",
-                    lineHeight: 40
-                  },
-                  b: {
-                    color: "rgb(98,137,169)",
-                    fontSize: 24,
-                    height: 60
-                  }
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                lineStyle: {
-                  color: "rgb(98,137,169)"
-                },
-                smooth: 0.2,
-                length: 10,
-                length2: 20
-              }
-            },
-            itemStyle: {
-              normal: {
-                shadowColor: "rgba(0, 0, 0, 0.8)",
-                shadowBlur: 50
-              }
-            }
-          }
-        ]
-      });
-      let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
-      var dataArry = {
-        two: 300,
-        three: 200,
-        four: 200
-      };
-      Pie4.setOption({
-        tooltip: {
-          formatter: "{a} <br/>{c} {b}"
-        },
-        series: [
-          {
-            name: "远程巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 100,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["20%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.two) {
-                  return "远程巡检:" + dataArry.two;
-                }
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                return value *10 .toFixed(2) + "%";
-              }
-            },
-            data: [
-              {
-                value: this.ycxjData,
-                name: "远程巡检"
-              }
-            ]
-          },
-          {
-            name: "现场巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 100,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["40%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.three) {
-                  return "现场巡检:" + dataArry.three;
-                }
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                return value .toFixed(2)  + "%";
-              }
-            },
-            data: [
-              {
-                value: this.xcxjData,
-                name: "现场巡检"
-              }
-            ]
-          },
-          {
-            name: "专项巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 100,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["62%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.four) {
-                  return "专项巡检:" + dataArry.four;
-                }
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                return value + "%";
-              }
-            },
-            data: [
-              {
-                value: this.zxxjData,
-                name: "专项巡检"
-              }
-            ]
-          }
-        ]
-      });
-      this.$nextTick(() => {
-        Pie1.resize();
-      });
-      this.$nextTick(() => {
-        Pie4.resize();
-      });
-    },
+    //         label: {
+    //           normal: {
+    //             formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
+    //             rich: {
+    //               c: {
+    //                 color: "#77c8ff",
+    //                 fontSize: 28,
+    //                 fontWeight: "bold",
+    //                 lineHeight: 40
+    //               },
+    //               b: {
+    //                 color: "rgb(98,137,169)",
+    //                 fontSize: 24,
+    //                 height: 60
+    //               }
+    //             }
+    //           }
+    //         },
+    //         labelLine: {
+    //           normal: {
+    //             lineStyle: {
+    //               color: "rgb(98,137,169)"
+    //             },
+    //             smooth: 0.2,
+    //             length: 10,
+    //             length2: 20
+    //           }
+    //         },
+    //         itemStyle: {
+    //           normal: {
+    //             shadowColor: "rgba(0, 0, 0, 0.8)",
+    //             shadowBlur: 50
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
+    //   var dataArry = {
+    //     two: 300,
+    //     three: 200,
+    //     four: 200
+    //   };
+    //   Pie4.setOption({
+    //     tooltip: {
+    //       formatter: "{a} <br/>{c} {b}"
+    //     },
+    //     series: [
+    //       {
+    //         name: "远程巡检",
+    //         type: "gauge",
+    //         color: ["#f00"],
+    //         min: 0,
+    //         max: 100,
+    //         splitNumber: 8,
+    //         radius: "30%",
+    //         center: ["20%", "55%"],
+    //         axisLine: {
+    //           // 坐标轴线
+    //           lineStyle: {
+    //             // 属性lineStyle控制线条样式
+    //             width: 10,
+    //             color: [
+    //               [0.4, "#203add"],
+    //               [1, "#0d1758"]
+    //             ]
+    //           },
+    //           backgroundColor: "none"
+    //         },
+    //         axisTick: {
+    //           // 坐标轴小标记
+    //           length: 12, // 属性length控制线长
+    //           lineStyle: {
+    //             // 属性lineStyle控制线条样式
+    //             color: "auto"
+    //           }
+    //         },
+    //         tooltip: {
+    //           formatter: function() {
+    //             if (dataArry.two) {
+    //               return "远程巡检:" + dataArry.two;
+    //             }
+    //           }
+    //         },
+    //         splitLine: {
+    //           // 分隔线
+    //           length: 5, // 属性length控制线长
+    //           lineStyle: {
+    //             // 属性lineStyle（详见lineStyle）控制线条样式
+    //             color: "rgba(255,255,255,0.7)"
+    //           }
+    //         },
+    //         axisLabel: {
+    //           borderRadius: 1,
+    //           color: "rgba(255,255,255,0.7)",
+    //           padding: 1
+    //         },
+    //         title: {
+    //           fontSize: 22,
+    //           fontColor: "#FFF",
+    //           color: "#FFF",
+    //           paddingTop: 15,
+    //           offsetCenter: [0, "110%"]
+    //         },
+    //         itemStyle: {
+    //           color: "#1092ff"
+    //         },
+    //         detail: {
+    //           shadowOffsetX: 0,
+    //           shadowOffsetY: 0,
+    //           textBorderColor: "#000",
+    //           textBorderWidth: 1,
+    //           textShadowBlur: 1,
+    //           textShadowColor: "#fff",
+    //           textShadowOffsetX: 0,
+    //           textShadowOffsetY: 0,
+    //           paddingTop: 10,
+    //           fontFamily: "digital",
+    //           fontSize: 20,
+    //           width: 30,
+    //           color: "#fff",
+    //           rich: {},
+    //           offsetCenter: [0, "65%"],
+    //           formatter: function(value) {
+    //             return value * (10).toFixed(2) + "%";
+    //           }
+    //         },
+    //         data: [
+    //           {
+    //             value: this.ycxjData,
+    //             name: "远程巡检"
+    //           }
+    //         ]
+    //       },
+    //       {
+    //         name: "现场巡检",
+    //         type: "gauge",
+    //         color: ["#f00"],
+    //         min: 0,
+    //         max: 100,
+    //         splitNumber: 8,
+    //         radius: "30%",
+    //         center: ["40%", "55%"],
+    //         axisLine: {
+    //           // 坐标轴线
+    //           lineStyle: {
+    //             // 属性lineStyle控制线条样式
+    //             width: 10,
+    //             color: [
+    //               [0.4, "#203add"],
+    //               [1, "#0d1758"]
+    //             ]
+    //           },
+    //           backgroundColor: "none"
+    //         },
+    //         axisTick: {
+    //           // 坐标轴小标记
+    //           length: 12, // 属性length控制线长
+    //           lineStyle: {
+    //             // 属性lineStyle控制线条样式
+    //             color: "auto"
+    //           }
+    //         },
+    //         splitLine: {
+    //           // 分隔线
+    //           length: 5, // 属性length控制线长
+    //           lineStyle: {
+    //             // 属性lineStyle（详见lineStyle）控制线条样式
+    //             color: "rgba(255,255,255,0.7)"
+    //           }
+    //         },
+    //         tooltip: {
+    //           formatter: function() {
+    //             if (dataArry.three) {
+    //               return "现场巡检:" + dataArry.three;
+    //             }
+    //           }
+    //         },
+    //         axisLabel: {
+    //           borderRadius: 1,
+    //           color: "rgba(255,255,255,0.7)",
+    //           padding: 1
+    //         },
+    //         title: {
+    //           fontSize: 22,
+    //           fontColor: "#FFF",
+    //           color: "#FFF",
+    //           paddingTop: 15,
+    //           offsetCenter: [0, "110%"]
+    //         },
+    //         itemStyle: {
+    //           color: "#1092ff"
+    //         },
+    //         detail: {
+    //           shadowOffsetX: 0,
+    //           shadowOffsetY: 0,
+    //           textBorderColor: "#000",
+    //           textBorderWidth: 1,
+    //           textShadowBlur: 1,
+    //           textShadowColor: "#fff",
+    //           textShadowOffsetX: 0,
+    //           textShadowOffsetY: 0,
+    //           paddingTop: 10,
+    //           fontFamily: "digital",
+    //           fontSize: 20,
+    //           width: 30,
+    //           color: "#fff",
+    //           rich: {},
+    //           offsetCenter: [0, "65%"],
+    //           formatter: function(value) {
+    //             return value.toFixed(2) + "%";
+    //           }
+    //         },
+    //         data: [
+    //           {
+    //             value: this.xcxjData,
+    //             name: "现场巡检"
+    //           }
+    //         ]
+    //       },
+    //       {
+    //         name: "专项巡检",
+    //         type: "gauge",
+    //         color: ["#f00"],
+    //         min: 0,
+    //         max: 100,
+    //         splitNumber: 8,
+    //         radius: "30%",
+    //         center: ["62%", "55%"],
+    //         axisLine: {
+    //           // 坐标轴线
+    //           lineStyle: {
+    //             // 属性lineStyle控制线条样式
+    //             width: 10,
+    //             color: [
+    //               [0.4, "#203add"],
+    //               [1, "#0d1758"]
+    //             ]
+    //           },
+    //           backgroundColor: "none"
+    //         },
+    //         axisTick: {
+    //           // 坐标轴小标记
+    //           length: 12, // 属性length控制线长
+    //           lineStyle: {
+    //             // 属性lineStyle控制线条样式
+    //             color: "auto"
+    //           }
+    //         },
+    //         splitLine: {
+    //           // 分隔线
+    //           length: 5, // 属性length控制线长
+    //           lineStyle: {
+    //             // 属性lineStyle（详见lineStyle）控制线条样式
+    //             color: "rgba(255,255,255,0.7)"
+    //           }
+    //         },
+    //         tooltip: {
+    //           formatter: function() {
+    //             if (dataArry.four) {
+    //               return "专项巡检:" + dataArry.four;
+    //             }
+    //           }
+    //         },
+    //         axisLabel: {
+    //           borderRadius: 1,
+    //           color: "rgba(255,255,255,0.7)",
+    //           padding: 1
+    //         },
+    //         title: {
+    //           fontSize: 22,
+    //           fontColor: "#FFF",
+    //           color: "#FFF",
+    //           paddingTop: 15,
+    //           offsetCenter: [0, "110%"]
+    //         },
+    //         itemStyle: {
+    //           color: "#1092ff"
+    //         },
+    //         detail: {
+    //           shadowOffsetX: 0,
+    //           shadowOffsetY: 0,
+    //           textBorderColor: "#000",
+    //           textBorderWidth: 1,
+    //           textShadowBlur: 1,
+    //           textShadowColor: "#fff",
+    //           textShadowOffsetX: 0,
+    //           textShadowOffsetY: 0,
+    //           paddingTop: 10,
+    //           fontFamily: "digital",
+    //           fontSize: 20,
+    //           width: 30,
+    //           color: "#fff",
+    //           rich: {},
+    //           offsetCenter: [0, "65%"],
+    //           formatter: function(value) {
+    //             return value + "%";
+    //           }
+    //         },
+    //         data: [
+    //           {
+    //             value: this.zxxjData,
+    //             name: "专项巡检"
+    //           }
+    //         ]
+    //       }
+    //     ]
+    //   });
+    //   this.$nextTick(() => {
+    //     Pie1.resize();
+    //   });
+    //   this.$nextTick(() => {
+    //     Pie4.resize();
+    //   });
+    // },
     // 饼图
     piedemo() {
-      let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
+      let PieXJ = this.$echarts.init(document.getElementById("PieXJ")); //新巡检图
+      // let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
       let Pie2 = this.$echarts.init(document.getElementById("Pie2")); //风险处置柱状图
-      let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
+      // let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
       let zrPie = this.$echarts.init(document.getElementById("zrPie")); //准入饼图
       let sqPie = this.$echarts.init(document.getElementById("sqPie")); //水球图
       let ybpPie = this.$echarts.init(document.getElementById("ybpPie")); //仪表盘
       let yjPie = this.$echarts.init(document.getElementById("yjPie")); //预警柱状图
       let box4Pie = this.$echarts.init(document.getElementById("box4Pie")); //预警柱状图
+      //新巡检图
+      PieXJ.setOption({
+        grid: {
+          x: 80,
+          y: 50,
+          x2: 160,
+          y2: 50
+        },
+        legend: {
+          data: ["现场巡检", "远程巡检", "专项巡检"],
+          top: "12%",
+          right: "10%",
+          textStyle: {
+            color: "#fff",
+            fontSize: 22
+          }
+        },
+        barWidth: 18,
+        xAxis: {
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              color: "rgba(255,255,255,0.2)"
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false,
+            //  改变x轴颜色
+            lineStyle: {
+              color: "#26D9FF"
+            }
+          },
+          axisLabel: {
+            show: false,
+            //  改变x轴字体颜色和大小
+            textStyle: {
+              color: "#fff",
+              fontSize: 24
+            }
+          }
+        },
+        yAxis: {
+          type: "category",
+          data: ["现场", "远程", "专项"],
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            //  改变y轴颜色
+            lineStyle: {
+              color: "#26D9FF"
+            }
+          },
+          axisLabel: {
+            //  改变y轴字体颜色和大小
+            //formatter: '{value} m³ ', //  给y轴添加单位
+            show: false,
+            textStyle: {
+              color: "#fff",
+              fontSize: 24
+            }
+          }
+        },
+        series: [
+          {
+            type: "bar",
+            name: "现场巡检",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true, //开启显示
+                  formatter: function(data) {
+                    return "总数:" + data.value + "个";
+                  },
+                  position: "right", //在上方显示
+                  textStyle: {
+                    //数值样式
+                    color: "#fff",
+                    fontSize: 24
+                  }
+                },
+                color: "#1DB7E5"
+              }
+            },
+            data: [28, ,]
+          },
+          {
+            type: "bar",
+            name: "现场巡检",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true, //开启显示
+                  formatter: function(data) {
+                    return "完成数:" + data.value + "个";
+                  },
+                  position: "right", //在上方显示
+                  textStyle: {
+                    //数值样式
+                    color: "#fff",
+                    fontSize: 24
+                  }
+                },
+                color: "#1DB7E5"
+              }
+            },
+            data: [10, ,]
+          },
+          {
+            type: "bar",
+            name: "远程巡检",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true, //开启显示
+                  formatter: function(data) {
+                    return "总数:" + data.value + "个";
+                  },
+                  position: "right", //在上方显示
+                  textStyle: {
+                    //数值样式
+                    color: "#fff",
+                    fontSize: 24
+                  }
+                },
+                color: "#F94E4E"
+              }
+            },
+            data: [, 12]
+          },
+          {
+            type: "bar",
+            name: "远程巡检",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true, //开启显示
+                  formatter: function(data) {
+                    return "完成数:" + data.value + "个";
+                  },
+                  position: "right", //在上方显示
+                  textStyle: {
+                    //数值样式
+                    color: "#fff",
+                    fontSize: 24
+                  }
+                },
+                color: "#F94E4E"
+              }
+            },
+            data: [, 9]
+          },
+          {
+            type: "bar",
+            name: "专项巡检",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true, //开启显示
+                  formatter: function(data) {
+                    return "总数:" + data.value + "个";
+                  },
+                  position: "right", //在上方显示
+                  textStyle: {
+                    //数值样式
+                    color: "#fff",
+                    fontSize: 24
+                  }
+                },
+                color: "#FFD52E"
+              }
+            },
+            data: [, , 9]
+          },
+          {
+            type: "bar",
+            name: "专项巡检",
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true, //开启显示
+                  formatter: function(data) {
+                    return "完成数:" + data.value + "个";
+                  },
+                  position: "right", //在上方显示
+                  textStyle: {
+                    //数值样式
+                    color: "#fff",
+                    fontSize: 24
+                  }
+                },
+                color: "#FFD52E"
+              }
+            },
+            data: [, , 10]
+          }
+        ]
+      });
       // 支行柱状图+折线图
       var that = this;
       box4Pie.setOption({
         grid: {
           x: 50,
           x2: 50,
-          top: "30%",
-          bottom: "22%" //也可设置left和right设置距离来控制图表的大小
+          top: "20%",
+          bottom: "15%" //也可设置left和right设置距离来控制图表的大小
         },
         tooltip: {
           trigger: "axis",
@@ -1589,7 +1801,8 @@ export default {
           data: that.box4PieData,
           top: "0%",
           textStyle: {
-            color: "#fff"
+            color: "#fff",
+            fontSize: 16
           }
         },
         xAxis: {
@@ -1606,7 +1819,8 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#fff" //X轴文字颜色
+              color: "#fff", //X轴文字颜色
+              fontSize: 14
             }
           }
         },
@@ -1630,10 +1844,9 @@ export default {
               }
             },
             axisLabel: {
-              show: true,
               textStyle: {
                 color: "#fff",
-                fontSize: this.setFontsize(0.12)
+                fontSize: 14
               }
             }
           },
@@ -1658,7 +1871,7 @@ export default {
               formatter: "{value} %", //右侧Y轴文字显示
               textStyle: {
                 color: "#fff",
-                fontSize: this.setFontsize(0.12)
+                fontSize: 14
               }
             }
           },
@@ -1719,7 +1932,7 @@ export default {
           {
             name: this.box4PieData[0],
             type: "bar",
-            barWidth: this.setFontsize(0.15),
+            barWidth: 18,
             itemStyle: {
               normal: {
                 color: "#388BFF"
@@ -1730,7 +1943,7 @@ export default {
           {
             name: this.box4PieData[1],
             type: "bar",
-            barWidth: this.setFontsize(0.15),
+            barWidth: 18,
             itemStyle: {
               normal: {
                 color: "#F6931C"
@@ -2438,7 +2651,7 @@ export default {
             type: "pie",
             z: 3,
             center: ["65%", "55%"],
-            radius: ["50%", "80%"],
+            radius: ["30%", "50%"],
             clockwise: true,
             avoidLabelOverlap: true,
             hoverOffset: this.setFontsize(0.07),
@@ -2474,289 +2687,289 @@ export default {
         ]
       });
       //
-      this.$nextTick(() => {
-        Pie1.resize();
-      });
-      this.$nextTick(() => {
-        Pie4.resize();
-      });
+      // this.$nextTick(() => {
+      //   Pie1.resize();
+      // });
+      // this.$nextTick(() => {
+      //   Pie4.resize();
+      // });
       //  仪表盘
-      var dataArry = {
-        two: 300,
-        three: 200,
-        four: 200
-      };
-      Pie4.setOption({
-        tooltip: {
-          formatter: "{a} <br/>{c} {b}"
-        },
-        series: [
-          {
-            name: "远程巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 100,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["20%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.two) {
-                  return "远程巡检:" + dataArry.two;
-                }
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                return value + "%";
-              }
-            },
-            data: [
-              {
-                value: this.ycxjData,
-                name: "远程巡检"
-              }
-            ]
-          },
-          {
-            name: "现场巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 100,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["40%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.three) {
-                  return "现场巡检:" + dataArry.three;
-                }
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                return value + "%";
-              }
-            },
-            data: [
-              {
-                value: this.xcxjData,
-                name: "现场巡检"
-              }
-            ]
-          },
-          {
-            name: "专项巡检",
-            type: "gauge",
-            color: ["#f00"],
-            min: 0,
-            max: 100,
-            splitNumber: 8,
-            radius: "30%",
-            center: ["62%", "55%"],
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10,
-                color: [
-                  [0.4, "#203add"],
-                  [1, "#0d1758"]
-                ]
-              },
-              backgroundColor: "none"
-            },
-            axisTick: {
-              // 坐标轴小标记
-              length: 12, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                color: "auto"
-              }
-            },
-            splitLine: {
-              // 分隔线
-              length: 5, // 属性length控制线长
-              lineStyle: {
-                // 属性lineStyle（详见lineStyle）控制线条样式
-                color: "rgba(255,255,255,0.7)"
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                if (dataArry.four) {
-                  return "专项巡检:" + dataArry.four;
-                }
-              }
-            },
-            axisLabel: {
-              borderRadius: 1,
-              color: "rgba(255,255,255,0.7)",
-              padding: 1
-            },
-            title: {
-              fontSize: 22,
-              fontColor: "#FFF",
-              color: "#FFF",
-              paddingTop: 15,
-              offsetCenter: [0, "110%"]
-            },
-            itemStyle: {
-              color: "#1092ff"
-            },
-            detail: {
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textBorderColor: "#000",
-              textBorderWidth: 1,
-              textShadowBlur: 1,
-              textShadowColor: "#fff",
-              textShadowOffsetX: 0,
-              textShadowOffsetY: 0,
-              paddingTop: 10,
-              fontFamily: "digital",
-              fontSize: 20,
-              width: 30,
-              color: "#fff",
-              rich: {},
-              offsetCenter: [0, "65%"],
-              formatter: function(value) {
-                return value + "%";
-              }
-            },
-            data: [
-              {
-                value: this.zxxjData,
-                name: "专项巡检"
-              }
-            ]
-          }
-        ]
-      });
-      window.addEventListener("resize", function() {
-        Pie1.resize();
-      });
-      window.addEventListener("resize", function() {
-        Pie4.resize();
-      });
+      // var dataArry = {
+      //   two: 300,
+      //   three: 200,
+      //   four: 200
+      // };
+      // Pie4.setOption({
+      //   tooltip: {
+      //     formatter: "{a} <br/>{c} {b}"
+      //   },
+      //   series: [
+      //     {
+      //       name: "远程巡检",
+      //       type: "gauge",
+      //       color: ["#f00"],
+      //       min: 0,
+      //       max: 100,
+      //       splitNumber: 8,
+      //       radius: "30%",
+      //       center: ["20%", "55%"],
+      //       axisLine: {
+      //         // 坐标轴线
+      //         lineStyle: {
+      //           // 属性lineStyle控制线条样式
+      //           width: 10,
+      //           color: [
+      //             [0.4, "#203add"],
+      //             [1, "#0d1758"]
+      //           ]
+      //         },
+      //         backgroundColor: "none"
+      //       },
+      //       axisTick: {
+      //         // 坐标轴小标记
+      //         length: 12, // 属性length控制线长
+      //         lineStyle: {
+      //           // 属性lineStyle控制线条样式
+      //           color: "auto"
+      //         }
+      //       },
+      //       tooltip: {
+      //         formatter: function() {
+      //           if (dataArry.two) {
+      //             return "远程巡检:" + dataArry.two;
+      //           }
+      //         }
+      //       },
+      //       splitLine: {
+      //         // 分隔线
+      //         length: 5, // 属性length控制线长
+      //         lineStyle: {
+      //           // 属性lineStyle（详见lineStyle）控制线条样式
+      //           color: "rgba(255,255,255,0.7)"
+      //         }
+      //       },
+      //       axisLabel: {
+      //         borderRadius: 1,
+      //         color: "rgba(255,255,255,0.7)",
+      //         padding: 1
+      //       },
+      //       title: {
+      //         fontSize: 22,
+      //         fontColor: "#FFF",
+      //         color: "#FFF",
+      //         paddingTop: 15,
+      //         offsetCenter: [0, "110%"]
+      //       },
+      //       itemStyle: {
+      //         color: "#1092ff"
+      //       },
+      //       detail: {
+      //         shadowOffsetX: 0,
+      //         shadowOffsetY: 0,
+      //         textBorderColor: "#000",
+      //         textBorderWidth: 1,
+      //         textShadowBlur: 1,
+      //         textShadowColor: "#fff",
+      //         textShadowOffsetX: 0,
+      //         textShadowOffsetY: 0,
+      //         paddingTop: 10,
+      //         fontFamily: "digital",
+      //         fontSize: 20,
+      //         width: 30,
+      //         color: "#fff",
+      //         rich: {},
+      //         offsetCenter: [0, "65%"],
+      //         formatter: function(value) {
+      //           return value + "%";
+      //         }
+      //       },
+      //       data: [
+      //         {
+      //           value: this.ycxjData,
+      //           name: "远程巡检"
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       name: "现场巡检",
+      //       type: "gauge",
+      //       color: ["#f00"],
+      //       min: 0,
+      //       max: 100,
+      //       splitNumber: 8,
+      //       radius: "30%",
+      //       center: ["40%", "55%"],
+      //       axisLine: {
+      //         // 坐标轴线
+      //         lineStyle: {
+      //           // 属性lineStyle控制线条样式
+      //           width: 10,
+      //           color: [
+      //             [0.4, "#203add"],
+      //             [1, "#0d1758"]
+      //           ]
+      //         },
+      //         backgroundColor: "none"
+      //       },
+      //       axisTick: {
+      //         // 坐标轴小标记
+      //         length: 12, // 属性length控制线长
+      //         lineStyle: {
+      //           // 属性lineStyle控制线条样式
+      //           color: "auto"
+      //         }
+      //       },
+      //       splitLine: {
+      //         // 分隔线
+      //         length: 5, // 属性length控制线长
+      //         lineStyle: {
+      //           // 属性lineStyle（详见lineStyle）控制线条样式
+      //           color: "rgba(255,255,255,0.7)"
+      //         }
+      //       },
+      //       tooltip: {
+      //         formatter: function() {
+      //           if (dataArry.three) {
+      //             return "现场巡检:" + dataArry.three;
+      //           }
+      //         }
+      //       },
+      //       axisLabel: {
+      //         borderRadius: 1,
+      //         color: "rgba(255,255,255,0.7)",
+      //         padding: 1
+      //       },
+      //       title: {
+      //         fontSize: 22,
+      //         fontColor: "#FFF",
+      //         color: "#FFF",
+      //         paddingTop: 15,
+      //         offsetCenter: [0, "110%"]
+      //       },
+      //       itemStyle: {
+      //         color: "#1092ff"
+      //       },
+      //       detail: {
+      //         shadowOffsetX: 0,
+      //         shadowOffsetY: 0,
+      //         textBorderColor: "#000",
+      //         textBorderWidth: 1,
+      //         textShadowBlur: 1,
+      //         textShadowColor: "#fff",
+      //         textShadowOffsetX: 0,
+      //         textShadowOffsetY: 0,
+      //         paddingTop: 10,
+      //         fontFamily: "digital",
+      //         fontSize: 20,
+      //         width: 30,
+      //         color: "#fff",
+      //         rich: {},
+      //         offsetCenter: [0, "65%"],
+      //         formatter: function(value) {
+      //           return value + "%";
+      //         }
+      //       },
+      //       data: [
+      //         {
+      //           value: this.xcxjData,
+      //           name: "现场巡检"
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       name: "专项巡检",
+      //       type: "gauge",
+      //       color: ["#f00"],
+      //       min: 0,
+      //       max: 100,
+      //       splitNumber: 8,
+      //       radius: "30%",
+      //       center: ["62%", "55%"],
+      //       axisLine: {
+      //         // 坐标轴线
+      //         lineStyle: {
+      //           // 属性lineStyle控制线条样式
+      //           width: 10,
+      //           color: [
+      //             [0.4, "#203add"],
+      //             [1, "#0d1758"]
+      //           ]
+      //         },
+      //         backgroundColor: "none"
+      //       },
+      //       axisTick: {
+      //         // 坐标轴小标记
+      //         length: 12, // 属性length控制线长
+      //         lineStyle: {
+      //           // 属性lineStyle控制线条样式
+      //           color: "auto"
+      //         }
+      //       },
+      //       splitLine: {
+      //         // 分隔线
+      //         length: 5, // 属性length控制线长
+      //         lineStyle: {
+      //           // 属性lineStyle（详见lineStyle）控制线条样式
+      //           color: "rgba(255,255,255,0.7)"
+      //         }
+      //       },
+      //       tooltip: {
+      //         formatter: function() {
+      //           if (dataArry.four) {
+      //             return "专项巡检:" + dataArry.four;
+      //           }
+      //         }
+      //       },
+      //       axisLabel: {
+      //         borderRadius: 1,
+      //         color: "rgba(255,255,255,0.7)",
+      //         padding: 1
+      //       },
+      //       title: {
+      //         fontSize: 22,
+      //         fontColor: "#FFF",
+      //         color: "#FFF",
+      //         paddingTop: 15,
+      //         offsetCenter: [0, "110%"]
+      //       },
+      //       itemStyle: {
+      //         color: "#1092ff"
+      //       },
+      //       detail: {
+      //         shadowOffsetX: 0,
+      //         shadowOffsetY: 0,
+      //         textBorderColor: "#000",
+      //         textBorderWidth: 1,
+      //         textShadowBlur: 1,
+      //         textShadowColor: "#fff",
+      //         textShadowOffsetX: 0,
+      //         textShadowOffsetY: 0,
+      //         paddingTop: 10,
+      //         fontFamily: "digital",
+      //         fontSize: 20,
+      //         width: 30,
+      //         color: "#fff",
+      //         rich: {},
+      //         offsetCenter: [0, "65%"],
+      //         formatter: function(value) {
+      //           return value + "%";
+      //         }
+      //       },
+      //       data: [
+      //         {
+      //           value: this.zxxjData,
+      //           name: "专项巡检"
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // });
+      // window.addEventListener("resize", function() {
+      //   Pie1.resize();
+      // });
+      // window.addEventListener("resize", function() {
+      //   Pie4.resize();
+      // });
       // 风险处置
       var data1 = this.fxczData1;
       var data3 = this.fxczData2;
@@ -2849,82 +3062,82 @@ export default {
         "#9E87FF",
         "#58D5FF"
       ];
-      Pie1.setOption({
-        backgroundColor: "",
-        title: {
-          text: "",
-          left: "center",
-          top: 20,
-          textStyle: {
-            color: "#ccc"
-          }
-        },
+      // Pie1.setOption({
+      //   backgroundColor: "",
+      //   title: {
+      //     text: "",
+      //     left: "center",
+      //     top: 20,
+      //     textStyle: {
+      //       color: "#ccc"
+      //     }
+      //   },
 
-        tooltip: {
-          trigger: "item",
-          formatter: "{b} : {c} ({d}%)",
-          textStyle: {
-            fontSize: 24
-          }
-        },
+      //   tooltip: {
+      //     trigger: "item",
+      //     formatter: "{b} : {c} ({d}%)",
+      //     textStyle: {
+      //       fontSize: 24
+      //     }
+      //   },
 
-        visualMap: {
-          show: false,
-          min: 500,
-          max: 600,
-          inRange: {
-            //colorLightness: [0, 1]
-          }
-        },
-        series: [
-          {
-            name: "访问来源",
-            type: "pie",
-            radius: "50%",
-            center: ["45%", "62%"],
-            color: ["#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
-            data: this.dqxjData1.sort(function(a, b) {
-              return a.value - b.value;
-            }),
-            roseType: "radius",
+      //   visualMap: {
+      //     show: false,
+      //     min: 500,
+      //     max: 600,
+      //     inRange: {
+      //       //colorLightness: [0, 1]
+      //     }
+      //   },
+      //   series: [
+      //     {
+      //       name: "访问来源",
+      //       type: "pie",
+      //       radius: "50%",
+      //       center: ["45%", "62%"],
+      //       color: ["#FBFE27", "#FE5050", "#1DB7E5"], //'#FBFE27','rgb(11,228,96)','#FE5050'
+      //       data: this.dqxjData1.sort(function(a, b) {
+      //         return a.value - b.value;
+      //       }),
+      //       roseType: "radius",
 
-            label: {
-              normal: {
-                formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
-                rich: {
-                  c: {
-                    color: "#77c8ff",
-                    fontSize: 30,
-                    fontWeight: "bold",
-                    lineHeight: 5
-                  },
-                  b: {
-                    color: "rgb(98,137,169)",
-                    fontSize: 24,
-                    height: 40
-                  }
-                }
-              }
-            },
-            labelLine: {
-              normal: {
-                lineStyle: {
-                  color: "rgb(98,137,169)"
-                },
-                smooth: 0.2,
-                length: 10,
-                length2: 20
-              }
-            },
-            itemStyle: {
-              normal: {
-                shadowColor: "rgba(0, 0, 0, 0.8)",
-                shadowBlur: 50
-              }
-            }
-          }
-        ]
-      });
+      //       label: {
+      //         normal: {
+      //           formatter: ["{c|{c}个}", "{b|{b}}"].join("\n"),
+      //           rich: {
+      //             c: {
+      //               color: "#77c8ff",
+      //               fontSize: 30,
+      //               fontWeight: "bold",
+      //               lineHeight: 5
+      //             },
+      //             b: {
+      //               color: "rgb(98,137,169)",
+      //               fontSize: 24,
+      //               height: 40
+      //             }
+      //           }
+      //         }
+      //       },
+      //       labelLine: {
+      //         normal: {
+      //           lineStyle: {
+      //             color: "rgb(98,137,169)"
+      //           },
+      //           smooth: 0.2,
+      //           length: 10,
+      //           length2: 20
+      //         }
+      //       },
+      //       itemStyle: {
+      //         normal: {
+      //           shadowColor: "rgba(0, 0, 0, 0.8)",
+      //           shadowBlur: 50
+      //         }
+      //       }
+      //     }
+      //   ]
+      // });
     },
     // 链接跳转
     echart() {
@@ -3039,7 +3252,10 @@ export default {
 
     for (let i = 0; i < newdituData.length; i++) {
       for (let j = 1; j < newdituData.length; j++) {
-        newdituData[i].value = newdituData[i].name == newdituData[j].name ? newdituData[j].value : newdituData[i].value;
+        newdituData[i].value =
+          newdituData[i].name == newdituData[j].name
+            ? newdituData[j].value
+            : newdituData[i].value;
       }
     }
     newdituData = newdituData.reduce((item, next) => {
@@ -3096,6 +3312,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 // 新增css
+.xjTitle {
+  position: absolute;
+  display: flex;
+  left: 15px;
+  top: 55px;
+  flex-direction: column;
+  color: #fff;
+  padding: 0px;
+  li {
+    color: #fff;
+    font-size: 12px;
+    margin-bottom:30px;
+  }
+}
 .xxxl {
   height: 80%;
   overflow: auto;
@@ -3157,8 +3387,12 @@ export default {
   display: flex;
   flex-direction: row;
   .box4Pie {
-    width: 95%;
-    height: 100%;
+    width: 135%;
+    height: 140%;
+    position: absolute;
+    transform: scale(0.7);
+    right: -20.5%;
+    top: -20%;
   }
   .box4_tab {
     width: 5%;
@@ -3203,7 +3437,7 @@ export default {
   width: 230%;
   height: 200%;
   position: absolute;
-  bottom: -67%;
+  bottom: -60%;
   left: -60%;
   transform: scale(0.4);
   .zrPie {
@@ -3622,11 +3856,11 @@ ul {
     .modr3 {
       .bingtu {
         width: 200%;
-        height: 200%;
+        height: 260%;
         position: absolute;
-        transform: scale(0.55);
-        left: -45%;
-        top: -50%;
+        transform: scale(0.46);
+        left: -50%;
+        top: -72%;
       }
       .zhuzhuangtu {
         width: 200%;
@@ -3642,7 +3876,7 @@ ul {
         margin-bottom: 2%;
         height: 18%;
         position: absolute;
-        z-index: 999;
+        // z-index: 999;
         width: 80%;
         .title {
           color: #70c5ff;
@@ -3692,6 +3926,7 @@ ul {
       background-size: 95% 100%;
       background-repeat: no-repeat;
       position: relative;
+      overflow: hidden;
       padding: 4% 4% 4% 9%;
     }
   }
