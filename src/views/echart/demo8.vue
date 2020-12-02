@@ -1569,19 +1569,19 @@ export default {
         grid: {
           x: 80,
           y: 50,
-          x2: 160,
+          x2: 140,
           y2: 50
         },
         legend: {
-          data: ["现场巡检", "远程巡检", "专项巡检"],
-          top: "12%",
-          right: "10%",
+          data: ["现场", "远程", "专项"],
+          top: "8%",
+          right: "5%",
           textStyle: {
             color: "#fff",
-            fontSize: 22
+            fontSize: 24
           }
         },
-        barWidth: 18,
+        barWidth: 16,
         xAxis: {
           type: "value",
           splitLine: {
@@ -1636,7 +1636,7 @@ export default {
         series: [
           {
             type: "bar",
-            name: "现场巡检",
+            name: "现场",
             itemStyle: {
               normal: {
                 label: {
@@ -1658,7 +1658,7 @@ export default {
           },
           {
             type: "bar",
-            name: "现场巡检",
+            name: "现场",
             itemStyle: {
               normal: {
                 label: {
@@ -1680,7 +1680,7 @@ export default {
           },
           {
             type: "bar",
-            name: "远程巡检",
+            name: "远程",
             itemStyle: {
               normal: {
                 label: {
@@ -1702,7 +1702,7 @@ export default {
           },
           {
             type: "bar",
-            name: "远程巡检",
+            name: "远程",
             itemStyle: {
               normal: {
                 label: {
@@ -1724,7 +1724,7 @@ export default {
           },
           {
             type: "bar",
-            name: "专项巡检",
+            name: "专项",
             itemStyle: {
               normal: {
                 label: {
@@ -1746,7 +1746,7 @@ export default {
           },
           {
             type: "bar",
-            name: "专项巡检",
+            name: "专项",
             itemStyle: {
               normal: {
                 label: {
@@ -3323,7 +3323,7 @@ export default {
   li {
     color: #fff;
     font-size: 12px;
-    margin-bottom:30px;
+    margin-bottom: 30px;
   }
 }
 .xxxl {
@@ -3856,11 +3856,11 @@ ul {
     .modr3 {
       .bingtu {
         width: 200%;
-        height: 260%;
+        height: 280%;
         position: absolute;
-        transform: scale(0.46);
-        left: -50%;
-        top: -72%;
+        transform: scale(0.42);
+        left: -55%;
+        top: -80%;
       }
       .zhuzhuangtu {
         width: 200%;
