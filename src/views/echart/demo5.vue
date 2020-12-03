@@ -89,35 +89,10 @@
                         <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
-                        <li>
-                          <p class="p1">中国</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">韩国</p>
-                          <p class="p2">800</p>
-                          <p class="p3">1,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">日本</p>
-                          <p class="p2">1,400</p>
-                          <p class="p3">2,655,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">俄罗斯</p>
-                          <p class="p2">1,080</p>
-                          <p class="p3">1,245,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">新加坡</p>
-                          <p class="p2">900</p>
-                          <p class="p3">225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">印度</p>
-                          <p class="p2">1,000</p>
-                          <p class="p3">125,000</p>
+                        <li v-for="items in sjList">
+                          <p class="p1">{{ items.value1 }}</p>
+                          <p class="p2">{{ items.value2 }}</p>
+                          <p class="p3">{{ items.value3 }}</p>
                         </li>
                       </ul>
                     </div>
@@ -130,35 +105,10 @@
                         <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
-                        <li>
-                          <p class="p1">福建</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">32,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">浙江</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">42,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">黑龙江</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">12,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">河北</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">14,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">云南</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">11,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">四川</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">322,000</p>
+                        <li v-for="items in zgList">
+                          <p class="p1">{{ items.value1 }}</p>
+                          <p class="p2">{{ items.value2 }}</p>
+                          <p class="p3">{{ items.value3 }}</p>
                         </li>
                       </ul>
                     </div>
@@ -171,35 +121,10 @@
                         <p>欺诈事件金额(元)</p>
                       </div>
                       <ul class="gjBox">
-                        <li>
-                          <p class="p1">类型</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">类型</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">类型</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">类型</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">类型</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
-                        </li>
-                        <li>
-                          <p class="p1">类型</p>
-                          <p class="p2">1,200</p>
-                          <p class="p3">2,225,000</p>
+                        <li v-for="items in qzList">
+                          <p class="p1">{{ items.value1 }}</p>
+                          <p class="p2">{{ items.value2 }}</p>
+                          <p class="p3">{{ items.value3 }}</p>
                         </li>
                       </ul>
                     </div>
@@ -412,6 +337,58 @@ export default {
   name: "demo5",
   data() {
     return {
+      // 数据渲染
+      qzList: [
+        {
+          value1: "类型1",
+          value2: "2334",
+          value3: "1320452"
+        },
+        {
+          value1: "类型2",
+          value2: "2334",
+          value3: "1320452"
+        },
+        {
+          value1: "类型3",
+          value2: "2334",
+          value3: "1320452"
+        }
+      ],
+      sjList: [
+        {
+          value1: "中国",
+          value2: "2334",
+          value3: "1320452"
+        },
+        {
+          value1: "中国",
+          value2: "2334",
+          value3: "1320452"
+        },
+        {
+          value1: "中国",
+          value2: "2334",
+          value3: "1320452"
+        }
+      ],
+      zgList: [
+        {
+          value1: "福建",
+          value2: "2334",
+          value3: "1320452"
+        },
+        {
+          value1: "浙江",
+          value2: "2334",
+          value3: "1320452"
+        },
+        {
+          value1: "广东",
+          value2: "2334",
+          value3: "1320452"
+        }
+      ],
       lang: "cn",
       sskb: true,
       // 下拉选择全部/线上/线下
@@ -832,7 +809,13 @@ export default {
         },
 
         xAxis: {
-          data: ["微信核实", "短信核实", "智能语音外呼", "符合客户行为","无效卡处理"],
+          data: [
+            "微信核实",
+            "短信核实",
+            "智能语音外呼",
+            "符合客户行为",
+            "无效卡处理"
+          ],
           axisLine: {
             show: true, //隐藏X轴轴线
             lineStyle: {
@@ -893,7 +876,7 @@ export default {
                 color: "#32e8f5"
               }
             },
-            data: [133, 127, 110, 90,70]
+            data: [133, 127, 110, 90, 70]
           },
           {
             name: "平均",
@@ -904,7 +887,7 @@ export default {
                 color: "#f69846"
               }
             },
-            data: [123, 80, 70, 93,42]
+            data: [123, 80, 70, 93, 42]
           }
         ]
       });
@@ -2138,7 +2121,7 @@ li {
       .zxt {
         width: 100%;
         height: 300px;
-        margin-top:20px;
+        margin-top: 20px;
       }
       width: 50%;
       height: 100%;
