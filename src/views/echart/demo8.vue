@@ -3301,6 +3301,9 @@ export default {
     // }, []);
 
     // console.log(arr, "去重");
+    var shuzi111 = "1,2,3,4,5"
+    JSON.parse("[" + shuzi111 + "]")
+    console.log(shuzi111)
   },
   beforeDestroy: function() {
     if (this.getDate) {
