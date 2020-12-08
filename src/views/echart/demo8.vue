@@ -622,16 +622,19 @@ export default {
       this.shows = 2;
       this.dataType = "存量评级";
       this.box4PieData = ["服务点数", "中高风险服务点数", "占比(%)"];
+      this.box4PieDemo();
     },
     clickZR() {
       this.shows = 3;
       this.dataType = "准入评级";
       this.box4PieData = ["进件数", "通过数", "准入通过率(%)"];
+      this.box4PieDemo();
     },
     clickXJ() {
       this.shows = 4;
       this.dataType = "巡检";
       this.box4PieData = ["服务点数", "巡检通过服务点数", "巡检通过率(%)"];
+      this.box4PieDemo();
     },
     // 测试点击监听改变图表
     // PieClick1(value) {
@@ -986,7 +989,7 @@ export default {
         grid: {
           x: 50,
           x2: 50,
-          top: "15%",
+          top: "30%",
           bottom: "22%" //也可设置left和right设置距离来控制图表的大小
         },
         tooltip: {
@@ -1037,7 +1040,7 @@ export default {
         yAxis: [
           {
             type: "value",
-            name: " ",
+            name: "",
             nameTextStyle: {
               color: "#fff"
             },
@@ -1063,7 +1066,7 @@ export default {
           },
           {
             type: "value",
-            name: " ",
+            name: "",
             nameTextStyle: {
               color: "#fff"
             },
@@ -1118,8 +1121,8 @@ export default {
             height: this.setFontsize(0.18),
             xAxisIndex: [0],
             bottom: "0%",
-            start: 0,
-            end: 100,
+            start: 30,
+            end: 70,
             handleIcon:
               "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
             handleSize: "110%",
@@ -1133,7 +1136,7 @@ export default {
           },
           {
             type: "inside",
-            show: true,
+            show: false,
             height: 15,
             start: 1,
             end: 35
@@ -2959,8 +2962,6 @@ export default {
   watch: {},
   created() {
     this.getData();
-    // console.log(this.setFontsize(0.3), "1111");
-
     // 数据解析备用
     // box4Pie数据
     var dituNewData = [
@@ -3011,7 +3012,6 @@ export default {
       }
       return 0;
     });
-    console.log(dituNewData);
     var itemName = [];
     var itemValue1 = [];
     var itemValue2 = [];
@@ -3026,124 +3026,6 @@ export default {
     this.zsData = itemValue1;
     this.wclData = itemValue2;
     this.wclvData = itemValue3;
-    // var newyhData = [];
-    // for (var i = 0; i < yhData.length; i++) {
-    //   newdata1.push({
-    //     name: yhData[i].name,
-    //     value: yhData[i].value,
-    //   });
-    // }
-    // var rows = [
-    //   {
-    //     IND: "北京,560,340"
-    //   },
-    //   {
-    //     IND: "天津,539,260"
-    //   }
-    // ];
-    // var newRow = [];
-    // rows.map(item => {
-    //   var newData = item.IND;
-    //   var result = newData.split(",");
-    //   newRow.push({
-    //     name: result[0],
-    //     value1: result[1],
-    //     value2: result[2]
-    //   });
-    // });
-    // console.log(newRow, "123456");
-    // var itemName = [];
-    // var itemValue1 = [];
-    // // var itemValue2 = [];
-    // dituNewData.map(item => {
-    //   itemName.push(item.name);
-    //   itemValue1.push(parseInt(item.value));
-    //   // itemValue2.push(parseInt(item.value2));
-    // });
-    // console.log(itemName, "1");
-    // console.log(itemValue1, "2");
-    // console.log(itemValue2);
-    // 数据排序
-    var yhData = [
-      {
-        name: "aaa",
-        value: "2"
-      },
-      {
-        name: "bbb",
-        value: "8"
-      }
-    ];
-    yhData.sort(function(a, b) {
-      if (a.value > b.value) {
-        return -1;
-      } else if (a.value < b.value) {
-        return 1;
-      }
-      return 0;
-    });
-    var newyhData = [];
-    for (var i = 0; i < yhData.length; i++) {
-      newyhData.push({
-        name: yhData[i].name,
-        value: yhData[i].value
-      });
-    }
-    console.log(newyhData);
-
-    var newdituData = [
-      {
-        name: "重庆",
-        value: 20
-      },
-      {
-        name: "云南",
-        value: 10
-      },
-      {
-        name: "辽宁",
-        value: 10
-      }
-    ];
-    // newdituData = newdituData.concat(this.dituData);
-    // console.log(newdituData)
-    let arr = [
-      {
-        name: "张三",
-        age: "30"
-      },
-      {
-        name: "李四",
-        age: "15"
-      },
-      {
-        name: "王五",
-        age: "20"
-      },
-      {
-        name: "张三",
-        age: "18"
-      },
-      {
-        name: "王五",
-        age: "16"
-      }
-    ];
-
-    let obj = {};
-
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 1; j < arr.length; j++) {
-        arr[i].age = arr[i].name == arr[j].name ? arr[j].age : arr[i].age;
-      }
-    }
-
-    arr = arr.reduce((item, next) => {
-      obj[next.name] ? "" : (obj[next.name] = true && item.push(next));
-      return item;
-    }, []);
-
-    console.log(arr, "去重");
   },
   beforeDestroy: function() {
     if (this.getDate) {
