@@ -3582,7 +3582,10 @@ ul {
       .list {
         width: 80%;
         height: 60%;
-        margin: 50px auto 0px;
+        position: absolute;
+        left:10%;
+        top:32%;
+        margin: 0px auto;
         display: flex;
         flex-direction: row;
         align-items: center;
