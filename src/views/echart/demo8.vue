@@ -878,7 +878,7 @@ export default {
         //风险预警
         {
           name: "风险级",
-          value: 148,
+          value: 149,
           color: "#F56C6C"
         },
         {
