@@ -419,7 +419,7 @@ export default {
       //默认参数
       box4PieData: ["进件数", "通过数", "准入通过率(%)"],
       dataType: "准入评级",
-      selectTime: "当日",
+      selectTime: "当年",
       options: [
         {
           value: "选项1",
@@ -576,7 +576,7 @@ export default {
       province: "全国",
       shows: 3,
       showXJ: 1,
-      showDate: 1,
+      showDate: 3,
       listArr: [], //城市json
       nowDate: "", // 当前日期
       nowTime: "", // 当前时间
@@ -602,14 +602,349 @@ export default {
     clickDR() {
       this.showDate = 1;
       this.selectTime = "当日";
+      var loading = this.$loading({
+        lock:true,
+        text:"加载中",
+        spinner:"el-icon-loading",
+        background:"rgba(0,0,0,0.7)"
+      });
+      this.zrpjData1 = 800 //准入评级
+      this.zrpjData2 = 720
+      this.zrpjData3 = 90
+      this.zrData = [
+        //拒件分布
+        {
+          name: "征信类",
+          value: "20"
+        },
+        {
+          name: "洗钱风险类",
+          value: "10"
+        },
+        {
+          name: "司法涉诉类",
+          value: "30"
+        },
+        {
+          name: "内部黑名单类",
+          value: "60"
+        },
+        {
+          name: "外部黑名单类",
+          value: "25"
+        }
+      ],
+      this.shuiqiuData = 0.15, //存量评级
+      this.fxjData = 25,
+      this.jsjData= 13,
+      this.yjjData= 40,
+      this.gzjData= 55,
+      this.zrtglData= 90, //仪表盘
+      this.cldxlData= 85,
+      this.yjczlData= 75,
+      this.xjtglData= 54,
+      this.fxyjData = [
+        //风险预警
+        {
+          name: "风险级",
+          value: 48,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 65,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 80,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 72,
+          color: "#409EFF"
+        }
+      ],
+      this.fxyjData1 = [
+        //风险预警
+        {
+          name: "风险级",
+          value: 4,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 7,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 6,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 14,
+          color: "#409EFF"
+        }
+      ],
+      this.fxczData1 = [80, 85, 45, 64], //风险处置
+      this.fxczData2 = [75, 63, 43, 61],
+      this.dqxjData1 = [
+        //定期巡检
+        {
+          value: 4970,
+          name: "远程巡检"
+        },
+        {
+          value: 2234,
+          name: "现场巡检"
+        },
+        {
+          value: 1632,
+          name: "专项巡检"
+        }
+      ],
+      this.ycxjData= 8.2,
+      this.xcxjData= 7.5,
+      this.zxxjData= 9.5,
+      setTimeout(() => {
+        loading.close()
+        this.piedemo();
+      }, 800);
     },
     clickDY() {
       this.showDate = 2;
       this.selectTime = "当月";
+      var loading = this.$loading({
+        lock:true,
+        text:"加载中",
+        spinner:"el-icon-loading",
+        background:"rgba(0,0,0,0.7)"
+      });
+      this.zrpjData1 = 1800 //准入评级
+      this.zrpjData2 = 1720
+      this.zrpjData3 = 90
+      this.zrData = [
+        //拒件分布
+        {
+          name: "征信类",
+          value: "120"
+        },
+        {
+          name: "洗钱风险类",
+          value: "210"
+        },
+        {
+          name: "司法涉诉类",
+          value: "130"
+        },
+        {
+          name: "内部黑名单类",
+          value: "360"
+        },
+        {
+          name: "外部黑名单类",
+          value: "225"
+        }
+      ],
+      this.shuiqiuData = 0.45, //存量评级
+      this.fxjData = 65,
+      this.jsjData= 43,
+      this.yjjData= 30,
+      this.gzjData= 55,
+      this.zrtglData= 70, //仪表盘
+      this.cldxlData= 65,
+      this.yjczlData= 35,
+      this.xjtglData= 24,
+      this.fxyjData = [
+        //风险预警
+        {
+          name: "风险级",
+          value: 148,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 165,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 480,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 272,
+          color: "#409EFF"
+        }
+      ],
+      this.fxyjData1 = [
+        //风险预警
+        {
+          name: "风险级",
+          value: 14,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 17,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 46,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 24,
+          color: "#409EFF"
+        }
+      ],
+      this.fxczData1 = [180, 285, 145, 264], //风险处置
+      this.fxczData2 = [175, 263, 143, 261],
+      this.dqxjData1 = [
+        //定期巡检
+        {
+          value: 14970,
+          name: "远程巡检"
+        },
+        {
+          value: 12234,
+          name: "现场巡检"
+        },
+        {
+          value: 21632,
+          name: "专项巡检"
+        }
+      ],
+      this.ycxjData= 5.2,
+      this.xcxjData= 7.5,
+      this.zxxjData= 4.5,
+      setTimeout(() => {
+        loading.close()
+        this.piedemo();
+      }, 800);
+    
     },
     clickDN() {
       this.showDate = 3;
       this.selectTime = "当年";
+      var loading = this.$loading({
+        lock:true,
+        text:"加载中",
+        spinner:"el-icon-loading",
+        background:"rgba(0,0,0,0.7)"
+      });
+      this.zrpjData1 = 24800 //准入评级
+      this.zrpjData2 = 23720
+      this.zrpjData3 = 90
+      this.zrData = [
+        //拒件分布
+        {
+          name: "征信类",
+          value: "400"
+        },
+        {
+          name: "洗钱风险类",
+          value: "900"
+        },
+        {
+          name: "司法涉诉类",
+          value: "360"
+        },
+        {
+          name: "内部黑名单类",
+          value: "650"
+        },
+        {
+          name: "外部黑名单类",
+          value: "251"
+        }
+      ],
+      this.shuiqiuData = 0.75, //存量评级
+      this.fxjData = 25,
+      this.jsjData= 13,
+      this.yjjData= 7,
+      this.gzjData= 8,
+      this.zrtglData= 60, //仪表盘
+      this.cldxlData= 45,
+      this.yjczlData= 35,
+      this.xjtglData= 24,
+      this.fxyjData = [
+        //风险预警
+        {
+          name: "风险级",
+          value: 148,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 1265,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 4280,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 872,
+          color: "#409EFF"
+        }
+      ],
+      this.fxyjData1 = [
+        //风险预警
+        {
+          name: "风险级",
+          value: 414,
+          color: "#F56C6C"
+        },
+        {
+          name: "警示级",
+          value: 217,
+          color: "#E6A23C"
+        },
+        {
+          name: "预警级",
+          value: 126,
+          color: "#FFD52E"
+        },
+        {
+          name: "关注级",
+          value: 145,
+          color: "#409EFF"
+        }
+      ],
+      this.fxczData1 = [4280, 2485, 4345, 2464], //风险处置
+      this.fxczData2 = [3275, 763, 543, 1261],
+      this.dqxjData1 = [
+        //定期巡检
+        {
+          value: 44970,
+          name: "远程巡检"
+        },
+        {
+          value: 32234,
+          name: "现场巡检"
+        },
+        {
+          value: 21632,
+          name: "专项巡检"
+        }
+      ],
+      this.ycxjData= 4.2,
+      this.xcxjData= 3.5,
+      this.zxxjData= 6.5,
+      setTimeout(() => {
+        loading.close()
+        this.piedemo();
+      }, 800);
+    
     },
     // 预警 存量 准入 巡检  切换
     clickYJ() {
@@ -3286,7 +3621,10 @@ ul {
       .list {
         width: 80%;
         height: 60%;
-        margin: 80px auto 0px;
+        margin: 0px auto;
+        position: absolute;
+        left:10%;
+        top:32%;
         display: flex;
         flex-direction: row;
         align-items: center;
