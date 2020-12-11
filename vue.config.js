@@ -39,16 +39,6 @@ module.exports = {
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {
-    output:{
-      filename:'js/[name].js',
-      chunkFilename:'js/[name].js',
-    },
-    plugins:[
-      new MiniCssExtractPlugin({
-        filename:'css/[name].css',
-        chunkFilename:'css/[name].css',
-      })
-    ],
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
     name: name,
