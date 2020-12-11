@@ -89,9 +89,7 @@
           <img src="../../assets/img/sj1.png" alt />
           <p class="title">存量评级</p>
         </div>
-        <p class="sq_txt">总异常率</p>
         <div class="clBox">
-          <div class="sqPie" id="sqPie"></div>
           <div class="jdt">
             <ul class="jdt_list">
               <li>
@@ -99,39 +97,55 @@
                 <el-progress
                   class="jdt_box"
                   :text-inside="true"
-                  :stroke-width="12"
+                  :stroke-width="14"
                   :percentage="this.fxjData"
                   status="exception"
                 ></el-progress>
+                <p>数量:370</p>
               </li>
               <li>
                 <p>警示级</p>
                 <el-progress
                   class="jdt_box "
                   :text-inside="true"
-                  :stroke-width="12"
+                  :stroke-width="14"
                   :percentage="this.jsjData"
                   status="warning"
                 ></el-progress>
+                <p>数量:370</p>
               </li>
               <li>
                 <p>预警级</p>
                 <el-progress
                   class="jdt_box jdt_box_1"
                   :text-inside="true"
-                  :stroke-width="12"
+                  :stroke-width="14"
                   :percentage="this.yjjData"
                   status="success"
                 ></el-progress>
+                <p>数量:370</p>
               </li>
               <li>
                 <p>关注级</p>
                 <el-progress
                   class="jdt_box"
                   :text-inside="true"
-                  :stroke-width="12"
+                  :stroke-width="14"
                   :percentage="this.gzjData"
                 ></el-progress>
+                <p>数量:370</p>
+              </li>
+              <li>
+                <p>正常级</p>
+                <el-progress
+                  class="jdt_box"
+                  :text-inside="true"
+                  :stroke-width="14"
+                  :percentage="this.zcjData"
+                  status="success"
+                  color="#52AF52"
+                ></el-progress>
+                <p>数量:370</p>
               </li>
             </ul>
           </div>
@@ -243,6 +257,7 @@ export default {
       jsjData: 45,
       yjjData: 60,
       gzjData: 30,
+      zcjData: 40,
       zrtglData: 80, //仪表盘
       cldxlData: 90,
       yjczlData: 40,
@@ -568,7 +583,8 @@ export default {
         },
         {
           name: "福建",
-          value: 80
+          value: 80,
+          id:350000,
         },
         {
           name: "广东",
@@ -1560,7 +1576,6 @@ export default {
       let Pie2 = this.$echarts.init(document.getElementById("Pie2")); //风险处置柱状图
       // let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
       let zrPie = this.$echarts.init(document.getElementById("zrPie")); //准入饼图
-      let sqPie = this.$echarts.init(document.getElementById("sqPie")); //水球图
       let ybpPie = this.$echarts.init(document.getElementById("ybpPie")); //仪表盘
       let yjPie = this.$echarts.init(document.getElementById("yjPie")); //预警柱状图
       let box4Pie = this.$echarts.init(document.getElementById("box4Pie")); //预警柱状图
@@ -2538,66 +2553,6 @@ export default {
           }
         ]
       });
-      // 水球图
-      sqPie.setOption({
-        title: {
-          text: "",
-          textStyle: {
-            fontWeight: "normal",
-            fontSize: 25,
-            color: "rgb(97, 142, 205)"
-          }
-        },
-        series: [
-          {
-            type: "liquidFill",
-            radius: "65%",
-            center: ["50%", "40%"],
-            data: [this.shuiqiuData, this.shuiqiuData, this.shuiqiuData], // data个数代表波浪数
-            backgroundStyle: {
-              borderWidth: 1,
-              color: "rgb(255,0,255,0.1)"
-            },
-            label: {
-              normal: {
-                formatter: (this.shuiqiuData * 100).toFixed(2) + "%",
-                textStyle: {
-                  fontSize: this.setFontsize(0.25)
-                }
-              }
-            },
-            outline: {
-              show: false
-            }
-          },
-          {
-            type: "pie",
-            center: ["50%", "40%"],
-            radius: ["70%", "72%"],
-            hoverAnimation: false,
-            data: [
-              {
-                name: "",
-                value: 500,
-                labelLine: {
-                  show: false
-                },
-                itemStyle: {
-                  color: "#5886f0"
-                },
-                emphasis: {
-                  labelLine: {
-                    show: false
-                  },
-                  itemStyle: {
-                    color: "#5886f0"
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      });
       // 准入拒件饼图
       var seriesData = this.zrData;
       var legendData = [
@@ -2971,84 +2926,101 @@ export default {
       //   Pie4.resize();
       // });
       // 风险处置
-      var data1 = this.fxczData1;
-      var data3 = this.fxczData2;
-      var datacity = ["风险级", "警示级", "预警级", "关注级"];
+      var xdata = ["风险级", "警示级", "预警级", "关注级"];
+      var data = [50, 40, 30, 20];
+      var jztColor = ["#FD4C54", "#FD950E", "#29B8FC", "#31CE5B"];
       Pie2.setOption({
-        color: ["#388BFF", "#E6A23C"],
-        tooltip: {
-          trigger: "axis",
-          textStyle: {
-            fontSize: 30
-          }
-        },
         legend: {
           top: "6%",
-          data: ["预警总数", "处理数"],
+          data: ["风险级", "警示级", "预警级", "关注级"],
           textStyle: {
             color: "#fff",
             fontSize: 36
           }
         },
+        tooltip: {
+          trigger: "axis",
+          textStyle: {
+            fontSize: 32
+          }
+        },
         grid: {
-          //图表的位置
-          top: "22%",
-          left: "3%",
-          right: "4%",
+          left: "5%",
+          right: "3%",
           bottom: "5%",
+          top: "15%",
           containLabel: true
         },
-        yAxis: [
-          {
-            type: "value",
-            axisLabel: {
-              show: true,
-              interval: "auto",
-              formatter: "{value} ",
-              textStyle: {
-                fontSize: 30,
-                color: "#fff"
-              }
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                type: "dashed"
-              }
-            },
-            show: true
+        xAxis: {
+          data: xdata,
+          triggerEvent: true,
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false
+          },
+          axisLabel: {
+            show: true,
+            interval: 0,
+            textStyle: {
+              color: "#fff",
+              fontSize: 32
+            }
           }
-        ],
-        xAxis: [
-          {
-            type: "category",
-            axisLabel: {
-              interval: 0,
-              show: true,
-              splitNumber: 15,
-              textStyle: {
-                fontSize: 34,
-                color: "#fff"
-              }
-            },
-            data: datacity
+        },
+        yAxis: {
+          name: "总数(个)",
+          triggerEvent: true,
+          nameTextStyle: {
+            color: "#fff",
+            fontSize: 28
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "rgba(255,255,255,.1)"
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "rgba(255,255,255,.1)"
+            }
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#fff",
+              fontSize: 26
+            }
           }
-        ],
+        },
+        // color: ["#e54035"],
         series: [
           {
-            name: "预警总数",
-            type: "bar",
-            stack: "sum",
-            barWidth: this.setFontsize(0.5),
-            data: data1
-          },
-          {
-            name: "处理数",
-            type: "bar",
-            color: "#E6A23C",
-            stack: "sum1",
-            barWidth: this.setFontsize(0.5),
-            data: data3
+            name: "",
+            barMinHeight: 20,
+            type: "pictorialBar",
+            barCategoryGap: "0%",
+            barGap: "0%",
+            // symbol: 'path://M0,10 L10,10 L5,0 L0,10 z',
+            symbol:
+              "path://M0,10 L10,10 C8.5,10 5.5,5 5,0 C4.5,5 1.5,10 0,10 z",
+            itemStyle: {
+              normal: {
+                //barBorderRadius: 5,
+                //渐变色
+                color: function(params) {
+                  return jztColor[params.dataIndex];
+                }
+              }
+            },
+            data: data,
+            z: 10
           }
         ]
       });
@@ -3301,9 +3273,9 @@ export default {
     // }, []);
 
     // console.log(arr, "去重");
-    var shuzi111 = "1,2,3,4,5"
-    JSON.parse("[" + shuzi111 + "]")
-    console.log(shuzi111)
+    var shuzi111 = "1,2,3,4,5";
+    JSON.parse("[" + shuzi111 + "]");
+    console.log(shuzi111);
   },
   beforeDestroy: function() {
     if (this.getDate) {
@@ -3462,31 +3434,28 @@ export default {
   display: flex;
   flex-direction: row;
   position: relative;
-  .sqPie {
-    width: 40%;
-    height: 100%;
-  }
+
   .jdt {
-    width: 60%;
+    width: 100%;
     height: 100%;
     .jdt_list {
-      margin: 0px;
-      margin-top: 15px;
+      margin: 10px 0px;
       padding: 0px;
       display: flex;
       flex-direction: column;
       li {
         display: flex;
         flex-direction: row;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         p {
           color: #fff;
           float: left;
           font-size: 10px;
         }
         .jdt_box {
-          width: 70%;
+          width: 55%;
           margin-left: 10px;
+          margin-right: 10px;
           .jdt_box_1 {
           }
         }
@@ -3583,8 +3552,8 @@ ul {
         width: 80%;
         height: 60%;
         position: absolute;
-        left:10%;
-        top:32%;
+        left: 10%;
+        top: 32%;
         margin: 0px auto;
         display: flex;
         flex-direction: row;
@@ -4315,9 +4284,7 @@ ul {
   .sq_txt {
     left: 18%;
   }
-  .clBox .sqPie {
-    width: 36%;
-  }
+
   .clBox .jdt {
     width: 64%;
   }
