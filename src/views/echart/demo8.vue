@@ -48,7 +48,7 @@
             </el-option>
           </el-select>
         </div>
-        <p class="title">准入评级</p>
+        <p class="title">准入控制</p>
         <ul class="list">
           <li>
             <img class="diqiu" src="../../assets/img/diqiu2.png" alt />
@@ -161,6 +161,12 @@
       </div>
       <div class="modBox2">
         <div class="box1">
+          <div class="ybpname">
+            <p>准入通过率</p>
+            <p>存量低险率</p>
+            <p>预警处置率</p>
+            <p>巡检通过率</p>
+          </div>
           <div class="ybpPie" id="ybpPie"></div>
         </div>
       </div>
@@ -170,7 +176,7 @@
         <p class="jiedian_tit">当前位置：{{ province + selectTime }}</p>
         <p class="title">风险预警</p>
         <div class="yjBox">
-          <div class="yjPie" id="yjPie"></div>
+          <div class="yjPie" id="Pie2"></div>
         </div>
       </div>
       <div class="modr2">
@@ -178,7 +184,7 @@
           <img src="../../assets/img/sj.png" alt />
           <p class="title">风险处置</p>
         </div>
-        <div class="zhexiantu" id="Pie2"></div>
+        <div class="zhexiantu" id="yjPie"></div>
       </div>
       <div class="modr3">
         <div class="titleBox">
@@ -205,7 +211,7 @@
     <div class="box4">
       <div class="box4_tab">
         <p :class="{ active: shows == 3 }" class="title_all" @click="clickZR()">
-          准入评级
+          准入控制
         </p>
         <p :class="{ active: shows == 2 }" class="title_all" @click="clickCL()">
           存量评级
@@ -223,14 +229,15 @@
 </template>
 <script>
 import "echarts/map/js/china.js";
-import obj from "echarts/map/json/china.json";
+import "echarts/map/js/province/fujian.js";
+// import obj from "echarts/map/json/china.json";
 import "echarts-liquidfill/src/liquidFill.js";
 export default {
   name: "demo8",
   data() {
     return {
       // 页面渲染
-      zrpjData1: 1500, //准入评级
+      zrpjData1: 1500, //准入控制
       zrpjData2: 900,
       zrpjData3: 60,
       zrData: [
@@ -436,7 +443,7 @@ export default {
       ],
       //默认参数
       box4PieData: ["进件数", "通过数", "准入通过率(%)"],
-      dataType: "准入评级",
+      dataType: "准入控制",
       selectTime: "当日",
       options: [
         {
@@ -584,7 +591,7 @@ export default {
         {
           name: "福建",
           value: 80,
-          id:350000,
+          id: 350000
         },
         {
           name: "广东",
@@ -644,7 +651,7 @@ export default {
     },
     clickZR() {
       this.shows = 3;
-      this.dataType = "准入评级";
+      this.dataType = "准入控制";
       this.box4PieData = ["进件数", "通过数", "准入通过率(%)"];
     },
     clickXJ() {
@@ -740,35 +747,97 @@ export default {
     // 绘制地图
     getData() {
       // 获取城市名称数据
-      console.log("取到的福建省的json数据", obj);
-      if (obj) {
-        let arr = obj.features;
-        // 循环取出 城市名称和value值
-        for (var j = 0; j < arr.length; j++) {
-          this.max = arr[0].id;
-          this.min = arr[0].id;
-          if (arr[j].id > this.max) {
-            this.max = arr[j].id;
-          }
-          if (arr[j].id < this.min) {
-            this.min = arr[j].id;
-          }
-          this.listArr.push({
-            name: arr[j].properties.name,
-            value: arr[j].id
-          });
-        }
-      }
+      // console.log("取到的福建省的json数据", obj);
+      // if (obj) {
+      //   let arr = obj.features;
+      //   // 循环取出 城市名称和value值
+      //   for (var j = 0; j < arr.length; j++) {
+      //     this.max = arr[0].id;
+      //     this.min = arr[0].id;
+      //     if (arr[j].id > this.max) {
+      //       this.max = arr[j].id;
+      //     }
+      //     if (arr[j].id < this.min) {
+      //       this.min = arr[j].id;
+      //     }
+      //     this.listArr.push({
+      //       name: arr[j].properties.name,
+      //       value: arr[j].id
+      //     });
+      //   }
+      // }
     },
     DrawMap() {
       // 全国地图渐变
-      let dituJB1 = this.$echarts.init(document.getElementById("ditu1"));
+      let myChart = this.$echarts.init(document.getElementById("ditu1"));
       // 省份点击联动
       let _that = this;
-      dituJB1.on("click", function(param) {
+      myChart.on("click", function(param) {
         console.log(param);
         // _that.PieClick(param.data);
       });
+      // 地图高亮轮播
+      // var count = 0;
+      // var timeTicket = null;
+      // var dataLength = this.dituData.length;
+      // timeTicket && clearInterval(timeTicket);
+      // timeTicket = setInterval(function() {
+      //   myChart.dispatchAction({
+      //     type: "downplay",
+      //     seriesIndex: 1
+      //   });
+      //   myChart.dispatchAction({
+      //     type: "highlight",
+      //     seriesIndex: 1,
+      //     dataIndex: count % dataLength
+      //   });
+      //   myChart.dispatchAction({
+      //     type: "showTip",
+      //     seriesIndex: 1,
+      //     dataIndex: count % dataLength
+      //   });
+      //   count++;
+      // }, 3000);
+      // myChart.on("mouseover", function(params) {
+      //   console.log(params);
+      //   clearInterval(timeTicket);
+      //   myChart.dispatchAction({
+      //     type: "downplay",
+      //     seriesIndex: 1
+      //   });
+      //   myChart.dispatchAction({
+      //     type: "highlight",
+      //     seriesIndex: 1,
+      //     dataIndex: params.dataIndex
+      //   });
+      //   myChart.dispatchAction({
+      //     type: "showTip",
+      //     seriesIndex: 1,
+      //     dataIndex: params.dataIndex
+      //   });
+      // });
+      // myChart.on("mouseout", function(params) {
+      //   timeTicket && clearInterval(timeTicket);
+      //   timeTicket = setInterval(function() {
+      //     myChart.dispatchAction({
+      //       type: "downplay",
+      //       seriesIndex: 1
+      //     });
+      //     myChart.dispatchAction({
+      //       type: "highlight",
+      //       seriesIndex: 1,
+      //       dataIndex: count % dataLength
+      //     });
+      //     myChart.dispatchAction({
+      //       type: "showTip",
+      //       seriesIndex: 1,
+      //       dataIndex: count % dataLength
+      //     });
+      //     count++;
+      //   }, 3000);
+      // });
+
+      
       // dituJB1.getZr().on("click", res => {
       //   // 点击空白处
       //   _that.PieClick1(res.target);
@@ -855,7 +924,7 @@ export default {
         }
         return res;
       };
-      dituJB1.setOption({
+      myChart.setOption({
         tooltip: {
           trigger: "item",
           formatter: function(params) {
@@ -2028,9 +2097,10 @@ export default {
           itemHeight: 15,
           itemGap: 9,
           top: "5",
-          left: "center",
+          right:"5",
+          // left: "center",
           textStyle: {
-            fontSize: 22,
+            fontSize: 32,
             color: "#F1F1F3"
           },
           data: ["已处理", "未处理"]
@@ -2142,7 +2212,7 @@ export default {
               show: true,
               textStyle: {
                 color: "#ffffff",
-                fontSize: 18
+                fontSize: 26
               }
             },
             data: label.map(value => {
@@ -2151,7 +2221,7 @@ export default {
                 textStyle: {
                   align: "center",
                   color: value[1],
-                  fontSize: 24
+                  fontSize: 32
                 }
               };
             })
@@ -2180,11 +2250,11 @@ export default {
           {
             name: "已处理",
             type: "bar",
-            barWidth: 15,
+            barWidth: 20,
             stack: "left",
             label: {
               show: true,
-              fontSize: 20,
+              fontSize: 28,
               distance: 5,
               color: "#fff",
               position: "left", //inside|right
@@ -2203,13 +2273,13 @@ export default {
           {
             name: "未处理",
             type: "bar",
-            barWidth: 15,
+            barWidth: 20,
             stack: "right",
             xAxisIndex: 2,
             yAxisIndex: 2,
             label: {
               show: true,
-              fontSize: 20,
+              fontSize: 28,
               distance: 5,
               color: "#fff",
               position: "right", //inside|right
@@ -2228,59 +2298,13 @@ export default {
       });
       // 仪表盘
       ybpPie.setOption({
-        title: [
-          {
-            x: "9%",
-            y: "80%",
-            //bottom: 100,
-            text: "准入通过率",
-            textStyle: {
-              fontWeight: "normal",
-              fontSize: 28,
-              color: "#fff"
-            }
-          },
-          {
-            x: "32%",
-            y: "80%",
-            //bottom: 100,
-            text: "存量低险率",
-            textStyle: {
-              fontWeight: "normal",
-              fontSize: 28,
-              color: "#fff"
-            }
-          },
-          {
-            x: "56%",
-            y: "80%",
-            //bottom: 100,
-            text: "预警处置率",
-            textStyle: {
-              fontWeight: "normal",
-              fontSize: 28,
-              color: "#fff"
-            }
-          },
-          {
-            x: "79%",
-            y: "80%",
-            //bottom: 100,
-            text: "巡检通过率",
-            textStyle: {
-              fontWeight: "normal",
-              fontSize: 28,
-              color: "#fff"
-            }
-          }
-        ],
         series: [
           {
             name: "速度",
             type: "gauge",
             min: 0,
             max: 100,
-            center: ["15%", "50%"], // 默认全局居中
+            center: ["14.5%", "50%"], // 默认全局居中
             //splitNumber:11,
             radius: "95%",
             axisLine: {
@@ -2342,7 +2366,12 @@ export default {
                 fontSize: 40
               }
             },
-            data: [{ value: this.zrtglData }]
+            data: [
+              { 
+                value: this.zrtglData,
+                name:"123",
+              }
+              ]
           },
           {
             name: "速度",
@@ -2418,7 +2447,7 @@ export default {
             type: "gauge",
             min: 0,
             max: 100,
-            center: ["62%", "50%"], // 默认全局居中
+            center: ["61.5%", "50%"], // 默认全局居中
             //splitNumber:11,
             radius: "95%",
             axisLine: {
@@ -2935,20 +2964,20 @@ export default {
           data: ["风险级", "警示级", "预警级", "关注级"],
           textStyle: {
             color: "#fff",
-            fontSize: 36
+            fontSize: 26
           }
         },
         tooltip: {
           trigger: "axis",
           textStyle: {
-            fontSize: 32
+            fontSize: 26
           }
         },
         grid: {
           left: "5%",
           right: "3%",
-          bottom: "5%",
-          top: "15%",
+          bottom: "0%",
+          top: "28%",
           containLabel: true
         },
         xAxis: {
@@ -2965,7 +2994,7 @@ export default {
             interval: 0,
             textStyle: {
               color: "#fff",
-              fontSize: 32
+              fontSize: 22
             }
           }
         },
@@ -2974,7 +3003,7 @@ export default {
           triggerEvent: true,
           nameTextStyle: {
             color: "#fff",
-            fontSize: 28
+            fontSize: 20
           },
           splitLine: {
             show: true,
@@ -2995,7 +3024,7 @@ export default {
             show: true,
             textStyle: {
               color: "#fff",
-              fontSize: 26
+              fontSize: 18
             }
           }
         },
@@ -3016,6 +3045,14 @@ export default {
                 //渐变色
                 color: function(params) {
                   return jztColor[params.dataIndex];
+                },
+                label:{
+                  show:true,
+                  position:"top",
+                  textStyle:{
+                    fontSize:24,
+                    color:"#fff"
+                  }
                 }
               }
             },
@@ -3287,6 +3324,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 // 新增css
+.ybpname{
+  width: 94%;
+  left: 3%;
+  position: absolute;
+  display: flex;
+  bottom:20px;
+  p{
+    color:#fff;
+    width:25%;
+    text-align: center;
+    font-size: 20px;
+  }
+}
 .xjTitle {
   position: absolute;
   display: flex;
@@ -3797,12 +3847,12 @@ ul {
       display: flex;
       flex-direction: column;
       .zhexiantu {
-        width: 215%;
-        height: 220%;
+        width: 225%;
+        height: 230%;
         position: absolute;
         transform: scale(0.35);
-        left: -60%;
-        top: -50%;
+        left: -65%;
+        top: -60%;
       }
       .titleBox {
         display: flex;
@@ -3826,7 +3876,7 @@ ul {
       background-size: 95% 100%;
       background-repeat: no-repeat;
       position: relative;
-      padding: 5% 5% 11% 8%;
+      padding: 5% 5% 5% 8%;
     }
     .modr3 {
       .bingtu {
