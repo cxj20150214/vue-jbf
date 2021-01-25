@@ -37,3 +37,11 @@ export function getModelInfo(data) {
     data
   })
 }
+
+export function getCode(data) {
+  return request({
+    url: '/vue-admin-template/food/list',
+    method: 'get',
+    data
+  })
+}

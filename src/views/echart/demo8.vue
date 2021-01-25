@@ -34,6 +34,20 @@
             </p>
           </div>
           <el-select
+            class="ccbSelect ccbSelect1"
+            v-model="valueSelect1"
+            placeholder="历史年份"
+            @change="getJGH1"
+          >
+            <el-option
+              v-for="item in options1"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <el-select
             class="ccbSelect"
             v-model="valueSelect"
             placeholder="请选择"
@@ -230,7 +244,40 @@
 <script>
 import "echarts/map/js/china.js";
 import "echarts/map/js/province/fujian.js";
-// import obj from "echarts/map/json/china.json";
+import "echarts/map/js/province/anhui.js";
+import "echarts/map/js/province/aomen.js";
+import "echarts/map/js/province/beijing.js";
+import "echarts/map/js/province/chongqing.js";
+import "echarts/map/js/province/gansu.js";
+import "echarts/map/js/province/guangdong.js";
+import "echarts/map/js/province/guangxi.js";
+import "echarts/map/js/province/guizhou.js";
+import "echarts/map/js/province/hainan.js";
+import "echarts/map/js/province/hebei.js";
+import "echarts/map/js/province/heilongjiang.js";
+import "echarts/map/js/province/henan.js";
+import "echarts/map/js/province/hubei.js";
+import "echarts/map/js/province/hunan.js";
+import "echarts/map/js/province/jiangsu.js";
+import "echarts/map/js/province/jiangxi.js";
+import "echarts/map/js/province/jilin.js";
+import "echarts/map/js/province/liaoning.js";
+import "echarts/map/js/province/neimenggu.js";
+import "echarts/map/js/province/ningxia.js";
+import "echarts/map/js/province/qinghai.js";
+import "echarts/map/js/province/shandong.js";
+import "echarts/map/js/province/shanghai.js";
+import "echarts/map/js/province/shanxi.js";
+import "echarts/map/js/province/shanxi1.js";
+import "echarts/map/js/province/sichuan.js";
+import "echarts/map/js/province/taiwan.js";
+import "echarts/map/js/province/tianjin.js";
+import "echarts/map/js/province/xianggang.js";
+import "echarts/map/js/province/xinjiang.js";
+import "echarts/map/js/province/xizang.js";
+import "echarts/map/js/province/yunnan.js";
+import "echarts/map/js/province/zhejiang.js";
+// import obj from "echarts/map/json/350200.json";
 import "echarts-liquidfill/src/liquidFill.js";
 export default {
   name: "demo8",
@@ -240,6 +287,54 @@ export default {
       zrpjData1: 1500, //准入控制
       zrpjData2: 900,
       zrpjData3: 60,
+      // 散点数据
+      dituData1: [
+        {
+          name: "北京",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "天津",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "重庆",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "厦门",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "深圳",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "苏州",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "大连",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "青岛",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "三峡",
+          value: 116,
+          id: 2222222
+        }
+      ],
       zrData: [
         //拒件分布
         {
@@ -445,6 +540,24 @@ export default {
       box4PieData: ["进件数", "通过数", "准入通过率(%)"],
       dataType: "准入控制",
       selectTime: "当日",
+      options1: [
+        {
+          value: "选项0",
+          label: "选择年份"
+        },
+        {
+          value: "选项1",
+          label: "2020年"
+        },
+        {
+          value: "选项2",
+          label: "2019年"
+        },
+        {
+          value: "选项3",
+          label: "2018年"
+        }
+      ],
       options: [
         {
           value: "选项1",
@@ -599,6 +712,8 @@ export default {
         }
       ],
       valueSelect: "全国",
+      valueSelect1: "历史年份",
+      mapName: "china",
       province: "全国",
       shows: 3,
       showXJ: 1,
@@ -613,6 +728,17 @@ export default {
   },
   computed: {},
   methods: {
+    // 获取下拉框历史年份
+    getJGH1(val) {
+      console.log(val);
+      let obj = {};
+      obj = this.options.find(item => {
+        return item.value === val;
+      });
+      let getLabel = "";
+      getLabel = obj.label;
+      // this.province = getLabel;
+    },
     // 获取下拉框机构号和名称
     getJGH(val) {
       console.log(val);
@@ -683,9 +809,38 @@ export default {
     //     ];
     //   }
     // },
-    PieClick(value) {
-      this.province = value.name;
-      alert(value.id);
+    PieClick(param) {
+      // this.province = value.name;
+      this.dituData = [];
+      this.dituData1 = [];
+      if (param.name === "福建") {
+        this.dituData = [
+          {
+            name: "泉州市",
+            value: 100
+          },
+          {
+            name: "厦门市",
+            value: 50
+          }
+        ];
+      }
+      if (param.name === "厦门市") {
+        this.axios.get("/data/350200.json").then(data => {
+          this.dituData = [
+            {
+              name: "思明区",
+              value: 100
+            }
+          ];
+          console.log(data);
+          const getJson = data.data;
+          this.$echarts.registerMap(param.name, getJson);
+          this.DrawMap(); // resize 图形功能方法
+        });
+      }
+      this.mapName = param.name;
+      this.DrawMap();
     },
     // 处理量 处理率
     clAll() {
@@ -747,24 +902,25 @@ export default {
     // 绘制地图
     getData() {
       // 获取城市名称数据
-      // console.log("取到的福建省的json数据", obj);
+      // console.log("取到的XX市的json数据", obj);
       // if (obj) {
       //   let arr = obj.features;
       //   // 循环取出 城市名称和value值
       //   for (var j = 0; j < arr.length; j++) {
-      //     this.max = arr[0].id;
-      //     this.min = arr[0].id;
-      //     if (arr[j].id > this.max) {
-      //       this.max = arr[j].id;
-      //     }
-      //     if (arr[j].id < this.min) {
-      //       this.min = arr[j].id;
-      //     }
+      //     // this.max = arr[0].id;
+      //     // this.min = arr[0].id;
+      //     // if (arr[j].id > this.max) {
+      //     //   this.max = arr[j].id;
+      //     // }
+      //     // if (arr[j].id < this.min) {
+      //     //   this.min = arr[j].id;
+      //     // }
       //     this.listArr.push({
       //       name: arr[j].properties.name,
       //       value: arr[j].id
       //     });
       //   }
+      //   console.log(this.listArr,'全国市json')
       // }
     },
     DrawMap() {
@@ -772,9 +928,13 @@ export default {
       let myChart = this.$echarts.init(document.getElementById("ditu1"));
       // 省份点击联动
       let _that = this;
+      myChart.off("click");
       myChart.on("click", function(param) {
         console.log(param);
-        // _that.PieClick(param.data);
+        _that.PieClick(param);
+      });
+      myChart.on("mapselectchanged", function(param) {
+        console.log(param);
       });
       // 地图高亮轮播
       // var count = 0;
@@ -837,46 +997,17 @@ export default {
       //   }, 3000);
       // });
 
-      
       // dituJB1.getZr().on("click", res => {
       //   // 点击空白处
       //   _that.PieClick1(res.target);
       // });
-      var mapName = "china";
+      var mapName = this.mapName;
       var dataJB = this.dituData;
-      var dataJB1 = [
-        {
-          name: "厦门",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "深圳",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "苏州",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "大连",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "青岛",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "三峡",
-          value: 116,
-          id: 2222222
-        }
-      ];
+      var dataJB1 = this.dituData1;
       var geoCoordMap = {
+        北京: [116.403039, 39.917565],
+        天津: [116.403039, 39.917565],
+        重庆: [106.554413, 29.556932],
         厦门: [118.159101, 24.491196],
         宁波: [121.622188, 29.871286],
         深圳: [114.062198, 22.549668],
@@ -982,14 +1113,14 @@ export default {
               show: false
             }
           },
-          roam: true,
+          roam: false,
           itemStyle: {
             normal: {
-              areaColor: "#031525",
+              areaColor: "#00467F",
               borderColor: "#3B5077"
             },
             emphasis: {
-              areaColor: "#2B91B7"
+              areaColor: "#A5CC82"
             }
           }
         },
@@ -1039,7 +1170,7 @@ export default {
                 }
               }
             },
-            roam: true,
+            roam: false,
             itemStyle: {
               normal: {
                 areaColor: "#031525",
@@ -2097,7 +2228,7 @@ export default {
           itemHeight: 15,
           itemGap: 9,
           top: "5",
-          right:"5",
+          right: "5",
           // left: "center",
           textStyle: {
             fontSize: 32,
@@ -2367,11 +2498,11 @@ export default {
               }
             },
             data: [
-              { 
+              {
                 value: this.zrtglData,
-                name:"123",
+                name: "123"
               }
-              ]
+            ]
           },
           {
             name: "速度",
@@ -2957,7 +3088,7 @@ export default {
       // 风险处置
       var xdata = ["风险级", "警示级", "预警级", "关注级"];
       var data = [50, 40, 30, 20];
-      var jztColor = ["#FD4C54", "#FD950E", "#29B8FC", "#31CE5B"];
+      var jztColor = ["#FD4C54", "#FD950E", "#FFD52E", "#409EFF"];
       Pie2.setOption({
         legend: {
           top: "6%",
@@ -3046,12 +3177,12 @@ export default {
                 color: function(params) {
                   return jztColor[params.dataIndex];
                 },
-                label:{
-                  show:true,
-                  position:"top",
-                  textStyle:{
-                    fontSize:24,
-                    color:"#fff"
+                label: {
+                  show: true,
+                  position: "top",
+                  textStyle: {
+                    fontSize: 24,
+                    color: "#fff"
                   }
                 }
               }
@@ -3324,15 +3455,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 // 新增css
-.ybpname{
+.ybpname {
   width: 94%;
   left: 3%;
   position: absolute;
   display: flex;
-  bottom:20px;
-  p{
-    color:#fff;
-    width:25%;
+  bottom: 20px;
+  p {
+    color: #fff;
+    width: 25%;
     text-align: center;
     font-size: 20px;
   }
@@ -3367,13 +3498,16 @@ export default {
   width: 60%;
   height: 50%;
   margin-top: 3%;
+  &.ccbSelect1 {
+    width: 40%;
+  }
 }
 .selectBox {
   position: absolute;
   z-index: 999;
-  width: 320px;
+  width: 500px;
   height: 50px;
-  right: -22%;
+  right: -58%;
   display: flex;
   flex-direction: row;
   .box4_tab {
