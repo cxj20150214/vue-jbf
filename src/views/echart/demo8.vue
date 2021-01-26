@@ -172,6 +172,38 @@
           <div class="ditu" id="ditu1"></div>
           <p class="title">{{ province }}{{ dataType }}大数据统计</p>
           <p class="back" v-show="showShen" @click="toChina">返回</p>
+          <!-- 跑马灯 -->
+          <vue-seamless-scroll
+            :class-option="optionscroll1"
+            :data="listData1"
+            class="seamless-warp1"
+          >
+            <ul class="itemhua">
+              <li v-for="item in listData1">
+                <!-- <div class="tit">裕农通-福建省分行</div> -->
+                <div class="txt">
+                  <!-- <div class="paihan">NO {{ item.no }}</div> -->
+                  <div class="boxP">
+                    <div class="box">
+                      <p class="t1">裕农通-福建省分行</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">总数</p>
+                      <p class="t2">{{ item.data1 }}</p>
+                    </div>
+                    <!-- <div class="box">
+                      <p class="t1">已处理数</p>
+                      <p class="t2">{{item.data2}}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">处理率</p>
+                      <p class="t2">{{item.data3}}</p>
+                    </div> -->
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </vue-seamless-scroll>
         </div>
       </div>
       <div class="modBox2">
@@ -288,6 +320,69 @@ export default {
       zrpjData1: 1500, //准入控制
       zrpjData2: 900,
       zrpjData3: 60,
+      // 跑马灯
+      listData1: [
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "1"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "2"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "3"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "4"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "5"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "6"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "7"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "8"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "9"
+        },
+        {
+          data1: "120个",
+          data2: "60个",
+          data3: "80%",
+          no: "10"
+        }
+      ],
       // 散点数据
       dituData1: [
         {
@@ -728,7 +823,16 @@ export default {
       chulilv: false
     };
   },
-  computed: {},
+  computed: {
+    optionscroll1() {
+      return {
+        // hoverStop: false,
+        step: 0.4,
+        direction: 2,
+        limitMoveNum: 2
+      };
+    }
+  },
   methods: {
     // 返回中国地图
     toChina() {
@@ -4537,22 +4641,25 @@ ul {
 }
 
 .seamless-warp1 {
-  width: 90%;
+  width: 180px;
+  right: 2%;
+  top: 2%;
   margin: 0px auto;
-  height: 100%;
+  height: 100px;
   overflow: hidden;
   display: block;
+  position: absolute;
   .itemhua {
     padding: 0px;
     margin: 0px;
     display: flex;
     flex-direction: row;
-    height: 200px;
-    margin-top: 20px;
+    height: 80px;
+    margin-top: 10px;
     li {
-      width: 300px;
-      height: 150px;
-      margin-right: 20px;
+      width: 160px;
+      height: 80px;
+      margin-right: 10px;
       .tit {
         color: #fff;
         font-size: 16px;
@@ -4565,7 +4672,8 @@ ul {
         justify-content: space-between;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 5px;
-        height: 100px;
+        height: 80px;
+        width:100%;
         .paihan {
           width: 80px;
           height: 80px;
@@ -4582,11 +4690,10 @@ ul {
         .boxP {
           display: flex;
           flex-direction: column;
-          margin-top: 10px;
-          margin-right: 15px;
-          margin-left: 5px;
+          margin-top: 15px;
+          margin:0px auto;
           .box {
-            width: 170px;
+            width: 100%;
             font-size: 14px;
             text-align: center;
             background: rgba(255, 255, 255, 0.1);
