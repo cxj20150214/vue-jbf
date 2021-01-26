@@ -171,6 +171,7 @@
         <div class="bg">
           <div class="ditu" id="ditu1"></div>
           <p class="title">{{ province }}{{ dataType }}大数据统计</p>
+          <p class="back" v-show="showShen" @click="toChina">返回</p>
         </div>
       </div>
       <div class="modBox2">
@@ -277,7 +278,7 @@ import "echarts/map/js/province/xinjiang.js";
 import "echarts/map/js/province/xizang.js";
 import "echarts/map/js/province/yunnan.js";
 import "echarts/map/js/province/zhejiang.js";
-// import obj from "echarts/map/json/350200.json";
+// import obj from "echarts/map/json/province/shanxi1.json";
 import "echarts-liquidfill/src/liquidFill.js";
 export default {
   name: "demo8",
@@ -711,6 +712,7 @@ export default {
           value: 40
         }
       ],
+      showShen: false,
       valueSelect: "全国",
       valueSelect1: "历史年份",
       mapName: "china",
@@ -728,6 +730,198 @@ export default {
   },
   computed: {},
   methods: {
+    // 返回中国地图
+    toChina() {
+      this.dituData1 = [
+        {
+          name: "北京",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "天津",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "重庆",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "厦门",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "深圳",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "苏州",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "大连",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "青岛",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "三峡",
+          value: 116,
+          id: 2222222
+        }
+      ];
+      this.dituData = [
+        {
+          name: "重庆",
+          value: 0
+        },
+        {
+          name: "云南",
+          value: 0
+        },
+        {
+          name: "辽宁",
+          value: 0
+        },
+        {
+          name: "黑龙江",
+          value: 0
+        },
+        {
+          name: "广西",
+          value: 20
+        },
+        {
+          name: "甘肃",
+          value: 20
+        },
+        {
+          name: "山西",
+          value: 10
+        },
+        {
+          name: "陕西",
+          value: 0
+        },
+        {
+          name: "吉林",
+          value: 40
+        },
+        {
+          name: "贵州",
+          value: 20
+        },
+        {
+          name: "新疆",
+          value: 0
+        },
+        {
+          name: "青海",
+          value: 10
+        },
+        {
+          name: "西藏",
+          value: 0
+        },
+        {
+          name: "四川",
+          value: 20
+        },
+        {
+          name: "宁夏",
+          value: 0
+        },
+        {
+          name: "海南",
+          value: 0
+        },
+        {
+          name: "台湾",
+          value: 0
+        },
+        {
+          name: "香港",
+          value: 0
+        },
+        {
+          name: "澳门",
+          value: 0
+        },
+        {
+          name: "上海",
+          value: 100
+        },
+        {
+          name: "安徽",
+          value: 150
+        },
+        {
+          name: "江苏",
+          value: 140
+        },
+        {
+          name: "浙江",
+          value: 120
+        },
+        {
+          name: "北京",
+          value: 80
+        },
+        {
+          name: "天津",
+          value: 60
+        },
+        {
+          name: "河北",
+          value: 0
+        },
+        {
+          name: "河南",
+          value: 0
+        },
+        {
+          name: "内蒙古",
+          value: 0
+        },
+        {
+          name: "湖南",
+          value: 0
+        },
+        {
+          name: "山东",
+          value: 180
+        },
+        {
+          name: "江西",
+          value: 160
+        },
+        {
+          name: "湖北",
+          value: 0
+        },
+        {
+          name: "福建",
+          value: 80,
+          id: 350000
+        },
+        {
+          name: "广东",
+          value: 40
+        }
+      ];
+      this.mapName = "china";
+      this.DrawMap();
+      this.showShen = false;
+    },
     // 获取下拉框历史年份
     getJGH1(val) {
       console.log(val);
@@ -841,6 +1035,9 @@ export default {
       }
       this.mapName = param.name;
       this.DrawMap();
+      if (this.mapName !== "china") {
+        this.showShen = true;
+      }
     },
     // 处理量 处理率
     clAll() {
@@ -902,7 +1099,7 @@ export default {
     // 绘制地图
     getData() {
       // 获取城市名称数据
-      // console.log("取到的XX市的json数据", obj);
+      // console.log("取到的XX省的json数据", obj);
       // if (obj) {
       //   let arr = obj.features;
       //   // 循环取出 城市名称和value值
@@ -915,12 +1112,12 @@ export default {
       //     // if (arr[j].id < this.min) {
       //     //   this.min = arr[j].id;
       //     // }
-      //     this.listArr.push({
-      //       name: arr[j].properties.name,
-      //       value: arr[j].id
-      //     });
+      //     this.listArr.push(
+      //       arr[j].properties.name
+      //       // value: arr[j].id
+      //     );
       //   }
-      //   console.log(this.listArr,'全国市json')
+      //   console.log(this.listArr, "XX省json");
       // }
     },
     DrawMap() {
@@ -933,69 +1130,65 @@ export default {
         console.log(param);
         _that.PieClick(param);
       });
-      myChart.on("mapselectchanged", function(param) {
-        console.log(param);
-      });
       // 地图高亮轮播
-      // var count = 0;
-      // var timeTicket = null;
-      // var dataLength = this.dituData.length;
-      // timeTicket && clearInterval(timeTicket);
-      // timeTicket = setInterval(function() {
-      //   myChart.dispatchAction({
-      //     type: "downplay",
-      //     seriesIndex: 1
-      //   });
-      //   myChart.dispatchAction({
-      //     type: "highlight",
-      //     seriesIndex: 1,
-      //     dataIndex: count % dataLength
-      //   });
-      //   myChart.dispatchAction({
-      //     type: "showTip",
-      //     seriesIndex: 1,
-      //     dataIndex: count % dataLength
-      //   });
-      //   count++;
-      // }, 3000);
-      // myChart.on("mouseover", function(params) {
-      //   console.log(params);
-      //   clearInterval(timeTicket);
-      //   myChart.dispatchAction({
-      //     type: "downplay",
-      //     seriesIndex: 1
-      //   });
-      //   myChart.dispatchAction({
-      //     type: "highlight",
-      //     seriesIndex: 1,
-      //     dataIndex: params.dataIndex
-      //   });
-      //   myChart.dispatchAction({
-      //     type: "showTip",
-      //     seriesIndex: 1,
-      //     dataIndex: params.dataIndex
-      //   });
-      // });
-      // myChart.on("mouseout", function(params) {
-      //   timeTicket && clearInterval(timeTicket);
-      //   timeTicket = setInterval(function() {
-      //     myChart.dispatchAction({
-      //       type: "downplay",
-      //       seriesIndex: 1
-      //     });
-      //     myChart.dispatchAction({
-      //       type: "highlight",
-      //       seriesIndex: 1,
-      //       dataIndex: count % dataLength
-      //     });
-      //     myChart.dispatchAction({
-      //       type: "showTip",
-      //       seriesIndex: 1,
-      //       dataIndex: count % dataLength
-      //     });
-      //     count++;
-      //   }, 3000);
-      // });
+      var count = 0;
+      var timeTicket = null;
+      var dataLength = this.dituData.length;
+      timeTicket && clearInterval(timeTicket);
+      timeTicket = setInterval(function() {
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 1
+        });
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 1,
+          dataIndex: count % dataLength
+        });
+        myChart.dispatchAction({
+          type: "showTip",
+          seriesIndex: 1,
+          dataIndex: count % dataLength
+        });
+        count++;
+      }, 3000);
+      myChart.on("mouseover", function(params) {
+        clearInterval(timeTicket);
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 1
+        });
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 1,
+          dataIndex: params.dataIndex
+        });
+        myChart.dispatchAction({
+          type: "showTip",
+          seriesIndex: 1,
+          dataIndex: params.dataIndex
+        });
+      });
+      myChart.on("mouseout", function(params) {
+        timeTicket && clearInterval(timeTicket);
+        timeTicket = setInterval(function() {
+          myChart.dispatchAction({
+            type: "downplay",
+            seriesIndex: 1
+          });
+          myChart.dispatchAction({
+            type: "highlight",
+            seriesIndex: 1,
+            dataIndex: count % dataLength
+          });
+          myChart.dispatchAction({
+            type: "showTip",
+            seriesIndex: 1,
+            dataIndex: count % dataLength
+          });
+          count++;
+        }, 3000);
+      });
 
       // dituJB1.getZr().on("click", res => {
       //   // 点击空白处
@@ -1120,7 +1313,7 @@ export default {
               borderColor: "#3B5077"
             },
             emphasis: {
-              areaColor: "#A5CC82"
+              areaColor: "#FFD52E"
             }
           }
         },
@@ -3700,7 +3893,7 @@ ul {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  user-select: none;
+  // user-select: none;
   display: flex;
   flex-direction: row;
   background-image: url("../../assets/img/demo2bg.jpg");
@@ -3865,6 +4058,15 @@ ul {
         .ditu {
           width: 100%;
           height: 100%;
+        }
+        .back {
+          position: absolute;
+          color: #d2d2d3;
+          font-size: 18px;
+          right: 5%;
+          bottom: 10%;
+          font-weight: 700;
+          cursor: pointer;
         }
       }
     }
