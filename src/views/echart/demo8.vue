@@ -188,8 +188,16 @@
                       <p class="t1">裕农通-福建省分行</p>
                     </div>
                     <div class="box">
-                      <p class="t1">总数</p>
+                      <p class="t1">进件数</p>
                       <p class="t2">{{ item.data1 }}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">通过数</p>
+                      <p class="t2">{{ item.data2 }}</p>
+                    </div>
+                    <div class="box">
+                      <p class="t1">通过率</p>
+                      <p class="t2">{{ item.data3 }}</p>
                     </div>
                     <!-- <div class="box">
                       <p class="t1">已处理数</p>
@@ -245,12 +253,13 @@
             巡检完成率
           </p> -->
         </div>
-        <ul class="xjTitle">
+        <ul class="xjTitle" v-show="xjPie">
           <li>专项</li>
           <li>远程</li>
           <li>现场</li>
         </ul>
-        <div class="bingtu" id="PieXJ"></div>
+        <div class="bingtu" id="PieXJ" v-show="xjPie"></div>
+        <div class="bingtu" id="PieXJyear" v-show="xjPieYear"></div>
         <!-- <div class="bingtu" id="Pie1" v-show="chuliliang"></div>
         <div class="bingtu" id="Pie4" v-show="chulilv"></div> -->
       </div>
@@ -636,24 +645,7 @@ export default {
       box4PieData: ["进件数", "通过数", "准入通过率(%)"],
       dataType: "准入控制",
       selectTime: "当日",
-      options1: [
-        {
-          value: "选项0",
-          label: "选择年份"
-        },
-        {
-          value: "选项1",
-          label: "2020年"
-        },
-        {
-          value: "选项2",
-          label: "2019年"
-        },
-        {
-          value: "选项3",
-          label: "2018年"
-        }
-      ],
+      options1: [],
       options: [
         {
           value: "选项1",
@@ -819,8 +811,8 @@ export default {
       nowDate: "", // 当前日期
       nowTime: "", // 当前时间
       nowWeek: "", // 当前星期
-      chuliliang: true,
-      chulilv: false
+      xjPie: false,
+      xjPieYear: true
     };
   },
   computed: {
@@ -836,6 +828,7 @@ export default {
   methods: {
     // 返回中国地图
     toChina() {
+      this.dituData = [];
       this.dituData1 = [
         {
           name: "北京",
@@ -1023,6 +1016,7 @@ export default {
         }
       ];
       this.mapName = "china";
+      // this.$echarts.registerMap("china")
       this.DrawMap();
       this.showShen = false;
     },
@@ -1120,6 +1114,10 @@ export default {
           {
             name: "厦门市",
             value: 50
+          },
+          {
+            name: "南平市",
+            value: 50
           }
         ];
       }
@@ -1128,6 +1126,14 @@ export default {
           this.dituData = [
             {
               name: "思明区",
+              value: 100
+            },
+            {
+              name: "湖里区",
+              value: 100
+            },
+            {
+              name: "集美区",
               value: 100
             }
           ];
@@ -1138,6 +1144,7 @@ export default {
         });
       }
       this.mapName = param.name;
+      // this.$echarts.registerMap(param.name)
       this.DrawMap();
       if (this.mapName !== "china") {
         this.showShen = true;
@@ -1260,17 +1267,17 @@ export default {
         clearInterval(timeTicket);
         myChart.dispatchAction({
           type: "downplay",
-          seriesIndex: 1
+          seriesIndex: 0
         });
         myChart.dispatchAction({
           type: "highlight",
-          seriesIndex: 1,
-          dataIndex: params.dataIndex
+          seriesIndex: 0,
+          dataIndex: count % dataLength
         });
         myChart.dispatchAction({
           type: "showTip",
-          seriesIndex: 1,
-          dataIndex: params.dataIndex
+          seriesIndex: 0,
+          dataIndex: count % dataLength
         });
       });
       myChart.on("mouseout", function(params) {
@@ -1481,7 +1488,7 @@ export default {
             data: dataJB
           }
         ]
-      });
+      },true);
     },
     //   设置字体
     setFontsize(res) {
@@ -2069,6 +2076,7 @@ export default {
     // 饼图
     piedemo() {
       let PieXJ = this.$echarts.init(document.getElementById("PieXJ")); //新巡检图
+      let PieXJyear = this.$echarts.init(document.getElementById("PieXJyear")); //新巡检图(当年)
       // let Pie1 = this.$echarts.init(document.getElementById("Pie1")); //巡检处理总量
       let Pie2 = this.$echarts.init(document.getElementById("Pie2")); //风险处置柱状图
       // let Pie4 = this.$echarts.init(document.getElementById("Pie4")); //巡检处理率
@@ -2076,6 +2084,123 @@ export default {
       let ybpPie = this.$echarts.init(document.getElementById("ybpPie")); //仪表盘
       let yjPie = this.$echarts.init(document.getElementById("yjPie")); //预警柱状图
       let box4Pie = this.$echarts.init(document.getElementById("box4Pie")); //预警柱状图
+      //新巡检图(当年)
+      var dataZX = [10, 20, 30, 40];
+      var dataYC = [13, 14, 15, 12];
+      var dataXC = [23, 24, 25, 22];
+      var datacity = ["一季度", "二季度", "三季度", "四季度"];
+      PieXJyear.setOption({
+        // color: ["#388BFF", "#E6A23C"],
+        tooltip: {
+          trigger: "axis",
+          formatter: function(params) {
+            var html = params[0].name + "<br>";
+            for (var i = 0; i < params.length; i++) {
+              html +=
+                '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:' +
+                params[i].color +
+                ';"></span>';
+              html +=
+                params[i].seriesName + "通过数:" + params[i].value + "<br>";
+            }
+            return html;
+          },
+          textStyle: {
+            fontSize: 26
+          }
+        },
+        legend: {
+          top: "6%",
+          right: "5%",
+          data: ["专项", "远程", "现场"],
+          textStyle: {
+            color: "#fff",
+            fontSize: 26
+          }
+        },
+        grid: {
+          //图表的位置
+          top: "28%",
+          left: "5%",
+          right: "4%",
+          bottom: "18%",
+          containLabel: true
+        },
+        yAxis: {
+          name: "通过数(个)",
+          triggerEvent: true,
+          nameTextStyle: {
+            color: "#fff",
+            fontSize: 26
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "rgba(255,255,255,.1)"
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "rgba(255,255,255,.1)"
+            }
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: "#fff",
+              fontSize: 24
+            }
+          }
+        },
+        xAxis: [
+          {
+            type: "category",
+            axisLabel: {
+              interval: 0,
+              show: true,
+              splitNumber: 15,
+              textStyle: {
+                fontSize: 28,
+                color: "#fff"
+              }
+            },
+            data: datacity
+          }
+        ],
+        series: [
+          {
+            name: "专项",
+            barGap: 0.3,
+            type: "bar",
+            color: "#FFD52E",
+            stack: "sum",
+            barWidth: this.setFontsize(0.3),
+            data: dataZX
+          },
+          {
+            name: "远程",
+            barGap: 0.3,
+            type: "bar",
+            color: "#F94E4E",
+            stack: "sum1",
+            barWidth: this.setFontsize(0.3),
+            data: dataYC
+          },
+          {
+            name: "现场",
+            barGap: 0.3,
+            type: "bar",
+            color: "#1DB7E5",
+            stack: "sum2",
+            barWidth: this.setFontsize(0.3),
+            data: dataXC
+          }
+        ]
+      });
       //新巡检图
       PieXJ.setOption({
         grid: {
@@ -3604,6 +3729,28 @@ export default {
   },
   watch: {},
   created() {
+    let yy = new Date().getFullYear()
+    let toYear = yy.toString()
+    let toYear1 = (yy - 1).toString()
+    let toYear2 = (yy - 2).toString()
+    this.options1 = [
+      {
+        value: "选项0",
+        label: toYear
+      },
+      {
+        value: "选项1",
+        label: toYear1
+      },
+      {
+        value: "选项2",
+        label: toYear
+      },
+      {
+        value: "选项3",
+        label: toYear
+      }
+    ];
     this.getData();
     // console.log(this.setFontsize(0.3), "1111");
     // 数据解析备用
@@ -3670,37 +3817,37 @@ export default {
     }
     console.log(newyhData);
 
-    var newdituData = [
-      {
-        name: "重庆",
-        value: 20
-      },
-      {
-        name: "云南",
-        value: 10
-      },
-      {
-        name: "辽宁",
-        value: 10
-      }
-    ];
-    newdituData = this.dituData.concat(newdituData);
-    let obj = {};
+    // var newdituData = [
+    //   {
+    //     name: "重庆",
+    //     value: 20
+    //   },
+    //   {
+    //     name: "云南",
+    //     value: 10
+    //   },
+    //   {
+    //     name: "辽宁",
+    //     value: 10
+    //   }
+    // ];
+    // newdituData = this.dituData.concat(newdituData);
+    // let obj = {};
 
-    for (let i = 0; i < newdituData.length; i++) {
-      for (let j = 1; j < newdituData.length; j++) {
-        newdituData[i].value =
-          newdituData[i].name == newdituData[j].name
-            ? newdituData[j].value
-            : newdituData[i].value;
-      }
-    }
-    newdituData = newdituData.reduce((item, next) => {
-      obj[next.name] ? "" : (obj[next.name] = true && item.push(next));
-      return item;
-    }, []);
+    // for (let i = 0; i < newdituData.length; i++) {
+    //   for (let j = 1; j < newdituData.length; j++) {
+    //     newdituData[i].value =
+    //       newdituData[i].name == newdituData[j].name
+    //         ? newdituData[j].value
+    //         : newdituData[i].value;
+    //   }
+    // }
+    // newdituData = newdituData.reduce((item, next) => {
+    //   obj[next.name] ? "" : (obj[next.name] = true && item.push(next));
+    //   return item;
+    // }, []);
 
-    console.log(newdituData, "去重");
+    // console.log(newdituData, "去重");
 
     // let arr = [
     //   {
@@ -4645,7 +4792,7 @@ ul {
   right: 2%;
   top: 2%;
   margin: 0px auto;
-  height: 100px;
+  height: 150px;
   overflow: hidden;
   display: block;
   position: absolute;
@@ -4654,11 +4801,11 @@ ul {
     margin: 0px;
     display: flex;
     flex-direction: row;
-    height: 80px;
+    height: 130px;
     margin-top: 10px;
     li {
       width: 160px;
-      height: 80px;
+      height: 130px;
       margin-right: 10px;
       .tit {
         color: #fff;
@@ -4672,11 +4819,11 @@ ul {
         justify-content: space-between;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 5px;
-        height: 80px;
-        width:100%;
+        height: 130px;
+        width: 100%;
         .paihan {
           width: 80px;
-          height: 80px;
+          height: 130px;
           margin-top: 10px;
           margin-left: 10px;
           border: 1px solid #2988c1;
@@ -4690,8 +4837,8 @@ ul {
         .boxP {
           display: flex;
           flex-direction: column;
+          margin: 0px auto;
           margin-top: 15px;
-          margin:0px auto;
           .box {
             width: 100%;
             font-size: 14px;
