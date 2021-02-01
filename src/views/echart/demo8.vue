@@ -828,7 +828,6 @@ export default {
   methods: {
     // 返回中国地图
     toChina() {
-      this.dituData = [];
       this.dituData1 = [
         {
           name: "北京",
@@ -876,145 +875,6 @@ export default {
           id: 2222222
         }
       ];
-      this.dituData = [
-        {
-          name: "重庆",
-          value: 0
-        },
-        {
-          name: "云南",
-          value: 0
-        },
-        {
-          name: "辽宁",
-          value: 0
-        },
-        {
-          name: "黑龙江",
-          value: 0
-        },
-        {
-          name: "广西",
-          value: 20
-        },
-        {
-          name: "甘肃",
-          value: 20
-        },
-        {
-          name: "山西",
-          value: 10
-        },
-        {
-          name: "陕西",
-          value: 0
-        },
-        {
-          name: "吉林",
-          value: 40
-        },
-        {
-          name: "贵州",
-          value: 20
-        },
-        {
-          name: "新疆",
-          value: 0
-        },
-        {
-          name: "青海",
-          value: 10
-        },
-        {
-          name: "西藏",
-          value: 0
-        },
-        {
-          name: "四川",
-          value: 20
-        },
-        {
-          name: "宁夏",
-          value: 0
-        },
-        {
-          name: "海南",
-          value: 0
-        },
-        {
-          name: "台湾",
-          value: 0
-        },
-        {
-          name: "香港",
-          value: 0
-        },
-        {
-          name: "澳门",
-          value: 0
-        },
-        {
-          name: "上海",
-          value: 100
-        },
-        {
-          name: "安徽",
-          value: 150
-        },
-        {
-          name: "江苏",
-          value: 140
-        },
-        {
-          name: "浙江",
-          value: 120
-        },
-        {
-          name: "北京",
-          value: 80
-        },
-        {
-          name: "天津",
-          value: 60
-        },
-        {
-          name: "河北",
-          value: 0
-        },
-        {
-          name: "河南",
-          value: 0
-        },
-        {
-          name: "内蒙古",
-          value: 0
-        },
-        {
-          name: "湖南",
-          value: 0
-        },
-        {
-          name: "山东",
-          value: 180
-        },
-        {
-          name: "江西",
-          value: 160
-        },
-        {
-          name: "湖北",
-          value: 0
-        },
-        {
-          name: "福建",
-          value: 80,
-          id: 350000
-        },
-        {
-          name: "广东",
-          value: 40
-        }
-      ];
       this.mapName = "china";
       // this.$echarts.registerMap("china")
       this.DrawMap();
@@ -1046,6 +906,8 @@ export default {
     clickDR() {
       this.showDate = 1;
       this.selectTime = "当日";
+      this.mapName = "china";
+      this.DrawMap();
     },
     clickDY() {
       this.showDate = 2;
@@ -1103,46 +965,29 @@ export default {
     // },
     PieClick(param) {
       // this.province = value.name;
-      this.dituData = [];
       this.dituData1 = [];
-      if (param.name === "福建") {
-        this.dituData = [
-          {
-            name: "泉州市",
-            value: 100
-          },
-          {
-            name: "厦门市",
-            value: 50
-          },
-          {
-            name: "南平市",
-            value: 50
-          }
-        ];
-      }
-      if (param.name === "厦门市") {
-        this.axios.get("/data/350200.json").then(data => {
-          this.dituData = [
-            {
-              name: "思明区",
-              value: 100
-            },
-            {
-              name: "湖里区",
-              value: 100
-            },
-            {
-              name: "集美区",
-              value: 100
-            }
-          ];
-          console.log(data);
-          const getJson = data.data;
-          this.$echarts.registerMap(param.name, getJson);
-          this.DrawMap(); // resize 图形功能方法
-        });
-      }
+      // if (param.name === "厦门市") {
+      //   this.axios.get("/data/350200.json").then(data => {
+      //     this.dituData = [
+      //       {
+      //         name: "思明区",
+      //         value: 100
+      //       },
+      //       {
+      //         name: "湖里区",
+      //         value: 100
+      //       },
+      //       {
+      //         name: "集美区",
+      //         value: 100
+      //       }
+      //     ];
+      //     console.log(data);
+      //     const getJson = data.data;
+      //     this.$echarts.registerMap(param.name, getJson);
+      //     this.DrawMap(); // resize 图形功能方法
+      //   });
+      // }
       this.mapName = param.name;
       // this.$echarts.registerMap(param.name)
       this.DrawMap();
@@ -1306,6 +1151,7 @@ export default {
       //   _that.PieClick1(res.target);
       // });
       var mapName = this.mapName;
+      var dataJB =[];
       var dataJB = this.dituData;
       var dataJB1 = this.dituData1;
       var geoCoordMap = {
@@ -1437,7 +1283,7 @@ export default {
             coordinateSystem: "geo",
             data: convertData1(dataJB1),
             symbolSize: function(val) {
-              return val[2] / 10;
+              return val[2] / 20;
             },
             label: {
               normal: {
