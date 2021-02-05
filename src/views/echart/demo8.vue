@@ -172,46 +172,6 @@
           <div class="ditu" id="ditu1"></div>
           <p class="title">{{ province }}{{ dataType }}大数据统计</p>
           <p class="back" v-show="showShen" @click="toChina">返回</p>
-          <!-- 跑马灯 -->
-          <vue-seamless-scroll
-            :class-option="optionscroll1"
-            :data="listData1"
-            class="seamless-warp1"
-          >
-            <ul class="itemhua">
-              <li v-for="item in listData1">
-                <!-- <div class="tit">裕农通-福建省分行</div> -->
-                <div class="txt">
-                  <!-- <div class="paihan">NO {{ item.no }}</div> -->
-                  <div class="boxP">
-                    <div class="box">
-                      <p class="t1">裕农通-福建省分行</p>
-                    </div>
-                    <div class="box">
-                      <p class="t1">进件数</p>
-                      <p class="t2">{{ item.data1 }}</p>
-                    </div>
-                    <div class="box">
-                      <p class="t1">通过数</p>
-                      <p class="t2">{{ item.data2 }}</p>
-                    </div>
-                    <div class="box">
-                      <p class="t1">通过率</p>
-                      <p class="t2">{{ item.data3 }}</p>
-                    </div>
-                    <!-- <div class="box">
-                      <p class="t1">已处理数</p>
-                      <p class="t2">{{item.data2}}</p>
-                    </div>
-                    <div class="box">
-                      <p class="t1">处理率</p>
-                      <p class="t2">{{item.data3}}</p>
-                    </div> -->
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </vue-seamless-scroll>
         </div>
       </div>
       <div class="modBox2">
@@ -329,69 +289,6 @@ export default {
       zrpjData1: 1500, //准入控制
       zrpjData2: 900,
       zrpjData3: 60,
-      // 跑马灯
-      listData1: [
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "1"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "2"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "3"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "4"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "5"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "6"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "7"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "8"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "9"
-        },
-        {
-          data1: "120个",
-          data2: "60个",
-          data3: "80%",
-          no: "10"
-        }
-      ],
       // 散点数据
       dituData1: [
         {
@@ -816,16 +713,24 @@ export default {
     };
   },
   computed: {
-    optionscroll1() {
-      return {
-        // hoverStop: false,
-        step: 0.4,
-        direction: 2,
-        limitMoveNum: 2
-      };
-    }
   },
   methods: {
+    getFJ(){
+      this.dituData = [
+            {
+              name: "泉州市",
+              value: "100"
+            },
+            {
+              name: "厦门市",
+              value: "100"
+            },
+            {
+              name: "漳州市",
+              value: "100"
+            }
+      ];
+    },
     // 返回中国地图
     toChina() {
       this.dituData1 = [
@@ -906,8 +811,6 @@ export default {
     clickDR() {
       this.showDate = 1;
       this.selectTime = "当日";
-      this.mapName = "china";
-      this.DrawMap();
     },
     clickDY() {
       this.showDate = 2;
@@ -966,6 +869,9 @@ export default {
     PieClick(param) {
       // this.province = value.name;
       this.dituData1 = [];
+      if (param.name === "福建") {
+        this.getFJ();
+      }
       // if (param.name === "厦门市") {
       //   this.axios.get("/data/350200.json").then(data => {
       //     this.dituData = [
@@ -1078,7 +984,9 @@ export default {
     },
     DrawMap() {
       // 全国地图渐变
-      let myChart = this.$echarts.init(document.getElementById("ditu1"));
+      var myChart = this.$echarts.init(document.getElementById("ditu1"));
+      myChart.dispose();
+      var myChart = this.$echarts.init(document.getElementById("ditu1"));
       // 省份点击联动
       let _that = this;
       myChart.off("click");
@@ -1257,20 +1165,20 @@ export default {
           map: mapName,
           label: {
             normal: {
-              show: false
+              show: false,
             },
             emphasis: {
               show: false
             }
           },
-          roam: false,
+          roam: true,
           itemStyle: {
             normal: {
               areaColor: "#00467F",
               borderColor: "#3B5077"
             },
             emphasis: {
-              areaColor: "#FFD52E"
+              areaColor: "#FFD52E",
             }
           }
         },
@@ -1320,7 +1228,7 @@ export default {
                 }
               }
             },
-            roam: false,
+            roam: true,
             itemStyle: {
               normal: {
                 areaColor: "#031525",
@@ -4633,84 +4541,7 @@ ul {
   }
 }
 
-.seamless-warp1 {
-  width: 180px;
-  right: 2%;
-  top: 2%;
-  margin: 0px auto;
-  height: 150px;
-  overflow: hidden;
-  display: block;
-  position: absolute;
-  .itemhua {
-    padding: 0px;
-    margin: 0px;
-    display: flex;
-    flex-direction: row;
-    height: 130px;
-    margin-top: 10px;
-    li {
-      width: 160px;
-      height: 130px;
-      margin-right: 10px;
-      .tit {
-        color: #fff;
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-      .txt {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 5px;
-        height: 130px;
-        width: 100%;
-        .paihan {
-          width: 80px;
-          height: 130px;
-          margin-top: 10px;
-          margin-left: 10px;
-          border: 1px solid #2988c1;
-          font-size: 22px;
-          border-radius: 5px;
-          color: #ffb956;
-          text-align: center;
-          line-height: 80px;
-          background: rgba(255, 255, 255, 0.1);
-        }
-        .boxP {
-          display: flex;
-          flex-direction: column;
-          margin: 0px auto;
-          margin-top: 15px;
-          .box {
-            width: 100%;
-            font-size: 14px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            height: 22px;
-            margin-bottom: 5px;
-            line-height: 22px;
-            padding-left: 5px;
-            color: #fff;
-            border-left: 1px solid #2988c1;
-            .t1 {
-              color: #fff;
-              float: left;
-            }
-            .t2 {
-              color: #ffb956;
-              float: right;
-              margin-right: 15px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
+
 .el-carousel__item:nth-child(2n) {
   // background-color: #072769;
   background: rgba(53, 87, 154, 0.5);
