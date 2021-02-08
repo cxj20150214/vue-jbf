@@ -143,6 +143,7 @@
         <div class="bg">
           <div class="ditu" id="ditu1"></div>
           <p class="title">{{ province }}{{ dataType }}大数据统计</p>
+          <p class="back" v-show="showShen" @click="toChina">返回</p>
         </div>
       </div>
       <div class="modBox2">
@@ -202,13 +203,49 @@
 </template>
 <script>
 import "echarts/map/js/china.js";
-import obj from "echarts/map/json/china.json";
+import "echarts/map/js/province/fujian.js";
+import "echarts/map/js/province/anhui.js";
+import "echarts/map/js/province/aomen.js";
+import "echarts/map/js/province/beijing.js";
+import "echarts/map/js/province/chongqing.js";
+import "echarts/map/js/province/gansu.js";
+import "echarts/map/js/province/guangdong.js";
+import "echarts/map/js/province/guangxi.js";
+import "echarts/map/js/province/guizhou.js";
+import "echarts/map/js/province/hainan.js";
+import "echarts/map/js/province/hebei.js";
+import "echarts/map/js/province/heilongjiang.js";
+import "echarts/map/js/province/henan.js";
+import "echarts/map/js/province/hubei.js";
+import "echarts/map/js/province/hunan.js";
+import "echarts/map/js/province/jiangsu.js";
+import "echarts/map/js/province/jiangxi.js";
+import "echarts/map/js/province/jilin.js";
+import "echarts/map/js/province/liaoning.js";
+import "echarts/map/js/province/neimenggu.js";
+import "echarts/map/js/province/ningxia.js";
+import "echarts/map/js/province/qinghai.js";
+import "echarts/map/js/province/shandong.js";
+import "echarts/map/js/province/shanghai.js";
+import "echarts/map/js/province/shanxi.js";
+import "echarts/map/js/province/shanxi1.js";
+import "echarts/map/js/province/sichuan.js";
+import "echarts/map/js/province/taiwan.js";
+import "echarts/map/js/province/tianjin.js";
+import "echarts/map/js/province/xianggang.js";
+import "echarts/map/js/province/xinjiang.js";
+import "echarts/map/js/province/xizang.js";
+import "echarts/map/js/province/yunnan.js";
+import "echarts/map/js/province/zhejiang.js";
 import "echarts-liquidfill/src/liquidFill.js";
 export default {
   name: "demo8",
   data() {
     return {
       // 页面渲染
+      mapNameShow: false,
+      mapBorder: "#3B5077",
+      showShen: false,
       zrpjData1: 80050, //准入评级
       zrpjData2: 72045,
       zrpjData3: 90,
@@ -420,6 +457,53 @@ export default {
       box4PieData: ["进件数", "通过数", "准入通过率(%)"],
       dataType: "准入评级",
       selectTime: "当年",
+      dituData1: [
+        {
+          name: "北京",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "天津",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "重庆",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "厦门",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "深圳",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "苏州",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "大连",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "青岛",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "三峡",
+          value: 116,
+          id: 2222222
+        }
+      ],
       options: [
         {
           value: "选项1",
@@ -572,6 +656,7 @@ export default {
           value: 40
         }
       ],
+      mapName: "china",
       valueSelect: "全国",
       province: "全国",
       shows: 3,
@@ -587,6 +672,62 @@ export default {
   },
   computed: {},
   methods: {
+    // 返回中国地图
+    toChina() {
+      this.dituData1 = [
+        {
+          name: "北京",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "天津",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "重庆",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "厦门",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "深圳",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "苏州",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "大连",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "青岛",
+          value: 116,
+          id: 2222222
+        },
+        {
+          name: "三峡",
+          value: 116,
+          id: 2222222
+        }
+      ];
+      this.mapName = "china";
+      this.mapNameShow = false;
+      this.mapBorder = "#3B5077";
+      // this.$echarts.registerMap("china")
+      this.DrawMap();
+      this.showShen = false;
+    },
     // 获取下拉框机构号和名称
     getJGH(val) {
       console.log(val);
@@ -603,15 +744,15 @@ export default {
       this.showDate = 1;
       this.selectTime = "当日";
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
-      this.zrpjData1 = 800 //准入评级
-      this.zrpjData2 = 720
-      this.zrpjData3 = 90
-      this.zrData = [
+      this.zrpjData1 = 800; //准入评级
+      this.zrpjData2 = 720;
+      this.zrpjData3 = 90;
+      (this.zrData = [
         //拒件分布
         {
           name: "征信类",
@@ -633,100 +774,100 @@ export default {
           name: "外部黑名单类",
           value: "25"
         }
-      ],
-      this.shuiqiuData = 0.15, //存量评级
-      this.fxjData = 25,
-      this.jsjData= 13,
-      this.yjjData= 40,
-      this.gzjData= 55,
-      this.zrtglData= 90, //仪表盘
-      this.cldxlData= 85,
-      this.yjczlData= 75,
-      this.xjtglData= 54,
-      this.fxyjData = [
-        //风险预警
-        {
-          name: "风险级",
-          value: 48,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 65,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 80,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 72,
-          color: "#409EFF"
-        }
-      ],
-      this.fxyjData1 = [
-        //风险预警
-        {
-          name: "风险级",
-          value: 4,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 7,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 6,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 14,
-          color: "#409EFF"
-        }
-      ],
-      this.fxczData1 = [80, 85, 45, 64], //风险处置
-      this.fxczData2 = [75, 63, 43, 61],
-      this.dqxjData1 = [
-        //定期巡检
-        {
-          value: 4970,
-          name: "远程巡检"
-        },
-        {
-          value: 2234,
-          name: "现场巡检"
-        },
-        {
-          value: 1632,
-          name: "专项巡检"
-        }
-      ],
-      this.ycxjData= 8.2,
-      this.xcxjData= 7.5,
-      this.zxxjData= 9.5,
-      setTimeout(() => {
-        loading.close()
-        this.piedemo();
-      }, 800);
+      ]),
+        (this.shuiqiuData = 0.15), //存量评级
+        (this.fxjData = 25),
+        (this.jsjData = 13),
+        (this.yjjData = 40),
+        (this.gzjData = 55),
+        (this.zrtglData = 90), //仪表盘
+        (this.cldxlData = 85),
+        (this.yjczlData = 75),
+        (this.xjtglData = 54),
+        (this.fxyjData = [
+          //风险预警
+          {
+            name: "风险级",
+            value: 48,
+            color: "#F56C6C"
+          },
+          {
+            name: "警示级",
+            value: 65,
+            color: "#E6A23C"
+          },
+          {
+            name: "预警级",
+            value: 80,
+            color: "#FFD52E"
+          },
+          {
+            name: "关注级",
+            value: 72,
+            color: "#409EFF"
+          }
+        ]),
+        (this.fxyjData1 = [
+          //风险预警
+          {
+            name: "风险级",
+            value: 4,
+            color: "#F56C6C"
+          },
+          {
+            name: "警示级",
+            value: 7,
+            color: "#E6A23C"
+          },
+          {
+            name: "预警级",
+            value: 6,
+            color: "#FFD52E"
+          },
+          {
+            name: "关注级",
+            value: 14,
+            color: "#409EFF"
+          }
+        ]),
+        (this.fxczData1 = [80, 85, 45, 64]), //风险处置
+        (this.fxczData2 = [75, 63, 43, 61]),
+        (this.dqxjData1 = [
+          //定期巡检
+          {
+            value: 4970,
+            name: "远程巡检"
+          },
+          {
+            value: 2234,
+            name: "现场巡检"
+          },
+          {
+            value: 1632,
+            name: "专项巡检"
+          }
+        ]),
+        (this.ycxjData = 8.2),
+        (this.xcxjData = 7.5),
+        (this.zxxjData = 9.5),
+        setTimeout(() => {
+          loading.close();
+          this.piedemo();
+        }, 200);
     },
     clickDY() {
       this.showDate = 2;
       this.selectTime = "当月";
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
-      this.zrpjData1 = 1800 //准入评级
-      this.zrpjData2 = 1720
-      this.zrpjData3 = 90
-      this.zrData = [
+      this.zrpjData1 = 1800; //准入评级
+      this.zrpjData2 = 1720;
+      this.zrpjData3 = 90;
+      (this.zrData = [
         //拒件分布
         {
           name: "征信类",
@@ -748,101 +889,100 @@ export default {
           name: "外部黑名单类",
           value: "225"
         }
-      ],
-      this.shuiqiuData = 0.45, //存量评级
-      this.fxjData = 65,
-      this.jsjData= 43,
-      this.yjjData= 30,
-      this.gzjData= 55,
-      this.zrtglData= 70, //仪表盘
-      this.cldxlData= 65,
-      this.yjczlData= 35,
-      this.xjtglData= 24,
-      this.fxyjData = [
-        //风险预警
-        {
-          name: "风险级",
-          value: 148,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 165,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 480,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 272,
-          color: "#409EFF"
-        }
-      ],
-      this.fxyjData1 = [
-        //风险预警
-        {
-          name: "风险级",
-          value: 14,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 17,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 46,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 24,
-          color: "#409EFF"
-        }
-      ],
-      this.fxczData1 = [180, 285, 145, 264], //风险处置
-      this.fxczData2 = [175, 263, 143, 261],
-      this.dqxjData1 = [
-        //定期巡检
-        {
-          value: 14970,
-          name: "远程巡检"
-        },
-        {
-          value: 12234,
-          name: "现场巡检"
-        },
-        {
-          value: 21632,
-          name: "专项巡检"
-        }
-      ],
-      this.ycxjData= 5.2,
-      this.xcxjData= 7.5,
-      this.zxxjData= 4.5,
-      setTimeout(() => {
-        loading.close()
-        this.piedemo();
-      }, 800);
-    
+      ]),
+        (this.shuiqiuData = 0.45), //存量评级
+        (this.fxjData = 65),
+        (this.jsjData = 43),
+        (this.yjjData = 30),
+        (this.gzjData = 55),
+        (this.zrtglData = 70), //仪表盘
+        (this.cldxlData = 65),
+        (this.yjczlData = 35),
+        (this.xjtglData = 24),
+        (this.fxyjData = [
+          //风险预警
+          {
+            name: "风险级",
+            value: 148,
+            color: "#F56C6C"
+          },
+          {
+            name: "警示级",
+            value: 165,
+            color: "#E6A23C"
+          },
+          {
+            name: "预警级",
+            value: 480,
+            color: "#FFD52E"
+          },
+          {
+            name: "关注级",
+            value: 272,
+            color: "#409EFF"
+          }
+        ]),
+        (this.fxyjData1 = [
+          //风险预警
+          {
+            name: "风险级",
+            value: 14,
+            color: "#F56C6C"
+          },
+          {
+            name: "警示级",
+            value: 17,
+            color: "#E6A23C"
+          },
+          {
+            name: "预警级",
+            value: 46,
+            color: "#FFD52E"
+          },
+          {
+            name: "关注级",
+            value: 24,
+            color: "#409EFF"
+          }
+        ]),
+        (this.fxczData1 = [180, 285, 145, 264]), //风险处置
+        (this.fxczData2 = [175, 263, 143, 261]),
+        (this.dqxjData1 = [
+          //定期巡检
+          {
+            value: 14970,
+            name: "远程巡检"
+          },
+          {
+            value: 12234,
+            name: "现场巡检"
+          },
+          {
+            value: 21632,
+            name: "专项巡检"
+          }
+        ]),
+        (this.ycxjData = 5.2),
+        (this.xcxjData = 7.5),
+        (this.zxxjData = 4.5),
+        setTimeout(() => {
+          loading.close();
+          this.piedemo();
+        }, 200);
     },
     clickDN() {
       this.showDate = 3;
       this.selectTime = "当年";
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
-      this.zrpjData1 = 24800 //准入评级
-      this.zrpjData2 = 23720
-      this.zrpjData3 = 90
-      this.zrData = [
+      this.zrpjData1 = 24800; //准入评级
+      this.zrpjData2 = 23720;
+      this.zrpjData3 = 90;
+      (this.zrData = [
         //拒件分布
         {
           name: "征信类",
@@ -864,400 +1004,419 @@ export default {
           name: "外部黑名单类",
           value: "251"
         }
-      ],
-      this.shuiqiuData = 0.75, //存量评级
-      this.fxjData = 25,
-      this.jsjData= 13,
-      this.yjjData= 7,
-      this.gzjData= 8,
-      this.zrtglData= 60, //仪表盘
-      this.cldxlData= 45,
-      this.yjczlData= 35,
-      this.xjtglData= 24,
-      this.fxyjData = [
-        //风险预警
-        {
-          name: "风险级",
-          value: 149,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 1265,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 4280,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 872,
-          color: "#409EFF"
-        }
-      ],
-      this.fxyjData1 = [
-        //风险预警
-        {
-          name: "风险级",
-          value: 414,
-          color: "#F56C6C"
-        },
-        {
-          name: "警示级",
-          value: 217,
-          color: "#E6A23C"
-        },
-        {
-          name: "预警级",
-          value: 126,
-          color: "#FFD52E"
-        },
-        {
-          name: "关注级",
-          value: 145,
-          color: "#409EFF"
-        }
-      ],
-      this.fxczData1 = [4280, 2485, 4345, 2464], //风险处置
-      this.fxczData2 = [3275, 763, 543, 1261],
-      this.dqxjData1 = [
-        //定期巡检
-        {
-          value: 44970,
-          name: "远程巡检"
-        },
-        {
-          value: 32234,
-          name: "现场巡检"
-        },
-        {
-          value: 21632,
-          name: "专项巡检"
-        }
-      ],
-      this.ycxjData= 4.2,
-      this.xcxjData= 3.5,
-      this.zxxjData= 6.5,
-      setTimeout(() => {
-        loading.close()
-        this.piedemo();
-      }, 800);
-    
+      ]),
+        (this.shuiqiuData = 0.75), //存量评级
+        (this.fxjData = 25),
+        (this.jsjData = 13),
+        (this.yjjData = 7),
+        (this.gzjData = 8),
+        (this.zrtglData = 60), //仪表盘
+        (this.cldxlData = 45),
+        (this.yjczlData = 35),
+        (this.xjtglData = 24),
+        (this.fxyjData = [
+          //风险预警
+          {
+            name: "风险级",
+            value: 149,
+            color: "#F56C6C"
+          },
+          {
+            name: "警示级",
+            value: 1265,
+            color: "#E6A23C"
+          },
+          {
+            name: "预警级",
+            value: 4280,
+            color: "#FFD52E"
+          },
+          {
+            name: "关注级",
+            value: 872,
+            color: "#409EFF"
+          }
+        ]),
+        (this.fxyjData1 = [
+          //风险预警
+          {
+            name: "风险级",
+            value: 414,
+            color: "#F56C6C"
+          },
+          {
+            name: "警示级",
+            value: 217,
+            color: "#E6A23C"
+          },
+          {
+            name: "预警级",
+            value: 126,
+            color: "#FFD52E"
+          },
+          {
+            name: "关注级",
+            value: 145,
+            color: "#409EFF"
+          }
+        ]),
+        (this.fxczData1 = [4280, 2485, 4345, 2464]), //风险处置
+        (this.fxczData2 = [3275, 763, 543, 1261]),
+        (this.dqxjData1 = [
+          //定期巡检
+          {
+            value: 44970,
+            name: "远程巡检"
+          },
+          {
+            value: 32234,
+            name: "现场巡检"
+          },
+          {
+            value: 21632,
+            name: "专项巡检"
+          }
+        ]),
+        (this.ycxjData = 4.2),
+        (this.xcxjData = 3.5),
+        (this.zxxjData = 6.5),
+        setTimeout(() => {
+          loading.close();
+          this.piedemo();
+        }, 200);
     },
     // 预警 存量 准入 巡检  切换
     clickYJ() {
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
       this.shows = 1;
       this.dataType = "风险预警";
       this.box4PieData = ["预警数", "处置数", "预警处置率(%)"];
-       var dituNewData = [
-      { name: "福建", value: 1663, value1: 2431, value2: 0.712880210289148 },
-      { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
-      { name: "北京", value: 1610, value1: 1555, value2: 0.86583850931677 },
-      { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
-      { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
-      { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
-      { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
-      { name: "浙江", value: 1559, value1: 2100, value2: 0.929614873837981 },
-      { name: "大连", value: 1789, value1: 2033, value2: 0.968697596422582 },
-      { name: "厦门", value: 2166, value1: 730, value2: 0.784803001876173 },
-      { name: "重庆", value: 2423, value1: 1897, value2: 0.937716262975779 },
-      { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
-      { name: "天津", value: 1002, value1: 574, value2: 0.872255489021956 },
-      { name: "宁波", value: 2133, value1: 1795, value2: 0.241537740271918 },
-      { name: "湖南", value: 1704, value1: 2097, value2: 0.634685230024213 },
-      { name: "青岛", value: 1548, value1: 2456, value2: 0.963893249607535 },
-      { name: "河南", value: 3001, value1: 2764, value2: 0.921026324558481 },
-      { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
-      { name: "苏州", value: 3996, value1: 1947, value2: 0.975450901803607 },
-      { name: "四川", value: 2035, value1: 1475, value2: 0.87051597051597 },
-      { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
-      { name: "陕西", value: 2627, value1: 1277, value2: 0.87619384506544 },
-      { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
-      { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
-      { name: "青海", value: 2444, value1: 1386, value2: 0.812602291325696 },
-      { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
-      { name: "黑龙江", value: 2613, value1: 2548, value2: 0.975124378109453 },
-      { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
-      { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
-      { name: "甘肃", value: 1377, value1: 2247, value2: 0.917176809506662 },
-      { name: "辽宁", value: 1491, value1: 2404, value2: 0.344640706543557 },
-      { name: "海南", value: 1045, value1: 687, value2: 0.75311004784689 },
-      { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
-      { name: "安徽", value: 1655, value1: 1944, value2: 0.873319755600815 },
-      { name: "新疆", value: 2234, value1: 1518, value2: 0.948075201432408 },
-      { name: "贵州", value: 1496, value1: 1700, value2: 0.89662447257384 },
-      { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
-    ];
-    this.dituData = dituNewData;
-    dituNewData.sort(function(a, b) {
-      if (a.value > b.value) {
-        return -1;
-      } else if (a.value < b.value) {
-        return 1;
-      }
-      return 0;
-    });
-    var itemName = [];
-    var itemValue1 = [];
-    var itemValue2 = [];
-    var itemValue3 = [];
-    dituNewData.map(item => {
-      itemName.push(item.name);
-      itemValue1.push(parseFloat(item.value));
-      itemValue2.push(parseFloat(item.value1));
-      itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
-    });
-    this.zhihanglist = itemName;
-    this.zsData = itemValue1;
-    this.wclData = itemValue2;
-    this.wclvData = itemValue3;
+      var dituNewData = [
+        { name: "福建", value: 1663, value1: 2431, value2: 0.712880210289148 },
+        { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
+        { name: "北京", value: 1610, value1: 1555, value2: 0.86583850931677 },
+        { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
+        { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
+        { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
+        { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
+        { name: "浙江", value: 1559, value1: 2100, value2: 0.929614873837981 },
+        { name: "大连", value: 1789, value1: 2033, value2: 0.968697596422582 },
+        { name: "厦门", value: 2166, value1: 730, value2: 0.784803001876173 },
+        { name: "重庆", value: 2423, value1: 1897, value2: 0.937716262975779 },
+        { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
+        { name: "天津", value: 1002, value1: 574, value2: 0.872255489021956 },
+        { name: "宁波", value: 2133, value1: 1795, value2: 0.241537740271918 },
+        { name: "湖南", value: 1704, value1: 2097, value2: 0.634685230024213 },
+        { name: "青岛", value: 1548, value1: 2456, value2: 0.963893249607535 },
+        { name: "河南", value: 3001, value1: 2764, value2: 0.921026324558481 },
+        { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
+        { name: "苏州", value: 3996, value1: 1947, value2: 0.975450901803607 },
+        { name: "四川", value: 2035, value1: 1475, value2: 0.87051597051597 },
+        { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
+        { name: "陕西", value: 2627, value1: 1277, value2: 0.87619384506544 },
+        { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
+        { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
+        { name: "青海", value: 2444, value1: 1386, value2: 0.812602291325696 },
+        { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
+        {
+          name: "黑龙江",
+          value: 2613,
+          value1: 2548,
+          value2: 0.975124378109453
+        },
+        { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
+        { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
+        { name: "甘肃", value: 1377, value1: 2247, value2: 0.917176809506662 },
+        { name: "辽宁", value: 1491, value1: 2404, value2: 0.344640706543557 },
+        { name: "海南", value: 1045, value1: 687, value2: 0.75311004784689 },
+        { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
+        { name: "安徽", value: 1655, value1: 1944, value2: 0.873319755600815 },
+        { name: "新疆", value: 2234, value1: 1518, value2: 0.948075201432408 },
+        { name: "贵州", value: 1496, value1: 1700, value2: 0.89662447257384 },
+        { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
+      ];
+      this.dituData = dituNewData;
+      dituNewData.sort(function(a, b) {
+        if (a.value > b.value) {
+          return -1;
+        } else if (a.value < b.value) {
+          return 1;
+        }
+        return 0;
+      });
+      var itemName = [];
+      var itemValue1 = [];
+      var itemValue2 = [];
+      var itemValue3 = [];
+      dituNewData.map(item => {
+        itemName.push(item.name);
+        itemValue1.push(parseFloat(item.value));
+        itemValue2.push(parseFloat(item.value1));
+        itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
+      });
+      this.zhihanglist = itemName;
+      this.zsData = itemValue1;
+      this.wclData = itemValue2;
+      this.wclvData = itemValue3;
       this.box4PieDemo();
       setTimeout(() => {
-        loading.close()
+        loading.close();
         this.piedemo();
-      }, 800);
+      }, 200);
     },
     clickCL() {
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
       this.shows = 2;
       this.dataType = "存量评级";
       this.box4PieData = ["服务点数", "中高风险服务点数", "占比(%)"];
-       var dituNewData = [
-      { name: "福建", value: 1663, value1: 2431, value2: 0.712880210289148 },
-      { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
-      { name: "北京", value: 1610, value1: 1555, value2: 0.86583850931677 },
-      { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
-      { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
-      { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
-      { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
-      { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
-      { name: "大连", value: 2789, value1: 1733, value2: 0.968697596422582 },
-      { name: "厦门", value: 1066, value1: 730, value2: 0.784803001876173 },
-      { name: "重庆", value: 2423, value1: 1897, value2: 0.937716262975779 },
-      { name: "湖北", value: 1355, value1: 2100, value2: 0.89171974522293 },
-      { name: "天津", value: 2002, value1: 1874, value2: 0.872255489021956 },
-      { name: "宁波", value: 2133, value1: 2095, value2: 0.241537740271918 },
-      { name: "湖南", value: 2304, value1: 2097, value2: 0.634685230024213 },
-      { name: "青岛", value: 1548, value1: 2756, value2: 0.963893249607535 },
-      { name: "河南", value: 2001, value1: 1464, value2: 0.921026324558481 },
-      { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
-      { name: "苏州", value: 2996, value1: 1947, value2: 0.975450901803607 },
-      { name: "四川", value: 2035, value1: 1975, value2: 0.87051597051597 },
-      { name: "云南", value: 3855, value1: 2724, value2: 0.954115586690018 },
-      { name: "陕西", value: 2827, value1: 2477, value2: 0.87619384506544 },
-      { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
-      { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
-      { name: "青海", value: 2444, value1: 1986, value2: 0.812602291325696 },
-      { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
-      { name: "黑龙江", value: 2613, value1: 2548, value2: 0.975124378109453 },
-      { name: "吉林", value: 3212, value1: 1699, value2: 0.902552926525529 },
-      { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
-      { name: "甘肃", value: 2777, value1: 1947, value2: 0.917176809506662 },
-      { name: "辽宁", value: 1491, value1: 1504, value2: 0.344640706543557 },
-      { name: "海南", value: 1045, value1: 787, value2: 0.75311004784689 },
-      { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
-      { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
-      { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
-      { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
-      { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
-    ];
-    this.dituData = dituNewData;
-    dituNewData.sort(function(a, b) {
-      if (a.value > b.value) {
-        return -1;
-      } else if (a.value < b.value) {
-        return 1;
-      }
-      return 0;
-    });
-    var itemName = [];
-    var itemValue1 = [];
-    var itemValue2 = [];
-    var itemValue3 = [];
-    dituNewData.map(item => {
-      itemName.push(item.name);
-      itemValue1.push(parseFloat(item.value));
-      itemValue2.push(parseFloat(item.value1));
-      itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
-    });
-    this.zhihanglist = itemName;
-    this.zsData = itemValue1;
-    this.wclData = itemValue2;
-    this.wclvData = itemValue3;
+      var dituNewData = [
+        { name: "福建", value: 1663, value1: 2431, value2: 0.712880210289148 },
+        { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
+        { name: "北京", value: 1610, value1: 1555, value2: 0.86583850931677 },
+        { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
+        { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
+        { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
+        { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
+        { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
+        { name: "大连", value: 2789, value1: 1733, value2: 0.968697596422582 },
+        { name: "厦门", value: 1066, value1: 730, value2: 0.784803001876173 },
+        { name: "重庆", value: 2423, value1: 1897, value2: 0.937716262975779 },
+        { name: "湖北", value: 1355, value1: 2100, value2: 0.89171974522293 },
+        { name: "天津", value: 2002, value1: 1874, value2: 0.872255489021956 },
+        { name: "宁波", value: 2133, value1: 2095, value2: 0.241537740271918 },
+        { name: "湖南", value: 2304, value1: 2097, value2: 0.634685230024213 },
+        { name: "青岛", value: 1548, value1: 2756, value2: 0.963893249607535 },
+        { name: "河南", value: 2001, value1: 1464, value2: 0.921026324558481 },
+        { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
+        { name: "苏州", value: 2996, value1: 1947, value2: 0.975450901803607 },
+        { name: "四川", value: 2035, value1: 1975, value2: 0.87051597051597 },
+        { name: "云南", value: 3855, value1: 2724, value2: 0.954115586690018 },
+        { name: "陕西", value: 2827, value1: 2477, value2: 0.87619384506544 },
+        { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
+        { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
+        { name: "青海", value: 2444, value1: 1986, value2: 0.812602291325696 },
+        { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
+        {
+          name: "黑龙江",
+          value: 2613,
+          value1: 2548,
+          value2: 0.975124378109453
+        },
+        { name: "吉林", value: 3212, value1: 1699, value2: 0.902552926525529 },
+        { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
+        { name: "甘肃", value: 2777, value1: 1947, value2: 0.917176809506662 },
+        { name: "辽宁", value: 1491, value1: 1504, value2: 0.344640706543557 },
+        { name: "海南", value: 1045, value1: 787, value2: 0.75311004784689 },
+        { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
+        { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
+        { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
+        { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
+        { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
+      ];
+      this.dituData = dituNewData;
+      dituNewData.sort(function(a, b) {
+        if (a.value > b.value) {
+          return -1;
+        } else if (a.value < b.value) {
+          return 1;
+        }
+        return 0;
+      });
+      var itemName = [];
+      var itemValue1 = [];
+      var itemValue2 = [];
+      var itemValue3 = [];
+      dituNewData.map(item => {
+        itemName.push(item.name);
+        itemValue1.push(parseFloat(item.value));
+        itemValue2.push(parseFloat(item.value1));
+        itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
+      });
+      this.zhihanglist = itemName;
+      this.zsData = itemValue1;
+      this.wclData = itemValue2;
+      this.wclvData = itemValue3;
       this.box4PieDemo();
       setTimeout(() => {
-        loading.close()
+        loading.close();
         this.piedemo();
-      }, 800);
+      }, 200);
     },
     clickZR() {
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
       this.shows = 3;
       this.dataType = "准入评级";
       this.box4PieData = ["进件数", "通过数", "准入通过率(%)"];
       var dituNewData = [
-      { name: "福建", value: 1663, value1: 2431, value2: 0.712880210289148 },
-      { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
-      { name: "北京", value: 1610, value1: 1555, value2: 0.86583850931677 },
-      { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
-      { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
-      { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
-      { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
-      { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
-      { name: "大连", value: 1789, value1: 1733, value2: 0.968697596422582 },
-      { name: "厦门", value: 1066, value1: 730, value2: 0.784803001876173 },
-      { name: "重庆", value: 2423, value1: 1897, value2: 0.937716262975779 },
-      { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
-      { name: "天津", value: 1002, value1: 874, value2: 0.872255489021956 },
-      { name: "宁波", value: 2133, value1: 1795, value2: 0.241537740271918 },
-      { name: "湖南", value: 2304, value1: 2097, value2: 0.634685230024213 },
-      { name: "青岛", value: 1548, value1: 2456, value2: 0.963893249607535 },
-      { name: "河南", value: 3001, value1: 2764, value2: 0.921026324558481 },
-      { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
-      { name: "苏州", value: 3996, value1: 1947, value2: 0.975450901803607 },
-      { name: "四川", value: 2035, value1: 1975, value2: 0.87051597051597 },
-      { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
-      { name: "陕西", value: 2827, value1: 2477, value2: 0.87619384506544 },
-      { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
-      { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
-      { name: "青海", value: 2444, value1: 1986, value2: 0.812602291325696 },
-      { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
-      { name: "黑龙江", value: 2613, value1: 2548, value2: 0.975124378109453 },
-      { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
-      { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
-      { name: "甘肃", value: 2777, value1: 2547, value2: 0.917176809506662 },
-      { name: "辽宁", value: 1491, value1: 2104, value2: 0.344640706543557 },
-      { name: "海南", value: 1045, value1: 787, value2: 0.75311004784689 },
-      { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
-      { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
-      { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
-      { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
-      { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
-    ];
-    this.dituData = dituNewData;
-    dituNewData.sort(function(a, b) {
-      if (a.value > b.value) {
-        return -1;
-      } else if (a.value < b.value) {
-        return 1;
-      }
-      return 0;
-    });
-    var itemName = [];
-    var itemValue1 = [];
-    var itemValue2 = [];
-    var itemValue3 = [];
-    dituNewData.map(item => {
-      itemName.push(item.name);
-      itemValue1.push(parseFloat(item.value));
-      itemValue2.push(parseFloat(item.value1));
-      itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
-    });
-    this.zhihanglist = itemName;
-    this.zsData = itemValue1;
-    this.wclData = itemValue2;
-    this.wclvData = itemValue3;
-    this.box4PieDemo();
-    setTimeout(() => {
-        loading.close()
+        { name: "福建", value: 1663, value1: 2431, value2: 0.712880210289148 },
+        { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
+        { name: "北京", value: 1610, value1: 1555, value2: 0.86583850931677 },
+        { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
+        { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
+        { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
+        { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
+        { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
+        { name: "大连", value: 1789, value1: 1733, value2: 0.968697596422582 },
+        { name: "厦门", value: 1066, value1: 730, value2: 0.784803001876173 },
+        { name: "重庆", value: 2423, value1: 1897, value2: 0.937716262975779 },
+        { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
+        { name: "天津", value: 1002, value1: 874, value2: 0.872255489021956 },
+        { name: "宁波", value: 2133, value1: 1795, value2: 0.241537740271918 },
+        { name: "湖南", value: 2304, value1: 2097, value2: 0.634685230024213 },
+        { name: "青岛", value: 1548, value1: 2456, value2: 0.963893249607535 },
+        { name: "河南", value: 3001, value1: 2764, value2: 0.921026324558481 },
+        { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
+        { name: "苏州", value: 3996, value1: 1947, value2: 0.975450901803607 },
+        { name: "四川", value: 2035, value1: 1975, value2: 0.87051597051597 },
+        { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
+        { name: "陕西", value: 2827, value1: 2477, value2: 0.87619384506544 },
+        { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
+        { name: "宁夏", value: 2210, value1: 2201, value2: 0.995927601809955 },
+        { name: "青海", value: 2444, value1: 1986, value2: 0.812602291325696 },
+        { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
+        {
+          name: "黑龙江",
+          value: 2613,
+          value1: 2548,
+          value2: 0.975124378109453
+        },
+        { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
+        { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
+        { name: "甘肃", value: 2777, value1: 2547, value2: 0.917176809506662 },
+        { name: "辽宁", value: 1491, value1: 2104, value2: 0.344640706543557 },
+        { name: "海南", value: 1045, value1: 787, value2: 0.75311004784689 },
+        { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
+        { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
+        { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
+        { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
+        { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
+      ];
+      this.dituData = dituNewData;
+      dituNewData.sort(function(a, b) {
+        if (a.value > b.value) {
+          return -1;
+        } else if (a.value < b.value) {
+          return 1;
+        }
+        return 0;
+      });
+      var itemName = [];
+      var itemValue1 = [];
+      var itemValue2 = [];
+      var itemValue3 = [];
+      dituNewData.map(item => {
+        itemName.push(item.name);
+        itemValue1.push(parseFloat(item.value));
+        itemValue2.push(parseFloat(item.value1));
+        itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
+      });
+      this.zhihanglist = itemName;
+      this.zsData = itemValue1;
+      this.wclData = itemValue2;
+      this.wclvData = itemValue3;
+      this.box4PieDemo();
+      setTimeout(() => {
+        loading.close();
         this.piedemo();
-      }, 800);
+      }, 200);
     },
     clickXJ() {
       var loading = this.$loading({
-        lock:true,
-        text:"加载中",
-        spinner:"el-icon-loading",
-        background:"rgba(0,0,0,0.7)"
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
       });
       this.shows = 4;
       this.dataType = "巡检";
       this.box4PieData = ["服务点数", "巡检通过服务点数", "巡检通过率(%)"];
-       var dituNewData = [
-      { name: "福建", value: 2663, value1: 2431, value2: 0.712880210289148 },
-      { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
-      { name: "北京", value: 1810, value1: 1555, value2: 0.86583850931677 },
-      { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
-      { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
-      { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
-      { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
-      { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
-      { name: "大连", value: 2789, value1: 1733, value2: 0.968697596422582 },
-      { name: "厦门", value: 1066, value1: 730, value2: 0.784803001876173 },
-      { name: "重庆", value: 1423, value1: 1897, value2: 0.937716262975779 },
-      { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
-      { name: "天津", value: 1802, value1: 874, value2: 0.872255489021956 },
-      { name: "宁波", value: 2733, value1: 1795, value2: 0.241537740271918 },
-      { name: "湖南", value: 2304, value1: 2097, value2: 0.634685230024213 },
-      { name: "青岛", value: 1548, value1: 2456, value2: 0.963893249607535 },
-      { name: "河南", value: 3201, value1: 2764, value2: 0.921026324558481 },
-      { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
-      { name: "苏州", value: 3996, value1: 1947, value2: 0.975450901803607 },
-      { name: "四川", value: 1035, value1: 1975, value2: 0.87051597051597 },
-      { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
-      { name: "陕西", value: 4827, value1: 2477, value2: 0.87619384506544 },
-      { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
-      { name: "宁夏", value: 1210, value1: 2201, value2: 0.995927601809955 },
-      { name: "青海", value: 1644, value1: 1986, value2: 0.812602291325696 },
-      { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
-      { name: "黑龙江", value: 2613, value1: 2548, value2: 0.975124378109453 },
-      { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
-      { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
-      { name: "甘肃", value: 2777, value1: 2547, value2: 0.917176809506662 },
-      { name: "辽宁", value: 1491, value1: 2104, value2: 0.344640706543557 },
-      { name: "海南", value: 2545, value1: 787, value2: 0.75311004784689 },
-      { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
-      { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
-      { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
-      { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
-      { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
-    ];
-    this.dituData = dituNewData;
-    dituNewData.sort(function(a, b) {
-      if (a.value > b.value) {
-        return -1;
-      } else if (a.value < b.value) {
-        return 1;
-      }
-      return 0;
-    });
-    var itemName = [];
-    var itemValue1 = [];
-    var itemValue2 = [];
-    var itemValue3 = [];
-    dituNewData.map(item => {
-      itemName.push(item.name);
-      itemValue1.push(parseFloat(item.value));
-      itemValue2.push(parseFloat(item.value1));
-      itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
-    });
-    this.zhihanglist = itemName;
-    this.zsData = itemValue1;
-    this.wclData = itemValue2;
-    this.wclvData = itemValue3;
+      var dituNewData = [
+        { name: "福建", value: 2663, value1: 2431, value2: 0.712880210289148 },
+        { name: "上海", value: 2441, value1: 2323, value2: 0.951659156083572 },
+        { name: "北京", value: 1810, value1: 1555, value2: 0.86583850931677 },
+        { name: "广东", value: 2100, value1: 2097, value2: 0.998571428571429 },
+        { name: "深圳", value: 1202, value1: 1112, value2: 0.925124792013311 },
+        { name: "山东", value: 2325, value1: 2300, value2: 0.989247311827957 },
+        { name: "江苏", value: 1124, value1: 1002, value2: 0.718627450980392 },
+        { name: "浙江", value: 2259, value1: 2100, value2: 0.929614873837981 },
+        { name: "大连", value: 2789, value1: 1733, value2: 0.968697596422582 },
+        { name: "厦门", value: 1066, value1: 730, value2: 0.784803001876173 },
+        { name: "重庆", value: 1423, value1: 1897, value2: 0.937716262975779 },
+        { name: "湖北", value: 2355, value1: 2100, value2: 0.89171974522293 },
+        { name: "天津", value: 1802, value1: 874, value2: 0.872255489021956 },
+        { name: "宁波", value: 2733, value1: 1795, value2: 0.241537740271918 },
+        { name: "湖南", value: 2304, value1: 2097, value2: 0.634685230024213 },
+        { name: "青岛", value: 1548, value1: 2456, value2: 0.963893249607535 },
+        { name: "河南", value: 3201, value1: 2764, value2: 0.921026324558481 },
+        { name: "河北", value: 2610, value1: 2055, value2: 0.78735632183908 },
+        { name: "苏州", value: 3996, value1: 1947, value2: 0.975450901803607 },
+        { name: "四川", value: 1035, value1: 1975, value2: 0.87051597051597 },
+        { name: "云南", value: 2855, value1: 2724, value2: 0.954115586690018 },
+        { name: "陕西", value: 4827, value1: 2477, value2: 0.87619384506544 },
+        { name: "广西", value: 2544, value1: 2341, value2: 0.920204402515723 },
+        { name: "宁夏", value: 1210, value1: 2201, value2: 0.995927601809955 },
+        { name: "青海", value: 1644, value1: 1986, value2: 0.812602291325696 },
+        { name: "江西", value: 2031, value1: 1799, value2: 0.285770556376169 },
+        {
+          name: "黑龙江",
+          value: 2613,
+          value1: 2548,
+          value2: 0.975124378109453
+        },
+        { name: "吉林", value: 3212, value1: 2899, value2: 0.902552926525529 },
+        { name: "山西", value: 2214, value1: 2455, value2: 0.472423596304193 },
+        { name: "甘肃", value: 2777, value1: 2547, value2: 0.917176809506662 },
+        { name: "辽宁", value: 1491, value1: 2104, value2: 0.344640706543557 },
+        { name: "海南", value: 2545, value1: 787, value2: 0.75311004784689 },
+        { name: "内蒙古", value: 1160, value1: 1160, value2: 1 },
+        { name: "安徽", value: 2455, value1: 2144, value2: 0.873319755600815 },
+        { name: "新疆", value: 2234, value1: 2118, value2: 0.948075201432408 },
+        { name: "贵州", value: 1896, value1: 1700, value2: 0.89662447257384 },
+        { name: "西藏", value: 756, value1: 712, value2: 0.941798941798942 }
+      ];
+      this.dituData = dituNewData;
+      dituNewData.sort(function(a, b) {
+        if (a.value > b.value) {
+          return -1;
+        } else if (a.value < b.value) {
+          return 1;
+        }
+        return 0;
+      });
+      var itemName = [];
+      var itemValue1 = [];
+      var itemValue2 = [];
+      var itemValue3 = [];
+      dituNewData.map(item => {
+        itemName.push(item.name);
+        itemValue1.push(parseFloat(item.value));
+        itemValue2.push(parseFloat(item.value1));
+        itemValue3.push((parseFloat(item.value2) * 100).toFixed(2));
+      });
+      this.zhihanglist = itemName;
+      this.zsData = itemValue1;
+      this.wclData = itemValue2;
+      this.wclvData = itemValue3;
       this.box4PieDemo();
       setTimeout(() => {
-        loading.close()
+        loading.close();
         this.piedemo();
-      }, 800);
+      }, 200);
     },
     // 测试点击监听改变图表
     // PieClick1(value) {
@@ -1283,9 +1442,39 @@ export default {
     //     ];
     //   }
     // },
-    PieClick(value) {
-      this.province = value.name;
-      alert(value.id);
+    PieClick(param) {
+      // this.province = value.name;
+      this.dituData1 = [];
+      // if (param.name === "厦门市") {
+      //   this.axios.get("/data/350200.json").then(data => {
+      //     this.dituData = [
+      //       {
+      //         name: "思明区",
+      //         value: 100
+      //       },
+      //       {
+      //         name: "湖里区",
+      //         value: 100
+      //       },
+      //       {
+      //         name: "集美区",
+      //         value: 100
+      //       }
+      //     ];
+      //     console.log(data);
+      //     const getJson = data.data;
+      //     this.$echarts.registerMap(param.name, getJson);
+      //     this.DrawMap(); // resize 图形功能方法
+      //   });
+      // }
+      this.mapBorder = "#3D84BE";
+      this.mapNameShow = true;
+      this.mapName = param.name;
+      // this.$echarts.registerMap(param.name)
+      this.DrawMap();
+      if (this.mapName !== "china") {
+        this.showShen = true;
+      }
     },
     // 处理量 处理率
     clAll() {
@@ -1347,73 +1536,104 @@ export default {
     // 绘制地图
     getData() {
       // 获取城市名称数据
-      console.log("取到的福建省的json数据", obj);
-      if (obj) {
-        let arr = obj.features;
-        // 循环取出 城市名称和value值
-        for (var j = 0; j < arr.length; j++) {
-          this.max = arr[0].id;
-          this.min = arr[0].id;
-          if (arr[j].id > this.max) {
-            this.max = arr[j].id;
-          }
-          if (arr[j].id < this.min) {
-            this.min = arr[j].id;
-          }
-          this.listArr.push({
-            name: arr[j].properties.name,
-            value: arr[j].id
-          });
-        }
-      }
+      // console.log("取到的福建省的json数据", obj);
+      // if (obj) {
+      //   let arr = obj.features;
+      //   // 循环取出 城市名称和value值
+      //   for (var j = 0; j < arr.length; j++) {
+      //     this.max = arr[0].id;
+      //     this.min = arr[0].id;
+      //     if (arr[j].id > this.max) {
+      //       this.max = arr[j].id;
+      //     }
+      //     if (arr[j].id < this.min) {
+      //       this.min = arr[j].id;
+      //     }
+      //     this.listArr.push({
+      //       name: arr[j].properties.name,
+      //       value: arr[j].id
+      //     });
+      //   }
+      // }
     },
     DrawMap() {
       // 全国地图渐变
-      let dituJB1 = this.$echarts.init(document.getElementById("ditu1"));
+      var myChart = this.$echarts.init(document.getElementById("ditu1"));
+      myChart.dispose();
+      var myChart = this.$echarts.init(document.getElementById("ditu1"));
+      myChart.off("click");
       // 省份点击联动
       let _that = this;
-      dituJB1.on("click", function(param) {
+      myChart.on("click", function(param) {
         console.log(param);
-        // _that.PieClick(param.data);
+        _that.PieClick(param);
       });
-      // dituJB1.getZr().on("click", res => {
+      // 地图高亮轮播
+      var count = 0;
+      var timeTicket = null;
+      var dataLength = this.dituData.length;
+      timeTicket && clearInterval(timeTicket);
+      timeTicket = setInterval(function() {
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 1
+        });
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 1,
+          dataIndex: count % dataLength
+        });
+        myChart.dispatchAction({
+          type: "showTip",
+          seriesIndex: 1,
+          dataIndex: count % dataLength
+        });
+        count++;
+      }, 3000);
+      myChart.on("mouseover", function(params) {
+        clearInterval(timeTicket);
+        myChart.dispatchAction({
+          type: "downplay",
+          seriesIndex: 0
+        });
+        myChart.dispatchAction({
+          type: "highlight",
+          seriesIndex: 0,
+          dataIndex: count % dataLength
+        });
+        myChart.dispatchAction({
+          type: "showTip",
+          seriesIndex: 0,
+          dataIndex: count % dataLength
+        });
+      });
+      myChart.on("mouseout", function(params) {
+        timeTicket && clearInterval(timeTicket);
+        timeTicket = setInterval(function() {
+          myChart.dispatchAction({
+            type: "downplay",
+            seriesIndex: 1
+          });
+          myChart.dispatchAction({
+            type: "highlight",
+            seriesIndex: 1,
+            dataIndex: count % dataLength
+          });
+          myChart.dispatchAction({
+            type: "showTip",
+            seriesIndex: 1,
+            dataIndex: count % dataLength
+          });
+          count++;
+        }, 3000);
+      });
+      // myChart.getZr().on("click", res => {
       //   // 点击空白处
       //   _that.PieClick1(res.target);
       // });
-      var mapName = "china";
+      var mapName = this.mapName;
       var dataJB = this.dituData;
-      var dataJB1 = [
-        {
-          name: "厦门",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "深圳",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "苏州",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "大连",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "青岛",
-          value: 116,
-          id: 2222222
-        },
-        {
-          name: "三峡",
-          value: 116,
-          id: 2222222
-        }
-      ];
+      var dataJB1 = this.dituData1;
       var geoCoordMap = {
         厦门: [118.159101, 24.491196],
         宁波: [121.622188, 29.871286],
@@ -1462,7 +1682,7 @@ export default {
         }
         return res;
       };
-      dituJB1.setOption({
+      myChart.setOption({
         tooltip: {
           trigger: "item",
           formatter: function(params) {
@@ -1514,7 +1734,9 @@ export default {
           map: mapName,
           label: {
             normal: {
-              show: false
+              show: this.mapNameShow,
+              color: "#fff",
+              fontSize: 10
             },
             emphasis: {
               show: false
@@ -1523,11 +1745,11 @@ export default {
           roam: true,
           itemStyle: {
             normal: {
-              areaColor: "#031525",
-              borderColor: "#3B5077"
+              areaColor: "#00467F",
+              borderColor: this.mapBorder
             },
             emphasis: {
-              areaColor: "#2B91B7"
+              areaColor: "#FFD52E"
             }
           }
         },
@@ -3023,7 +3245,7 @@ export default {
         "内部黑名单类",
         "外部黑名单类"
       ];
-      var colorList1 = ["#73ACFF", "#9E87FF", "#FD866A", "#FDD56A","#02C81A"];
+      var colorList1 = ["#73ACFF", "#9E87FF", "#FD866A", "#FDD56A", "#02C81A"];
       zrPie.setOption({
         tooltip: {
           trigger: "item",
@@ -3911,8 +4133,8 @@ ul {
         height: 60%;
         margin: 0px auto;
         position: absolute;
-        left:10%;
-        top:32%;
+        left: 10%;
+        top: 32%;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -4039,6 +4261,15 @@ ul {
         .ditu {
           width: 100%;
           height: 100%;
+        }
+        .back {
+          position: absolute;
+          color: #d2d2d3;
+          font-size: 18px;
+          right: 5%;
+          bottom: 10%;
+          font-weight: 700;
+          cursor: pointer;
         }
       }
     }
