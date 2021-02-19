@@ -674,6 +674,12 @@ export default {
   methods: {
     // 返回中国地图
     toChina() {
+      var loading = this.$loading({
+        lock: true,
+        text: "加载中",
+        spinner: "el-icon-loading",
+        background: "rgba(0,0,0,0.7)"
+      });
       this.dituData1 = [
         {
           name: "北京",
@@ -727,6 +733,10 @@ export default {
       // this.$echarts.registerMap("china")
       this.DrawMap();
       this.showShen = false;
+      setTimeout(() => {
+        loading.close();
+        this.piedemo();
+      }, 200);
     },
     // 获取下拉框机构号和名称
     getJGH(val) {
@@ -1443,37 +1453,48 @@ export default {
     //   }
     // },
     PieClick(param) {
-      // this.province = value.name;
-      this.dituData1 = [];
-      // if (param.name === "厦门市") {
-      //   this.axios.get("/data/350200.json").then(data => {
-      //     this.dituData = [
-      //       {
-      //         name: "思明区",
-      //         value: 100
-      //       },
-      //       {
-      //         name: "湖里区",
-      //         value: 100
-      //       },
-      //       {
-      //         name: "集美区",
-      //         value: 100
-      //       }
-      //     ];
-      //     console.log(data);
-      //     const getJson = data.data;
-      //     this.$echarts.registerMap(param.name, getJson);
-      //     this.DrawMap(); // resize 图形功能方法
-      //   });
-      // }
-      this.mapBorder = "#3D84BE";
-      this.mapNameShow = true;
-      this.mapName = param.name;
-      // this.$echarts.registerMap(param.name)
-      this.DrawMap();
-      if (this.mapName !== "china") {
-        this.showShen = true;
+      if (this.showShen == false) {
+        var loading = this.$loading({
+          lock: true,
+          text: "加载中",
+          spinner: "el-icon-loading",
+          background: "rgba(0,0,0,0.7)"
+        });
+        // this.province = value.name;
+        this.dituData1 = [];
+        // if (param.name === "厦门市") {
+        //   this.axios.get("/data/350200.json").then(data => {
+        //     this.dituData = [
+        //       {
+        //         name: "思明区",
+        //         value: 100
+        //       },
+        //       {
+        //         name: "湖里区",
+        //         value: 100
+        //       },
+        //       {
+        //         name: "集美区",
+        //         value: 100
+        //       }
+        //     ];
+        //     console.log(data);
+        //     const getJson = data.data;
+        //     this.$echarts.registerMap(param.name, getJson);
+        //     this.DrawMap(); // resize 图形功能方法
+        //   });
+        // }
+        this.mapBorder = "#3D84BE";
+        this.mapNameShow = true;
+        this.mapName = param.name;
+        // this.$echarts.registerMap(param.name)
+        this.DrawMap();
+        if (this.mapName !== "china") {
+          this.showShen = true;
+        }
+        setTimeout(() => {
+          loading.close();
+        }, 200);
       }
     },
     // 处理量 处理率
