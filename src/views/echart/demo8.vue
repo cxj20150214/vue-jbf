@@ -708,8 +708,8 @@ export default {
       nowDate: "", // 当前日期
       nowTime: "", // 当前时间
       nowWeek: "", // 当前星期
-      xjPie: false,
-      xjPieYear: true
+      xjPie: true,
+      xjPieYear: false
     };
   },
   computed: {
