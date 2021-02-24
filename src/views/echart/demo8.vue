@@ -728,6 +728,8 @@ export default {
         }
       ];
       this.mapName = "china";
+      this.valueSelect = "全国";
+      this.province = "全国";
       this.mapNameShow = false;
       this.mapBorder = "#3B5077";
       // this.$echarts.registerMap("china")
@@ -1453,6 +1455,7 @@ export default {
     //   }
     // },
     PieClick(param) {
+      console.log(param)
       if (this.showShen == false) {
         var loading = this.$loading({
           lock: true,
@@ -1484,6 +1487,8 @@ export default {
         //     this.DrawMap(); // resize 图形功能方法
         //   });
         // }
+        this.valueSelect = param.name;
+        this.province = param.name;
         this.mapBorder = "#3D84BE";
         this.mapNameShow = true;
         this.mapName = param.name;
